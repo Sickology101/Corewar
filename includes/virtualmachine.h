@@ -3,17 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   virtualmachine.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:57 by marius            #+#    #+#             */
-/*   Updated: 2023/01/08 14:26:19 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/08 18:44:29 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	VIRTUALMACHINE_H
+#ifndef VIRTUALMACHINE_H
+
 # define VIRTUALMACHINE_H
 
-# include "../libft/includes/libft.h"
+typedef struct s_counter
+{
+	int			total_cycles;
+	int			nbr_live;
+	
+}				t_counter;
 
-int main(int argc, char **argv);
 #endif
