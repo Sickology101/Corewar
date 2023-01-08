@@ -3,13 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marius <marius@student.42.fr>              +#+  +:+       +#+         #
+#    By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-#    Updated: 2023/01/08 14:22:29 by marius           ###   ########.fr        #
+#    Updated: 2023/01/08 19:06:43 by mtissari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-]CYELLOW=\033[0;33m
+
 CEND=\033[0m
 CGREEN=\033[0;32m
 
@@ -30,7 +30,7 @@ VM_INC_FILES = virtualmachine.h
 VM_INC = $(addprefix $(VM_INC_DIR), $(VM_INC_FILES))
 
 LIBFT_DIR = libft/
-LIBFT_LIB = libft.a
+LIBFT_LIB = libftprintf.a
 LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
 all : $(VM_NAME)
