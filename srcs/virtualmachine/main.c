@@ -10,3 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+void	exit_error_message(char *message, int status)
+{
+	ft_putstr(message);
+	exit(status);
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc < 2)
+		error("Not enough players!", 0);
+	
+}
