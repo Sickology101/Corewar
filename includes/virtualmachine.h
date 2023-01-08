@@ -11,7 +11,9 @@
 /* ************************************************************************** */
 
 #ifndef	VIRTUALMACHINE_H
+# define VIRTUALMACHINE_H
 
-#define VIRTUALMACHINE_H
+# include "../libft/includes/libft.h"
 
+int main(int argc, char **argv);
 #endif

@@ -9,139 +9,94 @@
 #    Updated: 2023/01/08 14:22:29 by marius           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+]CYELLOW=\033[0;33m
+CEND=\033[0m
+CGREEN=\033[0;32m
 
-CC=gcc
+CC = gcc
+VM_NAME = corewar
+FLAGS = -Wall -Wextra #-Werror
 
-NAME=libftprintf.a 
+VM_SRC_DIR = ./srcs/virtualmachine/
+VM_SRC_FILES = main.c
+VM_SRC = $(addprefix $(VM_SRC_DIR), $(VM_SRC_FILES))
 
-FLAGS= -Wall -Wextra -Werror -g
-SRC_PATH=./src/
-SRC_FILES=ft_printf.c \
-	ft_vasprintf.c \
-	num_conversion.c \
-	percent_parse.c \
-	width_precision_parse.c \
-	precision_f.c \
-	print_c.c \
-	print_d.c \
-	print_f.c \
-	print_f2.c \
-	print_o.c \
-	print_p.c\
-	print_perc.c\
-	print_str.c \
-	print_uxX.c \
-	build_result.c
+VM_OBJ_DIR = ./vm_obj/
+VM_OBJ_FILES = $(VM_SRC_FILES:.c=.o)
+VM_OBJ = $(addprefix $(VM_OBJ_DIR), $(VM_OBJ_FILES))
 
-SRC=$(addprefix $(SRC_PATH), $(SRC_FILES))
+VM_INC_DIR = ./includes/
+VM_INC_FILES = virtualmachine.h
+VM_INC = $(addprefix $(VM_INC_DIR), $(VM_INC_FILES))
 
-OBJ_PATH=./obj/
-OBJ_FILES=$(SRC_FILES:.c=.o)
-OBJ=$(addprefix $(OBJ_PATH), $(OBJ_FILES))
+LIBFT_DIR = libft/
+LIBFT_LIB = libft.a
+LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
-LIB_OBJ_PATH=./libft/
-LIB_OBJ=$(LIB_SRC:.c=.o)
+all : $(VM_NAME)
 
-LIB_SRC_PATH=./libft/
-LIB_SRC=$(addprefix $(LIB_SRC_PATH), $(LIB_SRC_FILES))
-LIB_SRC_FILES=ft_strlen.c \
-	ft_strcpy.c \
-	ft_putchar.c \
-	ft_strdup.c \
-	ft_putnbr.c \
-	ft_putstr.c \
-	ft_atoi.c \
-	ft_isalpha.c \
-	ft_isalnum.c \
-	ft_isdigit.c \
-	ft_isascii.c \
-	ft_isprint.c \
-	ft_strncpy.c \
-	ft_toupper.c \
-	ft_tolower.c \
-	ft_strchr.c \
-	ft_strcmp.c \
-	ft_strstr.c \
-	ft_strncmp.c \
-	ft_strnstr.c \
-	ft_memcpy.c \
-	ft_memmove.c \
-	ft_memset.c \
-	ft_bzero.c \
-	ft_memccpy.c \
-	ft_memchr.c \
-	ft_memcmp.c \
-	ft_strcat.c \
-	ft_strncat.c \
-	ft_strlcat.c \
-	ft_strrchr.c \
-	ft_strdel.c \
-	ft_strclr.c \
-	ft_strnew.c \
-	ft_memalloc.c \
-	ft_memdel.c \
-	ft_putendl.c \
-	ft_strequ.c \
-	ft_strnequ.c \
-	ft_strsub.c \
-	ft_strjoin.c \
-	ft_strtrim.c \
-	ft_strsplit.c \
-	ft_putchar_fd.c \
-	ft_putstr_fd.c \
-	ft_putendl_fd.c \
-	ft_putnbr_fd.c \
-	ft_striter.c \
-	ft_striteri.c \
-	ft_strmap.c \
-	ft_strmapi.c \
-	ft_itoa.c \
-	ft_lstnew.c \
-	ft_lstadd.c \
-	ft_lstiter.c \
-	ft_lstdelone.c \
-	ft_lstdel.c \
-	ft_lstmap.c \
-	ft_print_double.c \
-	ft_isspace.c \
-	ft_lstadd_end.c \
-	ft_lstlen.c \
-	ft_lstmerge.c \
-	ft_atoi_base.c \
-	get_next_line.c \
-	ft_itoa_base.c \
-	ft_numlenbase.c \
-	ft_uitoa_base.c \
-	ft_unumlenbase.c
+$(VM_NAME): $(VM_OBJ) $(VM_INC)
+	@make -C $(LIBFT_DIR)
+	@echo "$(CYELLOW)Compiling $(VM_NAME)$(CEND)"
+	@$(CC) -o $(VM_NAME) $(FLAGS) $(VM_OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBFT)
+	@echo "$(CGREEN)OK$(CEND)"
 
-INCLUDES=-I./includes -I./libft
-HEADERS_PATH=./includes/
-HEADERS_FILES=ft_printf.h
-HEADERS=$(addprefix $(HEADERS_PATH), $(HEADERS_FILES))
+$(VM_OBJ_DIR)%.o: $(VM_SRC_DIR)%.c
+	@mkdir -p $(VM_OBJ_DIR)
+	@$(CC) $(FLAGS) -c $< -o $@
 
-all: $(NAME) 
+clean :
+	@make -C $(LIBFT_DIR) clean
+	@echo "$(CYELLOW)Removing $(VM_NAME) object folder$(CEND)"
+	@rm -rf $(VM_OBJ_DIR)
+	@echo "$(CGREEN)OK$(CEND)"
 
-$(NAME): $(OBJ) $(LIB_OBJ) $(HEADERS) 
-	@ar rc $(NAME) $(OBJ) $(LIB_OBJ)
-	@ranlib $(NAME)
+fclean : clean
+	@make -C $(LIBFT_DIR) fclean
+	@echo "$(CYELLOW)Removing $(VM_NAME)$(CEND)"
+	@rm -rf $(VM_NAME)
+	@echo "$(CGREEN)OK$(CEND)"
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@mkdir $(OBJ_PATH) 2>/dev/null || echo "" > /dev/null
-	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
+re : fclean all clean all
 
-$(LIB_OBJ_PATH)%.o: $(LIB_SRC_PATH)%.c
-	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
+# COREWAR		=	corewar
+# ASSEMBLER	=	assembler
+# LIBFT		=	libft/libftprintf.a
+# FLAGS		=	-Wall -Wextra -Werror -I includes -I libft/includes -I libft/libft
 
-clean:
-	@make -C ./libft clean
-	@rm -f $(OBJ)
-	@rm -rf $(OBJ_PATH)
+# VM_SRC		=	
 
-fclean: clean
-	@make -C ./libft fclean
-	@rm -f $(NAME)
+# LIBFT_DIR	=	libft/
+# VM_SRC_DIR		=	srcs/
 
-re: fclean all clean all
+# CHK_SRCS	=	$(addprefix $(VM_SRC_DIR), $(VM_SRC))
 
-.PHONY: clean fclean re all
+# VM_OBJ_DIR		=	obj/
+# OBJS		= 	$(SRC_OBJS)
+# SRC_OBJS	=	$(patsubst %, $(VM_OBJ_DIR)%, $(VM_SRC:.c=.o))
 
+# all: $(COREWAR)
+
+# $(COREWAR): $(LIBFT) $(VM_OBJ_DIR) $(SRC_OBJS)
+# 	@gcc $(FLAGS) $(LIBFT) $(SRC_OBJS) -o $(VM_NAME)
+# 	@printf "Compilation complete.\n"
+	
+# $(LIBFT):
+# 	@make -C $(LIBFT_DIR)
+
+# $(VM_OBJ_DIR):
+# 	@mkdir -p $(VM_OBJ_DIR)
+
+# $(VM_OBJ_DIR)%.o: $(VM_SRC_DIR)%.c
+# 	@gcc $(FLAGS) -o $@ -c $<
+# 	@printf "Corewar compiled.\n"
+
+# clean:
+# 	@make -C $(LIBFT_DIR) clean
+# 	@rm -rf $(OBJS) $(SURPL_O)
+
+# fclean: clean
+# 	@make -C $(LIBFT_DIR) fclean
+# 	@rm -rf $(VM_NAME) *.out
+
+# re: fclean all
