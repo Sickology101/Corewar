@@ -6,11 +6,12 @@
 #    By: marius <marius@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-#    Updated: 2023/01/08 14:19:47 by marius           ###   ########.fr        #
+#    Updated: 2023/01/08 14:22:29 by marius           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	corewar
+COREWAR		=	corewar
+ASSEMBLER	=	assembler
 LIBFT		=	libft/libftprintf.a
 FLAGS		=	-Wall -Wextra -Werror -I includes -I libft/includes -I libft/libft
 
@@ -25,9 +26,9 @@ OBJ_DIR		=	obj/
 OBJS		= 	$(SRC_OBJS)
 SRC_OBJS	=	$(patsubst %, $(OBJ_DIR)%, $(SRC:.c=.o))
 
-all: $(NAME)
+all: $(COREWAR)
 
-$(NAME): $(LIBFT) $(OBJ_DIR) $(SRC_OBJS)
+$(COREWAR): $(LIBFT) $(OBJ_DIR) $(SRC_OBJS)
 	@gcc $(FLAGS) $(LIBFT) $(SRC_OBJS) -o $(NAME)
 	@printf "Compilation complete.\n"
 	
