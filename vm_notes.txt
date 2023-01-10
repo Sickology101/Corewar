@@ -1,3 +1,9 @@
+DONE:
+
+file name and extension verification
+	- name has to exist (can't be empty or just ".cor");
+	- extension has to be ".cor"
+
 TODO:
 
 implement "-n" flag

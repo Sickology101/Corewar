@@ -34,12 +34,32 @@ void	validate_file_extension(const int i, const char **av)
 	}
 }
 
-void	validate_magic_header(const int i, const char **av)
+void	init_player(const int i, const char **av, t_player **player)
 {
-	
+	(*player)->name = av[i];
+	(*player)->comment = NULL;
+	(*player)->id = i;
 }
 
-void	open_players(const int ac, const char **av)
+void	create_player(const int i, const char **av, t_data * const data)
+{
+	t_player	*new_player;
+
+	new_player = (t_player *)malloc(sizeof(t_player));
+	if (!new_player)
+			exit_error_message("Player allocation failed!");
+	new_player->next = NULL;
+	if (data->player)
+	{
+		new_player->next = data->player;
+		data->player = new_player;
+	}
+	else if (!data->player)
+		data->player = new_player;
+	init_player(i, av, &data->player);
+}
+
+void	open_players(const int ac, const char **av, t_data * const data)
 {
 	int	i;
 	
@@ -47,16 +67,25 @@ void	open_players(const int ac, const char **av)
 	while (i < ac)
 	{
 		validate_file_extension(i, av);
-		validate_magic_header(i, av);
+		create_player(i, av, data);
 		i++;
 	}
+
+}
+
+void	init_data(t_data *data)
+{
+	data->player = NULL;
 }
 
 int	main(const int ac, const char **av)
 {
+	t_data	data;
+
+	init_data(&data);
 	if (ac < 2)
 		exit_error_message("Not enough players!");
-	open_players(ac, av);
+	open_players(ac, av, &data);
 
 	return(0);
 }

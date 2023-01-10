@@ -10,9 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	VIRTUALMACHINE_H
+#ifndef VIRTUALMACHINE_H
 # define VIRTUALMACHINE_H
 
 # include "../libft/includes/ft_printf.h"
 
+typedef struct s_player
+{
+	int				id;
+	const char			*name;
+	const char			*comment;
+	struct s_player	*next;
+
+}					t_player;
+
+typedef struct s_data
+{
+	t_player		*player;
+}					t_data;
 #endif
