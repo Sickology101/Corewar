@@ -15,7 +15,7 @@ CGREEN=\033[0;32m
 
 CC = gcc
 VM_NAME = corewar
-FLAGS = -Wall -Wextra #-Werror
+FLAGS = -g -Wall -Wextra #-Werror
 
 VM_SRC_DIR = ./srcs/virtualmachine/
 VM_SRC_FILES = main.c
@@ -30,7 +30,7 @@ VM_INC_FILES = virtualmachine.h
 VM_INC = $(addprefix $(VM_INC_DIR), $(VM_INC_FILES))
 
 LIBFT_DIR = libft/
-LIBFT_LIB = libft.a
+LIBFT_LIB = libftprintf.a
 LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
 all : $(VM_NAME)

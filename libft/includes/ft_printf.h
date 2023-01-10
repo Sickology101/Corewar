@@ -16,7 +16,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft.h"
+# include "../libft/libft.h"
 # include <stdio.h>
 
 # define ALLOC_SIZE 60

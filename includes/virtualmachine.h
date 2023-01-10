@@ -13,7 +13,6 @@
 #ifndef	VIRTUALMACHINE_H
 # define VIRTUALMACHINE_H
 
-# include "../libft/includes/libft.h"
+# include "../libft/includes/ft_printf.h"
 
-int main(int argc, char **argv);
 #endif

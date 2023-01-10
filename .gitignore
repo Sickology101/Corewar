@@ -2,3 +2,5 @@ resources_42/
 .DS_Store/
 corewar
 vm_obj/
+.vscode
+libft/libft/*.o
