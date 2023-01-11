@@ -6,7 +6,7 @@
 #    By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-#    Updated: 2023/01/08 19:06:43 by mtissari         ###   ########.fr        #
+#    Updated: 2023/01/11 18:40:01 by mtissari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CGREEN=\033[0;32m
 
 CC = gcc
 VM_NAME = corewar
-FLAGS = -Wall -Wextra #-Werror
+FLAGS = -Wall -Wextra -g #-Werror
 
 VM_SRC_DIR = ./srcs/virtualmachine/
 VM_SRC_FILES = main.c
