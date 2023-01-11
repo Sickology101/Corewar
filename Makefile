@@ -6,7 +6,7 @@
 #    By: marius <marius@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-#    Updated: 2023/01/08 14:22:29 by marius           ###   ########.fr        #
+#    Updated: 2023/01/11 11:55:52 by marius           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,10 @@ ASSEMBLER	=	assembler
 LIBFT		=	libft/libftprintf.a
 FLAGS		=	-Wall -Wextra -Werror -I includes -I libft/includes -I libft/libft
 
-SRC		=	
+SRC		=	main.c
 
 LIBFT_DIR	=	libft/
-SRC_DIR		=	srcs/
+SRC_DIR		=	srcs/asm/
 
 CHK_SRCS	=	$(addprefix $(SRC_DIR), $(SRC))
 
@@ -29,7 +29,7 @@ SRC_OBJS	=	$(patsubst %, $(OBJ_DIR)%, $(SRC:.c=.o))
 all: $(COREWAR)
 
 $(COREWAR): $(LIBFT) $(OBJ_DIR) $(SRC_OBJS)
-	@gcc $(FLAGS) $(LIBFT) $(SRC_OBJS) -o $(NAME)
+	@gcc $(FLAGS) $(LIBFT) $(SRC_OBJS) -o $(ASSEMBLER)
 	@printf "Compilation complete.\n"
 	
 $(LIBFT):

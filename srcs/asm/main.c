@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/08 14:54:28 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/11 11:57:39 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ static	void	exit_ussage(void)
 // that the Virtual Machine can read. 
 int	main (int argc, char **argv)
 {
+	int fd;
+	
 	if (argc != 2)
 		exit_ussage();
+	fd = open(argv[1],O_RDONLY);
+	
 	return (0);
 }
