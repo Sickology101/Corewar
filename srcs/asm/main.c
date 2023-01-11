@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/11 13:12:43 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/11 16:17:34 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 
 //a simple function that exits the program in case of bad call (wrong filename, no file)
-static	void	exit_usage(void)
+void	exit_usage(void)
 {
 	ft_printf("Usage : ./assembler [filename.s]");
 	exit(1);

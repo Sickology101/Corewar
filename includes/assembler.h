@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/11 13:01:32 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/11 16:17:42 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ typedef struct s_data
 }			t_data;
 
 int scan_file(t_data *data, int fd);
+void	exit_usage(void);
 #endif
