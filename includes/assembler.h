@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/11 11:54:17 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/11 13:01:32 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,11 @@
 #define ASSEMBLER_H
 # include "ft_printf.h"
 
+typedef struct s_data
+{
+	char	**file;
+	int		file_size;
+}			t_data;
+
+int scan_file(t_data *data, int fd);
 #endif
