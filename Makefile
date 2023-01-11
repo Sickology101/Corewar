@@ -18,7 +18,8 @@ VM_NAME = corewar
 FLAGS = -g -Wall -Wextra #-Werror
 
 VM_SRC_DIR = ./srcs/virtualmachine/
-VM_SRC_FILES = main.c
+VM_SRC_FILES = main.c \
+				read_players.c
 VM_SRC = $(addprefix $(VM_SRC_DIR), $(VM_SRC_FILES))
 
 VM_OBJ_DIR = ./vm_obj/

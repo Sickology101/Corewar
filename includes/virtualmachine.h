@@ -14,6 +14,7 @@
 # define VIRTUALMACHINE_H
 
 # include "../libft/includes/ft_printf.h"
+# include <stdbool.h>
 
 typedef struct s_player
 {
@@ -28,4 +29,10 @@ typedef struct s_data
 {
 	t_player		*player;
 }					t_data;
+
+
+void	init_data(t_data *data);
+void	exit_error_message(char *message);
+void	open_players(const int ac, const char **av, t_data * const data);
+
 #endif
