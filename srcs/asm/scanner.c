@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/01/11 17:04:14 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/11 17:18:22 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,17 @@ int	check_valid(char *str)
 	return (0);
 }
 
+int	check_quotes(char *str)
+{
+	int index;
+
+	index = search_char(str, '"');
+	if (str[++index] == '\n')
+		return (1);
+	else
+		return (0);
+}
+
 //gets the name of the champion and makes sure it is correctly formatted
 char *get_name(int fd, char *line)
 {
@@ -56,7 +67,7 @@ char *get_name(int fd, char *line)
 
 	index = ft_strlen(line);
 	dest = ft_strdup(line);
-	if (line[--index] == '"')
+	if (line[--index] == '"' && check_quotes(line))
 		return (dest);
 	ret = 1;
 	if (check_valid(line))
