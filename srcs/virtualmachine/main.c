@@ -21,6 +21,7 @@ void	exit_error_message(char *message)
 void	init_data(t_data *data)
 {
 	data->player = NULL;
+	data->player_amount = 0;
 }
 
 int	main(const int ac, const char **av)
@@ -31,6 +32,11 @@ int	main(const int ac, const char **av)
 	if (ac < 2)
 		exit_error_message("Not enough players!");
 	open_players(ac, av, &data);
-	printf("%s\n", data.player->name);
-	return(0);
+	while (data.player)
+	{
+		printf("%s ", data.player->name);
+		printf("id = %d\n", data.player->id);
+		data.player = data.player->next;
+	}
+	return (0);
 }

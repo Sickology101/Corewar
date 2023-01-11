@@ -28,11 +28,16 @@ typedef struct s_player
 typedef struct s_data
 {
 	t_player		*player;
+	int				player_amount;
 }					t_data;
 
 
 void	init_data(t_data *data);
 void	exit_error_message(char *message);
 void	open_players(const int ac, const char **av, t_data * const data);
+int		validate_and_receive_n_flag_arg(int *i, const char **av, int ac);
+void	check_amount_of_players(t_data *const data);
+void	set_players_ids(t_data *const data);
+void	sort_players_list(t_data *data);
 
 #endif

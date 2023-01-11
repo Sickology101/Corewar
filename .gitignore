@@ -4,3 +4,5 @@ corewar
 vm_obj/
 .vscode
 libft/libft/*.o
+test_files_n_flag.sh
+log.txt

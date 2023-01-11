@@ -28,20 +28,23 @@ void	validate_file_extension(const int i, const char **av)
 	}
 }
 
-void	init_player(const int i, const char **av, t_player **player)
+void	init_player(const char *name, t_player **player, int flag_id)
 {
-	(*player)->name = av[i];
+	(*player)->name = name;
 	(*player)->comment = NULL;
-	(*player)->id = i;
+	if (flag_id != 0)
+		(*player)->id = flag_id;
+	else
+		(*player)->id = 0;
 }
 
-void	create_player(const int i, const char **av, t_data * const data)
+void	create_player(t_data *const data)
 {
 	t_player	*new_player;
 
 	new_player = (t_player *)malloc(sizeof(t_player));
 	if (!new_player)
-			exit_error_message("Player allocation failed!");
+		exit_error_message("Player allocation failed!");
 	new_player->next = NULL;
 	if (data->player)
 	{
@@ -50,54 +53,24 @@ void	create_player(const int i, const char **av, t_data * const data)
 	}
 	else if (!data->player)
 		data->player = new_player;
-	init_player(i, av, &data->player);
+	data->player_amount++;
 }
 
-int argument_has_only_numbers(int *i, const char **av)
-{
-	size_t iterator;
-
-	iterator = 0;
-	while (av[*i][iterator])
-	{
-		if (av[*i][iterator] >= '0' && av[*i][iterator] <= '9')
-			iterator++;
-		else
-			return (0);
-	}
-	return (1);
-}
-
-
-void	n_flag_validation(int *i, const char **av, int ac)
-{
-	if (*av[*i] == '-')
-	{
-		if (!ft_strcmp(av[*i], "-n"))
-		{
-			if ((*i + 2) >= ac)
-				exit_error_message("Too few arguments after -n flag!");
-			*i = *i + 1;
-			if (!argument_has_only_numbers(i, av))
-				exit_error_message("Wrong argument after -n flag!");
-			*i = *i + 1;
-		}
-		else
-			exit_error_message("Unsupported flag!");
-	}
-}
-
-void	open_players(const int ac, const char **av, t_data * const data)
+void	open_players(const int ac, const char **av, t_data *const data)
 {
 	int	i;
-	
+	int	flag_id;
+
 	i = 1;
+	flag_id = 0;
 	while (i < ac)
 	{
-		n_flag_validation(&i, av, ac);
+		flag_id = validate_and_receive_n_flag_arg(&i, av, ac);
 		validate_file_extension(i, av);
-		create_player(i, av, data);
+		create_player(data);
+		init_player(av[i], &data->player, flag_id);
 		i++;
 	}
-
+	check_amount_of_players(data);
+	set_players_ids(data);
 }
