@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/01/12 11:22:58 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/12 15:05:19 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,18 +117,65 @@ int	get_name_comment(t_data *data, int fd)
 		data->file[0] = get_name(fd,line);
 	else if (!ft_strncmp(line, ".comment", 8))
 		data->file[1] = get_name(fd,line);
-	ft_printf("%s\n",data->file[0]);
-	ft_printf("%s\n",data->file[1]);
 	return (0);
 }
 
+// this function ignores empty lines
+int	check_empty_line(char *str)
+{
+	if (str[0] == '\0')
+		return (1);
+	else
+		return (0);
+}
+
+char *check_valid_inst(char *line)
+{
+	char *dest;
+
+	dest = ft_strdup(line);
+	return (dest);
+}
+
+// this functions continues reading the file and saves each instruction
+// at the same time checking if it valid?
+int	get_instructions(t_data *data, int fd)
+{
+	char	*line;
+	int		ret;
+	int		index;
+	
+	ret = 1;
+	index = 2;
+	while (ret)
+	{
+		ret = get_next_line(fd, &line);
+		while (check_comment(line) || check_empty_line(line))
+		{
+			ret = get_next_line(fd, &line);
+			if (ret == 0)
+				return (1);
+		}
+		data->file[index++] = check_valid_inst(line);
+	}
+	return (0);
+}
 
 //a function that reads through the file and checks the syntax
 //returns 1 if an error was found
 int scan_file(t_data *data, int fd)
 {
+	int index;
+	
 	data->file = (char **)malloc(sizeof(char *) * 1064);
 	if (get_name_comment(data, fd))
 		return (1);
+	if (get_instructions(data, fd))
+		return (1);
+	index = 0;
+	while (data->file[index] != NULL)
+	{
+		ft_printf("%s\n",data->file[index++]);
+	}
 	return (0);
 }
