@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/11 16:17:34 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/12 18:14:31 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	exit_usage(void)
 
 
 //a function to check the file name and exit the program in case it does not end with .s
-int checkname(char *str)
+bool checkname(char *str)
 {
 	int index;
 
@@ -32,10 +32,10 @@ int checkname(char *str)
 	{
 		if (str[index] == '.')
 		{
-			return (0);
+			return (true);
 		}
 	}
-	return (1);
+	return (false);
 }
 
 // The assembler is meant to read through the .s file representing a champion
@@ -48,7 +48,7 @@ int	main (int argc, char **argv)
 	
 	if (argc != 2)
 		exit_usage();
-	if (checkname(argv[1]))
+	if (!checkname(argv[1]))
 		exit_usage();
 	fd = open(argv[1],O_RDONLY);
 	data = (t_data *)malloc(sizeof(t_data));
