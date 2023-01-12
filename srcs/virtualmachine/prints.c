@@ -55,3 +55,24 @@ void	print_arena(t_data *const data)
 		i++;
 	}
 }
+
+/*
+You can install Hex Editor and open .cor file there
+And use this function to print player code
+It will print it in the same format as hex editor, so
+it's easy to read and compare them
+*/
+void	print_player_code(t_player *player)
+{
+	int i;
+
+	i = 0;
+	while (i < player->exec_size)
+	{
+		if (i % 16 == 0)
+			ft_printf("\n");
+		ft_printf("%.2x ", player->exec_code[i]);
+		i++;
+	}
+	ft_printf("\nbytes = %d\n\n", i);
+}

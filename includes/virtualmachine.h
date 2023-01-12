@@ -14,8 +14,9 @@
 # define VIRTUALMACHINE_H
 
 # include "../libft/includes/ft_printf.h"
-# include "../resources_42/op.h"
 # include <stdbool.h>
+
+#define MEM_SIZE				(4*1024)
 
 typedef struct s_player
 {
@@ -25,7 +26,7 @@ typedef struct s_player
 	const char			*name;
 	const char			*comment;
 	int					exec_size;
-	int					exec_code;
+	uint8_t				*exec_code;
 	struct s_player	*next;
 
 }					t_player;
@@ -44,18 +45,30 @@ typedef struct s_data
 }					t_data;
 
 
-void	init_data(t_data *data);
 void	exit_error_message(char *message);
-void	validate_user_input(const int ac, const char **av, t_data * const data);
-int		validate_and_receive_n_flag_arg(int *i, const char **av, int ac);
+
+/*-------Prints-------*/
+void	print_introduction(t_data *const data);
+void	print_player_code(t_player *player);
+void	print_champion_path_and_id(t_data *const data);
+void	print_arena(t_data *const data);
+
+/*-------Inits--------*/
+void	init_data(t_data *data);
+void	init_player(const char *path, t_player **player, int flag_id);
+void	init_arena(t_data *const data);
+
+/*-------Player_ids---*/
 void	check_amount_of_players(t_data *const data);
 void	set_players_ids(t_data *const data);
 void	sort_players_list(t_data *const data);
+
+/*-------Read_players---*/
+int		validate_and_receive_n_flag_arg(int *i, const char **av, int ac);
+void	validate_user_input(const int ac, const char **av, t_data * const data);
+
+/*-------Validation-----*/
 int		validate_player(t_data *const data);
-void	init_player(const char *path, t_player **player, int flag_id);
-void	print_introduction(t_data *const data);
-void	print_champion_path_and_id(t_data *const data);
-void	print_arena(t_data *const data);
-void	init_arena(t_data *const data);
+
 
 #endif

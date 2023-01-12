@@ -46,8 +46,9 @@ void	init_arena(t_data *const data)
 	player = data->player;
 	while (i < data->player_amount)
 	{
-		ft_memcpy(&data->arena[pointer], &player->exec_code, //Argh, it kinda works, but probably we have to reverse data
-			player->exec_size);									   //either here or when we read or save it into a player
+		print_player_code(player);
+		ft_memcpy(&data->arena[pointer], &player->exec_code,
+			player->exec_size);
 		i++;
 		pointer += MEM_SIZE / data->player_amount;
 		player = player->next;

@@ -50,7 +50,10 @@ void	get_exec_code(int fd, t_player *player)
 		exit_error("invalid champion name");
 	}
 	if (buffer[0])
-		player->exec_code = ft_strdup(buffer);
+	{
+		player->exec_code = (uint8_t *)malloc(sizeof(uint8_t) * rtn);
+		ft_memcpy(player->exec_code, buffer, player->exec_size);
+	}
 	else
 		printf("\t\tbuffer[0](in exec code) does not exist...\n");
 }

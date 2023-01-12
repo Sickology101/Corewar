@@ -15,7 +15,7 @@ CGREEN=\033[0;32m
 
 CC = gcc
 VM_NAME = corewar
-FLAGS = -Wall -Wextra -g #-Werror
+FLAGS = -Wall -Wextra -g -fsanitize=address#-Werror
 
 VM_SRC_DIR = ./srcs/virtualmachine/
 VM_SRC_FILES = main.c \
