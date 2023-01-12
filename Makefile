@@ -3,19 +3,27 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marius <marius@student.42.fr>              +#+  +:+       +#+         #
+#    By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-#    Updated: 2023/01/08 14:22:29 by marius           ###   ########.fr        #
+<<<<<<< HEAD
+#    Updated: 2023/01/08 19:06:43 by mtissari         ###   ########.fr        #
+=======
+#    Updated: 2023/01/11 18:40:01 by mtissari         ###   ########.fr        #
+>>>>>>> 718d808a340db69b5c32f4b4266b55a2e28ab187
 #                                                                              #
 # **************************************************************************** #
-]CYELLOW=\033[0;33m
+
 CEND=\033[0m
 CGREEN=\033[0;32m
 
 CC = gcc
 VM_NAME = corewar
+<<<<<<< HEAD
 FLAGS = -g -Wall -Wextra #-Werror
+=======
+FLAGS = -Wall -Wextra -g #-Werror
+>>>>>>> 718d808a340db69b5c32f4b4266b55a2e28ab187
 
 VM_SRC_DIR = ./srcs/virtualmachine/
 VM_SRC_FILES = main.c \

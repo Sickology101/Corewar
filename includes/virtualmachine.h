@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   virtualmachine.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:57 by marius            #+#    #+#             */
-/*   Updated: 2023/01/08 14:26:19 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/12 17:44:45 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ typedef struct s_player
 	struct s_player	*next;
 
 }					t_player;
+
+typedef struct s_counter
+{
+	int			total_cycles;
+	int			nbr_live;
+}				t_counter;
 
 typedef struct s_data
 {
