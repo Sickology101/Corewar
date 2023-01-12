@@ -83,15 +83,15 @@ void	sort_players_list(t_data *const data)
 	int			tmp_id;
 	t_player	*iter;
 
-	tmp_id = data->player_amount;
+	tmp_id = 1;
 	iter = data->player;
-	while (tmp_id > 0)
+	while (tmp_id <= data->player_amount)
 	{
 		if (iter->id != tmp_id)
 		{
 			find_id_and_swap_players(iter, tmp_id);
 		}
-		tmp_id--;
+		tmp_id++;
 		iter = iter->next;
 	}
 }
