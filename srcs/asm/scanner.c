@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/01/11 17:18:22 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/12 11:22:58 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	check_quotes(char *str)
 	int index;
 
 	index = search_char(str, '"');
-	if (str[++index] == '\n')
-		return (1);
-	else
+	if (str[++index] == '\0')
 		return (0);
+	else
+		return (1);
 }
 
 //gets the name of the champion and makes sure it is correctly formatted
@@ -104,7 +104,21 @@ int	get_name_comment(t_data *data, int fd)
 	}
 	if (!ft_strncmp(line, ".name", 5))
 		data->file[0] = get_name(fd,line);
+	else if (!ft_strncmp(line, ".comment", 8))
+		data->file[1] = get_name(fd,line);
+	ret = get_next_line(fd, &line);
+	while (check_comment(line))
+	{
+		ret = get_next_line(fd, &line);
+		if (ret == 0)
+			return (1);
+	}
+	if (!ft_strncmp(line, ".name", 5))
+		data->file[0] = get_name(fd,line);
+	else if (!ft_strncmp(line, ".comment", 8))
+		data->file[1] = get_name(fd,line);
 	ft_printf("%s\n",data->file[0]);
+	ft_printf("%s\n",data->file[1]);
 	return (0);
 }
 
