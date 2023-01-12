@@ -41,3 +41,17 @@ void	print_introduction(t_data *const data)
 		tmp = tmp->next;
 	}
 }
+
+void	print_arena(t_data *const data)
+{
+	int	i;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		if (i % 64 == 0)
+			ft_printf("\n");
+		ft_printf("%.2x ", data->arena[i]);
+		i++;
+	}
+}
