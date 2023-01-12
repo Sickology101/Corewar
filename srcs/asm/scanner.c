@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   scanner.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/01/12 15:05:19 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/12 17:54:36 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 // checks the first char of the line to see if it is a comment
-int	check_comment(char *str)
+bool	check_comment(char *str)
 {
 	if (str[0] == '#')
-		return (1);
-	return (0);
+		return (true);
+	return (false);
 }
 
 int	search_char(char *str, char c)
@@ -29,7 +29,7 @@ int	search_char(char *str, char c)
 		index++;
 	}
 	if (str[index] == '\n')
-		return(0);
+		return(false);
 	else
 		return (index);
 }
@@ -42,20 +42,20 @@ int	check_valid(char *str)
 	while(str[++index] != '"')
 	{
 		if (str[index] == '\n')
-			return (1);
+			return (false);
 	}
-	return (0);
+	return (true);
 }
 
-int	check_quotes(char *str)
+bool	check_quotes(char *str)
 {
 	int index;
 
 	index = search_char(str, '"');
 	if (str[++index] == '\0')
-		return (0);
+		return (false);
 	else
-		return (1);
+		return (true);
 }
 
 //gets the name of the champion and makes sure it is correctly formatted
@@ -70,7 +70,7 @@ char *get_name(int fd, char *line)
 	if (line[--index] == '"' && check_quotes(line))
 		return (dest);
 	ret = 1;
-	if (check_valid(line))
+	if (!check_valid(line))
 		exit_usage();
 	while(ret)
 	{
@@ -88,19 +88,19 @@ char *get_name(int fd, char *line)
 
 //this function reads through the first line and saves the name on data->file[0]
 // and the comment on data->file[1]
-int	get_name_comment(t_data *data, int fd)
+bool	get_name_comment(t_data *data, int fd)
 {
 	int ret;
 	char *line;
 
 	ret = get_next_line(fd, &line);
 	if (ret == 0)
-		return (1);
+		return (false);
 	while (check_comment(line))
 	{
 		ret = get_next_line(fd, &line);
 		if (ret == 0)
-			return (1);
+			return (false);
 	}
 	if (!ft_strncmp(line, ".name", 5))
 		data->file[0] = get_name(fd,line);
@@ -111,22 +111,22 @@ int	get_name_comment(t_data *data, int fd)
 	{
 		ret = get_next_line(fd, &line);
 		if (ret == 0)
-			return (1);
+			return (false);
 	}
 	if (!ft_strncmp(line, ".name", 5))
 		data->file[0] = get_name(fd,line);
 	else if (!ft_strncmp(line, ".comment", 8))
 		data->file[1] = get_name(fd,line);
-	return (0);
+	return (true);
 }
 
 // this function ignores empty lines
 int	check_empty_line(char *str)
 {
 	if (str[0] == '\0')
-		return (1);
+		return (true);
 	else
-		return (0);
+		return (false);
 }
 
 char *check_valid_inst(char *line)
@@ -139,7 +139,7 @@ char *check_valid_inst(char *line)
 
 // this functions continues reading the file and saves each instruction
 // at the same time checking if it valid?
-int	get_instructions(t_data *data, int fd)
+bool	get_instructions(t_data *data, int fd)
 {
 	char	*line;
 	int		ret;
@@ -154,11 +154,11 @@ int	get_instructions(t_data *data, int fd)
 		{
 			ret = get_next_line(fd, &line);
 			if (ret == 0)
-				return (1);
+				return (false);
 		}
 		data->file[index++] = check_valid_inst(line);
 	}
-	return (0);
+	return (true);
 }
 
 //a function that reads through the file and checks the syntax
@@ -168,14 +168,14 @@ int scan_file(t_data *data, int fd)
 	int index;
 	
 	data->file = (char **)malloc(sizeof(char *) * 1064);
-	if (get_name_comment(data, fd))
-		return (1);
-	if (get_instructions(data, fd))
-		return (1);
+	if (!get_name_comment(data, fd))
+		return (false);
+	if (!get_instructions(data, fd))
+		return (false);
 	index = 0;
 	while (data->file[index] != NULL)
 	{
 		ft_printf("%s\n",data->file[index++]);
 	}
-	return (0);
+	return (true);
 }
