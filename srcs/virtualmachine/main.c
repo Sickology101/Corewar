@@ -29,5 +29,6 @@ int	main(const int ac, const char **av)
 	validate_player(&data);
 	print_champion_path_and_id(&data);
 	print_introduction(&data);
+	init_arena(&data);
 	return (0);
 }

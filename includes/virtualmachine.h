@@ -14,6 +14,7 @@
 # define VIRTUALMACHINE_H
 
 # include "../libft/includes/ft_printf.h"
+# include "../resources_42/op.h"
 # include <stdbool.h>
 
 typedef struct s_player
@@ -39,6 +40,7 @@ typedef struct s_data
 {
 	t_player		*player;
 	int				player_amount;
+	uint8_t			arena[MEM_SIZE];
 }					t_data;
 
 
@@ -53,5 +55,7 @@ int		validate_player(t_data *const data);
 void	init_player(const char *path, t_player **player, int flag_id);
 void	print_introduction(t_data *const data);
 void	print_champion_path_and_id(t_data *const data);
+void	print_arena(t_data *const data);
+void	init_arena(t_data *const data);
 
 #endif
