@@ -18,10 +18,13 @@
 
 typedef struct s_player
 {
-	int				id;
+	int					id;
+	int					fd;
 	const char			*path;
-	// const char			*name;
+	const char			*name;
 	const char			*comment;
+	int					exec_size;
+	int					exec_code;
 	struct s_player	*next;
 
 }					t_player;
@@ -46,5 +49,9 @@ int		validate_and_receive_n_flag_arg(int *i, const char **av, int ac);
 void	check_amount_of_players(t_data *const data);
 void	set_players_ids(t_data *const data);
 void	sort_players_list(t_data *const data);
+int		validate_player(t_data *const data);
+void	init_player(const char *path, t_player **player, int flag_id);
+void	print_introduction(t_data *const data);
+void	print_champion_path_and_id(t_data *const data);
 
 #endif

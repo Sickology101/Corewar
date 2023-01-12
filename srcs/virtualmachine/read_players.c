@@ -48,8 +48,7 @@ void	validate_file_extension(const int i, const char **av)
 	}
 }
 
-void	create_and_init_player(const char *path,
-								t_data *const data, int flag_id)
+void	create_player(t_data *const data)
 {
 	t_player	*new_player;
 
@@ -65,12 +64,6 @@ void	create_and_init_player(const char *path,
 	else if (!data->player)
 		data->player = new_player;
 	data->player_amount++;
-	data->player->path = path;
-	data->player->comment = NULL;
-	if (flag_id != 0)
-		data->player->id = flag_id;
-	else
-		data->player->id = 0;
 }
 
 void	check_n_flag_unique_ids(t_data *const data)
@@ -104,7 +97,8 @@ void	validate_user_input(const int ac, const char **av, t_data *const data)
 	{
 		flag_id = validate_and_receive_n_flag_arg(&i, av, ac);
 		validate_file_extension(i, av);
-		create_and_init_player(av[i], data, flag_id);
+		create_player(data);
+		init_player(av[i], &data->player, flag_id);
 		i++;
 	}
 	check_amount_of_players(data);

@@ -18,12 +18,6 @@ void	exit_error_message(char *message)
 	exit(0);
 }
 
-void	init_data(t_data *data)
-{
-	data->player = NULL;
-	data->player_amount = 0;
-}
-
 int	main(const int ac, const char **av)
 {
 	t_data	data;
@@ -32,11 +26,8 @@ int	main(const int ac, const char **av)
 	if (ac < 2)
 		exit_error_message("Not enough players!");
 	validate_user_input(ac, av, &data);
-	while (data.player)
-	{
-		printf("%s ", data.player->path);
-		printf("id = %d\n", data.player->id);
-		data.player = data.player->next;
-	}
+	validate_player(&data);
+	print_champion_path_and_id(&data);
+	print_introduction(&data);
 	return (0);
 }

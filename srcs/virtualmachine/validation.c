@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/virtualmachine.h"
+#include "../../includes/virtualmachine.h"
 #include "../../resources_42/op.h"
 
 void	exit_error(char *str)	//Just for testing purposes, delete this!
@@ -45,7 +45,7 @@ void	get_exec_code(int fd, t_player *player)
 	rtn = read(fd, buffer, player->exec_size);
 	printf("\tbytes read in get_exec_code: %i\n\n", rtn);
 	printf("\033[0;32m executable CODE: %s\n\n\033[0m", buffer);
-	if (rtn < 1)
+	if (rtn < player->exec_size)
 	{
 		exit_error("invalid champion name");
 	}
@@ -61,7 +61,7 @@ void	check_null_separator(int fd)
 	int		buffer;
 
 	rtn = read(fd, &buffer, 4);
-	if (rtn < 1 || buffer != 0)
+	if (rtn < 4 || buffer != 0)
 	{
 		exit_error("invalid NULL");
 	}
@@ -77,7 +77,7 @@ void	get_champion_comment(int fd, t_player *player)
 	printf("CURRENT LOCATION: %i\n", rtn);
 	rtn = read(fd, buffer, COMMENT_LENGTH);
 	printf("\tbytes read in get_champion_comment: %i\n\n", rtn);
-	if (rtn < 1 || ft_strlen(buffer) > COMMENT_LENGTH)
+	if (rtn < COMMENT_LENGTH)
 	{
 		exit_error("invalid champion comment");
 	}
@@ -94,16 +94,14 @@ void	get_exec_size(int fd, t_player *player)
 	int		rtn;
 	int		buffer;
 
-	rtn = lseek(fd, 0, SEEK_CUR);
+	rtn = lseek(fd, 0, SEEK_CUR);				//DONT FORGET WE CAN'T USE IT, CAN WE??
 	if (rtn != 136)
 		exit_error("Error: Wrong byte location");//Might have to do differently
 	printf("CURRENT LOCATION: %i\n", rtn);
 	rtn = read(fd, &buffer, 4);
-	buffer = swap_endians(buffer);
-	if (rtn < 1)
-	{
+	if (rtn < 4)
 		exit_error("invalid file");
-	}
+	buffer = swap_endians(buffer);
 	if (buffer > CHAMP_MAX_SIZE)
 		exit_error("invalid exec_size");
 	player->exec_size = buffer;
@@ -116,9 +114,11 @@ void	get_champion_name(int fd, t_player *player)
 	char	buffer[PROG_NAME_LENGTH];
 
 	rtn = read(fd, buffer, PROG_NAME_LENGTH);
+	if (rtn < PROG_NAME_LENGTH)
+		exit_error("Error reading!");
 	printf("\tbytes read in get_champion_name: %i\n\n", rtn);
 	printf("\033[0;32m CHAMPION NAME: %s\n\n\033[0m", buffer);
-	if (rtn < 1 || ft_strlen(buffer) > PROG_NAME_LENGTH)
+	if (ft_strlen(buffer) > PROG_NAME_LENGTH)
 	{
 		exit_error("invalid champion name");
 	}
@@ -133,30 +133,40 @@ void	check_magic_header(int fd)
 	int		buffer;
 
 	rtn = read(fd, &buffer, 4);
+	if (rtn < 4)
+		exit_error("Error reading!");
 	buffer = swap_endians(buffer);
-	if (rtn < 1 || buffer != COREWAR_EXEC_MAGIC)
+	if (buffer != COREWAR_EXEC_MAGIC)
 		exit_error("invalid magic header");
 }
 
-int	validate_player(const char *av, t_player *player)
+int	validate_player(t_data *const data)
 {
-	int		fd;
-	int		rtn;
-	int		delete;
+	int			fd;
+	int			rtn;
+	int			delete;
+	t_player	*player;
 
-	fd = open(av, O_RDONLY);
-	check_magic_header(fd);
-	get_champion_name(fd, player);
-	get_exec_size(fd, player);
-	get_champion_comment(fd, player);
-	get_exec_code(fd, player);
-	rtn = 1;
-	while (rtn >= 1)
+	player = data->player;
+	while (player)
 	{
-		rtn = read(fd, &delete, 1);
-		printf(" %i rounds until EOF\n", rtn);
+		fd = open(player->path, O_RDONLY);
+		player->fd = fd; 						//just in case
+		check_magic_header(fd);
+		get_champion_name(fd, player);
+		get_exec_size(fd, player);
+		get_champion_comment(fd, player);
+		get_exec_code(fd, player);
+		rtn = 1;
+		while (rtn >= 1)
+		{
+			rtn = read(fd, &delete, 1);
+			printf(" %i rounds until EOF\n", rtn);
+		}
+		printf("--------------------------------------");
+		close (fd);	// We'll see later if it needs to stay open.
+		player = player->next;
 	}
-	close (fd);	// We'll see later if it needs to stay open.
 	return (0);
 }
 /*											THESE WERE FOR (local)TESTINGG!!!
@@ -195,16 +205,16 @@ t_player	*init_player(void)
 	return (player);
 }*/
 
-int	main(int argc, char **argv)
-{
-	t_player	*player;
+// int	main(int argc, char **argv)
+// {
+// 	t_player	*player;
 
-	player = init_player();
-	validate_player(argv[1], player);
-	free_player (player);
-	printf("\033[1;95mALLES GOTT?\n");
-	return (0);
-}
+// 	player = init_player();
+// 	validate_player(argv[1], player);
+// 	free_player (player);
+// 	printf("\033[1;95mALLES GOTT?\n");
+// 	return (0);
+// }
 
 /*   _______________________________________________________
 	| an empty string can also be used as a champion name:  |

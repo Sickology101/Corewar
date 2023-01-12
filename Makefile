@@ -6,11 +6,7 @@
 #    By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/01/08 19:06:43 by mtissari         ###   ########.fr        #
-=======
 #    Updated: 2023/01/11 18:40:01 by mtissari         ###   ########.fr        #
->>>>>>> 718d808a340db69b5c32f4b4266b55a2e28ab187
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,16 +15,15 @@ CGREEN=\033[0;32m
 
 CC = gcc
 VM_NAME = corewar
-<<<<<<< HEAD
-FLAGS = -g -Wall -Wextra #-Werror
-=======
 FLAGS = -Wall -Wextra -g #-Werror
->>>>>>> 718d808a340db69b5c32f4b4266b55a2e28ab187
 
 VM_SRC_DIR = ./srcs/virtualmachine/
 VM_SRC_FILES = main.c \
 				read_players.c \
-				player_ids.c
+				player_ids.c \
+				validation.c \
+				inits.c \
+				prints.c
 VM_SRC = $(addprefix $(VM_SRC_DIR), $(VM_SRC_FILES))
 
 VM_OBJ_DIR = ./vm_obj/
