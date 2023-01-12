@@ -31,10 +31,10 @@ int	main(const int ac, const char **av)
 	init_data(&data);
 	if (ac < 2)
 		exit_error_message("Not enough players!");
-	open_players(ac, av, &data);
+	validate_user_input(ac, av, &data);
 	while (data.player)
 	{
-		printf("%s ", data.player->name);
+		printf("%s ", data.player->path);
 		printf("id = %d\n", data.player->id);
 		data.player = data.player->next;
 	}

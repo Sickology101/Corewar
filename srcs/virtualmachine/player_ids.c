@@ -12,27 +12,7 @@
 
 #include "../../includes/virtualmachine.h"
 
-int	validate_and_receive_n_flag_arg(int *i, const char **av, int ac)
-{
-	if (*av[*i] == '-')
-	{
-		if (!ft_strcmp(av[*i], "-n"))
-		{
-			if ((*i + 2) >= ac)
-				exit_error_message("Too few arguments after -n flag!");
-			*i = *i + 1;
-			if (av[*i][0] < '1' || av[*i][0] > '4' || av[*i][1])
-				exit_error_message("Wrong argument after -n flag!");
-			*i = *i + 1;
-			return (av[*i - 1][0] - '0');
-		}
-		else
-			exit_error_message("Unsupported flag!");
-	}
-	return (0);
-}
-
-void	find_free_number(t_data *const data, int *missing_id)
+void	find_free_id(t_data *const data, int *missing_id)
 {	
 	t_player	*tmp_player;
 
@@ -69,15 +49,49 @@ void	set_players_ids(t_data *const data)
 	t_player	*tmp_player;
 
 	missing_id = data->player_amount;
-	find_free_number(data, &missing_id);
 	tmp_player = data->player;
 	while (tmp_player)
 	{
+		find_free_id(data, &missing_id);
 		if (tmp_player->id == 0)
-		{
 			tmp_player->id = missing_id;
-			missing_id--;
-		}
 		tmp_player = tmp_player->next;
+	}
+}
+
+void	find_id_and_swap_players(t_player *to_player, int req_id)
+{
+	t_player	*iter;
+	int			tmp_id;
+	const char	*tmp_path;
+
+	iter = to_player->next;
+	tmp_path = NULL;
+	tmp_id = 0;
+	while (iter->id != req_id)
+		iter = iter->next;
+	tmp_id = iter->id;
+	iter->id = to_player->id;
+	to_player->id = tmp_id;
+	tmp_path = iter->path;
+	iter->path = to_player->path;
+	to_player->path = tmp_path;
+}
+
+void	sort_players_list(t_data *const data)
+{
+	int			tmp_id;
+	t_player	*iter;
+
+	tmp_id = data->player_amount;
+	iter = data->player;
+	while (tmp_id > 0)
+	{
+		if (iter->id != tmp_id)
+		{
+			find_id_and_swap_players(iter, tmp_id);
+		}
+		tmp_id--;
+		iter = iter->next;
 	}
 }

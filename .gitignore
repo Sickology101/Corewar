@@ -3,6 +3,10 @@ resources_42/
 corewar
 vm_obj/
 .vscode
+libft/.obj/
 libft/libft/*.o
+libft/libft.a
+libft/libft/libft.a
+libft/libftprintf.a
 test_files_n_flag.sh
 log.txt
