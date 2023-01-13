@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/01/12 17:54:36 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/01/13 10:38:41 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,71 @@ int	check_empty_line(char *str)
 		return (false);
 }
 
+int	check_valid_label_char(char c)
+{
+	int	index;
+
+	index = 0;
+	while (index < 38)
+	{
+		if (c == LABEL_CHAR[index])
+			return (0);
+		index++;
+	}
+	ft_printf("%c\n",c);
+	return (1);
+}
+
+// checks the line from index (0 for statement line)
+// to see if it follows a valid statement (name, argnumb, and arg type)
+int	check_valid_state(char *line, int index)
+{
+	while (line[index] != '\n')
+	{
+		while (line[index] == '	' || line[index] == ' ')
+		{
+			index++;
+		}
+		
+	}
+}
+
+// checks the line and reads through the first chars up to ':'
+// to see if they are valid LABEL_CHARs then checks the rest of it to see
+// if it is a valid statement
+int	check_valid_label(char *line)
+{
+	int	index;
+
+	index = 0;
+	while (line[index] != ':')
+	{
+		if (check_valid_label_char(line[index]))
+			return (1);
+		index++;
+	}
+	if (line[index++] == '\n')
+		return (0)
+	else if (check_valid_state(line, index))
+		return (1);
+	return (0);
+}
+
+// verifies every line if it is a valid(lexically) statement or label
 char *check_valid_inst(char *line)
 {
 	char *dest;
 
-	dest = ft_strdup(line);
+	dest = NULL;
+	if (line[0] == '	' || line[0] == ' ')
+		dest = ft_strdup("OK");
+	else
+	{
+		if (!check_valid_label(line))
+			dest = ft_strdup(line);
+		else
+			exit_usage();
+	}
 	return (dest);
 }
 
@@ -147,6 +207,7 @@ bool	get_instructions(t_data *data, int fd)
 	
 	ret = 1;
 	index = 2;
+	init_statements(data);
 	while (ret)
 	{
 		ret = get_next_line(fd, &line);
@@ -156,6 +217,8 @@ bool	get_instructions(t_data *data, int fd)
 			if (ret == 0)
 				return (false);
 		}
+		if (ret == 0)
+			break;
 		data->file[index++] = check_valid_inst(line);
 	}
 	return (true);

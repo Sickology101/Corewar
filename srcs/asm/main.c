@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/12 18:14:31 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/01/13 10:30:00 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main (int argc, char **argv)
 		exit_usage();
 	fd = open(argv[1],O_RDONLY);
 	data = (t_data *)malloc(sizeof(t_data));
-	if (scan_file(data, fd))
+	if (!scan_file(data, fd))
 		exit_usage();
 	return (0);
 }
