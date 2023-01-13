@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/13 16:54:52 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/01/13 17:16:03 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #define ASSEMBLER_H
 # include "ft_printf.h"
+# include <fcntl.h>
 # include <stdbool.h>
 
 #define LABEL_CHAR "abcdefghijklmnopqrstuvwxyz_0123456789"
