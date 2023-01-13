@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/13 10:30:00 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/13 18:40:20 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int	main (int argc, char **argv)
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!scan_file(data, fd))
 		exit_usage();
+	write_bytecode(data, argv);
 	return (0);
 }
