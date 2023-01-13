@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/01/13 10:38:41 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/13 17:03:29 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	check_comment(char *str)
 
 int	search_char(char *str, char c)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	while (str[index] != c && str[index] != '\n')
@@ -29,7 +29,7 @@ int	search_char(char *str, char c)
 		index++;
 	}
 	if (str[index] == '\n')
-		return(false);
+		return (false);
 	else
 		return (index);
 }
@@ -37,9 +37,9 @@ int	search_char(char *str, char c)
 int	check_valid(char *str)
 {
 	int	index;
-	
+
 	index = search_char(str, '"');
-	while(str[++index] != '"')
+	while (str[++index] != '"')
 	{
 		if (str[index] == '\n')
 			return (false);
@@ -49,7 +49,7 @@ int	check_valid(char *str)
 
 bool	check_quotes(char *str)
 {
-	int index;
+	int	index;
 
 	index = search_char(str, '"');
 	if (str[++index] == '\0')
@@ -59,11 +59,11 @@ bool	check_quotes(char *str)
 }
 
 //gets the name of the champion and makes sure it is correctly formatted
-char *get_name(int fd, char *line)
+char	*get_name(int fd, char *line)
 {
-	int index;
-	char *dest;
-	int ret;
+	int		index;
+	char	*dest;
+	int		ret;
 
 	index = ft_strlen(line);
 	dest = ft_strdup(line);
@@ -72,15 +72,15 @@ char *get_name(int fd, char *line)
 	ret = 1;
 	if (!check_valid(line))
 		exit_usage();
-	while(ret)
+	while (ret)
 	{
 		free(line);
-		ret = get_next_line(fd,&line);
+		ret = get_next_line(fd, &line);
 		index = ft_strlen(line);
 		dest = ft_strupdate(dest, "\n");
 		dest = ft_strupdate(dest, line);
 		if (line[--index] == '"')
-			return(dest);
+			return (dest);
 	}
 	exit_usage();
 	return (NULL);
@@ -90,8 +90,8 @@ char *get_name(int fd, char *line)
 // and the comment on data->file[1]
 bool	get_name_comment(t_data *data, int fd)
 {
-	int ret;
-	char *line;
+	int		ret;
+	char	*line;
 
 	ret = get_next_line(fd, &line);
 	if (ret == 0)
@@ -103,9 +103,9 @@ bool	get_name_comment(t_data *data, int fd)
 			return (false);
 	}
 	if (!ft_strncmp(line, ".name", 5))
-		data->file[0] = get_name(fd,line);
+		data->file[0] = get_name(fd, line);
 	else if (!ft_strncmp(line, ".comment", 8))
-		data->file[1] = get_name(fd,line);
+		data->file[1] = get_name(fd, line);
 	ret = get_next_line(fd, &line);
 	while (check_comment(line))
 	{
@@ -114,9 +114,9 @@ bool	get_name_comment(t_data *data, int fd)
 			return (false);
 	}
 	if (!ft_strncmp(line, ".name", 5))
-		data->file[0] = get_name(fd,line);
+		data->file[0] = get_name(fd, line);
 	else if (!ft_strncmp(line, ".comment", 8))
-		data->file[1] = get_name(fd,line);
+		data->file[1] = get_name(fd, line);
 	return (true);
 }
 
@@ -140,7 +140,7 @@ int	check_valid_label_char(char c)
 			return (0);
 		index++;
 	}
-	ft_printf("%c\n",c);
+	ft_printf("%c\n", c);
 	return (1);
 }
 
@@ -154,7 +154,6 @@ int	check_valid_state(char *line, int index)
 		{
 			index++;
 		}
-		
 	}
 }
 
@@ -173,16 +172,16 @@ int	check_valid_label(char *line)
 		index++;
 	}
 	if (line[index++] == '\n')
-		return (0)
+		return (0);
 	else if (check_valid_state(line, index))
 		return (1);
 	return (0);
 }
 
 // verifies every line if it is a valid(lexically) statement or label
-char *check_valid_inst(char *line)
+char	*check_valid_inst(char *line)
 {
-	char *dest;
+	char	*dest;
 
 	dest = NULL;
 	if (line[0] == '	' || line[0] == ' ')
@@ -204,7 +203,7 @@ bool	get_instructions(t_data *data, int fd)
 	char	*line;
 	int		ret;
 	int		index;
-	
+
 	ret = 1;
 	index = 2;
 	init_statements(data);
@@ -218,7 +217,7 @@ bool	get_instructions(t_data *data, int fd)
 				return (false);
 		}
 		if (ret == 0)
-			break;
+			break ;
 		data->file[index++] = check_valid_inst(line);
 	}
 	return (true);
@@ -226,10 +225,10 @@ bool	get_instructions(t_data *data, int fd)
 
 //a function that reads through the file and checks the syntax
 //returns 1 if an error was found
-int scan_file(t_data *data, int fd)
+int	scan_file(t_data *data, int fd)
 {
-	int index;
-	
+	int	index;
+
 	data->file = (char **)malloc(sizeof(char *) * 1064);
 	if (!get_name_comment(data, fd))
 		return (false);
@@ -238,7 +237,7 @@ int scan_file(t_data *data, int fd)
 	index = 0;
 	while (data->file[index] != NULL)
 	{
-		ft_printf("%s\n",data->file[index++]);
+		ft_printf("%s\n", data->file[index++]);
 	}
 	return (true);
 }

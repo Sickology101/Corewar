@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   init_statements.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:13:12 by marius            #+#    #+#             */
-/*   Updated: 2023/01/13 09:37:29 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/13 16:58:57 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-static	t_statements init_live(void)
+static t_statements	init_live(void)
 {
-	t_statements s;
+	t_statements	s;
+
 	s.str = ft_strdup("live");
 	s.arg_num = 1;
 	s.arg = (int *)malloc(sizeof(int));
@@ -22,10 +23,10 @@ static	t_statements init_live(void)
 	return (s);
 }
 
-static	t_statements init_ld(void)
+static t_statements	init_ld(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("ld");
 	s.arg_num = 2;
 	s.arg = (int *)malloc(sizeof(int) * 2);
@@ -34,10 +35,10 @@ static	t_statements init_ld(void)
 	return (s);
 }
 
-static	t_statements init_st(void)
+static t_statements	init_st(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("st");
 	s.arg_num = 2;
 	s.arg = (int *)malloc(sizeof(int) * 2);
@@ -46,10 +47,10 @@ static	t_statements init_st(void)
 	return (s);
 }
 
-static	t_statements init_add(void)
+static t_statements	init_add(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("add");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
@@ -59,10 +60,10 @@ static	t_statements init_add(void)
 	return (s);
 }
 
-static	t_statements init_sub(void)
+static t_statements	init_sub(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("sub");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
@@ -72,10 +73,10 @@ static	t_statements init_sub(void)
 	return (s);
 }
 
-static	t_statements init_and(void)
+static t_statements	init_and(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("and");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
@@ -85,10 +86,10 @@ static	t_statements init_and(void)
 	return (s);
 }
 
-static	t_statements init_or(void)
+static t_statements	init_or(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("or");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
@@ -98,10 +99,10 @@ static	t_statements init_or(void)
 	return (s);
 }
 
-static	t_statements init_xor(void)
+static t_statements	init_xor(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("xor");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
@@ -111,10 +112,10 @@ static	t_statements init_xor(void)
 	return (s);
 }
 
-static	t_statements init_zjmp(void)
+static t_statements	init_zjmp(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("zjmp");
 	s.arg_num = 1;
 	s.arg = (int *)malloc(sizeof(int) * 1);
@@ -122,10 +123,10 @@ static	t_statements init_zjmp(void)
 	return (s);
 }
 
-static	t_statements init_ldi(void)
+static t_statements	init_ldi(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("ldi");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
@@ -135,10 +136,10 @@ static	t_statements init_ldi(void)
 	return (s);
 }
 
-static	t_statements init_sti(void)
+static t_statements	init_sti(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("sti");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
@@ -148,10 +149,10 @@ static	t_statements init_sti(void)
 	return (s);
 }
 
-static	t_statements init_fork(void)
+static t_statements	init_fork(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("fork");
 	s.arg_num = 1;
 	s.arg = (int *)malloc(sizeof(int) * 1);
@@ -159,10 +160,10 @@ static	t_statements init_fork(void)
 	return (s);
 }
 
-static	t_statements init_lld(void)
+static t_statements	init_lld(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("lld");
 	s.arg_num = 2;
 	s.arg = (int *)malloc(sizeof(int) * 2);
@@ -171,10 +172,10 @@ static	t_statements init_lld(void)
 	return (s);
 }
 
-static	t_statements init_lldi(void)
+static t_statements	init_lldi(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("lldi");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
@@ -184,10 +185,10 @@ static	t_statements init_lldi(void)
 	return (s);
 }
 
-static	t_statements init_lfork(void)
+static t_statements	init_lfork(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("lfork");
 	s.arg_num = 1;
 	s.arg = (int *)malloc(sizeof(int) * 1);
@@ -195,10 +196,10 @@ static	t_statements init_lfork(void)
 	return (s);
 }
 
-static	t_statements init_aff(void)
+static t_statements	init_aff(void)
 {
-	t_statements s;
-	
+	t_statements	s;
+
 	s.str = ft_strdup("aff");
 	s.arg_num = 1;
 	s.arg = (int *)malloc(sizeof(int) * 1);

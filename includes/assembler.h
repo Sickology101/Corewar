@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assembler.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/13 10:05:08 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/13 16:54:52 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,19 @@
 // when multiple types are allowed then a combination of the 3 num is used
 typedef	struct s_statements
 {
-	char *str;
-	int	arg_num;
-	int *arg;
+	char	*str;
+	int		arg_num;
+	int		*arg;
 }				t_statements;
 
-typedef struct s_data
+typedef struct	s_data
 {
-	t_statements *s;
-	char	**file;
-	int		file_size;
+	t_statements	*s;
+	char			**file;
+	int				file_size;
 }			t_data;
 
-int scan_file(t_data *data, int fd);
+int		scan_file(t_data *data, int fd);
 void	exit_usage(void);
 void	init_statements(t_data *data);
 #endif
