@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_statements.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:13:12 by marius            #+#    #+#             */
-/*   Updated: 2023/01/13 16:58:57 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/01/14 13:49:55 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_statements	init_live(void)
 	s.str = ft_strdup("live");
 	s.arg_num = 1;
 	s.arg = (int *)malloc(sizeof(int));
-	s.arg[0] = 3;
+	s.arg[0] = T_DIR; // 2
 	return (s);
 }
 
@@ -179,9 +179,9 @@ static t_statements	init_lldi(void)
 	s.str = ft_strdup("lldi");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
-	s.arg[0] = 123;
-	s.arg[1] = 13;
-	s.arg[2] = 1;
+	s.arg[0] = T_REG + T_DIR + T_IND; // 1 + 2 + 4 = 7
+	s.arg[1] = T_REG + T_DIR; // 1 + 2 = 3
+	s.arg[2] = T_REG; // 1
 	return (s);
 }
 
