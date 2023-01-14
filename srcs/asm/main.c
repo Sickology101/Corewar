@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/13 18:40:20 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/01/13 19:12:38 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ bool checkname(char *str)
 int	main (int argc, char **argv)
 {
 	int fd;
-	t_data *data;
+	t_data 		*data;
+	t_champion	*hero;
 	
 	if (argc != 2)
 		exit_usage();
@@ -54,6 +55,6 @@ int	main (int argc, char **argv)
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!scan_file(data, fd))
 		exit_usage();
-	write_bytecode(data, argv);
+	write_bytecode(hero, argv);
 	return (0);
 }
