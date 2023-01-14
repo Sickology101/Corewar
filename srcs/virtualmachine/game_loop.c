@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assembler.h                                        :+:      :+:    :+:   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: igaplich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/08 14:25:45 by marius           ###   ########.fr       */
+/*   Created: 2023/01/14 20:21:17 by igaplich          #+#    #+#             */
+/*   Updated: 2023/01/14 20:21:18 by igaplich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASSEMBLER_H
+#include "../../includes/virtualmachine.h"
 
-# define ASSEMBLER_H
+void	run_game_loop(t_data *const data)
+{
+	while (data->process_amount)
+	{
 
-#endif
+	}
+}

@@ -20,6 +20,9 @@ void	init_data(t_data *data)
 	data->cycles_from_begin = 0;
 	data->amount_of_live = 0;
 	data->cycles_to_die = CYCLE_TO_DIE;
+	data->process_amount = 0;
+	data->process_head = NULL;
+	data->process_tail = NULL;
 }
 
 void	init_player(const char *path, t_player **player, int flag_id)
@@ -53,14 +56,15 @@ void	init_process_on_arena(t_data *const data, t_player *player,
 					size_t pointer)
 {
 	create_initial_process_list(data);
-	data->process_head->player = player;
 	data->process_head->carry = 0;
 	data->process_head->operation_code = 0;
 	data->process_head->last_live = 0;
 	data->process_head->cycles_before_exec = 0;
 	data->process_head->cur_pos = pointer;
 	data->process_head->next_operation = 0;
-	data->process_head->reg_num = 0;
+	data->process_head->reg[0] = -(player->id);
+	data->process_head->player = player;
+	data->process_amount++;
 }
 
 void	init_arena(t_data *const data)

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/virtualmachine.h"
-#include "../../resources_42/op.h"
 
 void	exit_error(char *str)	//Just for testing purposes, delete this!
 {

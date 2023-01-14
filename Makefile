@@ -24,7 +24,8 @@ VM_SRC_FILES = main.c \
 				validation.c \
 				inits.c \
 				prints.c \
-				process.c
+				process.c \
+				game_loop.c
 VM_SRC = $(addprefix $(VM_SRC_DIR), $(VM_SRC_FILES))
 
 VM_OBJ_DIR = ./vm_obj/

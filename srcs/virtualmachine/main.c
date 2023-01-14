@@ -30,5 +30,6 @@ int	main(const int ac, const char **av)
 	print_champion_path_and_id(&data);
 	print_introduction(&data);
 	init_arena(&data);
+	// run_game_loop(&data);
 	return (0);
 }
