@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/13 19:12:38 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/01/14 14:48:37 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool checkname(char *str)
 int	main (int argc, char **argv)
 {
 	int fd;
-	t_data 		*data;
+	t_parser 		*data;
 	t_champion	*hero;
 	
 	if (argc != 2)
@@ -52,7 +52,7 @@ int	main (int argc, char **argv)
 	if (!checkname(argv[1]))
 		exit_usage();
 	fd = open(argv[1],O_RDONLY);
-	data = (t_data *)malloc(sizeof(t_data));
+	data = (t_parser *)malloc(sizeof(t_parser));
 	if (!scan_file(data, fd))
 		exit_usage();
 	write_bytecode(hero, argv);

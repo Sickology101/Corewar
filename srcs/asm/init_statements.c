@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:13:12 by marius            #+#    #+#             */
-/*   Updated: 2023/01/14 13:49:55 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/14 14:48:37 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ static t_statements	init_aff(void)
 }
 
 // this initializes the statements array with all the valid statements and allowed args
-void	init_statements(t_data *data)
+void	init_statements(t_parser *data)
 {
 	data->s = (t_statements *)malloc(sizeof(t_statements) * 16);
 	data->s[0] = init_live();

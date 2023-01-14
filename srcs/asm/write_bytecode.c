@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   write_bytecode.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:40:53 by parkharo          #+#    #+#             */
-/*   Updated: 2023/01/13 18:43:07 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/01/14 14:48:37 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-void	write_bytecode(t_data *data, char **av)
+void	write_bytecode(t_parser *data, char **av)
 {
 	int		i;
-	t_data	*start;
+	t_parser	*start;
 
 	i = 0;
 	start = data;
