@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:57 by marius            #+#    #+#             */
-/*   Updated: 2023/01/12 17:44:45 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/14 20:38:02 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,13 @@ void	validate_user_input(const int ac, const char **av, t_data *const data);
 
 /*-------Validation-----*/
 int		validate_player(t_data *const data);
+
+
+void	get_champion_comment(int fd, t_player *player);
+void	check_null_separator(int fd);
+void	get_exec_code(int fd, t_player *player);
+
+int		swap_endians(int buffer);
 
 /*-------Process--------*/
 void	create_initial_process_list(t_data *const data);

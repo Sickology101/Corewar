@@ -6,7 +6,7 @@
 #    By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-#    Updated: 2023/01/11 18:40:01 by mtissari         ###   ########.fr        #
+#    Updated: 2023/01/14 20:37:44 by mtissari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ VM_SRC_FILES = main.c \
 				inits.c \
 				prints.c \
 				process.c \
-				game_loop.c
+				game_loop.c \
+				player_code_validation.c \
+				vm_utils.c
 VM_SRC = $(addprefix $(VM_SRC_DIR), $(VM_SRC_FILES))
 
 VM_OBJ_DIR = ./vm_obj/
