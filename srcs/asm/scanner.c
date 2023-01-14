@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/01/14 14:48:37 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/14 15:21:03 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,12 +146,13 @@ int	check_valid_label_char(char c)
 
 // checks the line from index (0 for statement line)
 // to see if it follows a valid statement (name, argnumb, and arg type)
-int	check_valid_state(char *line, int index)
+bool	check_valid_state(char *line, int index)
 {
 	while (line[index] != '\n')
 	{
 		while (line[index] == '	' || line[index] == ' ')
 		{
+			// HERE
 			index++;
 		}
 	}
@@ -160,7 +161,7 @@ int	check_valid_state(char *line, int index)
 // checks the line and reads through the first chars up to ':'
 // to see if they are valid LABEL_CHARs then checks the rest of it to see
 // if it is a valid statement
-int	check_valid_label(char *line)
+bool	check_valid_label(char *line)
 {
 	int	index;
 
@@ -168,14 +169,14 @@ int	check_valid_label(char *line)
 	while (line[index] != ':')
 	{
 		if (check_valid_label_char(line[index]))
-			return (1);
+			return (false);
 		index++;
 	}
 	if (line[index++] == '\n')
-		return (0);
+		return (true);
 	else if (check_valid_state(line, index))
-		return (1);
-	return (0);
+		return (false);
+	return (true);
 }
 
 // verifies every line if it is a valid(lexically) statement or label
@@ -188,7 +189,7 @@ char	*check_valid_inst(char *line)
 		dest = ft_strdup("OK");
 	else
 	{
-		if (!check_valid_label(line))
+		if (check_valid_label(line))
 			dest = ft_strdup(line);
 		else
 			exit_usage();
