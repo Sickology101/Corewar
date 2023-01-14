@@ -15,7 +15,11 @@
 void	init_data(t_data *data)
 {
 	data->player = NULL;
+	data->last_alive = NULL;
 	data->player_amount = 0;
+	data->cycles_from_begin = 0;
+	data->amount_of_live = 0;
+	data->cycles_to_die = CYCLE_TO_DIE;
 }
 
 void	init_player(const char *path, t_player **player, int flag_id)
@@ -32,11 +36,38 @@ void	init_player(const char *path, t_player **player, int flag_id)
 	(*player)->exec_code = 0;
 }
 
+void	place_players_on_arena(t_player *player, t_data *const data,
+					size_t pointer)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < player->exec_size)
+	{
+		data->arena[pointer + i] = player->exec_code[i];
+		i++;
+	}
+}
+
+void	init_process_on_arena(t_data *const data, t_player *player,
+					size_t pointer)
+{
+	create_initial_process_list(data);
+	data->process_head->player = player;
+	data->process_head->carry = 0;
+	data->process_head->operation_code = 0;
+	data->process_head->last_live = 0;
+	data->process_head->cycles_before_exec = 0;
+	data->process_head->cur_pos = pointer;
+	data->process_head->next_operation = 0;
+	data->process_head->reg_num = 0;
+}
+
 void	init_arena(t_data *const data)
 {
 	int			i;
 	t_player	*player;
-	int			pointer;
+	size_t		pointer;
 
 	i = -1;
 	while (++i < MEM_SIZE)
@@ -47,8 +78,8 @@ void	init_arena(t_data *const data)
 	while (i < data->player_amount)
 	{
 		print_player_code(player);
-		ft_memcpy(&data->arena[pointer], &player->exec_code,
-			player->exec_size);
+		place_players_on_arena(player, data, pointer);
+		init_process_on_arena(data, player, pointer);
 		i++;
 		pointer += MEM_SIZE / data->player_amount;
 		player = player->next;

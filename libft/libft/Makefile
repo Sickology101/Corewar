@@ -27,7 +27,7 @@ SRCS = ft_atoi ft_bzero ft_isalnum ft_isalpha ft_isascii ft_isdigit \
 		ft_strupdate ft_wordcounter ft_strtab_free ft_strndup 
 SRC := $(addsuffix .c, $(SRCS))
 INC := includes
-CFLAGS := -Wall -Wextra -Werror -O2
+CFLAGS := -Wall -Wextra -Werror -g -fsanitize=address
 LIBS := $(SRC:%.c=%.o)
 
 all: $(NAME)

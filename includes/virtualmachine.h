@@ -15,8 +15,10 @@
 
 # include "../libft/includes/ft_printf.h"
 # include <stdbool.h>
+# include <stdint.h>
 
 #define MEM_SIZE				(4*1024)
+#define CYCLE_TO_DIE			1536
 
 typedef struct s_player
 {
@@ -25,7 +27,7 @@ typedef struct s_player
 	const char			*path;
 	const char			*name;
 	const char			*comment;
-	int					exec_size;
+	size_t				exec_size;
 	uint8_t				*exec_code;
 	struct s_player	*next;
 
@@ -37,12 +39,32 @@ typedef struct s_counter
 	int			nbr_live;
 }				t_counter;
 
+typedef struct s_process
+{
+	size_t				unique_id;
+	int					carry;
+	int					operation_code;
+	int					last_live;
+	int					cycles_before_exec;
+	size_t				cur_pos;
+	size_t				next_operation;
+	size_t				reg_num;
+	t_player			*player;
+	struct s_process 	*next;
+}						t_process;
+
 typedef struct s_data
 {
-	t_player		*player;
-	int				player_amount;
-	uint8_t			arena[MEM_SIZE];
-}					t_data;
+	t_player			*player;
+	t_player			*last_alive;
+	int					player_amount;
+	int					cycles_from_begin;
+	int					amount_of_live;
+	int					cycles_to_die;
+	uint8_t				arena[MEM_SIZE];
+	struct s_process	*process_head;
+	struct s_process	*process_tail;
+}						t_data;
 
 
 void	exit_error_message(char *message);
@@ -70,5 +92,7 @@ void	validate_user_input(const int ac, const char **av, t_data * const data);
 /*-------Validation-----*/
 int		validate_player(t_data *const data);
 
+/*-------Process--------*/
+void	create_initial_process_list(t_data *const data);
 
 #endif

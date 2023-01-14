@@ -45,7 +45,7 @@ void	get_exec_code(int fd, t_player *player)
 	rtn = read(fd, buffer, player->exec_size);
 	printf("\tbytes read in get_exec_code: %i\n\n", rtn);
 	printf("\033[0;32m executable CODE: %s\n\n\033[0m", buffer);
-	if (rtn < player->exec_size)
+	if (rtn < (int)player->exec_size)
 	{
 		exit_error("invalid champion name");
 	}
@@ -108,7 +108,7 @@ void	get_exec_size(int fd, t_player *player)
 	if (buffer > CHAMP_MAX_SIZE)
 		exit_error("invalid exec_size");
 	player->exec_size = buffer;
-	printf("\033[0;32m executable SIZE: %i\n\033[0m", player->exec_size);
+	printf("\033[0;32m executable SIZE: %zu\n\033[0m", player->exec_size);
 }
 
 void	get_champion_name(int fd, t_player *player)

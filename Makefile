@@ -23,7 +23,8 @@ VM_SRC_FILES = main.c \
 				player_ids.c \
 				validation.c \
 				inits.c \
-				prints.c
+				prints.c \
+				process.c
 VM_SRC = $(addprefix $(VM_SRC_DIR), $(VM_SRC_FILES))
 
 VM_OBJ_DIR = ./vm_obj/

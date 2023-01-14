@@ -36,7 +36,7 @@ void	print_introduction(t_data *const data)
 	ft_printf("Introducing contestants...\n");
 	while (tmp)
 	{
-		printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
+		printf("* Player %d, weighing %zu bytes, \"%s\" (\"%s\") !\n",
 			tmp->id, tmp->exec_size, tmp->name, tmp->comment);
 		tmp = tmp->next;
 	}
@@ -64,10 +64,10 @@ it's easy to read and compare them
 */
 void	print_player_code(t_player *player)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (i < player->exec_size)
+	while (i < (int)player->exec_size)
 	{
 		if (i % 16 == 0)
 			ft_printf("\n");
