@@ -10,3 +10,4 @@ libft/libft/libft.a
 libft/libftprintf.a
 test_files_n_flag.sh
 log.txt
+tests

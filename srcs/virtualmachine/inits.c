@@ -16,6 +16,7 @@ void	init_data(t_data *data)
 {
 	data->player = NULL;
 	data->last_alive = NULL;
+	data->dump_cycles = -1;
 	data->player_amount = 0;
 	data->cycles_from_begin = 0;
 	data->amount_of_live = 0;

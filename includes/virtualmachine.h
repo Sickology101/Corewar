@@ -55,6 +55,7 @@ typedef struct s_data
 {
 	t_player			*player;
 	t_player			*last_alive;
+	int					dump_cycles;
 	int					player_amount;
 	int					cycles_from_begin;
 	int					amount_of_live;
@@ -84,12 +85,10 @@ void	set_players_ids(t_data *const data);
 void	sort_players_list(t_data *const data);
 
 /*-------Read_players---*/
-int		validate_and_receive_n_flag_arg(int *i, const char **av, int ac);
 void	validate_user_input(const int ac, const char **av, t_data *const data);
 
 /*-------Validation-----*/
 int		validate_player(t_data *const data);
-
 
 void	get_champion_comment(int fd, t_player *player);
 void	check_null_separator(int fd);

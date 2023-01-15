@@ -12,7 +12,29 @@
 
 #include "../../includes/virtualmachine.h"
 
-int	validate_and_receive_n_flag_arg(int *i, const char **av, int ac)
+void	validate_and_receive_dump_flag_arg(int *i, const char **av, int ac,
+								t_data *const data)
+{
+	size_t	j;
+
+	if ((*i + 1) >= ac)
+		exit_error_message("Too few arguments after flag!");
+	*i = *i + 1;
+	j = 0;
+	while (av[*i][j])
+	{
+		if (!ft_isdigit(av[*i][j]))
+			exit_error_message("Wrong argument after -dump flag!");
+		j++;
+	}
+	if (data->dump_cycles == -1)
+		data->dump_cycles = ft_atoi(av[*i]);
+	else
+		exit_error_message("-dump set multiple times!");
+	*i = *i + 1;
+}
+
+int	validate_and_receive_n_flag(int *i, const char **av, int ac)
 {
 	if (*av[*i] == '-')
 	{
@@ -36,15 +58,22 @@ void	validate_file_extension(const int i, const char **av)
 {
 	const char	*dot;
 
-	dot = ft_strchr(av[i], '.');
-	if (!dot)
-		exit_error_message("Wrong player file extension!");
-	else if (dot == av[i])
-		exit_error_message("Empty player name!");
-	else
+	if (av[i])
 	{
-		if (ft_strcmp(dot, ".cor"))
+		dot = ft_strchr(av[i], '.');
+		if (!dot)
 			exit_error_message("Wrong player file extension!");
+		else if (dot == av[i] && *(dot - 1) && *(dot - 1) == '/')
+			exit_error_message("Empty player filename!");
+		else if (dot == av[i] && *(dot + 1) && *(dot + 1) == '/')
+			exit_error_message("Enter player filename without "
+				"starting from ./");
+		else
+		{
+			if (ft_strcmp(dot, ".cor"))
+				exit_error_message("Wrong player file extension "
+					"or dots in the path!");
+		}
 	}
 }
 
@@ -95,7 +124,15 @@ void	validate_user_input(const int ac, const char **av, t_data *const data)
 	flag_id = 0;
 	while (i < ac)
 	{
-		flag_id = validate_and_receive_n_flag_arg(&i, av, ac);
+		if (!ft_strcmp(av[i], "-dump"))
+		{
+			validate_and_receive_dump_flag_arg(&i, av, ac, data);
+			if (!av[i])
+				break ;
+			else
+				continue ;
+		}
+		flag_id = validate_and_receive_n_flag(&i, av, ac);
 		validate_file_extension(i, av);
 		create_player(data);
 		init_player(av[i], &data->player, flag_id);
