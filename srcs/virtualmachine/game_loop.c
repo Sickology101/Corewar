@@ -16,6 +16,10 @@ void	run_game_loop(t_data *const data)
 {
 	while (data->process_amount)
 	{
-
+		if (data->cycles_from_begin == data->dump_cycles)
+		{
+			print_arena(data);
+			exit(0);
+		}
 	}
 }

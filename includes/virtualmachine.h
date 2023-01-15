@@ -87,6 +87,12 @@ void	sort_players_list(t_data *const data);
 /*-------Read_players---*/
 void	validate_user_input(const int ac, const char **av, t_data *const data);
 
+/*-------Flags----------*/
+void	check_n_flag_unique_ids(t_data *const data);
+int		validate_and_receive_n_flag(int *i, const char **av, int ac);
+void	validate_and_receive_dump_flag_arg(int *i, const char **av, int ac,
+								t_data *const data);
+
 /*-------Validation-----*/
 int		validate_player(t_data *const data);
 
