@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assembler.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/14 13:55:41 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/14 17:02:40 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ void	exit_usage(void);
 void	init_statements(t_data *data);
 void	write_bytes(int fd, int input, int count_bytes);
 void	write_bytecode(t_data *data, char **argv);
+char	*join_free(char *line, char *line2, int flag);
 #endif
