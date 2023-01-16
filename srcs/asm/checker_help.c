@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 20:25:13 by marius            #+#    #+#             */
-/*   Updated: 2023/01/16 20:26:58 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/16 21:14:53 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,28 @@ bool	check_empty_line(char *str)
 		return (true);
 	else
 		return (false);
+}
+
+// checks the first char of the line to see if it is a comment
+bool	check_comment(char *str)
+{
+	if (str[0] == '#')
+		return (true);
+	return (false);
+}
+
+// searches for a char in the string and returns it's index
+int	search_char(char *str, char c)
+{
+	int	index;
+
+	index = 0;
+	while (str[index] != c && str[index] != '\0')
+	{
+		index++;
+	}
+	if (str[index] == '\0')
+		return (0);
+	else
+		return (index);
 }

@@ -6,54 +6,11 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/01/16 20:00:23 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/16 21:15:43 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
-
-//this function reads through the first line and saves the name on data->file[0]
-// and the comment on data->file[1]
-bool	get_name_comment(t_parser *data, int fd)
-{
-	int		ret;
-	char	*line;
-
-	ret = get_next_line(fd, &line);
-	if (ret == 0)
-		return (false);
-	while (check_comment(line))
-	{
-		ret = get_next_line(fd, &line);
-		if (ret == 0)
-			return (false);
-	}
-	if (!ft_strncmp(line, ".name", 5))
-		data->file[0] = get_name(fd, line);
-	else if (!ft_strncmp(line, ".comment", 8))
-		data->file[1] = get_name(fd, line);
-	ret = get_next_line(fd, &line);
-	while (check_comment(line))
-	{
-		ret = get_next_line(fd, &line);
-		if (ret == 0)
-			return (false);
-	}
-	if (!ft_strncmp(line, ".name", 5))
-		data->file[0] = get_name(fd, line);
-	else if (!ft_strncmp(line, ".comment", 8))
-		data->file[1] = get_name(fd, line);
-	return (true);
-}
-
-// this function ignores empty lines
-int	check_empty_line(char *str)
-{
-	if (str[0] == '\0')
-		return (true);
-	else
-		return (false);
-}
 
 int	check_valid_label_char(char c)
 {
@@ -331,7 +288,7 @@ char	*check_valid_inst(char *line, t_parser *data)
 		if (check_valid_label(line, data))
 			dest = ft_strdup(line);
 		else
-			exit_usage();
+			exit_usage(0);
 	}
 	return (dest);
 }
