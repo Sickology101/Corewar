@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/16 11:00:18 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/16 15:10:23 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,5 @@ int		scan_file(t_parser *data, int fd);
 void	exit_usage(void);
 void	init_statements(t_parser *data);
 void	write_bytes(int fd, int input, int count_bytes);
-void	write_bytecode(t_parser *data, char **argv);
+void	write_bytecode(t_data *data, char **argv);
 #endif
