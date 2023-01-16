@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/14 14:48:37 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/16 20:14:08 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 
 //a simple function that exits the program in case of bad call (wrong filename, no file)
-void	exit_usage(void)
+void	exit_usage(int	flag)
 {
-	ft_printf("Usage : ./assembler [filename.s]");
+	if (flag == 1)
+		ft_printf("Invalid text in assembly code");
+	else
+		ft_printf("Usage : ./assembler [filename.s]");
 	exit(1);
 }
 
@@ -45,16 +48,16 @@ int	main (int argc, char **argv)
 {
 	int fd;
 	t_parser 		*data;
-	t_champion	*hero;
+	//t_champion	*hero;
 	
 	if (argc != 2)
-		exit_usage();
+		exit_usage(0);
 	if (!checkname(argv[1]))
-		exit_usage();
+		exit_usage(0);
 	fd = open(argv[1],O_RDONLY);
 	data = (t_parser *)malloc(sizeof(t_parser));
 	if (!scan_file(data, fd))
-		exit_usage();
-	write_bytecode(hero, argv);
+		exit_usage(0);
+	//write_bytecode(hero, argv);
 	return (0);
 }

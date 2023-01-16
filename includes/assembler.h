@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/16 15:10:23 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/16 20:27:06 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <fcntl.h>
 # include <stdbool.h>
 
-# define LABEL_CHAR "abcdefghijklmnopqrstuvwxyz_0123456789"
-# define MTY_SPACE_1 " "
-# define MTY_SPACE_2 "	"
+//# define LABEL_CHAR "abcdefghijklmnopqrstuvwxyz_0123456789"
+# define MTY_SPACE_1 ' '
+# define MTY_SPACE_2 '	'
 
 
 
@@ -78,11 +78,15 @@ typedef struct	s_parser
 	t_champion		*champ;
 }			t_parser;
 
-t_commmand		g_operation[17];
+t_command		g_operation[17];
 
 int		scan_file(t_parser *data, int fd);
-void	exit_usage(void);
+void	exit_usage(int flag);
 void	init_statements(t_parser *data);
-void	write_bytes(int fd, int input, int count_bytes);
-void	write_bytecode(t_data *data, char **argv);
+char	*get_name(int fd, char *line);
+bool	check_comment(char *str);
+bool	check_empty_line(char *str);
+int	ignore_spaces(char *str, int index);
+//void	write_bytes(int fd, int input, int count_bytes);
+//void	write_bytecode(t_parser *data, char **argv);
 #endif
