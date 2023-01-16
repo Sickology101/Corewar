@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/01/16 15:08:25 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/16 15:13:40 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,12 +306,15 @@ bool	check_arg_type(char *str, int index, int arg, t_statements s)
 bool	check_1_arg(t_statements s, char *str, int index)
 {
 	index = ignore_spaces(str, index);
-	check_arg_type(str, index, arg, s);
+	check_arg_type(str, index, 0, s);
 }
 
 bool	check_2_arg(t_statements s, char *str, int index)
 {
-	
+	index = ignore_spaces(str, index);
+	check_arg_type(str, index, 0, s);
+	index = ignore_spaces(str, index);
+	check_arg_type(str, index, 1, s);
 }
 
 bool	check_3_arg(t_statements s, char *str, int index)
