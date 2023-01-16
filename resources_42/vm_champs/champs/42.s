@@ -1,7 +1,7 @@
 .name           "42"
 .comment        "Just a basic Winner Program"
 
-entree:	live	%42		# entree
+entree:	live	%42		# entree gets a number in asm entree = 17
 	ld	%0,r5
 	ld	%0,r5
 	zjmp	%:bite
@@ -27,7 +27,7 @@ tirf:	live	%42
 	ld	%0,r11
 	zjmp	%:tirf
 
-tirop:	ld	%368,r2
+tirop:	ld	%368,r2		# tirop = 20
 	ld	%0,r3
 	ld	%4,r4
 

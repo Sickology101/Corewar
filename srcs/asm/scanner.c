@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/01/13 17:03:29 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/01/14 15:21:03 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*get_name(int fd, char *line)
 
 //this function reads through the first line and saves the name on data->file[0]
 // and the comment on data->file[1]
-bool	get_name_comment(t_data *data, int fd)
+bool	get_name_comment(t_parser *data, int fd)
 {
 	int		ret;
 	char	*line;
@@ -146,12 +146,13 @@ int	check_valid_label_char(char c)
 
 // checks the line from index (0 for statement line)
 // to see if it follows a valid statement (name, argnumb, and arg type)
-int	check_valid_state(char *line, int index)
+bool	check_valid_state(char *line, int index)
 {
 	while (line[index] != '\n')
 	{
 		while (line[index] == '	' || line[index] == ' ')
 		{
+			// HERE
 			index++;
 		}
 	}
@@ -160,7 +161,7 @@ int	check_valid_state(char *line, int index)
 // checks the line and reads through the first chars up to ':'
 // to see if they are valid LABEL_CHARs then checks the rest of it to see
 // if it is a valid statement
-int	check_valid_label(char *line)
+bool	check_valid_label(char *line)
 {
 	int	index;
 
@@ -168,14 +169,14 @@ int	check_valid_label(char *line)
 	while (line[index] != ':')
 	{
 		if (check_valid_label_char(line[index]))
-			return (1);
+			return (false);
 		index++;
 	}
 	if (line[index++] == '\n')
-		return (0);
+		return (true);
 	else if (check_valid_state(line, index))
-		return (1);
-	return (0);
+		return (false);
+	return (true);
 }
 
 // verifies every line if it is a valid(lexically) statement or label
@@ -188,7 +189,7 @@ char	*check_valid_inst(char *line)
 		dest = ft_strdup("OK");
 	else
 	{
-		if (!check_valid_label(line))
+		if (check_valid_label(line))
 			dest = ft_strdup(line);
 		else
 			exit_usage();
@@ -198,7 +199,7 @@ char	*check_valid_inst(char *line)
 
 // this functions continues reading the file and saves each instruction
 // at the same time checking if it valid?
-bool	get_instructions(t_data *data, int fd)
+bool	get_instructions(t_parser *data, int fd)
 {
 	char	*line;
 	int		ret;
@@ -225,7 +226,7 @@ bool	get_instructions(t_data *data, int fd)
 
 //a function that reads through the file and checks the syntax
 //returns 1 if an error was found
-int	scan_file(t_data *data, int fd)
+int	scan_file(t_parser *data, int fd)
 {
 	int	index;
 
