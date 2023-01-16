@@ -6,19 +6,23 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/14 15:11:09 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/16 11:00:18 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASSEMBLER_H
 
-#define ASSEMBLER_H
+# define ASSEMBLER_H
 # include "../resources_42/op.h"
 # include "ft_printf.h"
 # include <fcntl.h>
 # include <stdbool.h>
 
-#define LABEL_CHAR "abcdefghijklmnopqrstuvwxyz_0123456789"
+# define LABEL_CHAR "abcdefghijklmnopqrstuvwxyz_0123456789"
+# define MTY_SPACE_1 " "
+# define MTY_SPACE_2 "	"
+
+
 
 // a struct to save the arguments in planning to use it as
 // a template to check against when reading, but also save 
