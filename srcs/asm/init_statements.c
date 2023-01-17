@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:13:12 by marius            #+#    #+#             */
-/*   Updated: 2023/01/14 14:48:37 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/17 15:42:20 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static t_statements	init_ld(void)
 	s.str = ft_strdup("ld");
 	s.arg_num = 2;
 	s.arg = (int *)malloc(sizeof(int) * 2);
-	s.arg[0] = 23;
-	s.arg[1] = 1;
+	s.arg[0] = T_DIR + T_IND;
+	s.arg[1] = T_REG;
 	return (s);
 }
 
@@ -42,8 +42,8 @@ static t_statements	init_st(void)
 	s.str = ft_strdup("st");
 	s.arg_num = 2;
 	s.arg = (int *)malloc(sizeof(int) * 2);
-	s.arg[0] = 1;
-	s.arg[1] = 12;
+	s.arg[0] = T_REG;
+	s.arg[1] = T_REG + T_IND;
 	return (s);
 }
 
@@ -54,9 +54,9 @@ static t_statements	init_add(void)
 	s.str = ft_strdup("add");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
-	s.arg[0] = 1;
-	s.arg[1] = 1;
-	s.arg[2] = 1;
+	s.arg[0] = T_REG;
+	s.arg[1] = T_REG;
+	s.arg[2] = T_REG;
 	return (s);
 }
 
@@ -67,9 +67,9 @@ static t_statements	init_sub(void)
 	s.str = ft_strdup("sub");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
-	s.arg[0] = 1;
-	s.arg[1] = 1;
-	s.arg[2] = 1;
+	s.arg[0] = T_REG;
+	s.arg[1] = T_REG;
+	s.arg[2] = T_REG;
 	return (s);
 }
 
@@ -80,9 +80,9 @@ static t_statements	init_and(void)
 	s.str = ft_strdup("and");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
-	s.arg[0] = 123;
-	s.arg[1] = 123;
-	s.arg[2] = 1;
+	s.arg[0] = T_REG + T_IND + T_DIR;
+	s.arg[1] = T_REG + T_IND + T_DIR;
+	s.arg[2] = T_REG;
 	return (s);
 }
 
@@ -93,9 +93,9 @@ static t_statements	init_or(void)
 	s.str = ft_strdup("or");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
-	s.arg[0] = 123;
-	s.arg[1] = 123;
-	s.arg[2] = 1;
+	s.arg[0] = T_REG + T_IND + T_DIR;
+	s.arg[1] = T_REG + T_IND + T_DIR;
+	s.arg[2] = T_REG;
 	return (s);
 }
 
@@ -106,9 +106,9 @@ static t_statements	init_xor(void)
 	s.str = ft_strdup("xor");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
-	s.arg[0] = 123;
-	s.arg[1] = 123;
-	s.arg[2] = 1;
+	s.arg[0] = T_REG + T_IND + T_DIR;
+	s.arg[1] = T_REG + T_IND + T_DIR;
+	s.arg[2] = T_REG;
 	return (s);
 }
 
@@ -119,7 +119,7 @@ static t_statements	init_zjmp(void)
 	s.str = ft_strdup("zjmp");
 	s.arg_num = 1;
 	s.arg = (int *)malloc(sizeof(int) * 1);
-	s.arg[0] = 3;
+	s.arg[0] = T_DIR;
 	return (s);
 }
 
@@ -130,9 +130,9 @@ static t_statements	init_ldi(void)
 	s.str = ft_strdup("ldi");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
-	s.arg[0] = 123;
-	s.arg[1] = 13;
-	s.arg[2] = 1;
+	s.arg[0] = T_REG + T_IND + T_DIR;
+	s.arg[1] = T_REG + T_DIR;
+	s.arg[2] = T_REG;
 	return (s);
 }
 
@@ -143,9 +143,9 @@ static t_statements	init_sti(void)
 	s.str = ft_strdup("sti");
 	s.arg_num = 3;
 	s.arg = (int *)malloc(sizeof(int) * 3);
-	s.arg[0] = 1;
-	s.arg[1] = 123;
-	s.arg[2] = 13;
+	s.arg[0] = T_REG;
+	s.arg[1] = T_REG + T_DIR + T_IND;
+	s.arg[2] = T_REG + T_DIR;
 	return (s);
 }
 
@@ -156,7 +156,7 @@ static t_statements	init_fork(void)
 	s.str = ft_strdup("fork");
 	s.arg_num = 1;
 	s.arg = (int *)malloc(sizeof(int) * 1);
-	s.arg[0] = 3;
+	s.arg[0] = T_DIR;
 	return (s);
 }
 
@@ -167,8 +167,8 @@ static t_statements	init_lld(void)
 	s.str = ft_strdup("lld");
 	s.arg_num = 2;
 	s.arg = (int *)malloc(sizeof(int) * 2);
-	s.arg[0] = 23;
-	s.arg[1] = 1;
+	s.arg[0] = T_DIR + T_IND;
+	s.arg[1] = T_REG;
 	return (s);
 }
 
@@ -192,7 +192,7 @@ static t_statements	init_lfork(void)
 	s.str = ft_strdup("lfork");
 	s.arg_num = 1;
 	s.arg = (int *)malloc(sizeof(int) * 1);
-	s.arg[0] = 3;
+	s.arg[0] = T_DIR;
 	return (s);
 }
 
@@ -203,7 +203,7 @@ static t_statements	init_aff(void)
 	s.str = ft_strdup("aff");
 	s.arg_num = 1;
 	s.arg = (int *)malloc(sizeof(int) * 1);
-	s.arg[0] = 1;
+	s.arg[0] = T_REG;
 	return (s);
 }
 
