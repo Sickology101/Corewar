@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/16 20:14:08 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/17 11:29:15 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@
 void	exit_usage(int	flag)
 {
 	if (flag == 1)
-		ft_printf("Invalid text in assembly code");
+		ft_printf("Invalid text in assembly code\n");
+	else if (flag == 2)
+		ft_printf("Invalid label char\n");
+	else if (flag == 3)
+		ft_printf("Invalid statement\n");
 	else
-		ft_printf("Usage : ./assembler [filename.s]");
+		ft_printf("Usage : ./assembler [filename.s]\n");
 	exit(1);
 }
 

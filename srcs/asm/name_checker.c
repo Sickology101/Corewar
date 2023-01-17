@@ -6,22 +6,19 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:28:58 by marius            #+#    #+#             */
-/*   Updated: 2023/01/16 21:12:19 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/17 10:44:03 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-bool	check_valid_format(char *str)
+bool	search_1_quote(char *str)
 {
 	int	index;
 
 	index = search_char(str, '"');
-	while (str[++index] != '"')
-	{
-		if (str[index] == '\0')
-			return (false);
-	}
+	if (index == 0)
+		return (false);
 	return (true);
 }
 
@@ -93,7 +90,7 @@ char	*get_name(int fd, char *line)
 	else
 	{
 		ret = 1;
-		if (!check_valid_format(dest))
+		if (search_1_quote(dest))
 		{
 			while (ret)
 			{
@@ -111,6 +108,8 @@ char	*get_name(int fd, char *line)
 					
 			}
 		}
+		else
+			exit_usage(1);
 	}
 	return (dest);
 }

@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/16 21:15:03 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/17 11:35:42 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,10 @@ int	ignore_spaces(char *str, int index);
 bool	get_name_comment(t_parser *data, int fd);
 int		search_char(char *str, char c);
 bool	check_comment(char *str);
+bool	check_valid_label(char *line, t_parser *data);
+bool	check_valid_label_char(char c);
+bool	check_valid_state(char *line, int index, t_parser *data);
+bool	compare_syntax(char *str, t_parser *data, int	*state_num);
 //void	write_bytes(int fd, int input, int count_bytes);
 //void	write_bytecode(t_parser *data, char **argv);
 #endif
