@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:30:08 by marius            #+#    #+#             */
-/*   Updated: 2023/01/17 16:25:09 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/17 16:36:55 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ bool	check_valid_reg(char *str, int *index)
 {
 	if (str[*index] != 'r')
 		return (false);
-	(*index)++;
+	*index = *index + 1;
 	while (ft_isdigit(str[*index]))
 	{
-		(*index)++;
+		*index = *index + 1;
 	}
 	if (str[*index] == MTY_SPACE_1 || str[*index] == MTY_SPACE_2 || str[*index] == '\0' || str[*index] == '#' || str[*index] == ',')
 		return (true);
@@ -87,6 +87,8 @@ bool	check_valid_dir(char *str, int *index)
 	}
 	else
 	{
+		if (str[*index] == '-')
+			*index = *index + 1;
 		while (ft_isdigit(str[*index]))
 		{
 			*index = *index + 1;;
@@ -101,21 +103,23 @@ bool	check_valid_dir(char *str, int *index)
 
 bool	check_valid_ind(char *str, int *index)
 {
-	ft_printf("%d\n",*index);
-	if (str[*index++] == ':')
+	if (str[*index] == ':')
 	{
+		*index = *index + 1;
 		while (str[*index] != MTY_SPACE_1 && str[*index] != MTY_SPACE_2 && str[*index] != '\0' && str[*index] != ',')
 		{
 			if (check_valid_label_char(str[*index]))
 				return (false);
-			(*index)++;
+			*index = *index + 1;
 		}
 	}
 	else
 	{
+		if (str[*index] == '-')
+			*index = *index + 1;
 		while (ft_isdigit(str[*index]))
 		{
-			(*index)++;
+			*index = *index + 1;
 		}
 		if (str[*index] == MTY_SPACE_1 || str[*index] == MTY_SPACE_2 || str[*index] == '\0' || str[*index] == ',')
 			return (true);
@@ -156,7 +160,6 @@ bool	check_arg_type(char *str, int *index, int arg, t_statements s)
 	}
 	else if (s.arg[arg] == 6)
 	{
-		ft_printf("%d\n",*index);
 		if (check_valid_ind(str, index) || check_valid_dir(str, index))
 			return (true);
 	}
@@ -179,10 +182,8 @@ bool	check_1_arg(t_statements s, char *str, int *index)
 bool	check_2_arg(t_statements s, char *str, int *index)
 {
 	*index = ignore_spaces(str, *index);
-	ft_printf("index = %d\n",*index);
 	if (!check_arg_type(str, index, 0, s))
 		return (false);
-	ft_printf("index1 = %d\n",*index);
 	if (str[*index] == SEPARATOR_CHAR)
 		*index = *index + 1;
 	else
@@ -246,9 +247,7 @@ bool	check_valid_state(char *line, int index, t_parser *data)
 		index = ignore_spaces(line, index);
 		if (!compare_syntax(get_syntax_name(line, &index), data, &state_num))
 			return (false);
-		ft_printf("index = %d\n",index);
 		index = ignore_spaces(line, index);
-		ft_printf("index = %d\n",index);
 		if (!check_args(line,&index, state_num, data))
 			return (false);
 		index = ignore_spaces(line, index);

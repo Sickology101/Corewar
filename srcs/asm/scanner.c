@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/01/17 15:45:49 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/17 16:32:27 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ char	*check_valid_inst(char *line, t_parser *data)
 
 	dest = NULL;
 	if (line[0] == MTY_SPACE_1 || line[0] == MTY_SPACE_2)
-		dest = ft_strdup("OK");
+		if (check_valid_state(line,0, data))
+			dest = ft_strdup(line);
+		else
+			exit_usage(3);
 	else
 	{
 		if (check_valid_label(line, data))
