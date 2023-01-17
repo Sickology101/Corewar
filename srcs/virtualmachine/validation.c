@@ -72,7 +72,7 @@ void	check_magic_header(int fd)
 
 	rtn = read(fd, &buffer, 4);
 	if (rtn < 4)
-		exit_error_message("Error reading - Champion file to short!");
+		exit_error_message("Error reading -  file to short!");
 	buffer = swap_endians(buffer);
 	if (buffer != COREWAR_EXEC_MAGIC)
 		exit_error_message("invalid magic header");
@@ -94,7 +94,8 @@ int	validate_player(t_data *const data)
 	while (player)
 	{
 		fd = open(player->path, O_RDONLY);
-		player->fd = fd;
+		if (fd < 0)
+			exit_error_message("Error opening a file!");
 		check_magic_header(fd);
 		get_champion_name(fd, player);
 		get_exec_size(fd, player);
@@ -107,7 +108,7 @@ int	validate_player(t_data *const data)
 			printf(" %i rounds until EOF\n", rtn); // so is it an error then?
 		}
 		printf("--------------------------------------");
-		close (fd); // We'll see later if it needs to stay open.
+		close (fd);
 		player = player->next;
 	}
 	return (0);

@@ -21,7 +21,6 @@
 typedef struct s_player
 {
 	int					id;
-	int					fd;
 	const char			*path;
 	const char			*name;
 	const char			*comment;
@@ -34,7 +33,10 @@ typedef struct s_player
 typedef struct s_counter
 {
 	int			total_cycles;
-	int			nbr_live;
+	int			cycles_to_die;
+	int			nb_of_checks_done;
+	int			lives_this_period;
+	int			initial_cycles;
 }				t_counter;
 
 typedef struct s_process
@@ -53,13 +55,11 @@ typedef struct s_process
 
 typedef struct s_data
 {
+	struct s_counter	counter;
 	t_player			*player;
 	t_player			*last_alive;
 	int					dump_cycles;
 	int					player_amount;
-	int					cycles_from_begin;
-	int					amount_of_live;
-	int					cycles_to_die;
 	uint8_t				arena[MEM_SIZE];
 	size_t				process_amount;
 	struct s_process	*process_head;

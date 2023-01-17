@@ -47,6 +47,7 @@ void	print_arena(t_data *const data)
 	int	i;
 
 	i = 0;
+	printf("\n");
 	while (i < MEM_SIZE)
 	{
 		if (i % 64 == 0)

@@ -18,7 +18,7 @@ void	init_counter(t_counter *counter)
 	counter->cycles_to_die = CYCLE_TO_DIE;
 	counter->nb_of_checks_done = 0;
 	counter->lives_this_period = 0;
-	counter->player = 0;
+	counter->initial_cycles = CYCLE_TO_DIE;
 }
 
 void	reduce_cycle_bf_execution(t_data *const data)
@@ -30,6 +30,7 @@ void	reduce_cycle_bf_execution(t_data *const data)
 	{
 		if (temp_process->cycles_before_exec >= 0)
 			temp_process->cycles_before_exec--;
+		temp_process = temp_process->next;
 	}
 }
 
@@ -68,20 +69,27 @@ void	delete_process(t_data *const data, t_process *process)
 void	perform_check(t_data *const data, t_counter *counter)
 {
 	t_process	*temp_process;
+	t_process	*after_temp;
 
 	temp_process = data->process_head;
 	while (temp_process != NULL)
 	{
 		if (temp_process->cycles_before_exec <= 0
-			|| temp_process->last_live - CYCLE_TO_DIE < 0)
+			|| temp_process->last_live < data->counter.total_cycles
+			- data->counter.initial_cycles)
+		{
+			after_temp = temp_process->next;
 			delete_process(data, temp_process);
+			temp_process = after_temp;
+		}
 	}
 	if (counter->lives_this_period >= NBR_LIVE)
-		CYCLE_TO_DIE -= CYCLE_DELTA;
+		counter->initial_cycles -= CYCLE_DELTA;
 	if (CYCLE_TO_DIE >= 0)
-		counter->cycles_do_die = CYCLE_TO_DIE;
+		counter->cycles_to_die = counter->initial_cycles;
 	else
-		counter->cycles_do_die = 1;
+		counter->cycles_to_die = 1;
+	counter->lives_this_period = 0;
 }
 
 /*
@@ -96,12 +104,10 @@ void	perform_check(t_data *const data, t_counter *counter)
 
 void	run_game_loop(t_data *const data)
 {
-	t_counter	counter;
-
-	init_counter(&counter);
+	init_counter(&data->counter);
 	while (data->process_amount)
 	{
-		if (data->cycles_from_begin == data->dump_cycles)
+		if (data->counter.total_cycles == data->dump_cycles)
 		{
 			print_arena(data);
 			exit(0);
@@ -109,9 +115,10 @@ void	run_game_loop(t_data *const data)
 		//set_statement_codes();
 		reduce_cycle_bf_execution(data);
 		//execute_statements_and_move_processes();
-		if (counter->cycles_to_die <= 0)
-			perform_check(data, &counter);
-		data->cycles_from_begin++;
+		if (data->counter.cycles_to_die <= 0)
+			perform_check(data, &data->counter);
+		data->counter.cycles_to_die--;
+		data->counter.total_cycles++;
 	}
 }
 

@@ -18,9 +18,6 @@ void	init_data(t_data *data)
 	data->last_alive = NULL;
 	data->dump_cycles = -1;
 	data->player_amount = 0;
-	data->cycles_from_begin = 0;
-	data->amount_of_live = 0;
-	data->cycles_to_die = CYCLE_TO_DIE;
 	data->process_amount = 0;
 	data->process_head = NULL;
 	data->process_tail = NULL;
@@ -32,7 +29,6 @@ void	init_player(const char *path, t_player **player, int flag_id)
 		(*player)->id = flag_id;
 	else
 		(*player)->id = 0;
-	(*player)->fd = 0;
 	(*player)->path = path;
 	(*player)->name = NULL;
 	(*player)->comment = NULL;

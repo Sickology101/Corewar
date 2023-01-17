@@ -7,3 +7,4 @@ file name and extension verification
 
 TODO:
 	check that total exec_code size is less than arena size
+	do we need to stop initial cycles reduction after it goes negative???????
