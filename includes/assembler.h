@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/17 11:35:42 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/17 12:25:13 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_label
 	char	*name;
 	int		number_byte;
 	t_command	instruction;
+	struct s_label	*next;
 }				t_label;
 
 
@@ -76,6 +77,7 @@ typedef struct	s_parser
 	char			**file;
 	int				file_size;
 	t_champion		*champ;
+	t_label			*label;
 }			t_parser;
 
 t_command		g_operation[17];

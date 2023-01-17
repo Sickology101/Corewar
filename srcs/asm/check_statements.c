@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:30:08 by marius            #+#    #+#             */
-/*   Updated: 2023/01/17 11:36:15 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/17 15:28:44 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char *get_syntax_name(char *str, int *index)
 	{
 		dest[i2] = str[i];
 		i2++;
+		i++;
 	}
 	dest[i2] = '\0';
 	return (dest);
@@ -55,40 +56,42 @@ bool	compare_syntax(char *str, t_parser *data, int	*state_num)
 }
 
 // following functions will check if the args are correct lexycally
-bool	check_valid_reg(char *str, int index)
+bool	check_valid_reg(char *str, int *index)
 {
-	if (str[index] != 'r')
+	if (str[*index] != 'r')
 		return (false);
-	index++;
-	while (ft_isdigit(str[index]))
+	(*index)++;
+	while (ft_isdigit(str[*index]))
 	{
-		index++;
+		(*index)++;
 	}
-	if (str[index] == MTY_SPACE_1 || str[index] == MTY_SPACE_2 || str[index] == '\0' || str[index] == '#' || str[index] == ',')
+	if (str[*index] == MTY_SPACE_1 || str[*index] == MTY_SPACE_2 || str[*index] == '\0' || str[*index] == '#' || str[*index] == ',')
 		return (true);
 	return (false);
 }
 
-bool	check_valid_dir(char *str, int index)
+bool	check_valid_dir(char *str, int *index)
 {
-	if (str[index++] != '%')
+	if (str[*index] != '%')
 		return (false);
-	if (str[index++] == LABEL_CHAR)
+	*index = *index + 1;
+	if (str[*index] == LABEL_CHAR)
 	{
-		while (str[index] != MTY_SPACE_1 && str[index] != MTY_SPACE_2 && str[index] != '\0' && str[index] != ',')
+		*index = *index + 1;
+		while (str[*index] != MTY_SPACE_1 && str[*index] != MTY_SPACE_2 && str[*index] != '\0' && str[*index] != ',')
 		{
-			if (check_valid_label_char(str[index]))
+			if (!check_valid_label_char(str[*index]))
 				return (false);
-			index++;
+			*index = *index + 1;
 		}
 	}
 	else
 	{
-		while (ft_isdigit(str[index]))
+		while (ft_isdigit(str[*index]))
 		{
-			index++;
+			*index = *index + 1;;
 		}
-		if (str[index] == MTY_SPACE_1 || str[index] == MTY_SPACE_2 || str[index] == '\0' || str[index] == ',')
+		if (str[*index] == MTY_SPACE_1 || str[*index] == MTY_SPACE_2 || str[*index] == '\0' || str[*index] == ',')
 			return (true);
 		else
 			return (false);
@@ -96,24 +99,24 @@ bool	check_valid_dir(char *str, int index)
 	return (true);
 }
 
-bool	check_valid_ind(char *str, int index)
+bool	check_valid_ind(char *str, int *index)
 {
-	if (str[index++] == ':')
+	if (str[*index++] == ':')
 	{
-		while (str[index] != MTY_SPACE_1 && str[index] != MTY_SPACE_2 && str[index] != '\0' && str[index] != ',')
+		while (str[*index] != MTY_SPACE_1 && str[*index] != MTY_SPACE_2 && str[*index] != '\0' && str[*index] != ',')
 		{
-			if (check_valid_label_char(str[index]))
+			if (check_valid_label_char(str[*index]))
 				return (false);
-			index++;
+			(*index)++;
 		}
 	}
 	else
 	{
-		while (ft_isdigit(str[index]))
+		while (ft_isdigit(str[*index]))
 		{
-			index++;
+			(*index)++;
 		}
-		if (str[index] == MTY_SPACE_1 || str[index] == MTY_SPACE_2 || str[index] == '\0' || str[index] == ',')
+		if (str[*index] == MTY_SPACE_1 || str[*index] == MTY_SPACE_2 || str[*index] == '\0' || str[*index] == ',')
 			return (true);
 		else
 			return (false);
@@ -123,7 +126,7 @@ bool	check_valid_ind(char *str, int index)
 
 // takes in the string and the index of where the arg start, the expected arg, and the predefined statement to 
 // check against returns true if the arg is valid and false if not
-bool	check_arg_type(char *str, int index, int arg, t_statements s)
+bool	check_arg_type(char *str, int *index, int arg, t_statements s)
 {
 	if (s.arg[arg] == 1)
 	{
@@ -163,37 +166,52 @@ bool	check_arg_type(char *str, int index, int arg, t_statements s)
 	return (false);
 }
 
-bool	check_1_arg(t_statements s, char *str, int index)
+bool	check_1_arg(t_statements s, char *str, int *index)
 {
-	index = ignore_spaces(str, index);
-	check_arg_type(str, index, 0, s);
-	return (true);
+	if (check_arg_type(str, index, 0, s))
+		return (true);
+	else
+		return (false);
 }
 
-bool	check_2_arg(t_statements s, char *str, int index)
+bool	check_2_arg(t_statements s, char *str, int *index)
 {
-	index = ignore_spaces(str, index);
-	check_arg_type(str, index, 0, s);
-	index = ignore_spaces(str, index);
-	check_arg_type(str, index, 1, s);
-	return (true);
+	*index = ignore_spaces(str, *index);
+	if (check_arg_type(str, index, 0, s))
+		return (true);
+	else
+		return (false);
+	*index = ignore_spaces(str, *index);
+	if (check_arg_type(str, index, 1, s))
+		return (true);
+	else
+		return (false);
+	return (false);
 }
 
-bool	check_3_arg(t_statements s, char *str, int index)
+bool	check_3_arg(t_statements s, char *str, int *index)
 {
-	index = ignore_spaces(str, index);
-	check_arg_type(str, index, 0, s);
-	index = ignore_spaces(str, index);
-	check_arg_type(str, index, 1, s);
-	index = ignore_spaces(str, index);
-	check_arg_type(str, index, 1, s);
-	return (true);
+	*index = ignore_spaces(str, *index);
+	if (check_arg_type(str, index, 0, s))
+		return (true);
+	else
+		return (false);
+	*index = ignore_spaces(str, *index);
+	if (check_arg_type(str, index, 1, s))
+		return (true);
+	else
+		return (false);
+	*index = ignore_spaces(str, *index);
+	if (check_arg_type(str, index, 2, s))
+		return (true);
+	else
+		return (false);
+	return (false);
 }
 
 
-bool	check_args(char *str, int index, int state_num, t_parser *data)
+bool	check_args(char *str, int *index, int state_num, t_parser *data)
 {
-	index = ignore_spaces(str, index);
 	if (data->s[state_num].arg_num == 1)
 	{
 		if (check_1_arg(data->s[state_num], str, index))
@@ -218,16 +236,17 @@ bool	check_valid_state(char *line, int index, t_parser *data)
 {
 	int	state_num;
 	
-	while (line[index] != '\n')
+	while (line[index] != '\0')
 	{
-		while ((line[index] == MTY_SPACE_1 || line[index] == MTY_SPACE_2) && line[index] != '\0')
-		{
-			index++;
-		}
+		index = ignore_spaces(line, index);
 		if (!compare_syntax(get_syntax_name(line, &index), data, &state_num))
 			return (false);
-		if (!check_args(line,index, state_num, data))
+		index = ignore_spaces(line, index);
+		if (!check_args(line,&index, state_num, data))
 			return (false);
+		index = ignore_spaces(line, index);
+		if (line[index] == '\0' || line[index] == COMMENT_CHAR)
+			break;
 	}
 	return (true);
 }

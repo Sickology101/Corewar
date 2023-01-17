@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/17 11:29:15 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/17 14:38:18 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	main (int argc, char **argv)
 		exit_usage(0);
 	fd = open(argv[1],O_RDONLY);
 	data = (t_parser *)malloc(sizeof(t_parser));
+	data->label = NULL;
 	if (!scan_file(data, fd))
 		exit_usage(0);
 	//write_bytecode(hero, argv);
