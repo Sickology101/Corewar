@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:21:17 by igaplich          #+#    #+#             */
-/*   Updated: 2023/01/17 18:13:27 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:50:07 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_counter(t_counter *counter)
 	counter->total_cycles = 0;
 	counter->cycles_to_die = CYCLE_TO_DIE;
 	counter->nb_of_checks_done = 0;
+	counter->checks_without_reducing = 0;
 	counter->lives_this_period = 0;
 	counter->initial_cycles = CYCLE_TO_DIE;
 }
@@ -71,6 +72,7 @@ void	perform_check(t_data *const data, t_counter *counter)
 	t_process	*temp_process;
 	t_process	*after_temp;
 
+	counter->checks_without_reducing++;
 	temp_process = data->process_head;
 	while (temp_process != NULL)
 	{
@@ -83,9 +85,13 @@ void	perform_check(t_data *const data, t_counter *counter)
 			temp_process = after_temp;
 		}
 	}
-	if (counter->lives_this_period >= NBR_LIVE)
+	if (counter->lives_this_period >= NBR_LIVE
+		|| counter->checks_without_reducing == MAX_CHECKS)
+	{
+		counter->checks_without_reducing = 0;
 		counter->initial_cycles -= CYCLE_DELTA;
-	if (CYCLE_TO_DIE >= 0)
+	}
+	if (counter->initial_cycles >= 0)
 		counter->cycles_to_die = counter->initial_cycles;
 	else
 		counter->cycles_to_die = 1;

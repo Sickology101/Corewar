@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:57 by marius            #+#    #+#             */
-/*   Updated: 2023/01/14 20:38:02 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:44:59 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_counter
 	int			total_cycles;
 	int			cycles_to_die;
 	int			nb_of_checks_done;
+	int			checks_without_reducing;
 	int			lives_this_period;
 	int			initial_cycles;
 }				t_counter;
