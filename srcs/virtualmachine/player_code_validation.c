@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:34:11 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/14 20:38:46 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:41:58 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ void	get_exec_code(int fd, t_player *player)
 	rtn = read(fd, buffer, player->exec_size);
 	printf("\tbytes read in get_exec_code: %i\n\n", rtn);
 	printf("\033[0;32m executable CODE: %s\n\n\033[0m", buffer);
-	if (rtn < (int)player->exec_size)
+	if (rtn < 1)
 	{
-		exit_error_message("invalid champion name");
+		/* NEED TO DISCUSS IF THIS IS AN ERROR! */
+		exit_error_message("No executable code detected");
 	}
 	if (buffer[0])
 	{
@@ -33,6 +34,11 @@ void	get_exec_code(int fd, t_player *player)
 		printf("\t\tbuffer[0](in exec code) does not exist...\n");
 }
 
+/*
+** get_exec_code saves the code (and checks if it exists?	!!!
+** not sure if it needs to)
+*/
+
 void	check_null_separator(int fd)
 {
 	int		rtn;
@@ -41,10 +47,15 @@ void	check_null_separator(int fd)
 	rtn = read(fd, &buffer, 4);
 	if (rtn < 4 || buffer != 0)
 	{
-		exit_error_message("invalid NULL");
+		exit_error_message("invalid NULL - champion name or comment too long");
 	}
 	printf("\tbytes read in chehk_null_separator: %i\n\n", rtn);
 }
+
+/*
+** check_null_separator validates that there are 4 NULL bytes after champion
+** name and after champion comment.
+*/
 
 void	get_champion_comment(int fd, t_player *player)
 {
@@ -62,9 +73,13 @@ void	get_champion_comment(int fd, t_player *player)
 	if (buffer[0])
 		player->comment = ft_strdup(buffer);
 	else
-		printf("\033[0;93m \t\tbuffer[0]"
+		printf("\033[0;93m \t\tbuffer[0]" // An error or not?
 			"(champion comment) does not exist...\n \033[0m");
 	printf("\033[0;32m CHAMPION "
 		"COMMENT: %s\n\n \033[0m", player->comment);
 	check_null_separator(fd);
 }
+
+/*
+** get_champion_comment validates the length if the comment and saves it.
+*/
