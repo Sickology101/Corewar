@@ -73,6 +73,7 @@ void	perform_check(t_data *const data, t_counter *counter)
 	t_process	*after_temp;
 
 	counter->checks_without_reducing++;
+	counter->nb_of_checks_done++; //I THINK THIS SHOULD BE ALSO ADDED?? REMOVE IF NOT NEEDED OR REMOVE COMMENT IF NEEDED
 	temp_process = data->process_head;
 	while (temp_process != NULL)
 	{
