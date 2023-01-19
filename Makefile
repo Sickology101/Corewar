@@ -6,7 +6,7 @@
 #    By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-#    Updated: 2023/01/14 20:37:44 by mtissari         ###   ########.fr        #
+#    Updated: 2023/01/19 18:35:31 by mtissari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,24 @@ VM_SRC_FILES = main.c \
 				player_code_validation.c \
 				vm_utils.c \
 				flags.c \
-				set_statements.c
+				set_statements.c \ 
+				check_statement.c \
+				statement/add.c \
+				statement/aff.c \
+				statement/and.c \
+				statement/fork.c \
+				statement/ldi.c \
+				statement/lfork.c \
+				statement/live.c \
+				statement/lld.c \
+				statement/lldi.c \
+				statement/ls.c \
+				statement/or.c \
+				statement/st.c \
+				statement/sti.c \
+				statement/sub.c \
+				statement/xor.c \
+				statement/zjmp.c
 VM_SRC = $(addprefix $(VM_SRC_DIR), $(VM_SRC_FILES))
 
 VM_OBJ_DIR = ./vm_obj/

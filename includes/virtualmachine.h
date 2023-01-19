@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:57 by marius            #+#    #+#             */
-/*   Updated: 2023/01/17 19:44:59 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:23:36 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	validate_user_input(const int ac, const char **av, t_data *const data);
 void	check_n_flag_unique_ids(t_data *const data);
 int		validate_and_receive_n_flag(int *i, const char **av, int ac);
 void	validate_and_receive_dump_flag_arg(int *i, const char **av, int ac,
-								t_data *const data);
+			t_data *const data);
 
 /*-------Validation-----*/
 int		validate_player(t_data *const data);
@@ -114,5 +114,26 @@ void	run_game_loop(t_data *const data);
 /*-------Set_statements------*/
 void	set_statement_codes(t_data *const data, t_process *carriage);
 void	perform_cycle(t_data *const data);
+
+/*-------Check_statement------*/
+void	check_statement(t_data *const data, t_process *carriage);
+
+/*-------Statements------*/
+void	set_add(t_data *const data, t_process *carriage);
+void	set_aff(t_data *const data, t_process *carriage);
+void	set_and(t_data *const data, t_process *carriage);
+void	set_fork(t_data *const data, t_process *carriage);
+void	set_ldi(t_data *const data, t_process *carriage);
+void	set_lfork(t_data *const data, t_process *carriage);
+void	set_live(t_data *const data, t_process *carriage);
+void	set_lld(t_data *const data, t_process *carriage);
+void	set_lldi(t_data *const data, t_process *carriage);
+void	set_ls(t_data *const data, t_process *carriage);
+void	set_or(t_data *const data, t_process *carriage);
+void	set_st(t_data *const data, t_process *carriage);
+void	set_sti(t_data *const data, t_process *carriage);
+void	set_sub(t_data *const data, t_process *carriage);
+void	set_xor(t_data *const data, t_process *carriage);
+void	set_zjmp(t_data *const data, t_process *carriage);
 
 #endif
