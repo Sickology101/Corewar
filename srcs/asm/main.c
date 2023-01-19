@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/17 16:32:24 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/19 11:44:32 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main (int argc, char **argv)
 {
 	int fd;
 	t_parser 		*data;
-	//t_champion	*hero;
+	t_champion	*hero;
 	
 	if (argc != 2)
 		exit_usage(0);
@@ -60,9 +60,11 @@ int	main (int argc, char **argv)
 		exit_usage(0);
 	fd = open(argv[1],O_RDONLY);
 	data = (t_parser *)malloc(sizeof(t_parser));
-	data->label = NULL;
+	data->label_num = 0;
 	if (!scan_file(data, fd))
 		exit_usage(0);
+	hero = generate_champ(data);
+	ft_printf("%s\n%s\n",hero->name, hero->comment);
 	//write_bytecode(hero, argv);
 	return (0);
 }

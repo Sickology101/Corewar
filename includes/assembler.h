@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/17 12:25:13 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/19 11:38:45 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct			s_command
 {
 	char				*name;
 	int					codage;
+	char 				*label;
 	int					count_args;
 	int					args[3]; // for live ->args[0] = 2 args[1] = 0;
  	int					opcode;
@@ -55,8 +56,7 @@ typedef struct s_label
 {
 	char	*name;
 	int		number_byte;
-	t_command	instruction;
-	struct s_label	*next;
+	t_command	*instruction;
 }				t_label;
 
 
@@ -77,7 +77,8 @@ typedef struct	s_parser
 	char			**file;
 	int				file_size;
 	t_champion		*champ;
-	t_label			*label;
+	char			**label;
+	int				label_num;
 }			t_parser;
 
 t_command		g_operation[17];
@@ -96,6 +97,7 @@ bool	check_valid_label(char *line, t_parser *data);
 bool	check_valid_label_char(char c);
 bool	check_valid_state(char *line, int index, t_parser *data);
 bool	compare_syntax(char *str, t_parser *data, int	*state_num);
+t_champion *generate_champ(t_parser *data);
 //void	write_bytes(int fd, int input, int count_bytes);
 //void	write_bytecode(t_parser *data, char **argv);
 #endif

@@ -205,3 +205,5 @@ tird:	live	%42
 	zjmp	%:tird
 	zjmp	%:p1
 fin:	live	%633
+42
+Just a basic Winner Program
