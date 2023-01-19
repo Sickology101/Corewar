@@ -22,19 +22,6 @@ void	init_counter(t_counter *counter)
 	counter->initial_cycles = CYCLE_TO_DIE;
 }
 
-void	reduce_cycle_bf_execution(t_data *const data)
-{
-	t_process	*temp_process;
-
-	temp_process = data->process_head;
-	while (temp_process != NULL)
-	{
-		if (temp_process->cycles_before_exec >= 0)
-			temp_process->cycles_before_exec--;
-		temp_process = temp_process->next;
-	}
-}
-
 void	free_process(t_process *process)
 {
 	process->player = NULL;
@@ -119,9 +106,7 @@ void	run_game_loop(t_data *const data)
 			print_arena(data);
 			exit(0);
 		}
-		//set_statement_codes();
-		reduce_cycle_bf_execution(data);
-		//execute_statements_and_move_processes();
+		perform_cycle(data);
 		if (data->counter.cycles_to_die <= 0)
 			perform_check(data, &data->counter);
 		data->counter.cycles_to_die--;

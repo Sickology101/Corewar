@@ -97,10 +97,12 @@ void	validate_and_receive_dump_flag_arg(int *i, const char **av, int ac,
 /*-------Validation-----*/
 int		validate_player(t_data *const data);
 
-void	get_champion_comment(int fd, t_player *player);
-void	check_null_separator(int fd);
+/*-------Player_code_validation*/
 void	get_exec_code(int fd, t_player *player);
+void	check_null_separator(int fd);
+void	get_champion_comment(int fd, t_player *player);
 
+/*-------Vm_Utils-------*/
 int		swap_endians(int buffer);
 
 /*-------Process--------*/
@@ -108,5 +110,9 @@ void	create_initial_process_list(t_data *const data);
 
 /*-------Game_loop------*/
 void	run_game_loop(t_data *const data);
+
+/*-------Set_statements------*/
+void	set_statement_codes(t_data *const data, t_process *carriage);
+void	perform_cycle(t_data *const data);
 
 #endif
