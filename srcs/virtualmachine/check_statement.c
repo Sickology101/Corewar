@@ -61,16 +61,16 @@ void	check_statement(t_data *const data, t_process *carriage)
 	uint8_t	code;
 
 	code = data->arena[carriage->cur_pos];
-	if (code > 0 && code < 17)
+	if (code >= 1 && code <= 16)
 	{
 		carriage->operation_code = code;
 		if (code == 1 || code == 9 || code == 12 || code == 15 || code == 16)
-			codage_1(data, code);
+			one_argument(data, carriage, code);
 		else if (code == 2 || code == 3 || code == 13)
-			codage_2(data, code);
+			two_arguments(data, carriage, code);
 		else if (code == 4 || code == 5 || code == 6 || code == 7 || code == 8
 			|| code == 10 || code == 11 || code == 14)
-			codage_3(data, code);
+			three_arguments(data, carriage, code);
 	}
 	else
 		not_a_statement(data);
