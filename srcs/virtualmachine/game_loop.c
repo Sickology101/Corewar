@@ -29,6 +29,10 @@ void	free_process(t_process *process)
 	free (process);
 }
 
+/*
+** delete_process takes care that no matter where we are deleting process
+** from in the list, the list stays 
+*/
 void	delete_process(t_data *const data, t_process *process)
 {
 	t_process	*prev;
@@ -50,10 +54,14 @@ void	delete_process(t_data *const data, t_process *process)
 }
 
 /*
-** delete_process takes care that no matter where we are deleting process
-** from in the list, the list stays 
+** in perform_check we check the whole list of processes and check if they are 
+** dead. When dead, we delete them from list. If we received more than NBR_LIVE
+** amount of live -statements, we reduce the CYCLE_TO_DIE by CYCLE_DELTA.
+** We start a new period with the amount of CYCLES_TO_DIE,
+** unless it's 0 or less. In this case we just set the period to 1.
+**
+** (with period we mean the time between checks)
 */
-
 void	perform_check(t_data *const data, t_counter *counter)
 {
 	t_process	*temp_process;
@@ -87,15 +95,9 @@ void	perform_check(t_data *const data, t_counter *counter)
 }
 
 /*
-** in perform_check we check the whole list of processes and check if they are 
-** dead. When dead, we delete them from list. If we received more than NBR_LIVE
-** amount of live -statements, we reduce the CYCLE_TO_DIE by CYCLE_DELTA.
-** We start a new period with the amount of CYCLES_TO_DIE,
-** unless it's 0 or less. In this case we just set the period to 1.
-**
-** (with period we mean the time between checks)
+** run_game_loop is the game itself. Here we perform different checks and
+** execute the commands of the players.
 */
-
 void	run_game_loop(t_data *const data)
 {
 	init_counter(&data->counter);
@@ -113,8 +115,3 @@ void	run_game_loop(t_data *const data)
 		data->counter.total_cycles++;
 	}
 }
-
-/*
-** run_game_loop is the game itself. Here we perform different checks and
-** execute the commands of the players.
-*/

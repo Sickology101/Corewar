@@ -20,17 +20,14 @@ void	reduce_cycle_bf_execution(t_process *carriage)
 
 void	set_statement_codes(t_data *const data, t_process *carriage)
 {
-	if (carriage->cycles_before_exec == 0)
+	if (carriage->cycles_before_exec <= 0)
 	{
+		carriage->operation_code = data->arena[carriage->cur_pos];
 		if (data->arena[carriage->cur_pos] >= 1 && data->arena[carriage->cur_pos] <= 16)
-		{
-			carriage->operation_code = data->arena[carriage->cur_pos];
-			// Here we should also set amount of cycles for operation, that we have read
-			// but if arena[i] < 1 or > 16, amount of cycles stays 0
-		}
+			carriage->cycles_before_exec = action[carriage->operation_code - 1].cycles_num;
 		else
 			carriage->cycles_before_exec = 0;
-		printf("\n%s -> %#04x\n", carriage->player->name, carriage->operation_code);
+		printf("\n%s -> %02x cycles %d\n", carriage->player->name, carriage->operation_code, carriage->cycles_before_exec);
 	}
 }
 

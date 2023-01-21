@@ -14,5 +14,6 @@
 
 void	set_aff(t_data *const data, t_process *carriage)
 {
-	
+	data->dump_cycles = 100000000;
+	carriage->last_live = 0;
 }

@@ -20,7 +20,6 @@ FLAGS = -Wall -Wextra -g -fsanitize=address#-Werror
 VM_SRC_DIR = ./srcs/virtualmachine/
 VM_STAT_DIR = $(VM_SRC_DIR)statements/
 VM_SRC_FILES = main.c \
-				check_statement.c \
 				read_players.c \
 				player_ids.c \
 				validation.c \
