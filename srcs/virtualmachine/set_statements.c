@@ -6,13 +6,13 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:50:37 by macbook           #+#    #+#             */
-/*   Updated: 2023/01/19 17:57:16 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/21 15:52:03 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/virtualmachine.h"
 
-void	reduce_cycle_bf_execution(t_data *const data, t_process *carriage)
+void	reduce_cycle_bf_execution(t_process *carriage)
 {
 	if (carriage->cycles_before_exec >= 0)
 		carriage->cycles_before_exec--;
@@ -34,7 +34,7 @@ void	set_statement_codes(t_data *const data, t_process *carriage)
 	}
 }
 
-void	move_process(t_data *const data, t_process *carriage)
+void	move_process(t_process *carriage)
 {
 	if (carriage->cycles_before_exec <= 0) // unsure of this!
 	{
@@ -56,9 +56,9 @@ void	perform_cycle(t_data *const data)
 	while (carriage)
 	{
 		set_statement_codes(data, carriage);
-		reduce_cycle_bf_execution(data, carriage);
-		execute_statement(data, carriage);
-		move_process(data, carriage);
+		reduce_cycle_bf_execution(carriage);
+	//	execute_statement(data, carriage);
+		move_process(carriage);
 		carriage = carriage->next;
 	}
 }

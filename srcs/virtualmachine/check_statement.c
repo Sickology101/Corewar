@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:57:17 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/19 18:38:15 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/21 16:41:33 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ void	check_statement(t_data *const data, t_process *carriage)
 			three_arguments(data, carriage, code);
 	}
 	else
-		not_a_statement(data);
+	{
+		printf("not a statement\n");
+	//	not_a_statement(data);
+	}
 }
 
 /*

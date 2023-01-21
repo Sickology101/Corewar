@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:21:17 by igaplich          #+#    #+#             */
-/*   Updated: 2023/01/17 19:50:07 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/21 16:44:38 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	perform_check(t_data *const data, t_counter *counter)
 	t_process	*after_temp;
 
 	counter->checks_without_reducing++;
-	counter->nb_of_checks_done++; //I THINK THIS SHOULD BE ALSO ADDED?? REMOVE IF NOT NEEDED OR REMOVE COMMENT IF NEEDED
+	counter->nb_of_checks_done++;
 	temp_process = data->process_head;
 	while (temp_process != NULL)
 	{

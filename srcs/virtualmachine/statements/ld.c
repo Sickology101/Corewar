@@ -6,13 +6,13 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:11 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/19 18:17:27 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/21 16:22:28 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/virtualmachine.h"
 
-void	set_ls(t_data *const data, t_process *carriage)
+void	set_ld(t_data *const data, t_process *carriage)
 {
 	
 }

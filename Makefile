@@ -6,7 +6,7 @@
 #    By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-#    Updated: 2023/01/19 18:35:31 by mtissari         ###   ########.fr        #
+#    Updated: 2023/01/21 16:23:08 by mtissari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ VM_NAME = corewar
 FLAGS = -Wall -Wextra -g -fsanitize=address#-Werror
 
 VM_SRC_DIR = ./srcs/virtualmachine/
+VM_STAT_DIR = $(VM_SRC_DIR)statements/
 VM_SRC_FILES = main.c \
+				check_statement.c \
 				read_players.c \
 				player_ids.c \
 				validation.c \
@@ -29,28 +31,30 @@ VM_SRC_FILES = main.c \
 				player_code_validation.c \
 				vm_utils.c \
 				flags.c \
-				set_statements.c \ 
-				check_statement.c \
-				statement/add.c \
-				statement/aff.c \
-				statement/and.c \
-				statement/fork.c \
-				statement/ldi.c \
-				statement/lfork.c \
-				statement/live.c \
-				statement/lld.c \
-				statement/lldi.c \
-				statement/ls.c \
-				statement/or.c \
-				statement/st.c \
-				statement/sti.c \
-				statement/sub.c \
-				statement/xor.c \
-				statement/zjmp.c
+				set_statements.c \
+
+VM_STATEMENTS = add.c \
+				aff.c \
+				and.c \
+				fork.c \
+				ld.c \
+				ldi.c \
+				lfork.c \
+				live.c \
+				lld.c \
+				lldi.c \
+				or.c \
+				st.c \
+				sti.c \
+				sub.c \
+				xor.c \
+				zjmp.c
+				
 VM_SRC = $(addprefix $(VM_SRC_DIR), $(VM_SRC_FILES))
+VM_SRC_STAT = $(addprefix $(VM_STAT_DIR), $(VM_STATEMENTS))
 
 VM_OBJ_DIR = ./vm_obj/
-VM_OBJ_FILES = $(VM_SRC_FILES:.c=.o)
+VM_OBJ_FILES = $(VM_SRC_FILES:.c=.o) $(VM_STATEMENTS:.c=.o)
 VM_OBJ = $(addprefix $(VM_OBJ_DIR), $(VM_OBJ_FILES))
 
 VM_INC_DIR = ./includes/
@@ -70,6 +74,10 @@ $(VM_NAME): $(VM_OBJ) $(VM_INC)
 	@echo "$(CGREEN)OK$(CEND)"
 
 $(VM_OBJ_DIR)%.o: $(VM_SRC_DIR)%.c
+	@mkdir -p $(VM_OBJ_DIR)
+	@$(CC) $(FLAGS) -c $< -o $@
+
+$(VM_OBJ_DIR)%.o: $(VM_STAT_DIR)%.c
 	@mkdir -p $(VM_OBJ_DIR)
 	@$(CC) $(FLAGS) -c $< -o $@
 

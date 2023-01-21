@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbook <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:37:31 by macbook           #+#    #+#             */
-/*   Updated: 2023/01/12 20:37:34 by macbook          ###   ########.fr       */
+/*   Updated: 2023/01/21 16:34:43 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	init_process_on_arena(t_data *const data, t_player *player,
 	data->process_head->next_operation = 0;
 	data->process_head->reg[0] = -(player->id);
 	data->process_head->player = player;
+	check_statement(data, data->process_head);
 	data->process_amount++;
 }
 
