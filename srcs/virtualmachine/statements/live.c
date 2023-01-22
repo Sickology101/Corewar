@@ -14,6 +14,17 @@
 
 void	set_live(t_data *const data, t_process *carriage)
 {
+	// On live, it seems that we ALWAYS read 4 bytes(haven't found anything else yet)
+	// "In its direct meaning, it represents itself" - so the address of the
+	// next operation is at arena[t_dir] ?
+	int	temp;
+
+	temp = (data->arena[carriage->cur_pos + 1] | data->arena[carriage->cur_pos + 2]
+			| data->arena[carriage->cur_pos + 3] | data->arena[carriage->cur_pos + 4]);
+	//if (temp < 0)
+	//	;
+	carriage->next_operation = temp % MEM_SIZE;
+
 	carriage->operation_code = 1;
 	carriage->cycles_before_exec = 10;
 	printf("\n\t you've reached set_live\n");
