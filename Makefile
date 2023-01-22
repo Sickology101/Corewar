@@ -31,6 +31,7 @@ VM_SRC_FILES = main.c \
 				vm_utils.c \
 				flags.c \
 				set_statements.c \
+				execute.c
 
 VM_STATEMENTS = add.c \
 				aff.c \

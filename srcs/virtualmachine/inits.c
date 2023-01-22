@@ -53,8 +53,11 @@ void	init_process_on_arena(t_data *const data, t_player *player,
 					size_t pointer)
 {
 	create_initial_process_list(data);
+	data->process_head->args[0] = 0;
+	data->process_head->args[1] = 0;
+	data->process_head->args[2] = 0;
 	data->process_head->carry = 0;
-	data->process_head->operation_code = 0;
+	data->process_head->op_id = 0;
 	data->process_head->last_live = 0;
 	data->process_head->cycles_before_exec = 0;
 	data->process_head->cur_pos = pointer;

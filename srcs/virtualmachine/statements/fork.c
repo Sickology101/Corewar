@@ -14,7 +14,7 @@
 
 void	set_fork(t_data *const data, t_process *carriage)
 {
-	carriage->operation_code = 12;
+	carriage->op_id = 12;
 	carriage->cycles_before_exec = 800;
 	printf("\n\n\t\tyou've reached set_fork\n");
 }

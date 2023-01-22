@@ -44,9 +44,10 @@ typedef struct s_process
 {
 	size_t				unique_id;
 	int					carry;
-	uint8_t				operation_code;
+	uint8_t				op_id;
 	int					last_live;
 	int					cycles_before_exec;
+	uint8_t				args[3];
 	size_t				cur_pos;
 	size_t				next_operation;
 	size_t				reg[REG_NUMBER];
@@ -74,6 +75,8 @@ typedef struct s_statement
 	uint16_t	cycles_num;
 	uint8_t		args_num;
 	uint8_t		args[3];
+	uint8_t		read_types;
+	uint8_t		tdir_size;
 	void		(*func)(t_data *const, t_process *);
 }				t_statement;
 
@@ -159,136 +162,172 @@ void	set_sub(t_data *const data, t_process *carriage);
 void	set_xor(t_data *const data, t_process *carriage);
 void	set_zjmp(t_data *const data, t_process *carriage);
 
-static t_statement action[16] =
+/*-------Execute--------*/
+
+void	execute_statement(t_data *const data, t_process *carriage);
+
+static t_statement	g_op[16]
+	=	{
 {
-	{
-		.name = "live",
-		.id = 1,
-		.cycles_num = 10,
-		.args_num = 1,
-		.args = {0, 0, 0},
-		.func = &set_live
-	},
-	{
-		.name = "ld",
-		.id = 2,
-		.cycles_num = 5,
-		.args_num = 2,
-		.args = {0, 0, 0},
-		.func = &set_ld
-	},
-	{
-		.name = "st",
-		.id = 3,
-		.cycles_num = 5,
-		.args_num = 2,
-		.args = {0, 0, 0},
-		.func = &set_st
-	},
-	{
-		.name = "add",
-		.id = 4,
-		.cycles_num = 10,
-		.args_num = 3,
-		.args = {0, 0, 0},
-		.func = &set_add
-	},
-	{
-		.name = "sub",
-		.id = 5,
-		.cycles_num = 10,
-		.args_num = 3,
-		.args = {0, 0, 0},
-		.func = &set_sub
-	},
-	{
-		.name = "and",
-		.id = 6,
-		.cycles_num = 6,
-		.args_num = 3,
-		.args = {0, 0, 0},
-		.func = &set_and
-	},
-	{
-		.name = "or",
-		.id = 7,
-		.cycles_num = 6,
-		.args_num = 3,
-		.args = {0, 0, 0},
-		.func = &set_or
-	},
-	{
-		.name = "xor",
-		.id = 8,
-		.cycles_num = 6,
-		.args_num = 3,
-		.args = {0, 0, 0},
-		.func = &set_xor
-	},
-	{
-		.name = "zjmp",
-		.id = 9,
-		.cycles_num = 20,
-		.args_num = 1,
-		.args = {0, 0, 0},
-		.func = &set_zjmp
-	},
-	{
-		.name = "ldi",
-		.id = 10,
-		.cycles_num = 25,
-		.args_num = 3,
-		.args = {0, 0, 0},
-		.func = set_ldi
-	},
-	{
-		.name = "sti",
-		.id = 11,
-		.cycles_num = 25,
-		.args_num = 3,
-		.args = {0, 0, 0},
-		.func = &set_sti
-	},
-	{
-		.name = "fork",
-		.id = 12,
-		.cycles_num = 800,
-		.args_num = 1,
-		.args = {0, 0, 0},
-		.func = &set_fork
-	},
-	{
-		.name = "lld",
-		.id = 13,
-		.cycles_num = 10,
-		.args_num = 2,
-		.args = {0, 0, 0},
-		.func = &set_lld
-	},
-	{
-		.name = "lldi",
-		.id = 14,
-		.cycles_num = 50,
-		.args_num = 3,
-		.args = {0, 0, 0},
-		.func = &set_lldi
-	},
-	{
-		.name = "lfork",
-		.id = 15,
-		.cycles_num = 1000,
-		.args_num = 1,
-		.args = {0, 0, 0},
-		.func = &set_lfork
-	},
-	{
-		.name = "aff",
-		.id = 16,
-		.cycles_num = 2,
-		.args_num = 1,
-		.args = {0, 0, 0},
-		.func = &set_aff
-	},
+	.name = "live",
+	.id = 1,
+	.cycles_num = 10,
+	.args_num = 1,
+	.args = {DIR_CODE},
+	.read_types = 0,
+	.tdir_size = 4,
+	.func = &set_live
+},
+{
+	.name = "ld",
+	.id = 2,
+	.cycles_num = 5,
+	.args_num = 2,
+	.args = {DIR_CODE | IND_CODE, REG_CODE},
+	.read_types = 1,
+	.tdir_size = 4,
+	.func = &set_ld
+},
+{
+	.name = "st",
+	.id = 3,
+	.cycles_num = 5,
+	.args_num = 2,
+	.args = {REG_CODE, IND_CODE | REG_CODE},
+	.read_types = 1,
+	.tdir_size = 4,
+	.func = &set_st
+},
+{
+	.name = "add",
+	.id = 4,
+	.cycles_num = 10,
+	.args_num = 3,
+	.args = {REG_CODE, REG_CODE, REG_CODE},
+	.read_types = 1,
+	.tdir_size = 4,
+	.func = &set_add
+},
+{
+	.name = "sub",
+	.id = 5,
+	.cycles_num = 10,
+	.args_num = 3,
+	.args = {REG_CODE, REG_CODE, REG_CODE},
+	.read_types = 1,
+	.tdir_size = 4,
+	.func = &set_sub
+},
+{
+	.name = "and",
+	.id = 6,
+	.cycles_num = 6,
+	.args_num = 3,
+	.args = {REG_CODE | DIR_CODE | IND_CODE, REG_CODE | IND_CODE | DIR_CODE, REG_CODE},
+	.read_types = 1,
+	.tdir_size = 4,
+	.func = &set_and
+},
+{
+	.name = "or",
+	.id = 7,
+	.cycles_num = 6,
+	.args_num = 3,
+	.args = {REG_CODE | IND_CODE | DIR_CODE, REG_CODE | IND_CODE | DIR_CODE, REG_CODE},
+	.read_types = 1,
+	.tdir_size = 4,
+	.func = &set_or
+},
+{
+	.name = "xor",
+	.id = 8,
+	.cycles_num = 6,
+	.args_num = 3,
+	.args = {REG_CODE | IND_CODE | DIR_CODE, REG_CODE | IND_CODE | DIR_CODE, REG_CODE},
+	.read_types = 1,
+	.tdir_size = 4,
+	.func = &set_xor
+},
+{
+	.name = "zjmp",
+	.id = 9,
+	.cycles_num = 20,
+	.args_num = 1,
+	.args = {DIR_CODE},
+	.read_types = 0,
+	.tdir_size = 2,
+	.func = &set_zjmp
+},
+{
+	.name = "ldi",
+	.id = 10,
+	.cycles_num = 25,
+	.args_num = 3,
+	.args = {REG_CODE | DIR_CODE | IND_CODE, DIR_CODE | REG_CODE, REG_CODE},
+	.read_types = 1,
+	.tdir_size = 2,
+	.func = set_ldi
+},
+{
+	.name = "sti",
+	.id = 11,
+	.cycles_num = 25,
+	.args_num = 3,
+	.args = {REG_CODE, REG_CODE | DIR_CODE | IND_CODE, DIR_CODE | REG_CODE},
+	.read_types = 1,
+	.tdir_size = 2,
+	.func = &set_sti
+},
+{
+	.name = "fork",
+	.id = 12,
+	.cycles_num = 800,
+	.args_num = 1,
+	.args = {DIR_CODE},
+	.read_types = 0,
+	.tdir_size = 2,
+	.func = &set_fork
+},
+{
+	.name = "lld",
+	.id = 13,
+	.cycles_num = 10,
+	.args_num = 2,
+	.args = {DIR_CODE | IND_CODE, REG_CODE},
+	.read_types = 1,
+	.tdir_size = 4,
+	.func = &set_lld
+},
+{
+	.name = "lldi",
+	.id = 14,
+	.cycles_num = 50,
+	.args_num = 3,
+	.args = {REG_CODE | DIR_CODE | IND_CODE, DIR_CODE | REG_CODE, REG_CODE},
+	.read_types = 1,
+	.tdir_size = 2,
+	.func = &set_lldi
+},
+{
+	.name = "lfork",
+	.id = 15,
+	.cycles_num = 1000,
+	.args_num = 1,
+	.args = {DIR_CODE},
+	.read_types = 0,
+	.tdir_size = 2,
+	.func = &set_lfork
+},
+{
+	.name = "aff",
+	.id = 16,
+	.cycles_num = 2,
+	.args_num = 1,
+	.args = {REG_CODE},
+	.read_types = 1,
+	.tdir_size = 4,
+	.func = &set_aff
+},
 };
 
 #endif

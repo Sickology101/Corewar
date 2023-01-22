@@ -25,7 +25,7 @@ void	set_live(t_data *const data, t_process *carriage)
 	//	;
 	carriage->next_operation = temp % MEM_SIZE;
 
-	carriage->operation_code = 1;
+	carriage->op_id = 1;
 	carriage->cycles_before_exec = 10;
 	printf("\n\t you've reached set_live\n");
 	//if (carriage->cur_pos == 4095)
