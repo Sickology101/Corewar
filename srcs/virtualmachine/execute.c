@@ -62,11 +62,7 @@ void	execute_statement(t_data *const data, t_process *carriage)
 {
 	t_statement	*op;
 
-	op = &g_op[carriage->op_id - 1];
 	if (validate_args_types(data, carriage, op) || !op->read_types)
-	{
-		printf("arg types ok\n");
-		if (validate_args(data, carriage, op))
 		{
 			op->func(data, carriage);
 			printf("args are also ok\n");
