@@ -166,8 +166,7 @@ void	set_zjmp(t_data *const data, t_process *carriage);
 
 void	execute_statement(t_data *const data, t_process *carriage);
 
-static t_statement	g_op[16]
-	=	{
+static t_statement	g_op[16] = {
 {
 	.name = "live",
 	.id = 1,

@@ -12,12 +12,13 @@
 
 #include "../../includes/virtualmachine.h"
 
-int	validate_args_types(t_data *const data, t_process *carriage, t_statement *op)
+int	validate_args_types(t_data *const data,
+		t_process *carriage, t_statement *op)
 {
-	uint8_t byte;
-	int i;
+	uint8_t	byte;
+	int		i;
 
-	byte = data->arena[carriage->cur_pos + 1 % 4098];
+	byte = data->arena[carriage->cur_pos + 1 % MEM_SIZE];
 	i = 0;
 	while (i < op->args_num)
 	{
@@ -29,17 +30,49 @@ int	validate_args_types(t_data *const data, t_process *carriage, t_statement *op
 	return (1);
 }
 
+int	validate_args(t_data *const data, t_process *carriage, t_statement *op)
+{
+	int		i;
+	int		rel_index;
+	uint8_t	byte;
+
+	i = 0;
+	rel_index = 1;
+	if (op->read_types)
+		rel_index += 1;
+	while (i < op->args_num)
+	{
+		if (op->args[i] == REG_CODE)
+		{
+			byte = data->arena[carriage->cur_pos + rel_index];
+			if (byte < 1 || byte > 16)
+				return (0);
+			rel_index += T_REG;
+		}
+		if (carriage->args[i] == DIR_CODE)
+			rel_index += op->tdir_size;
+		else if (carriage->args[i] == IND_CODE)
+			rel_index += T_IND;
+		i++;
+	}
+	return (1);
+}
 
 void	execute_statement(t_data *const data, t_process *carriage)
 {
-	t_statement *operation;
+	t_statement	*op;
 
-	operation = &g_op[carriage->op_id - 1];
-	if (validate_args_types(data, carriage, operation) || !operation->read_types)
+	op = &g_op[carriage->op_id - 1];
+	if (validate_args_types(data, carriage, op) || !op->read_types)
 	{
 		printf("arg types ok\n");
-		// if (validate_args(data, carriage))
-			operation->func(data, carriage);
+		if (validate_args(data, carriage, op))
+		{
+			op->func(data, carriage);
+			printf("args are also ok\n");
+		}
+		else
+			printf("args are not ok\n");
 	}
 	else
 		printf("arg types wrong\n");
