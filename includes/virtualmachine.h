@@ -188,6 +188,7 @@ static t_statement	g_op[16] = {
 	.tdir_size = 4,
 	.func = &set_ld
 },
+
 {
 	.name = "st",
 	.id = 3,

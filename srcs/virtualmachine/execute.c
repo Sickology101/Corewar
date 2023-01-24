@@ -23,8 +23,11 @@ int	validate_args_types(t_data *const data,
 	while (i < op->args_num)
 	{
 		carriage->args[i] = (byte & (0xc0 >> i * 2)) >> (6 - i * 2);
-		if (!(carriage->args[i] & op->args[i]))
+		if (!(carriage->args[i] & op->args[i])) 				//TODO: CHECK THAT IT ACTUALLY WORKS
+		{
+			printf("arg types wrong\n");
 			return (0);
+		}
 		i++;
 	}
 	return (1);
@@ -47,12 +50,12 @@ int	validate_args(t_data *const data, t_process *carriage, t_statement *op)
 			byte = data->arena[carriage->cur_pos + rel_index];
 			if (byte < 1 || byte > 16)
 				return (0);
-			rel_index += T_REG;
+			rel_index += REG_SIZE;
 		}
-		if (carriage->args[i] == DIR_CODE)
+		else if (carriage->args[i] == DIR_CODE)
 			rel_index += op->tdir_size;
 		else if (carriage->args[i] == IND_CODE)
-			rel_index += T_IND;
+			rel_index += IND_SIZE;
 		i++;
 	}
 	return (1);
@@ -62,8 +65,8 @@ void	execute_statement(t_data *const data, t_process *carriage)
 {
 	t_statement	*op;
 
-	op = &g_op[data->arena[carriage->cur_pos]];
-	if (validate_args_types(data, carriage, op) || !op->read_types)
+	op = &g_op[data->arena[carriage->cur_pos] - 1];
+	if (!op->read_types || validate_args_types(data, carriage, op))
 	{
 		printf("Arg types are ok\n");
 		if (validate_args(data, carriage, op))
@@ -74,6 +77,4 @@ void	execute_statement(t_data *const data, t_process *carriage)
 		else
 			printf("args are not ok\n");
 	}
-	else
-		printf("arg types wrong\n");
 }

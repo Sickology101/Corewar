@@ -12,14 +12,30 @@
 
 #include "../../../includes/virtualmachine.h"
 
+
+
+
+
 void	set_live(t_data *const data, t_process *carriage)
 {
 	int	temp;
+	int arg;
 
-	temp = calculate_args(DIR_CODE, data->arena[carriage->cur_pos + 1]
-			| data->arena[carriage->cur_pos + 2]
-			| data->arena[carriage->cur_pos + 3]
-			| data->arena[carriage->cur_pos + 4]);
+	uint8_t one = 1;
+	uint8_t two = 1;
+	uint8_t three = 1;
+	uint8_t four = 5;
+	int		res;
+
+	res = one << 24 | two << 16 | three << 8 | four;
+	printf("res = %d\n", res);
+
+	arg = 0;
+	arg = data->arena[(carriage->cur_pos + 1) % MEM_SIZE] << 24 
+			| data->arena[(carriage->cur_pos + 2) % MEM_SIZE] << 16
+			| data->arena[(carriage->cur_pos + 3) % MEM_SIZE] << 8
+			| data->arena[(carriage->cur_pos + 4) % MEM_SIZE];
+	temp = calculate_args(DIR_CODE, arg);
 	carriage->last_live = data->counter.total_cycles;
 	if (temp < 0 && (temp * -1) <= data->player_amount)
 		data->last_alive = temp;
