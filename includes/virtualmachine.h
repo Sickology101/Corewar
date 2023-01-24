@@ -125,7 +125,7 @@ void	get_champion_comment(int fd, t_player *player);
 /*-------Vm_Utils-------*/
 
 int		swap_endians(int buffer);
-int		calculate_args(int args);
+int		calculate_args(int code, int args);
 
 /*-------Process--------*/
 

@@ -39,6 +39,7 @@ int	calculate_args(int code, int args)
 	int16_t	ind;
 	int		ret;
 
+	ret = 0;
 	if (code == 3) // (IND_CODE)
 	{
 		ind = args;

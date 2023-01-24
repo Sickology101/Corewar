@@ -62,7 +62,7 @@ void	execute_statement(t_data *const data, t_process *carriage)
 {
 	t_statement	*op;
 
-	op = NULL;
+	op = &g_op[data->arena[carriage->cur_pos]];
 	if (validate_args_types(data, carriage, op) || !op->read_types)
 	{
 		printf("Arg types are ok\n");

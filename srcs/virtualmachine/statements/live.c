@@ -20,7 +20,7 @@ void	set_live(t_data *const data, t_process *carriage)
 			| data->arena[carriage->cur_pos + 2]
 			| data->arena[carriage->cur_pos + 3]
 			| data->arena[carriage->cur_pos + 4]);
-	carriage->last_live = data->counter->total_cycles;
+	carriage->last_live = data->counter.total_cycles;
 	if (temp < 0 && (temp * -1) <= data->player_amount)
 		data->last_alive = temp;
 	carriage->op_id = 1;
