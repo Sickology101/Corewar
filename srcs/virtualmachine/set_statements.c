@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:50:37 by macbook           #+#    #+#             */
-/*   Updated: 2023/01/21 15:52:03 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/24 20:49:05 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,13 @@ void	set_statement_codes(t_data *const data, t_process *carriage)
 
 void	move_process(t_process *carriage)
 {
-	if (carriage->cycles_before_exec <= 0) // unsure of this!
+	if (carriage->cycles_before_exec <= 0)
 	{
 		if (carriage->cur_pos == 4095)
 			carriage->cur_pos = 0;
 		else
 			carriage->cur_pos++;
 	}
-	//else  	//there is no "else", but just put this here as a note
-		// just wait until the cycles_before_exec is 0
-		// so don't go to the next operation yet
 }
 
 void	perform_cycle(t_data *const data)

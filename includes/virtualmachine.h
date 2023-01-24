@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:57 by marius            #+#    #+#             */
-/*   Updated: 2023/01/19 18:23:36 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/24 19:29:17 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void	get_champion_comment(int fd, t_player *player);
 /*-------Vm_Utils-------*/
 
 int		swap_endians(int buffer);
+int		calculate_args(int args);
 
 /*-------Process--------*/
 

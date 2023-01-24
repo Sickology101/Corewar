@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igaplich <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 17:53:52 by igaplich          #+#    #+#             */
-/*   Updated: 2023/01/22 17:53:53 by igaplich         ###   ########.fr       */
+/*   Updated: 2023/01/24 17:49:16 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ void	execute_statement(t_data *const data, t_process *carriage)
 {
 	t_statement	*op;
 
+	op = NULL;
 	if (validate_args_types(data, carriage, op) || !op->read_types)
-		{
-			op->func(data, carriage);
-			printf("args are also ok\n");
-		}
-		else
-			printf("args are not ok\n");
+	{
+		op->func(data, carriage);
+		printf("args are also ok\n");
 	}
 	else
-		printf("arg types wrong\n");
+		printf("args are not ok\n");
+	//else
+	//	printf("arg types wrong\n");
 }
