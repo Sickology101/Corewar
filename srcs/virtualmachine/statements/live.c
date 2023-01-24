@@ -21,15 +21,6 @@ void	set_live(t_data *const data, t_process *carriage)
 	int	temp;
 	int arg;
 
-	uint8_t one = 1;
-	uint8_t two = 1;
-	uint8_t three = 1;
-	uint8_t four = 5;
-	int		res;
-
-	res = one << 24 | two << 16 | three << 8 | four;
-	printf("res = %d\n", res);
-
 	arg = 0;
 	arg = data->arena[(carriage->cur_pos + 1) % MEM_SIZE] << 24 
 			| data->arena[(carriage->cur_pos + 2) % MEM_SIZE] << 16
