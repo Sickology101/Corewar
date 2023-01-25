@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/19 11:38:45 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/25 10:53:28 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ typedef	struct s_statements
 
 typedef struct			s_command
 {
-	char				*name;
+	int					name;
+	int					type; // 0 for statement, 1 for label
 	int					codage;
+	int					size;
 	char 				*label;
 	int					count_args;
 	int					args[3]; // for live ->args[0] = 2 args[1] = 0;
  	int					opcode;
-	struct s_command	*next;
 }						t_command;
 
 typedef struct s_label
@@ -65,8 +66,7 @@ typedef struct s_champion
 	char			*name;
 	char			*comment;
 	int				commands_nub;
-	t_command		*commands;
-	t_label			*labels;
+	t_command		**commands;
 	struct s_champion	*next;
 }			t_champion;
 
@@ -98,6 +98,8 @@ bool	check_valid_label_char(char c);
 bool	check_valid_state(char *line, int index, t_parser *data);
 bool	compare_syntax(char *str, t_parser *data, int	*state_num);
 t_champion *generate_champ(t_parser *data);
+char	*get_label(char *line, int *index);
+char *get_syntax_name(char *str, int *index);
 //void	write_bytes(int fd, int input, int count_bytes);
 //void	write_bytecode(t_parser *data, char **argv);
 #endif
