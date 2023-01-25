@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:11 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/21 16:35:45 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/25 20:10:50 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	set_st(t_data *const data, t_process *carriage)
 {
-	carriage->op_id = 3;
-	carriage->cycles_before_exec = 5;
+	data->counter.total_cycles++;
+	data->counter.total_cycles--;
+	carriage->last_live = 0;
 	printf("\n\n\t\tyou've reached set_st\n");
 }

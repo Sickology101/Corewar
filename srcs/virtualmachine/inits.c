@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:37:31 by macbook           #+#    #+#             */
-/*   Updated: 2023/01/21 16:34:43 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:57:35 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	init_process_on_arena(t_data *const data, t_player *player,
 	data->process_head->last_live = 0;
 	data->process_head->cycles_before_exec = 0;
 	data->process_head->cur_pos = pointer;
-	data->process_head->next_operation = 0;
+	data->process_head->next_operation = -1;
 	data->process_head->reg[0] = -(player->id);
 	data->process_head->player = player;
 	data->process_amount++;

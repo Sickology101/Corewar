@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:50:37 by macbook           #+#    #+#             */
-/*   Updated: 2023/01/24 20:49:05 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:39:50 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,22 @@ void	set_statement_codes(t_data *const data, t_process *carriage)
 			carriage->cycles_before_exec = g_op[carriage->op_id - 1].cycles_num;
 		else
 			carriage->cycles_before_exec = 0;
-		printf("\n%s -> %02x cycles %d\n", carriage->player->name, carriage->op_id, carriage->cycles_before_exec);
+		//printf("\n%s -> %02x cycles %d\n", carriage->player->name, carriage->op_id, carriage->cycles_before_exec);
 	}
 }
 
 void	move_process(t_process *carriage)
 {
-	if (carriage->cycles_before_exec <= 0)
+	if (carriage->next_operation != -1 && carriage->cycles_before_exec <= 0)
 	{
-		if (carriage->cur_pos == 4095)
-			carriage->cur_pos = 0;
+		carriage->cur_pos = carriage->next_operation;
+		carriage->next_operation = -1;
+		//clean_process(carriage);	//not started with this function yet!
+	}
+	else if (carriage->cycles_before_exec <= 0)
+	{
+		if (carriage->cur_pos == MEM_SIZE - 1)
+			carriage->cur_pos = 0 % MEM_SIZE;
 		else
 			carriage->cur_pos++;
 	}

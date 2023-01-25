@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:57 by marius            #+#    #+#             */
-/*   Updated: 2023/01/24 19:29:17 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/25 19:37:34 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ typedef struct s_player
 
 typedef struct s_counter
 {
-	int			total_cycles;
-	int			cycles_to_die;
-	int			nb_of_checks_done;
-	int			checks_without_reducing;
-	int			lives_this_period;
-	int			initial_cycles;
+	int				total_cycles;
+	int				cycles_to_die;
+	int				nb_of_checks_done;
+	int				checks_without_reducing;
+	int				lives_this_period;
+	int				initial_cycles;
 }				t_counter;
 
 typedef struct s_process
@@ -49,7 +49,7 @@ typedef struct s_process
 	int					cycles_before_exec;
 	uint8_t				args[3];
 	size_t				cur_pos;
-	size_t				next_operation;
+	int					next_operation;
 	size_t				reg[REG_NUMBER];
 	t_player			*player;
 	struct s_process	*next;
@@ -126,10 +126,14 @@ void	get_champion_comment(int fd, t_player *player);
 
 int		swap_endians(int buffer);
 int		calculate_args(int code, int args);
+int		make_dir_to_int(uint8_t *arena, int cur_pos);
+int		make_ind_to_int(uint8_t *arena, int cur_pos);
+void	set_next_op(t_process *carriage, int jump_to);
 
 /*-------Process--------*/
 
 void	create_initial_process_list(t_data *const data);
+void	copy_process(t_data *const data, t_process *carriage, int pos);
 
 /*-------Game_loop------*/
 

@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:21:17 by igaplich          #+#    #+#             */
-/*   Updated: 2023/01/24 20:50:24 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/25 20:07:32 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	delete_process(t_data *const data, t_process *process)
 	free_process(process);
 	prev = NULL;
 	data->process_amount--;
+	printf("\n\t\t\t\t\t\tA PROCESS DELETED! remaining processes amount: %zu\n", data->process_amount);
 }
 
 /*
@@ -100,6 +101,7 @@ void	perform_check(t_data *const data, t_counter *counter)
 */
 void	run_game_loop(t_data *const data)
 {
+	printf("\n\ndump: %i\n\n", data->dump_cycles);
 	init_counter(&data->counter);
 	while (data->process_amount)
 	{

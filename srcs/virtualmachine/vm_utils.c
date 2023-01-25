@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:30:33 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/24 20:50:34 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:35:34 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,27 @@ int	swap_endians(int buffer)
 	return (leftmost | left_middle | right_middle | rightmost);
 }
 
+int	make_dir_to_int(uint8_t *arena, int cur_pos)
+{
+	int	res;
+
+	res = arena[(cur_pos + 1) % MEM_SIZE] << 24
+		| arena[(cur_pos + 2) % MEM_SIZE] << 16
+		| arena[(cur_pos + 3) % MEM_SIZE] << 8
+		| arena[(cur_pos + 4) % MEM_SIZE];
+	return (res);
+}
+
+int	make_ind_to_int(uint8_t *arena, int cur_pos)
+{
+	int	res;
+
+	res = 0;
+	res = arena[(cur_pos + 1) % MEM_SIZE] << 8
+		| arena[(cur_pos + 2) % MEM_SIZE];
+	return (res);
+}
+
 /*
 ** Calculate_args converts the unsigned ints to signed int16_t's,
 ** which is the way we get the negatives when we need them.
@@ -40,22 +61,26 @@ int	calculate_args(int code, int args)
 	int		ret;
 
 	ret = 0;
-	if (code == 3) // (IND_CODE)
+	if (code == IND_CODE)
 	{
 		ind = args;
 		ind = ind % IDX_MOD;
-		printf("\targument value: %i\n", ind);
 		ret = ind;
 	}
-	else if (code == 2) // (DIR_CODE)
+	else if (code == DIR_CODE)
 	{
 		ret = args;
 	}
-	else if (code == 1) // (REG_CODE)
+	else if (code == REG_CODE)
 	{
 		if (args < 1 || args > 16) // invalid reg, just ignore and skip?
 			return (0);
 		ret = args;
 	}
 	return (ret);
+}
+
+void	set_next_op(t_process *carriage, int jump_to)
+{
+	carriage->next_operation = jump_to;
 }
