@@ -54,7 +54,6 @@ void	init_process(t_data *const data, t_process *process, size_t pointer)
 
 void	copy_process(t_data *const data, t_process *carriage, int pos)
 {
-	int			i;
 	t_process	*copy;
 
 	copy = (t_process *)malloc(sizeof(t_process));
@@ -65,11 +64,6 @@ void	copy_process(t_data *const data, t_process *carriage, int pos)
 	copy->next = NULL;
 	copy->carry = carriage->carry;
 	copy->last_live = carriage->last_live;
-	i = 0;
-	while (i < REG_NUMBER)
-	{
-		copy->reg[i] = carriage->reg[i];
-		i++;
-	}
+	data->process_tail->next = copy;
 	data->process_tail = copy;
 }

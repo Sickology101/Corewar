@@ -52,6 +52,8 @@ void	place_players_on_arena(t_player *player, t_data *const data,
 void	init_process_on_arena(t_data *const data, t_player *player,
 					size_t pointer)
 {
+	int i;
+
 	create_initial_process_list(data);
 	data->process_head->args[0] = 0;
 	data->process_head->args[1] = 0;
@@ -65,6 +67,9 @@ void	init_process_on_arena(t_data *const data, t_player *player,
 	data->process_head->reg[0] = -(player->id);
 	data->process_head->player = player;
 	data->process_amount++;
+	i = 0;
+	while (++i < REG_NUMBER)
+		data->process_head->reg[i] = 0;
 }
 
 void	init_arena(t_data *const data)
