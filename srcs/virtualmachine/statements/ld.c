@@ -31,7 +31,7 @@ void	set_ld(t_data *const data, t_process *carriage)
 	reg = 0;
 	if (carriage->args[0] == DIR_CODE)
 	{
-		arg = make_dir_to_int(data->arena, carriage->cur_pos);
+		arg = make_dir_to_int(data->arena, carriage->cur_pos + 1);
 		value = arg;
 		reg = data->arena[carriage->cur_pos + 6];
 		set_next_op(carriage, carriage->cur_pos + 7);
