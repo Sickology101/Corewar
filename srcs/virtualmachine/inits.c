@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:37:31 by macbook           #+#    #+#             */
-/*   Updated: 2023/01/25 18:57:35 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:28:37 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_data(t_data *data)
 {
 	data->player = NULL;
-	data->last_alive = NULL;
+	data->last_alive = 0;
 	data->dump_cycles = -1;
 	data->player_amount = 0;
 	data->process_amount = 0;
@@ -52,7 +52,7 @@ void	place_players_on_arena(t_player *player, t_data *const data,
 void	init_process_on_arena(t_data *const data, t_player *player,
 					size_t pointer)
 {
-	int i;
+	int	i;
 
 	create_initial_process_list(data);
 	data->process_head->args[0] = 0;

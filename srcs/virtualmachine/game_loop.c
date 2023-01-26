@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:21:17 by igaplich          #+#    #+#             */
-/*   Updated: 2023/01/25 20:07:32 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:30:43 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	delete_process(t_data *const data, t_process *process)
 	free_process(process);
 	prev = NULL;
 	data->process_amount--;
-	printf("\n\t\t\t\t\t\tA PROCESS DELETED! remaining processes amount: %zu\n", data->process_amount);
+	printf("PROCESS DELETED! nb of processes now: %zu\n", data->process_amount);
 }
 
 /*

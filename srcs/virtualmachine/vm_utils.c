@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:30:33 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/25 18:35:34 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/26 20:42:58 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,23 @@ int	swap_endians(int buffer)
 	return (leftmost | left_middle | right_middle | rightmost);
 }
 
-int	make_dir_to_int(uint8_t *arena, int cur_pos)
+int	make_dir_to_int(uint8_t *arena, int cur_pos, int dir_size)
 {
 	int	res;
 
-	res = arena[(cur_pos + 1) % MEM_SIZE] << 24
-		| arena[(cur_pos + 2) % MEM_SIZE] << 16
-		| arena[(cur_pos + 3) % MEM_SIZE] << 8
-		| arena[(cur_pos + 4) % MEM_SIZE];
+	if (dir_size == 4)
+	{
+		res = arena[(cur_pos) % MEM_SIZE] << 24
+			| arena[(cur_pos + 1) % MEM_SIZE] << 16
+			| arena[(cur_pos + 2) % MEM_SIZE] << 8
+			| arena[(cur_pos + 3) % MEM_SIZE];
+	}
+	else
+	{
+		res = 0;
+		res = arena[(cur_pos) % MEM_SIZE] << 8
+			| arena[(cur_pos + 1) % MEM_SIZE];
+	}
 	return (res);
 }
 
@@ -46,8 +55,8 @@ int	make_ind_to_int(uint8_t *arena, int cur_pos)
 	int	res;
 
 	res = 0;
-	res = arena[(cur_pos + 1) % MEM_SIZE] << 8
-		| arena[(cur_pos + 2) % MEM_SIZE];
+	res = arena[(cur_pos) % MEM_SIZE] << 8
+		| arena[(cur_pos + 1) % MEM_SIZE];
 	return (res);
 }
 
@@ -74,8 +83,8 @@ int	calculate_args(int code, int args)
 	else if (code == REG_CODE)
 	{
 		if (args < 1 || args > 16) // invalid reg, just ignore and skip?
-			return (0);
-		ret = args;
+			return (-1);
+		ret = args - 1;
 	}
 	return (ret);
 }
@@ -83,4 +92,15 @@ int	calculate_args(int code, int args)
 void	set_next_op(t_process *carriage, int jump_to)
 {
 	carriage->next_operation = jump_to;
+}
+
+void	put_reg_value_on_arena(uint8_t *arena, int value, int pos)
+{
+	int		i;
+
+	i = 0;
+	arena[pos + i++] = (value & 0xFF000000) >> 24;
+	arena[pos + i++] = (value & 0x00FF0000) >> 16;
+	arena[pos + i++] = (value & 0x0000FF00) >> 8;
+	arena[pos + i++] = (value & 0x000000FF) >> 0;
 }

@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:57 by marius            #+#    #+#             */
-/*   Updated: 2023/01/25 19:37:34 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/26 19:27:40 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_data
 {
 	struct s_counter	counter;
 	t_player			*player;
-	t_player			*last_alive;
+	int					last_alive;
 	int					dump_cycles;
 	int					player_amount;
 	uint8_t				arena[MEM_SIZE];
@@ -126,14 +126,18 @@ void	get_champion_comment(int fd, t_player *player);
 
 int		swap_endians(int buffer);
 int		calculate_args(int code, int args);
-int		make_dir_to_int(uint8_t *arena, int cur_pos);
+int		make_dir_to_int(uint8_t *arena, int cur_pos, int dir_size);
 int		make_ind_to_int(uint8_t *arena, int cur_pos);
 void	set_next_op(t_process *carriage, int jump_to);
+
+void	put_reg_value_on_arena(uint8_t *arena, int value, int pos);
 
 /*-------Process--------*/
 
 void	create_initial_process_list(t_data *const data);
 void	copy_process(t_data *const data, t_process *carriage, int pos);
+void	put_process_on_arena(t_data *const data,
+			t_process *copy, int start, int end);
 
 /*-------Game_loop------*/
 

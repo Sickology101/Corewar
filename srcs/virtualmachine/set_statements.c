@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:50:37 by macbook           #+#    #+#             */
-/*   Updated: 2023/01/25 18:39:50 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:32:01 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ void	set_statement_codes(t_data *const data, t_process *carriage)
 	if (carriage->cycles_before_exec <= 0)
 	{
 		carriage->op_id = data->arena[carriage->cur_pos];
-		if (data->arena[carriage->cur_pos] >= 1 && data->arena[carriage->cur_pos] <= 16)
+		if (data->arena[carriage->cur_pos] >= 1
+			&& data->arena[carriage->cur_pos] <= 16)
 			carriage->cycles_before_exec = g_op[carriage->op_id - 1].cycles_num;
 		else
 			carriage->cycles_before_exec = 0;
-		//printf("\n%s -> %02x cycles %d\n", carriage->player->name, carriage->op_id, carriage->cycles_before_exec);
+		printf("\n%s -> %02x cycles %d\n", carriage->player->name,
+			carriage->op_id, carriage->cycles_before_exec);
 	}
 }
 

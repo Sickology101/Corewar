@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:40:29 by igaplich          #+#    #+#             */
-/*   Updated: 2023/01/25 19:42:22 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:04:18 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,37 @@ void	init_process(t_data *const data, t_process *process, size_t pointer)
 	data->process_amount++;
 }
 
+void	put_process_on_arena(t_data *const data,
+		t_process *copy, int start, int end)
+{
+	int	i;
+
+	i = 0;
+	while (start <= end)
+	{
+		data->arena[copy->cur_pos + i] = data->arena[start];
+		printf("new: %0.2x\n", data->arena[copy->cur_pos + i]);
+		start++;
+		i++;
+	}
+}
+
 void	copy_process(t_data *const data, t_process *carriage, int pos)
 {
+	int			i;
 	t_process	*copy;
 
 	copy = (t_process *)malloc(sizeof(t_process));
 	if (!copy)
-		exit_error_message("Process head allocation failed!");
+		exit_error_message("Process allocation failed!");
 	init_process(data, copy, pos);
 	copy->unique_id = data->process_amount;
 	copy->next = NULL;
 	copy->carry = carriage->carry;
 	copy->last_live = carriage->last_live;
+	i = 0;
+	while (++i < REG_NUMBER)
+		copy->reg[i] = carriage->reg[i];
 	data->process_tail->next = copy;
 	data->process_tail = copy;
 }

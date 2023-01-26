@@ -6,12 +6,17 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:40:34 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/17 15:42:51 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:33:37 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/virtualmachine.h"
 
+/*
+** get_exec_size reads 4 bytes that include the size of the executable code
+** in bytes. It cannot exceed CHAMP_MAX_SIZE, but there is no minimum limit,
+** hence in the case the size is 0, we set it to CHAMP_MAX_SIZE.
+*/
 void	get_exec_size(int fd, t_player *player)
 {
 	int		rtn;
@@ -38,11 +43,8 @@ void	get_exec_size(int fd, t_player *player)
 }
 
 /*
-** get_exec_size reads 4 bytes that include the size of the executable code
-** in bytes. It cannot exceed CHAMP_MAX_SIZE, but there is no minimum limit,
-** hence in the case the size is 0, we set it to CHAMP_MAX_SIZE.
+** get_champion_name validates the name length and saves it
 */
-
 void	get_champion_name(int fd, t_player *player)
 {
 	int		rtn;
@@ -62,9 +64,9 @@ void	get_champion_name(int fd, t_player *player)
 }
 
 /*
-** get_champion_name validates the name length and saves it
+** Check_magic_header reads the first 4 bytes of the file and checks if the
+** magic header in the file is valid.
 */
-
 void	check_magic_header(int fd)
 {
 	int		rtn;
@@ -77,11 +79,6 @@ void	check_magic_header(int fd)
 	if (buffer != COREWAR_EXEC_MAGIC)
 		exit_error_message("invalid magic header");
 }
-
-/*
-** Check_magic_header reads the first 4 bytes of the file and checks if the
-** magic header in the file is valid.
-*/
 
 int	validate_player(t_data *const data)
 {

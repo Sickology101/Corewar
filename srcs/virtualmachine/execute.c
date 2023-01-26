@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 17:53:52 by igaplich          #+#    #+#             */
-/*   Updated: 2023/01/24 17:49:16 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:29:34 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	validate_args_types(t_data *const data,
 	while (i < op->args_num)
 	{
 		carriage->args[i] = (byte & (0xc0 >> i * 2)) >> (6 - i * 2);
-		if (!(carriage->args[i] & op->args[i])) 				//TODO: CHECK THAT IT ACTUALLY WORKS
+		if (!(carriage->args[i] & op->args[i])) 		//TODO: CHECK THAT IT ACTUALLY WORKS
 		{
 			printf("arg types wrong\n");
 			return (0);
