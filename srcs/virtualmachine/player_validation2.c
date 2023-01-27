@@ -6,12 +6,16 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:34:11 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/17 15:41:58 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/27 16:26:24 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/virtualmachine.h"
 
+/*
+** get_exec_code reads and saves the code in the t_player-struct.
+** !!!!! (and checks if it exists? not sure if it needs to exist?) !!!!!
+*/
 void	get_exec_code(int fd, t_player *player)
 {
 	int		rtn;
@@ -35,10 +39,9 @@ void	get_exec_code(int fd, t_player *player)
 }
 
 /*
-** get_exec_code saves the code (and checks if it exists?	!!!
-** not sure if it needs to)
+** check_null_separator validates that there are 4 NULL bytes after champion
+** name and after champion comment.
 */
-
 void	check_null_separator(int fd)
 {
 	int		rtn;
@@ -53,10 +56,8 @@ void	check_null_separator(int fd)
 }
 
 /*
-** check_null_separator validates that there are 4 NULL bytes after champion
-** name and after champion comment.
+** get_champion_comment validates the length if the comment and saves it.
 */
-
 void	get_champion_comment(int fd, t_player *player)
 {
 	int		rtn;
@@ -79,7 +80,3 @@ void	get_champion_comment(int fd, t_player *player)
 		"COMMENT: %s\n\n \033[0m", player->comment);
 	check_null_separator(fd);
 }
-
-/*
-** get_champion_comment validates the length if the comment and saves it.
-*/

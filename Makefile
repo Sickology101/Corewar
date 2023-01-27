@@ -6,7 +6,7 @@
 #    By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-#    Updated: 2023/01/21 16:23:08 by mtissari         ###   ########.fr        #
+#    Updated: 2023/01/27 19:00:23 by mtissari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,16 +22,17 @@ VM_STAT_DIR = $(VM_SRC_DIR)statements/
 VM_SRC_FILES = main.c \
 				read_players.c \
 				player_ids.c \
-				validation.c \
 				inits.c \
 				prints.c \
 				process.c \
 				game_loop.c \
-				player_code_validation.c \
+				player_validation.c \
+				player_validation2.c \
 				vm_utils.c \
 				flags.c \
 				set_statements.c \
-				execute.c
+				execute.c \
+				get_arguments.c
 
 VM_STATEMENTS = add.c \
 				aff.c \

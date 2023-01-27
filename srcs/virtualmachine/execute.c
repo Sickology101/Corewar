@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 17:53:52 by igaplich          #+#    #+#             */
-/*   Updated: 2023/01/26 17:29:34 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/27 19:33:20 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	validate_args(t_data *const data, t_process *carriage, t_statement *op)
 		rel_index += 1;
 	while (i < op->args_num)
 	{
-		if (op->args[i] == REG_CODE)
+		if (carriage->args[i] == REG_CODE)
 		{
 			byte = data->arena[carriage->cur_pos + rel_index];
 			if (byte < 1 || byte > 16)
 				return (0);
-			rel_index += REG_SIZE;
+			rel_index++;
 		}
 		else if (carriage->args[i] == DIR_CODE)
 			rel_index += op->tdir_size;
