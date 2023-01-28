@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/25 10:53:28 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/28 05:22:55 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,40 @@
 # define MTY_SPACE_1 ' '
 # define MTY_SPACE_2 '	'
 
+typedef	struct s_line
+{
+	char	*str;
+	bool	type;
+	bool	instruction;
+	char	*label;
+	char	*statement;
+	int		arg_num;
+	char	**arg;
+	int		arg_type[3];
+	char	*arg_code[8];
+}			t_line;
 
+typedef	struct s_label
+{
+	char	*name;
+	int		pos;
+	bool	statement;
+}			t_label;
+
+
+typedef struct	s_parser
+{
+	t_line	**line;
+	int				file_size;
+	int		fd;
+}			t_parser;
+
+void	scan_file(t_parser *data);
+bool	ignore_comment_empty(char *line);
+void	get_name_comment(t_parser *data);
+void	exit_usage(int	flag);
+int	ignore_spaces(char *str, int index);
+void	get_instructions(t_parser *data);
 
 // a struct to save the arguments in planning to use it as
 // a template to check against when reading, but also save 
@@ -33,7 +66,7 @@
 // #define T_IND					4
 // #define T_LAB					8
 // when multiple types are allowed then a combination of the 3 num is used
-typedef	struct s_statements
+/*typedef	struct s_statements
 {
 	char	*str;
 	int		arg_num;
@@ -44,9 +77,7 @@ typedef	struct s_statements
 typedef struct			s_command
 {
 	int					name;
-	int					type; // 0 for statement, 1 for label
-	int					codage;
-	int					size;
+	char				arg_code[8];
 	char 				*label;
 	int					count_args;
 	int					args[3]; // for live ->args[0] = 2 args[1] = 0;
@@ -70,11 +101,19 @@ typedef struct s_champion
 	struct s_champion	*next;
 }			t_champion;
 
+typedef	struct file
+{
+	char	*line;
+	bool	label;
+	int		size;
+}			t_file;
+
+
 
 typedef struct	s_parser
 {
 	t_statements	*s;
-	char			**file;
+	t_file			*file;
 	int				file_size;
 	t_champion		*champ;
 	char			**label;
@@ -102,4 +141,5 @@ char	*get_label(char *line, int *index);
 char *get_syntax_name(char *str, int *index);
 //void	write_bytes(int fd, int input, int count_bytes);
 //void	write_bytecode(t_parser *data, char **argv);
+*/
 #endif

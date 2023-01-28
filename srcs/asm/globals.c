@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   globals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:54:01 by parkharo          #+#    #+#             */
-/*   Updated: 2023/01/13 18:56:36 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/01/28 03:52:54 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-t_command	g_operations[17] =
+/*t_command	g_operations[17] =
 {
 	{"live", 0, 1, 4, {T_DIR}, 0x01, 0, 0, 0, 0},
 	{"ld", 1, 2, 4, {T_DIR | T_IND, T_REG}, 0x02, 0, 0, 0, 0},
@@ -39,4 +39,4 @@ t_command	g_operations[17] =
 	{"lfork", 0, 1, 2, {T_DIR}, 0x0f, 0, 0, 0, 0},
 	{"aff", 1, 1, 4, {T_REG}, 0x10, 0, 0, 0, 0},
 	{0, 0, 0, 0, {0}, 0, 0, 0, 0, 0}
-};
+};*/

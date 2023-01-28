@@ -6,13 +6,13 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:30:08 by marius            #+#    #+#             */
-/*   Updated: 2023/01/17 16:36:55 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/28 03:52:07 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-char *get_syntax_name(char *str, int *index)
+/*char *get_syntax_name(char *str, int *index)
 {
 	char	*dest;
 	int		size;
@@ -256,3 +256,4 @@ bool	check_valid_state(char *line, int index, t_parser *data)
 	}
 	return (true);
 }
+*/

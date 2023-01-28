@@ -3,16 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:02:13 by parkharo          #+#    #+#             */
-/*   Updated: 2023/01/14 17:05:06 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/01/28 05:17:53 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "assembler.h"
+#include "assembler.h"
 
-t_data	*get_data(void)
+int	ignore_spaces(char *str, int index)
+{
+	while (str[index] != '\0' && (str[index] == MTY_SPACE_1 || str[index] == MTY_SPACE_2))
+	{
+		index++;
+	}
+	return (index);
+}
+
+bool ignore_comment_empty(char *line)
+{
+	int	index;
+
+	index = 0;
+	while (line[index] != '\0')
+	{
+		if(line[index] == COMMENT_CHAR)
+			return (true);
+		if (line[index] != MTY_SPACE_1 && line[index] != MTY_SPACE_2)
+			return (false);
+		index++;
+	}
+	return (true);
+}
+
+/*t_data	*get_data(void)
 {
 	static t_data	data;
 
@@ -97,3 +122,4 @@ int		size_code(t_champion *a)
 	}
 	return (size);
 }
+*/

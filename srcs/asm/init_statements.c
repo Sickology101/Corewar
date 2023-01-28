@@ -6,13 +6,13 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:13:12 by marius            #+#    #+#             */
-/*   Updated: 2023/01/17 15:42:20 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/28 03:53:16 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-static t_statements	init_live(void)
+/*static t_statements	init_live(void)
 {
 	t_statements	s;
 
@@ -228,3 +228,4 @@ void	init_statements(t_parser *data)
 	data->s[14] = init_lfork();
 	data->s[15] = init_aff();
 }
+*/

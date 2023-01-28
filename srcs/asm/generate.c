@@ -6,13 +6,13 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 11:15:45 by marius            #+#    #+#             */
-/*   Updated: 2023/01/25 11:01:28 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/28 03:52:36 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-static	int	get_size(char *str, int index)
+/*static	int	get_size(char *str, int index)
 {
 	int size;
 
@@ -90,23 +90,81 @@ int	get_inst_code(char *str, int **index)
 		return (0x10);
 }
 
+void	init_arg_code(char *str)
+{
+	int index;
+	
+	index = 0;
+	while (index < 8)
+	{
+		str[index++] = '0';
+	}
+}
+
+void	calculate_arg_code(char *str, int index, char *dest)
+{
+	index = ignore_spaces(str, index);
+	if (str[index] == 'r')
+		dest[1] = '1';
+	else if (str[index] == DIRECT_CHAR)
+		dest[0] = '1';
+	else
+	{
+		dest[0] = '1';
+		dest[1] = '1';
+	}
+	while (str[index] != MTY_SPACE_1 && str[index] != MTY_SPACE_2 && str[index] != '\0')
+	{
+		index++;
+	}
+	index = ignore_spaces(str, index);
+	if (str[index] == 'r')
+		dest[3] = '1';
+	else if (str[index] == DIRECT_CHAR)
+		dest[2] = '1';
+	else
+	{
+		dest[2] = '1';
+		dest[3] = '1';
+	}
+	while (str[index] != MTY_SPACE_1 && str[index] != MTY_SPACE_2 && str[index] != '\0')
+	{
+		index++;
+	}
+	index = ignore_spaces(str, index);
+	if (str[index] == 'r')
+		dest[5] = '1';
+	else if (str[index] == DIRECT_CHAR)
+		dest[4] = '1';
+	else
+	{
+		dest[4] = '1';
+		dest[5] = '1';
+	}
+}
+
 t_command	*generate_command(char *str, char **labels)
 {
 	t_command	*inst;
 	int			index;
+	int			i;
 
 	inst = malloc(sizeof(t_command));
 	index = 0;
-	if (check_valid_label_char(str[index]))
-	{
-		inst->type = 1;
-		inst->label = get_label(str, &index);
-	}
-	else
-		inst->type = 0;
+	while (str[index] != MTY_SPACE_1 && str[index] != MTY_SPACE_2)
+		index++;
 	index = ignore_spaces(str, index);
 	inst->name = get_inst_code(str, &index);
-	
+	i = 0;
+	init_arg_code(inst->arg_code);
+	calculate_arg_code(str, index, inst->arg_code);
+	while (i < 3)
+	{
+		if (str[index] == SEPARATOR_CHAR)
+			index++;
+		index = ignore_spaces(str, index);
+		
+	}
 }
 
 t_champion *generate_champ(t_parser *data)
@@ -116,16 +174,16 @@ t_champion *generate_champ(t_parser *data)
 	int	i;
 
 	hero = (t_champion *)malloc(sizeof(t_champion));
-	hero->name = get_champ_name_comm(data->file[0]);
-	hero->comment = get_champ_name_comm(data->file[1]);
+	hero->name = get_champ_name_comm(data->file[0].line);
+	hero->comment = get_champ_name_comm(data->file[1].line);
 	hero->commands = (t_command **)malloc(sizeof(t_command *) * (data->file_size - 2));
 	index = 2;
 	i = 0;
 	while (index < data->file_size)
 	{
-		hero->commands[i] = generate_command(data->file[index], data->label);
+		hero->commands[i] = generate_command(data->file[index].line, data->label);
 		index++;
 		i++;
 	}
 	return (hero);
-}
+}*/

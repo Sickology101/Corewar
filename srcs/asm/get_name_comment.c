@@ -1,18 +1,113 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   name_checker.c                                     :+:      :+:    :+:   */
+/*   get_name_comment.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:28:58 by marius            #+#    #+#             */
-/*   Updated: 2023/01/17 10:44:03 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/28 05:19:35 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-bool	search_1_quote(char *str)
+int	check_quotes(char *line)
+{
+	int index;
+	int	flag;
+	
+	flag = 0;
+	index = 0;
+	while (line[index] != '\0')
+	{
+		if (line[index] == '"')
+			flag++;
+		index++;
+	}
+	return (flag);
+}
+
+bool	check_valid_syntax(char *str)
+{
+	int	index;
+	int	flag;
+
+	index = 0;
+	flag = 0;
+	while (flag != 2)
+	{
+		if (str[index] == '"')
+			flag++;
+		index++;
+	}
+	index = ignore_spaces(str, index);
+	if (str[index] == '\0' || str[index] == '#')
+		return (true);
+	return (false);
+}
+
+void	save_name_comment(t_parser *data, char *line, int flag)
+{
+	int	ret;
+	
+	data->line[flag]->str = ft_strupdate(data->line[flag]->str, line);
+	if (check_quotes(data->line[flag]->str) == 0)
+		exit_usage(1);
+	else if (check_quotes(data->line[flag]->str) > 2)
+		exit_usage(1);
+	else if (check_quotes(data->line[flag]->str) == 2)
+	{
+		if (check_valid_syntax(data->line[flag]->str))
+			return ;
+		else
+			exit_usage(1);
+	}
+	else
+	{
+		data->line[flag]->str = ft_strupdate(data->line[flag]->str, "\n");
+		ret = get_next_line(data->fd, &line);
+		if (ret == 0)
+			exit_usage(4);
+		save_name_comment(data, line, flag);
+	}
+}
+
+void	get_name_comment(t_parser *data)
+{
+	int		ret;
+	char	*line;
+
+	ret = get_next_line(data->fd, &line);
+	if (ret == 0)
+		exit_usage(4);
+	while (ignore_comment_empty(line))
+	{
+		ret = get_next_line(data->fd, &line);
+		if (ret == 0)
+			exit_usage(4);
+	}
+	if (!ft_strncmp(line, ".name", 5))
+	{
+		data->line[0] = (t_line *)malloc(sizeof(t_line));
+		data->line[0]->str = (char *)malloc(sizeof(char));
+		data->line[0]->str[0] = '\0';
+		save_name_comment(data, line, 0);
+	}
+	else if (!ft_strncmp(line, ".comment", 8))
+	{
+		data->line[1] = (t_line *)malloc(sizeof(t_line));
+		data->line[1]->str = (char *)malloc(sizeof(char));
+		data->line[1]->str[0] = '\0';
+		save_name_comment(data, line, 1);
+	}
+	else
+		exit_usage(5);
+	if (data->line[1] == NULL || data->line[0] == NULL)
+		get_name_comment(data);
+}
+
+/*bool	search_1_quote(char *str)
 {
 	int	index;
 
@@ -131,9 +226,9 @@ bool	get_name_comment(t_parser *data, int fd)
 			return (false);
 	}
 	if (!ft_strncmp(line, ".name", 5))
-		data->file[0] = get_name(fd, line);
+		data->file[0].line = get_name(fd, line);
 	else if (!ft_strncmp(line, ".comment", 8))
-		data->file[1] = get_name(fd, line);
+		data->file[1].line = get_name(fd, line);
 	ret = get_next_line(fd, &line);
 	while (check_comment(line))
 	{
@@ -142,8 +237,8 @@ bool	get_name_comment(t_parser *data, int fd)
 			return (false);
 	}
 	if (!ft_strncmp(line, ".name", 5))
-		data->file[0] = get_name(fd, line);
+		data->file[0].line = get_name(fd, line);
 	else if (!ft_strncmp(line, ".comment", 8))
-		data->file[1] = get_name(fd, line);
+		data->file[1].line = get_name(fd, line);
 	return (true);
-}
+}*/

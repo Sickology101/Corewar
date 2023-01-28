@@ -6,13 +6,20 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/01/19 11:02:16 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/28 05:21:07 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-int	ignore_spaces(char *str, int index)
+void	scan_file(t_parser *data)
+{
+	data->line = (t_line **)malloc(sizeof(t_line *) * 1064);
+	get_name_comment(data);
+	get_instructions(data);
+}
+
+/*int	ignore_spaces(char *str, int index)
 {
 	while (str[index] != '\0' && (str[index] == MTY_SPACE_1 || str[index] == MTY_SPACE_2))
 	{
@@ -64,7 +71,8 @@ bool	get_instructions(t_parser *data, int fd)
 		}
 		if (ret == 0)
 			break ;
-		data->file[index++] = check_valid_inst(line, data);
+		data->file[index].line = check_valid_inst(line, data);
+		data->file[index++].size = calculate_size(line, data);
 		// a data->file[] resize required here if index > FILESIZE(now 1064)
 	}
 	data->file_size = index;
@@ -77,16 +85,17 @@ int	scan_file(t_parser *data, int fd)
 {
 	int	index;
 
-	data->file = (char **)malloc(sizeof(char *) * 1064);
+	data->file = (t_file *)malloc(sizeof(t_file) * 1064);
 	data->label = (char **)malloc(sizeof(char *) * 128);
 	if (!get_name_comment(data, fd))
 		return (false);
 	if (!get_instructions(data, fd))
 		return (false);
 	index = 0;
-	while (data->file[index] != NULL)
+	while (data->file[index].line != NULL)
 	{
-		ft_printf("%s\n", data->file[index++]);
+		ft_printf("%s  size = %d\n", data->file[index].line, data->file[index++].size);
 	}
 	return (true);
 }
+*/

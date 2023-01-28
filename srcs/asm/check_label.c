@@ -6,13 +6,13 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 10:45:58 by marius            #+#    #+#             */
-/*   Updated: 2023/01/19 11:07:49 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/28 03:51:50 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-bool	check_valid_label_char(char c)
+/*bool	check_valid_label_char(char c)
 {
 	int	index;
 
@@ -191,7 +191,7 @@ t_command *save_instruction(char *line)
 	return (instruction);
 }
 
-/*t_label	*save_label(char *line, int size)
+t_label	*save_label(char *line, int size)
 {
 	t_label *label;
 	
@@ -199,7 +199,7 @@ t_command *save_instruction(char *line)
 	label->name = get_label_name(line, size);
 	label->instruction = save_instruction(line);
 	return (label);
-}*/
+}
 
 char *get_first_n_char(char *line, int size)
 {
@@ -246,3 +246,4 @@ bool	check_valid_label(char *line, t_parser *data)
 	data->label[data->label_num++] = get_first_n_char(line, size);
 	return (true);
 }
+*/

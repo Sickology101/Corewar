@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strupdate.c                                     :+:      :+:    :+:   */
+/*   get_instructions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 11:19:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/28 04:56:05 by marius           ###   ########.fr       */
+/*   Created: 2023/01/28 05:22:04 by marius            #+#    #+#             */
+/*   Updated: 2023/01/28 05:22:30 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "assembler.h"
 
-char	*ft_strupdate(char *s1, const char *s2)
+void	get_instructions(t_parser *data)
 {
-	char	*temp;
-
-	temp = ft_strjoin(s1, s2);
-	if (!temp)
-		return (NULL);
-	ft_strdel(&s1);
-	return (temp);
+	
 }

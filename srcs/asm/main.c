@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/19 11:44:32 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/28 05:06:38 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ void	exit_usage(int	flag)
 		ft_printf("Invalid label char\n");
 	else if (flag == 3)
 		ft_printf("Invalid statement\n");
+	else if (flag == 4)
+		ft_printf("Incomplete assembly code\n");
+	else if (flag == 5)
+		ft_printf("No name or comment in file\n");
+	else if (flag == 6)
+		ft_printf("File converted succesfuly\n");
 	else
 		ft_printf("Usage : ./assembler [filename.s]\n");
 	exit(1);
@@ -50,21 +56,24 @@ bool checkname(char *str)
 // that the Virtual Machine can read. 
 int	main (int argc, char **argv)
 {
-	int fd;
 	t_parser 		*data;
-	t_champion	*hero;
+	int	index = 0;
 	
 	if (argc != 2)
 		exit_usage(0);
 	if (!checkname(argv[1]))
 		exit_usage(0);
-	fd = open(argv[1],O_RDONLY);
 	data = (t_parser *)malloc(sizeof(t_parser));
-	data->label_num = 0;
-	if (!scan_file(data, fd))
-		exit_usage(0);
-	hero = generate_champ(data);
-	ft_printf("%s\n%s\n",hero->name, hero->comment);
+	data->fd = open(argv[1],O_RDONLY);
+	// add error if file inexistent;
+	scan_file(data);
+	while(data->line[index] != NULL)
+	{
+		ft_printf("%s\n",data->line[index++]->str);
+	}
+	exit_usage(6);
+	//hero = generate_champ(data);
+	//ft_printf("%s\n%s\n",hero->name, hero->comment);
 	//write_bytecode(hero, argv);
 	return (0);
 }
