@@ -22,8 +22,8 @@ void	set_statement_codes(t_data *const data, t_process *carriage)
 			carriage->cycles_before_exec = g_op[carriage->op_id - 1].cycles_num;
 		else
 			carriage->cycles_before_exec = 0;
-		printf("\n%s -> %02x cycles %d\n", carriage->player->name,
-			carriage->op_id, carriage->cycles_before_exec);
+		// printf("\n%s -> %02x cycles %d\n", carriage->player->name,
+			// carriage->op_id, carriage->cycles_before_exec);
 	}
 }
 
@@ -36,12 +36,7 @@ void	move_process(t_process *carriage)
 		//clean_process(carriage);	//not started with this function yet!
 	}
 	else if (carriage->cycles_before_exec <= 0)
-	{
-		if (carriage->cur_pos == MEM_SIZE - 1)
-			carriage->cur_pos = 0 % MEM_SIZE;
-		else
-			carriage->cur_pos++;
-	}
+		carriage->cur_pos = (carriage->cur_pos + 1) % MEM_SIZE;
 }
 
 void	perform_cycle(t_data *const data)

@@ -130,12 +130,13 @@ int		make_ind_to_int(uint8_t *arena, int cur_pos);
 void	set_next_op(t_process *carriage, int jump_to);
 
 void	put_reg_value_on_arena(uint8_t *arena, int value, int pos);
-int		calc_relative_position(int arg1, int arg2);
+int		calc_relative_position(int arg, t_process *carriage);
 void	set_carry(t_process *carriage, int arg);
 
 /*-------Get_arguments--------*/
 
-int		get_arg(t_data *const data, t_process *carriage, int pos, int arg_code);
+int		get_arg(t_data *const data, t_process *carriage, int *rel_pos, int arg_num);
+// int		get_arg(t_data *const data, t_process *carriage, int pos, int arg_code);
 int		calculate_args(int code, int args);
 int		set_ind(uint8_t *arena, int pos);
 int		set_dir(uint8_t *arena, int pos, int dir_size);

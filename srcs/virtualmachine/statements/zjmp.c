@@ -19,13 +19,13 @@
 void	set_zjmp(t_data *const data, t_process *carriage)
 {
 	int	arg;
+	int	rel_pos;
 
-	arg = make_dir_to_int(data->arena, (carriage->cur_pos + 1) % MEM_SIZE, 2);
-	arg = calculate_args(DIR_CODE, arg);
+	rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
+	arg = get_arg(data, carriage, &rel_pos, 0);
 	carriage->last_live = data->counter.total_cycles;
 	if (carriage->carry)
 		set_next_op(carriage, (carriage->cur_pos + arg) % MEM_SIZE);
 	else
 		set_next_op(carriage, (carriage->cur_pos + 3) % MEM_SIZE);
-	printf("\n\t you've reached set_zjmp, arg: %i\n", arg);
 }

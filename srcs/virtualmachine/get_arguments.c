@@ -20,8 +20,16 @@ int	calculate_args(int code, int args)
 {
 	int16_t	ind;
 	int		ret;
+	char	*str;
 
-	printf("\t\tARG: |%i| CODE: |%i|\n\n", args, code);
+	str = NULL;
+	if (code == 1)
+		str = "T_REG";
+	else if (code == 2)
+		str = "T_DIR";
+	else if (code == 3)
+		str = "T_IND";
+	printf("\t\tARG: |%i| CODE: |%s|\n\n", args, str);
 	ret = 0;
 	if (code == IND_CODE)
 	{
@@ -37,7 +45,7 @@ int	calculate_args(int code, int args)
 	{
 		if (args < 1 || args > 16) // invalid reg, just ignore and skip?
 			return (-1); // will probably segfault with this>need to fix
-		ret = args - 1;
+		ret = args;
 	}
 	return (ret);
 }
@@ -60,19 +68,29 @@ int	set_ind(uint8_t *arena, int pos)
 	return (new);
 }
 
-int	get_arg(t_data *const data, t_process *carriage, int pos, int arg_code)
+int	get_arg(t_data *const data, t_process *carriage, int *rel_pos, int arg_num)
 {
 	t_statement	*op;
 	int			arg;
+	int			real_pos;	
 
+	real_pos = (carriage->cur_pos + *rel_pos) % MEM_SIZE;
 	op = &g_op[carriage->op_id - 1];
-	printf("pos: %i, data->arena[pos] + op->read_types: %i\n\n", pos, (data->arena[pos] + op->read_types));
-	if (arg_code == DIR_CODE)
-		arg = set_dir(data->arena,
-				pos + op->read_types, op->tdir_size);
-	else if (arg_code == IND_CODE)
-		arg = set_ind(data->arena, pos);
+	printf("\tcarriage at: %zu, reading bytes from: %i tdir_size: %d\n\n", carriage->cur_pos, real_pos, g_op[carriage->op_id - 1].tdir_size);
+	if (carriage->args[arg_num] == DIR_CODE)
+	{
+		arg = set_dir(data->arena, real_pos, op->tdir_size);
+		*rel_pos += op->tdir_size;
+	}
+	else if (carriage->args[arg_num] == IND_CODE)
+	{
+		arg = set_ind(data->arena, real_pos);
+		*rel_pos += T_DIR;
+	}
 	else
-		arg = calculate_args(REG_CODE, data->arena[pos]);
+	{
+		arg = calculate_args(REG_CODE, data->arena[real_pos]);
+		*rel_pos += T_REG;
+	}
 	return (arg);
 }

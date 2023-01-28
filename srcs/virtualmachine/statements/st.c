@@ -24,17 +24,16 @@ void	set_st(t_data *const data, t_process *carr)
 {
 	int		arg;
 	int8_t	reg;
+	int		rel_pos;
 
-	reg = data->arena[(carr->cur_pos + 2) % MEM_SIZE];
-	reg = calculate_args(IND_CODE, reg);
+	rel_pos = 1 + g_op[carr->op_id - 1].read_types;
+	reg = get_arg(data, carr, &rel_pos, 0);
 	if (reg != -1)
 	{
-		arg = calculate_args(REG_CODE,
-				(int)carr->reg[data->arena[(carr->cur_pos + 3) % MEM_SIZE]]);
+		arg = get_arg(data, carr, &rel_pos, 1);
 		if (carr->args[1] == IND_CODE)
 		{
 			arg = make_ind_to_int(data->arena, (carr->cur_pos + 3) % MEM_SIZE);
-			arg = calculate_args(IND_CODE, arg);
 			put_reg_value_on_arena(data->arena,
 				(int)carr->reg[reg], (carr->cur_pos + arg) % MEM_SIZE);
 		}

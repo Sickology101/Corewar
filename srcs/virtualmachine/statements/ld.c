@@ -30,30 +30,16 @@ void	set_ld(t_data *const data, t_process *carriage)
 	int		arg;
 	int8_t	reg;
 	int		value;
+	int		rel_pos;
 
+	rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
 	value = 0;
 	reg = 0;
-	if (carriage->args[0] == DIR_CODE)
-	{
-		arg = make_dir_to_int(data->arena,
-				(carriage->cur_pos + 2) % MEM_SIZE, 4);
-		value = arg;
-		reg = data->arena[(carriage->cur_pos + 6) % MEM_SIZE];
-		reg = calculate_args(REG_CODE, reg);
-		if (reg != -1)
-			set_next_op(carriage, (carriage->cur_pos + 7) % MEM_SIZE);
-	}
-	else if (carriage->args[0] == IND_CODE)
-	{
-		arg = make_ind_to_int(data->arena, (carriage->cur_pos + 2) % MEM_SIZE);
-		arg = calculate_args(IND_CODE, arg);
-		value = make_dir_to_int(data->arena,
-				((int)carriage->cur_pos + arg) % MEM_SIZE, 4);
-		reg = data->arena[(carriage->cur_pos + 4) % MEM_SIZE];
-		reg = calculate_args(REG_CODE, reg);
-		if (reg != -1)
-			set_next_op(carriage, (carriage->cur_pos + 5) % MEM_SIZE);
-	}
+	arg = get_arg(data, carriage, &rel_pos, 0);
+	value = arg;
+	reg = get_arg(data, carriage, &rel_pos, 1);
+	if (reg != -1)
+		set_next_op(carriage, (carriage->cur_pos + rel_pos) % MEM_SIZE);
 	load_value_to_reg(carriage, value, reg);
 	printf("set_ld: value: %i to the register: %i, which is reg[%i]\n", value, reg + 1, reg);
 }

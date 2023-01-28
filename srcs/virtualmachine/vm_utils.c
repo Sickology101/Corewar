@@ -76,24 +76,14 @@ void	put_reg_value_on_arena(uint8_t *arena, int value, int pos)
 	arena[pos + i++] = (value & 0x000000FF) >> 0;
 }
 
-int	calc_relative_position(int arg1, int arg2)
+int	calc_relative_position(int arg, t_process *carriage)
 {
-	int	ret;
-
-	ret = 0;
-	if (arg1 == DIR_CODE)
-		ret = 4;
-	else if (arg1 == IND_CODE)
-		ret = 2;
-	else if (arg1 == REG_CODE)
-		ret = 1;
-	if (arg2 == DIR_CODE)
-		ret += 4;
-	else if (arg2 == IND_CODE)
-		ret += 2;
-	else if (arg2 == REG_CODE)
-		ret += 1;
-	return (ret);
+	if (arg == DIR_CODE)
+		return (g_op[carriage->op_id - 1].tdir_size);
+	else if (arg == IND_CODE)
+		return (2);
+	else if (arg == REG_CODE)
+		return (1);
 }
 
 void	set_carry(t_process *carriage, int arg)

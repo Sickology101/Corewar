@@ -68,13 +68,15 @@ void	execute_statement(t_data *const data, t_process *carriage)
 	op = &g_op[data->arena[carriage->cur_pos] - 1];
 	if (!op->read_types || validate_args_types(data, carriage, op))
 	{
-		printf("Arg types are ok\n");
+		printf("\tArg types are ok\n");
 		if (validate_args(data, carriage, op))
 		{
+			printf("\targs are also ok\n");
+			printf("%s\n", g_op[carriage->op_id - 1].name);
 			op->func(data, carriage);
-			printf("args are also ok\n");
+			printf("execution ended\n");
 		}
 		else
-			printf("args are not ok\n");
+			printf("\targs are not ok\n");
 	}
 }

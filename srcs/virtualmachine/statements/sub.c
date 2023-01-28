@@ -20,13 +20,12 @@ void	set_sub(t_data *const data, t_process *carr)
 	int	arg1;
 	int	arg2;
 	int	arg3;
+	int	rel_pos;
 
-	arg1 = calculate_args(REG_CODE,
-			(int)data->arena[(carr->cur_pos + 2) % MEM_SIZE]);
-	arg2 = calculate_args(REG_CODE,
-			(int)data->arena[(carr->cur_pos + 3) % MEM_SIZE]);
-	arg3 = calculate_args(REG_CODE,
-			(int)data->arena[(carr->cur_pos + 4) % MEM_SIZE]);
+	rel_pos = 1 + g_op[carr->op_id - 1].read_types;
+	arg1 = get_arg(data, carr, &rel_pos, 0);
+	arg2 = get_arg(data, carr, &rel_pos, 1);
+	arg3 = get_arg(data, carr, &rel_pos, 2);
 	if (arg1 != -1 && arg2 != -1 && arg3 != -1)
 	{
 		carr->reg[arg3] = carr->reg[arg1] - carr->reg[arg2];
