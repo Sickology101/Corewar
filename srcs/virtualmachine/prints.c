@@ -49,7 +49,7 @@ void	print_arena(t_data *const data)
 
 	i = 0;
 
-	fd = open("mycore.txt", O_WRONLY | O_CREAT | O_TRUNC, 0600);
+	fd = open("ourcorewar.txt", O_WRONLY | O_CREAT | O_TRUNC, 0600);
 	while (i < MEM_SIZE)
 	{
 		if (i % 64 == 0)
