@@ -27,16 +27,12 @@ void	load_value_to_reg(t_process *carriage, int value, int reg_num)
 */
 void	set_ld(t_data *const data, t_process *carriage)
 {
-	int		arg;
 	int8_t	reg;
 	int		value;
 	int		rel_pos;
 
 	rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
-	value = 0;
-	reg = 0;
-	arg = get_arg(data, carriage, &rel_pos, 0);
-	value = arg;
+	value = get_arg(data, carriage, &rel_pos, 0);
 	reg = get_arg(data, carriage, &rel_pos, 1);
 	if (reg != -1)
 		set_next_op(carriage, (carriage->cur_pos + rel_pos) % MEM_SIZE);

@@ -180,6 +180,7 @@ void	set_zjmp(t_data *const data, t_process *carriage);
 /*-------Execute--------*/
 
 void	execute_statement(t_data *const data, t_process *carriage);
+void	load_value_to_reg(t_process *carriage, int value, int reg_num);
 
 static t_statement	g_op[16] = {
 {

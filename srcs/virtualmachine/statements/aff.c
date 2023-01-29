@@ -14,7 +14,10 @@
 
 void	set_aff(t_data *const data, t_process *carriage)
 {
-	data->counter.total_cycles++;
-	data->counter.total_cycles--;
-	carriage->last_live = 0;
+	int32_t	value;
+	int		rel_pos;
+
+	rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
+	value = get_arg(data, carriage, &rel_pos, 0);
+	ft_printf("Aff: %c\n", (char)value);
 }

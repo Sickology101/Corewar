@@ -22,6 +22,7 @@ void	set_add(t_data *const data, t_process *carr)
 	int	arg3;
 	int	rel_pos;
 
+	print_arena(data);
 	rel_pos = 1 + g_op[carr->op_id - 1].read_types;
 	arg1 = get_arg(data, carr, &rel_pos, 0);
 	arg2 = get_arg(data, carr, &rel_pos, 1);
