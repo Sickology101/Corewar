@@ -45,16 +45,25 @@ void	print_introduction(t_data *const data)
 void	print_arena(t_data *const data)
 {
 	int	i;
+	int fd;
 
 	i = 0;
-	printf("\n");
+
+	fd = open("mycore.txt", O_WRONLY | O_CREAT | O_TRUNC, 0600);
 	while (i < MEM_SIZE)
 	{
 		if (i % 64 == 0)
-			ft_printf("\n");
-		ft_printf("%.2x ", data->arena[i]);
+		{
+			if (i != 0)
+				dprintf(fd, "\n");
+			if (i == 0)
+				dprintf(fd, "0x");
+			dprintf(fd, "%#.4x : ", i);
+		}
+		dprintf(fd, "%.2x ", data->arena[i]);
 		i++;
 	}
+	dprintf(fd, "\n");
 }
 
 /*

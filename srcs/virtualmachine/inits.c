@@ -93,5 +93,5 @@ void	init_arena(t_data *const data)
 		pointer += MEM_SIZE / data->player_amount;
 		player = player->next;
 	}
-	print_arena(data);
+	// print_arena(data);
 }
