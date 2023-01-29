@@ -90,6 +90,7 @@ int	get_arg(t_data *const data, t_process *carriage, int *rel_pos, int arg_num)
 	else
 	{
 		arg = calculate_args(REG_CODE, data->arena[real_pos]);
+		arg = carriage->reg[arg];
 		*rel_pos += T_REG;
 	}
 	return (arg);

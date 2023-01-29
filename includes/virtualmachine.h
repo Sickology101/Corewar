@@ -77,6 +77,7 @@ typedef struct s_statement
 	uint8_t		args[3];
 	uint8_t		read_types;
 	uint8_t		tdir_size;
+	uint8_t		carry_mod;
 	void		(*func)(t_data *const, t_process *);
 }				t_statement;
 
@@ -189,6 +190,7 @@ static t_statement	g_op[16] = {
 	.args = {DIR_CODE},
 	.read_types = 0,
 	.tdir_size = 4,
+	.carry_mod = 0,
 	.func = &set_live
 },
 {
@@ -199,6 +201,7 @@ static t_statement	g_op[16] = {
 	.args = {DIR_CODE | IND_CODE, REG_CODE},
 	.read_types = 1,
 	.tdir_size = 4,
+	.carry_mod = 1,
 	.func = &set_ld
 },
 
@@ -210,6 +213,7 @@ static t_statement	g_op[16] = {
 	.args = {REG_CODE, IND_CODE | REG_CODE},
 	.read_types = 1,
 	.tdir_size = 4,
+	.carry_mod = 0,
 	.func = &set_st
 },
 {
@@ -220,6 +224,7 @@ static t_statement	g_op[16] = {
 	.args = {REG_CODE, REG_CODE, REG_CODE},
 	.read_types = 1,
 	.tdir_size = 4,
+	.carry_mod = 1,
 	.func = &set_add
 },
 {
@@ -230,6 +235,7 @@ static t_statement	g_op[16] = {
 	.args = {REG_CODE, REG_CODE, REG_CODE},
 	.read_types = 1,
 	.tdir_size = 4,
+	.carry_mod = 1,
 	.func = &set_sub
 },
 {
@@ -240,6 +246,7 @@ static t_statement	g_op[16] = {
 	.args = {REG_CODE | DIR_CODE | IND_CODE, REG_CODE | IND_CODE | DIR_CODE, REG_CODE},
 	.read_types = 1,
 	.tdir_size = 4,
+	.carry_mod = 1,
 	.func = &set_and
 },
 {
@@ -250,6 +257,7 @@ static t_statement	g_op[16] = {
 	.args = {REG_CODE | IND_CODE | DIR_CODE, REG_CODE | IND_CODE | DIR_CODE, REG_CODE},
 	.read_types = 1,
 	.tdir_size = 4,
+	.carry_mod = 1,
 	.func = &set_or
 },
 {
@@ -260,6 +268,7 @@ static t_statement	g_op[16] = {
 	.args = {REG_CODE | IND_CODE | DIR_CODE, REG_CODE | IND_CODE | DIR_CODE, REG_CODE},
 	.read_types = 1,
 	.tdir_size = 4,
+	.carry_mod = 1,
 	.func = &set_xor
 },
 {
@@ -270,6 +279,7 @@ static t_statement	g_op[16] = {
 	.args = {DIR_CODE},
 	.read_types = 0,
 	.tdir_size = 2,
+	.carry_mod = 0,
 	.func = &set_zjmp
 },
 {
@@ -280,6 +290,7 @@ static t_statement	g_op[16] = {
 	.args = {REG_CODE | DIR_CODE | IND_CODE, DIR_CODE | REG_CODE, REG_CODE},
 	.read_types = 1,
 	.tdir_size = 2,
+	.carry_mod = 0,
 	.func = set_ldi
 },
 {
@@ -290,6 +301,7 @@ static t_statement	g_op[16] = {
 	.args = {REG_CODE, REG_CODE | DIR_CODE | IND_CODE, DIR_CODE | REG_CODE},
 	.read_types = 1,
 	.tdir_size = 2,
+	.carry_mod = 0,
 	.func = &set_sti
 },
 {
@@ -300,6 +312,7 @@ static t_statement	g_op[16] = {
 	.args = {DIR_CODE},
 	.read_types = 0,
 	.tdir_size = 2,
+	.carry_mod = 0,
 	.func = &set_fork
 },
 {
@@ -310,6 +323,7 @@ static t_statement	g_op[16] = {
 	.args = {DIR_CODE | IND_CODE, REG_CODE},
 	.read_types = 1,
 	.tdir_size = 4,
+	.carry_mod = 1,
 	.func = &set_lld
 },
 {
@@ -320,6 +334,7 @@ static t_statement	g_op[16] = {
 	.args = {REG_CODE | DIR_CODE | IND_CODE, DIR_CODE | REG_CODE, REG_CODE},
 	.read_types = 1,
 	.tdir_size = 2,
+	.carry_mod = 1,
 	.func = &set_lldi
 },
 {
@@ -330,6 +345,7 @@ static t_statement	g_op[16] = {
 	.args = {DIR_CODE},
 	.read_types = 0,
 	.tdir_size = 2,
+	.carry_mod = 0,
 	.func = &set_lfork
 },
 {
@@ -340,6 +356,7 @@ static t_statement	g_op[16] = {
 	.args = {REG_CODE},
 	.read_types = 1,
 	.tdir_size = 4,
+	.carry_mod = 0,
 	.func = &set_aff
 },
 };

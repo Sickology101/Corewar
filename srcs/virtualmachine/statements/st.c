@@ -23,28 +23,21 @@
 void	set_st(t_data *const data, t_process *carr)
 {
 	int		arg;
-	int8_t	reg;
+	int32_t	reg_value;
 	int		rel_pos;
 
 	rel_pos = 1 + g_op[carr->op_id - 1].read_types;
-	reg = get_arg(data, carr, &rel_pos, 0);
-	if (reg != -1)
-	{
-		arg = get_arg(data, carr, &rel_pos, 1);
-		if (carr->args[1] == IND_CODE)
-		{
-			arg = make_ind_to_int(data->arena, (carr->cur_pos + 3) % MEM_SIZE);
-			put_reg_value_on_arena(data->arena,
-				(int)carr->reg[reg], (carr->cur_pos + arg) % MEM_SIZE);
-		}
-		else if (carr->args[1] == REG_CODE && arg != -1)
-		{
-			carr->reg[(arg)] = carr->reg[reg];
-		}
-	}
-	printf("\n\n\t\tyou've reached set_st\n");
+	reg_value = get_arg(data, carr, &rel_pos, 0);
 	if (carr->args[1] == IND_CODE)
-		set_next_op(carr, (carr->cur_pos + 5) % MEM_SIZE);
-	else
-		set_next_op(carr, (carr->cur_pos + 4) % MEM_SIZE);
+	{
+		arg = get_arg(data, carr, &rel_pos, 0);
+		put_reg_value_on_arena(data->arena,
+							   (int)reg_value, arg % MEM_SIZE);
+	}
+	else if (carr->args[1] == REG_CODE)
+	{
+		arg = data->arena[carr->cur_pos];
+		carr->reg[(arg)] = reg_value;
+	}
+	set_next_op(carr, (carr->cur_pos + rel_pos) % MEM_SIZE);
 }

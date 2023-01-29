@@ -14,7 +14,22 @@
 
 void	set_or(t_data *const data, t_process *carriage)
 {
-	data->counter.total_cycles++;
-	data->counter.total_cycles--;
-	carriage->last_live = 0;
+	int arg1;
+	int	arg2;
+	int	arg3;
+	int	rel_pos;
+
+	rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
+	arg1 = get_arg(data, carriage, &rel_pos, 0);
+	arg2 = get_arg(data, carriage, &rel_pos, 1);
+	arg3 = get_arg(data, carriage, &rel_pos, 2);
+	if (carriage->args[0] == REG_CODE)
+		arg1 = carriage->reg[arg1];
+	if (carriage->args[1] == REG_CODE)
+		arg2 = carriage->reg[arg2];
+	printf("\t\t\t|||EXECUTE 'OR': arg1: |%i|, arg2: |%i|, arg3: |%i|||\n\n",
+		arg1, arg2, arg3);
+	carriage->reg[arg3] = (arg1 | arg2);
+	set_carry(carriage, arg3);
+	set_next_op(carriage, (carriage->cur_pos + rel_pos) % MEM_SIZE);
 }
