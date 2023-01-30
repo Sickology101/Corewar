@@ -21,6 +21,6 @@ void	set_ldi(t_data *const data, t_process *carr)
 	rel_pos = 1 + g_op[carr->op_id - 1].read_types;
 	addr = get_arg(data, carr, &rel_pos, 0);
 	addr += get_arg(data, carr, &rel_pos, 1);
-	reg_id = data->arena[carr->cur_pos + rel_pos];
+	reg_id = data->arena[carr->cur_pos + rel_pos] - 1;
 	carr->reg[reg_id] = data->arena[(carr->cur_pos + addr) % IDX_MOD];
 }

@@ -22,7 +22,7 @@ void	set_and(t_data *const data, t_process *carr)
 	rel_pos = 1 + g_op[carr->op_id - 1].read_types;
 	arg1 = get_arg(data, carr, &rel_pos, 0);
 	arg2 = get_arg(data, carr, &rel_pos, 1);
-	reg_index = data->arena[carr->cur_pos + rel_pos];
+	reg_index = data->arena[carr->cur_pos + rel_pos] - 1;
 	carr->reg[reg_index] = (arg1 & arg2);
 	set_carry(carr, reg_index);
 	set_next_op(carr, (carr->cur_pos + rel_pos) % MEM_SIZE);

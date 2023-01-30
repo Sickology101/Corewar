@@ -27,7 +27,7 @@ void	set_st(t_data *const data, t_process *carr)
 	int		rel_pos;
 
 	rel_pos = 1 + g_op[carr->op_id - 1].read_types;
-	reg_value = get_arg(data, carr, &rel_pos, 0);
+	reg_value = get_arg(data, carr, &rel_pos, 0) - 1;
 	if (carr->args[1] == IND_CODE)
 	{
 		arg = get_arg(data, carr, &rel_pos, 0);
