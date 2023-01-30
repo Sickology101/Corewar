@@ -67,7 +67,7 @@ void	init_process_on_arena(t_data *const data, t_player *player,
 	data->process_head->reg[0] = -(player->id);
 	data->process_head->player = player;
 	data->process_amount++;
-	i = 0;
+	i = -1;
 	while (++i < REG_NUMBER)
 		data->process_head->reg[i] = 0;
 }

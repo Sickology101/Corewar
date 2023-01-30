@@ -45,6 +45,11 @@ void	create_initial_process_list(t_data *const data)
 
 void	init_process(t_data *const data, t_process *process, size_t pointer)
 {
+	int	i;
+
+	i = 0;
+	while (i < 16)
+		process->reg[i++] = 0;
 	process->args[0] = 0;
 	process->args[1] = 0;
 	process->args[2] = 0;
@@ -74,7 +79,7 @@ void	put_process_on_arena(t_data *const data,
 	}
 }
 
-void	copy_process(t_data *const data, t_process *carriage, int pos)
+t_process	*copy_process(t_data *const data, t_process *carriage, int address)
 {
 	int			i;
 	t_process	*copy;
@@ -82,7 +87,7 @@ void	copy_process(t_data *const data, t_process *carriage, int pos)
 	copy = (t_process *)malloc(sizeof(t_process));
 	if (!copy)
 		exit_error_message("Process allocation failed!");
-	init_process(data, copy, pos);
+	init_process(data, copy, address);
 	copy->unique_id = data->process_amount;
 	copy->next = NULL;
 	copy->carry = carriage->carry;
@@ -90,6 +95,5 @@ void	copy_process(t_data *const data, t_process *carriage, int pos)
 	i = 0;
 	while (++i < REG_NUMBER)
 		copy->reg[i] = carriage->reg[i];
-	data->process_tail->next = copy;
-	data->process_tail = copy;
+	return (copy);
 }

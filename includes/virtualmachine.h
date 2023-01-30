@@ -133,6 +133,8 @@ void	set_next_op(t_process *carriage, int jump_to);
 void	put_reg_value_on_arena(uint8_t *arena, int value, int pos);
 int		calc_relative_position(int arg, t_process *carriage);
 void	set_carry(t_process *carriage, int arg);
+int 	protect_address(int address);
+void	print_arena_term(t_data *const data);
 
 /*-------Get_arguments--------*/
 
@@ -146,7 +148,7 @@ int		set_dir(uint8_t *arena, int pos, int dir_size);
 
 void	free_process(t_process *process);
 void	create_initial_process_list(t_data *const data);
-void	copy_process(t_data *const data, t_process *carriage, int pos);
+t_process	*copy_process(t_data *const data, t_process *carriage, int pos);
 void	put_process_on_arena(t_data *const data,
 			t_process *copy, int start, int end);
 

@@ -66,6 +66,26 @@ void	print_arena(t_data *const data)
 	dprintf(fd, "\n");
 }
 
+void	print_arena_term(t_data *const data)
+{
+	int	i;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		if (i % 64 == 0)
+		{
+			if (i != 0)
+				ft_printf("\n");
+			if (i == 0)
+				ft_printf("0x");
+			ft_printf("%#.4x : ", i);
+		}
+		ft_printf("%.2x ", data->arena[i]);
+		i++;
+	}
+	ft_printf("\n");
+}
 /*
 You can install Hex Editor and open .cor file there
 And use this function to print player code

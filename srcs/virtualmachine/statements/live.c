@@ -20,15 +20,23 @@
 */
 void	set_live(t_data *const data, t_process *carriage)
 {
-	int	arg;
+	int			player_id;
+	int			rel_pos;
+	t_player	*player;
 
-	arg = make_dir_to_int(data->arena, (carriage->cur_pos + 1) % MEM_SIZE, 4);
-	arg = calculate_args(DIR_CODE, arg);
+	rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
+	player_id = get_arg(data, carriage, &rel_pos, 0);
+	data->counter.lives_this_period++;
 	carriage->last_live = data->counter.total_cycles;
-	if (arg < 0 && (arg * -1) <= data->player_amount)
-		data->last_alive = arg;
-	printf("\n\t you've reached set_live, arg: %i\n", arg);
-	set_next_op(carriage, (carriage->cur_pos + 5) % MEM_SIZE);
+	if (player_id <= -1 && player_id > -(data->player_amount))
+	{
+		player = data->player;
+		while (player->id != player_id)
+			player = player->next;
+		// player->current_lives_num++;
+		data->last_alive = player_id;
+	}
+	printf("\n\t you've reached set_live, arg: %i\n", player_id);
 }
 
 /*	TEMPORARY COMMENT(from cookbook):

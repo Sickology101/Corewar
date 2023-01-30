@@ -18,7 +18,7 @@
 */
 int	calculate_args(int code, int args)
 {
-	int16_t	ind;
+	int32_t	ind;
 	int		ret;
 	char	*str;
 
@@ -34,7 +34,6 @@ int	calculate_args(int code, int args)
 	if (code == IND_CODE)
 	{
 		ind = args;
-		ind = ind % IDX_MOD;
 		ret = ind;
 	}
 	else if (code == DIR_CODE)
@@ -85,7 +84,7 @@ int	get_arg(t_data *const data, t_process *carriage, int *rel_pos, int arg_num)
 	else if (carriage->args[arg_num] == IND_CODE)
 	{
 		arg = set_ind(data->arena, real_pos);
-		*rel_pos += T_DIR;
+		*rel_pos += T_IND;
 	}
 	else
 	{

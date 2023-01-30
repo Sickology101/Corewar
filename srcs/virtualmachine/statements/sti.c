@@ -19,11 +19,12 @@ void	set_sti(t_data *const data, t_process *carriage)
 	int32_t	rel_pos;
 
 	rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
-	reg_value = get_arg(data, carriage, &rel_pos, 0) - 1;
+	reg_value = get_arg(data, carriage, &rel_pos, 0);
 	arg = get_arg(data, carriage, &rel_pos, 1);
 	arg += get_arg(data, carriage, &rel_pos, 2);
-	put_reg_value_on_arena(data->arena, (int)reg_value, arg % MEM_SIZE);
-	printf("\tWriting %i to index %i\n", (int)reg_value, arg % MEM_SIZE);
-	// print_arena(data);
-	set_next_op(carriage, (carriage->cur_pos + rel_pos) % MEM_SIZE);
+	arg = protect_address(arg);
+	put_reg_value_on_arena(data->arena, (int)reg_value, (carriage->cur_pos + arg) % MEM_SIZE);
+	printf("\tWriting %i to index %i\n", (int)reg_value, arg);
+	// print_arena_term(data);
+	// set_next_op(carriage, (carriage->cur_pos + rel_pos) % MEM_SIZE);
 }

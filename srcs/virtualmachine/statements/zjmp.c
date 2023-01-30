@@ -23,9 +23,11 @@ void	set_zjmp(t_data *const data, t_process *carriage)
 
 	rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
 	arg = get_arg(data, carriage, &rel_pos, 0);
-	carriage->last_live = data->counter.total_cycles;
 	if (carriage->carry)
-		set_next_op(carriage, (carriage->cur_pos + arg) % MEM_SIZE);
+	{
+		arg = protect_address(carriage->cur_pos + (arg % IDX_MOD));
+		set_next_op(carriage, arg);
+	}
 	else
 		set_next_op(carriage, (carriage->cur_pos + rel_pos) % MEM_SIZE);
 }

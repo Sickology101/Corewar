@@ -27,10 +27,7 @@ void	set_add(t_data *const data, t_process *carr)
 	arg1 = get_arg(data, carr, &rel_pos, 0);
 	arg2 = get_arg(data, carr, &rel_pos, 1);
 	reg_id = data->arena[carr->cur_pos + rel_pos] - 1;
-	if (arg1 != -1 && arg2 != -1)
-	{
-		carr->reg[reg_id] = carr->reg[arg1] + carr->reg[arg2];
-	}
+	carr->reg[reg_id] = arg1 + arg2;
 	set_carry(carr, reg_id);
 	set_next_op(carr, (carr->cur_pos + rel_pos) % MEM_SIZE);
 	printf("arena now [%.2x] and next [%.2x]", data->arena[carr->cur_pos], data->arena[carr->next_operation]);

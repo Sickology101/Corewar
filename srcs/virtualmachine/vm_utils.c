@@ -55,8 +55,10 @@ int	make_ind_to_int(uint8_t *arena, int cur_pos)
 	int	res;
 
 	res = 0;
-	res = arena[(cur_pos) % MEM_SIZE] << 8
-		| arena[(cur_pos + 1) % MEM_SIZE];
+	res = arena[(cur_pos) % MEM_SIZE] << 24
+		| arena[(cur_pos + 1) % MEM_SIZE] << 16
+		| arena[(cur_pos + 2) % MEM_SIZE] << 8
+		| arena[(cur_pos + 3) % MEM_SIZE] << 0;
 	return (res);
 }
 
@@ -92,4 +94,12 @@ void	set_carry(t_process *carriage, int arg)
 		carriage->carry = 1;
 	else
 		carriage->carry = 0;
+}
+
+int protect_address(int address)
+{
+	address = address % MEM_SIZE;
+	if (address < 0)
+		address += MEM_SIZE;
+	return (address);
 }

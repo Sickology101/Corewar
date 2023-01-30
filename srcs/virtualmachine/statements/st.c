@@ -26,18 +26,19 @@ void	set_st(t_data *const data, t_process *carr)
 	int32_t	reg_value;
 	int		rel_pos;
 
+	// print_arena_term(data);
 	rel_pos = 1 + g_op[carr->op_id - 1].read_types;
-	reg_value = get_arg(data, carr, &rel_pos, 0) - 1;
+	reg_value = get_arg(data, carr, &rel_pos, 0);
 	if (carr->args[1] == IND_CODE)
 	{
-		arg = get_arg(data, carr, &rel_pos, 0);
-		put_reg_value_on_arena(data->arena,
-							   (int)reg_value, arg % MEM_SIZE);
+		arg = get_arg(data, carr, &rel_pos, 1);
+		arg = protect_address(arg % IDX_MOD);
+		put_reg_value_on_arena(data->arena, (int)reg_value, carr->cur_pos + arg);
 	}
 	else if (carr->args[1] == REG_CODE)
 	{
-		arg = data->arena[carr->cur_pos];
-		carr->reg[(arg)] = reg_value;
+		arg = data->arena[carr->cur_pos] - 1;
+		carr->reg[arg] = reg_value;
 	}
-	set_next_op(carr, (carr->cur_pos + rel_pos) % MEM_SIZE);
+	// print_arena_term(data);
 }
