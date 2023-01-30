@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:50:37 by macbook           #+#    #+#             */
-/*   Updated: 2023/01/26 17:32:01 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:17:19 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	set_statement_codes(t_data *const data, t_process *carriage)
 {
-	if (carriage->cycles_before_exec <= 0)
+	if (carriage->cycles_before_exec == 0)
 	{
 		carriage->op_id = data->arena[carriage->cur_pos];
 		if (data->arena[carriage->cur_pos] >= 1
@@ -29,13 +29,21 @@ void	set_statement_codes(t_data *const data, t_process *carriage)
 
 void	move_process(t_process *carriage)
 {
-	if (carriage->next_operation != -1 && carriage->cycles_before_exec <= 0)
+	int	i;
+
+	if (carriage->next_operation != -1 && carriage->cycles_before_exec == 0)
 	{
 		carriage->cur_pos = carriage->next_operation;
 		carriage->next_operation = -1;
-		//clean_process(carriage);	//not started with this function yet!
+		carriage->op_id = 0;
+		i = 0;
+		while (carriage->args[i] < 3)
+		{
+			carriage->args[i] = 0;
+			i++;
+		}
 	}
-	else if (carriage->cycles_before_exec <= 0)
+	else if (carriage->cycles_before_exec == 0)
 		carriage->cur_pos = (carriage->cur_pos + 1) % MEM_SIZE;
 }
 

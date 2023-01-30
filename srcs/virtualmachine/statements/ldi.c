@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:06 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/25 20:09:55 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:41:09 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ void	set_ldi(t_data *const data, t_process *carr)
 	addr += get_arg(data, carr, &rel_pos, 1);
 	reg_id = data->arena[carr->cur_pos + rel_pos] - 1;
 	carr->reg[reg_id] = data->arena[(carr->cur_pos + addr) % IDX_MOD];
+	set_next_op(carr, (carr->cur_pos + rel_pos) % MEM_SIZE);
 }

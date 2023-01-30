@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:05:56 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/27 19:26:56 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:40:53 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	set_add(t_data *const data, t_process *carr)
 		carr->reg[reg_id] = carr->reg[arg1] + carr->reg[arg2];
 	}
 	set_carry(carr, reg_id);
-	set_next_op(carr, (carr->cur_pos + 5) % MEM_SIZE);
+	set_next_op(carr, (carr->cur_pos + rel_pos) % MEM_SIZE);
 	printf("arena now [%.2x] and next [%.2x]", data->arena[carr->cur_pos], data->arena[carr->next_operation]);
 }

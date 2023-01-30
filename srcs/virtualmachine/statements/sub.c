@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:11 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/27 19:03:21 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:41:48 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	set_sub(t_data *const data, t_process *carr)
 		carr->reg[arg3] = carr->reg[arg1] - carr->reg[arg2];
 	}
 	set_carry(carr, arg3);
-	set_next_op(carr, (carr->cur_pos + 5) % MEM_SIZE);
+	set_next_op(carr, (carr->cur_pos + rel_pos) % MEM_SIZE);
 }

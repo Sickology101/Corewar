@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:21:17 by igaplich          #+#    #+#             */
-/*   Updated: 2023/01/26 17:30:43 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:40:31 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@ void	init_counter(t_counter *counter)
 	counter->checks_without_reducing = 0;
 	counter->lives_this_period = 0;
 	counter->initial_cycles = CYCLE_TO_DIE;
-}
-
-void	free_process(t_process *process)
-{
-	process->player = NULL;
-	process->next = NULL;
-	free (process);
 }
 
 /*
@@ -54,6 +47,25 @@ void	delete_process(t_data *const data, t_process *process)
 	printf("PROCESS DELETED! nb of processes now: %zu\n", data->process_amount);
 }
 
+void	check_processes(t_data *const data)
+{
+	t_process	*temp_process;
+	t_process	*after_temp;
+
+	temp_process = data->process_head;
+	while (temp_process != NULL)
+	{
+		after_temp = temp_process->next;
+		if (temp_process->cycles_before_exec <= 0
+			|| temp_process->last_live < data->counter.total_cycles
+			- data->counter.initial_cycles)
+		{
+			delete_process(data, temp_process);
+		}
+		temp_process = after_temp;
+	}
+}
+
 /*
 ** in perform_check we check the whole list of processes and check if they are 
 ** dead. When dead, we delete them from list. If we received more than NBR_LIVE
@@ -65,23 +77,9 @@ void	delete_process(t_data *const data, t_process *process)
 */
 void	perform_check(t_data *const data, t_counter *counter)
 {
-	t_process	*temp_process;
-	t_process	*after_temp;
-
 	counter->checks_without_reducing++;
 	counter->nb_of_checks_done++;
-	temp_process = data->process_head;
-	while (temp_process != NULL)
-	{
-		if (temp_process->cycles_before_exec <= 0
-			|| temp_process->last_live < data->counter.total_cycles
-			- data->counter.initial_cycles)
-		{
-			after_temp = temp_process->next;
-			delete_process(data, temp_process);
-			temp_process = after_temp;
-		}
-	}
+	check_processes(data);
 	if (counter->lives_this_period >= NBR_LIVE
 		|| counter->checks_without_reducing == MAX_CHECKS)
 	{

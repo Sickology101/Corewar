@@ -6,11 +6,18 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:40:29 by igaplich          #+#    #+#             */
-/*   Updated: 2023/01/27 18:26:26 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:30:42 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/virtualmachine.h"
+
+void	free_process(t_process *process)
+{
+	process->player = NULL;
+	process->next = NULL;
+	free (process);
+}
 
 void	create_initial_process_list(t_data *const data)
 {

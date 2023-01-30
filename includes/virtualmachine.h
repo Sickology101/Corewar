@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:57 by marius            #+#    #+#             */
-/*   Updated: 2023/01/27 19:04:35 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:30:54 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ int		set_dir(uint8_t *arena, int pos, int dir_size);
 
 /*-------Process--------*/
 
+void	free_process(t_process *process);
 void	create_initial_process_list(t_data *const data);
 void	copy_process(t_data *const data, t_process *carriage, int pos);
 void	put_process_on_arena(t_data *const data,
