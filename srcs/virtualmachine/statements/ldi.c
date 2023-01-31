@@ -16,12 +16,11 @@ void	set_ldi(t_data *const data, t_process *carr)
 {	
 	int	addr;
 	int	reg_id;
-	int	rel_pos;
 
-	rel_pos = 1 + g_op[carr->op_id - 1].read_types;
-	addr = get_arg(data, carr, &rel_pos, 0);
-	addr += get_arg(data, carr, &rel_pos, 1);
-	reg_id = data->arena[carr->cur_pos + rel_pos] - 1;
+	carr->rel_pos = 1 + g_op[carr->op_id - 1].read_types;
+	addr = get_arg(data, carr, &carr->rel_pos, 0);
+	addr += get_arg(data, carr, &carr->rel_pos, 1);
+	reg_id = data->arena[carr->cur_pos + carr->rel_pos] - 1;
+	carr->rel_pos += T_REG;
 	carr->reg[reg_id] = data->arena[(carr->cur_pos + addr) % IDX_MOD];
-	set_next_op(carr, (carr->cur_pos + rel_pos) % MEM_SIZE);
 }

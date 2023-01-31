@@ -16,14 +16,10 @@ void	set_lld(t_data *const data, t_process *carriage)
 {
 	int8_t	reg;
 	int		value;
-	int		rel_pos;
 
-	rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
-	value = get_arg(data, carriage, &rel_pos, 0);
-	reg = get_arg(data, carriage, &rel_pos, 1);
-	if (reg != -1)
-		set_next_op(carriage, (carriage->cur_pos + rel_pos) % MEM_SIZE);
+	carriage->rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
+	value = get_arg(data, carriage, &carriage->rel_pos, 0);
+	reg = get_arg(data, carriage, &carriage->rel_pos, 1);
 	load_value_to_reg(carriage, value, reg);
 	printf("set_lld: value: %i to the register: %i, which is reg[%i]\n", value, reg + 1, reg);
-	set_next_op(carriage, (carriage->cur_pos + rel_pos) % MEM_SIZE);
 }

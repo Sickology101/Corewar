@@ -29,7 +29,6 @@ int	calculate_args(int code, int args)
 		str = "T_DIR";
 	else if (code == 3)
 		str = "T_IND";
-	printf("\t\tARG: |%i| CODE: |%s|\n\n", args, str);
 	ret = 0;
 	if (code == IND_CODE)
 	{
@@ -46,6 +45,7 @@ int	calculate_args(int code, int args)
 			return (-1); // will probably segfault with this>need to fix
 		ret = args;
 	}
+	printf("\t\tARG: |%i| CODE: |%s|\n\n", ret, str);
 	return (ret);
 }
 
@@ -67,7 +67,7 @@ int	set_ind(uint8_t *arena, int pos)
 	return (new);
 }
 
-int	get_arg(t_data *const data, t_process *carriage, int *rel_pos, int arg_num)
+int	get_arg(t_data *const data, t_process *carriage, size_t *rel_pos, int arg_num)
 {
 	t_statement	*op;
 	int			arg;

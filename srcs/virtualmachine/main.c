@@ -27,8 +27,8 @@ int	main(const int ac, const char **av)
 		exit_error_message("Not enough players!");
 	validate_user_input(ac, av, &data);
 	validate_player(&data);
-	print_champion_path_and_id(&data);
-	print_introduction(&data);
+	// print_champion_path_and_id(&data);
+	// print_introduction(&data);
 	init_arena(&data);
 	run_game_loop(&data);
 	printf("game took %d loops\n", data.counter.total_cycles);

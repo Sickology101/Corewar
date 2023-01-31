@@ -60,16 +60,16 @@ void	init_process_on_arena(t_data *const data, t_player *player,
 	data->process_head->args[2] = 0;
 	data->process_head->carry = 0;
 	data->process_head->op_id = 0;
+	data->process_head->rel_pos = 0;
 	data->process_head->last_live = 0;
 	data->process_head->cycles_before_exec = 0;
 	data->process_head->cur_pos = pointer;
-	data->process_head->next_operation = -1;
-	data->process_head->reg[0] = -(player->id);
-	data->process_head->player = player;
-	data->process_amount++;
 	i = -1;
 	while (++i < REG_NUMBER)
 		data->process_head->reg[i] = 0;
+	data->process_head->reg[0] = -(player->id);
+	data->process_head->player = player;
+	data->process_amount++;
 }
 
 void	init_arena(t_data *const data)
@@ -86,7 +86,7 @@ void	init_arena(t_data *const data)
 	player = data->player;
 	while (i < data->player_amount)
 	{
-		print_player_code(player);
+		// print_player_code(player);
 		place_players_on_arena(player, data, pointer);
 		init_process_on_arena(data, player, pointer);
 		i++;

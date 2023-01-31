@@ -17,12 +17,11 @@ void	set_or(t_data *const data, t_process *carriage)
 	int arg1;
 	int	arg2;
 	int	arg3;
-	int	rel_pos;
 
-	rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
-	arg1 = get_arg(data, carriage, &rel_pos, 0);
-	arg2 = get_arg(data, carriage, &rel_pos, 1);
-	arg3 = get_arg(data, carriage, &rel_pos, 2);
+	carriage->rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
+	arg1 = get_arg(data, carriage, &carriage->rel_pos, 0);
+	arg2 = get_arg(data, carriage, &carriage->rel_pos, 1);
+	arg3 = get_arg(data, carriage, &carriage->rel_pos, 2);
 	if (carriage->args[0] == REG_CODE)
 		arg1 = carriage->reg[arg1];
 	if (carriage->args[1] == REG_CODE)
@@ -31,5 +30,4 @@ void	set_or(t_data *const data, t_process *carriage)
 		arg1, arg2, arg3);
 	carriage->reg[arg3] = (arg1 | arg2);
 	set_carry(carriage, arg3);
-	set_next_op(carriage, (carriage->cur_pos + rel_pos) % MEM_SIZE);
 }

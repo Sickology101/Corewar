@@ -22,23 +22,23 @@
 */
 void	set_st(t_data *const data, t_process *carr)
 {
-	int		arg;
+	int		address;
 	int32_t	reg_value;
-	int		rel_pos;
 
 	// print_arena_term(data);
-	rel_pos = 1 + g_op[carr->op_id - 1].read_types;
-	reg_value = get_arg(data, carr, &rel_pos, 0);
+	carr->rel_pos = 1 + g_op[carr->op_id - 1].read_types;
+	reg_value = get_arg(data, carr, &carr->rel_pos, 0);
 	if (carr->args[1] == IND_CODE)
 	{
-		arg = get_arg(data, carr, &rel_pos, 1);
-		arg = protect_address(arg % IDX_MOD);
-		put_reg_value_on_arena(data->arena, (int)reg_value, carr->cur_pos + arg);
+		address = get_arg(data, carr, &carr->rel_pos, 1);
+		// address = protect_address(address % IDX_MOD);
+		put_reg_value_on_arena(data->arena, (int)reg_value, (carr->cur_pos + (address % IDX_MOD) % MEM_SIZE));
 	}
 	else if (carr->args[1] == REG_CODE)
 	{
-		arg = data->arena[carr->cur_pos] - 1;
-		carr->reg[arg] = reg_value;
+		address = data->arena[carr->cur_pos + carr->rel_pos] - 1;
+		carr->reg[address] = reg_value;
+		carr->rel_pos += T_REG;
 	}
 	// print_arena_term(data);
 }

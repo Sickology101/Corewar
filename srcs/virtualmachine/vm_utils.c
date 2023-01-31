@@ -52,7 +52,7 @@ int	make_dir_to_int(uint8_t *arena, int cur_pos, int dir_size)
 
 int	make_ind_to_int(uint8_t *arena, int cur_pos)
 {
-	int	res;
+	uint32_t	res;
 
 	res = 0;
 	res = arena[(cur_pos) % MEM_SIZE] << 24
@@ -60,11 +60,6 @@ int	make_ind_to_int(uint8_t *arena, int cur_pos)
 		| arena[(cur_pos + 2) % MEM_SIZE] << 8
 		| arena[(cur_pos + 3) % MEM_SIZE] << 0;
 	return (res);
-}
-
-void	set_next_op(t_process *carriage, int jump_to)
-{
-	carriage->next_operation = jump_to;
 }
 
 void	put_reg_value_on_arena(uint8_t *arena, int value, int pos)

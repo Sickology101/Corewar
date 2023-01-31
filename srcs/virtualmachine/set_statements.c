@@ -31,36 +31,30 @@ void	move_process(t_process *carriage)
 {
 	int	i;
 
-	if (carriage->next_operation != -1 && carriage->cycles_before_exec == 0)
+	carriage->cur_pos = (carriage->cur_pos + carriage->rel_pos) % MEM_SIZE;
+	carriage->rel_pos = 0;
+	i = 0;
+	while (carriage->args[i] < 3)
 	{
-		carriage->cur_pos = carriage->next_operation;
-		carriage->next_operation = -1;
-		carriage->op_id = 0;
-		i = 0;
-		while (carriage->args[i] < 3)
-		{
-			carriage->args[i] = 0;
-			i++;
-		}
+		carriage->args[i] = 0;
+		i++;
 	}
-	else if (carriage->cycles_before_exec == 0)
-		carriage->cur_pos = (carriage->cur_pos + 1) % MEM_SIZE;
 }
 
 void	perform_cycle(t_data *const data)
 {
 	t_process	*carriage;
 
+	data->counter.total_cycles++;
 	carriage = data->process_head;
 	while (carriage)
 	{
-		set_statement_codes(data, carriage);
+		if (carriage->cycles_before_exec == 0)
+			set_statement_codes(data, carriage);
 		if (carriage->cycles_before_exec > 0)
 			carriage->cycles_before_exec--;
-		if (carriage->cycles_before_exec == 0
-			&& carriage->op_id >= 1 && carriage->op_id <= 16)
+		if (carriage->cycles_before_exec == 0)
 			execute_statement(data, carriage);
-		move_process(carriage);
 		carriage = carriage->next;
 	}
 }

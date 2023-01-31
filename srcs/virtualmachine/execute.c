@@ -18,17 +18,20 @@ int	validate_args_types(t_data *const data,
 	uint8_t	byte;
 	int		i;
 
-	byte = data->arena[carriage->cur_pos + 1 % MEM_SIZE];
-	i = 0;
-	while (i < op->args_num)
+	if (g_op[carriage->op_id - 1].read_types)
 	{
-		carriage->args[i] = (byte & (0xc0 >> i * 2)) >> (6 - i * 2);
-		if (!(carriage->args[i] & op->args[i])) 		//TODO: CHECK THAT IT ACTUALLY WORKS
+		byte = data->arena[carriage->cur_pos + 1 % MEM_SIZE];
+		i = 0;
+		while (i < op->args_num)
 		{
-			printf("arg types wrong\n");
-			return (0);
+			carriage->args[i] = (byte & (0xc0 >> i * 2)) >> (6 - i * 2);
+			if (!(carriage->args[i] & op->args[i])) // TODO: CHECK THAT IT ACTUALLY WORKS
+			{
+				printf("\targ types wrong\n");
+				return (0);
+			}
+			i++;
 		}
-		i++;
 	}
 	return (1);
 }
@@ -49,7 +52,10 @@ int	validate_args(t_data *const data, t_process *carriage, t_statement *op)
 		{
 			byte = data->arena[carriage->cur_pos + rel_index];
 			if (byte < 1 || byte > 16)
+			{
+				printf("\targs are not ok");
 				return (0);
+			}
 			rel_index++;
 		}
 		else if (carriage->args[i] == DIR_CODE)
@@ -61,22 +67,49 @@ int	validate_args(t_data *const data, t_process *carriage, t_statement *op)
 	return (1);
 }
 
+size_t	skip_args(t_process *carriage)
+{
+	size_t		rel_pos;
+	t_statement	*op;
+	int 		i;
+
+	op = &g_op[carriage->op_id - 1];
+	rel_pos = 1 + op->read_types;
+	i = 0;
+	while (i < op->args_num)
+	{
+		if (op->args[i] == REG_CODE)
+			rel_pos += T_REG;
+		else if (op->args[i] == DIR_CODE)
+			rel_pos += op->tdir_size;
+		else if (op->args[i] == IND_CODE)
+			rel_pos += T_IND;
+		i++;
+	}
+	return (rel_pos);
+}
+
 void	execute_statement(t_data *const data, t_process *carriage)
 {
 	t_statement	*op;
 
-	op = &g_op[data->arena[carriage->cur_pos] - 1];
-	if (!op->read_types || validate_args_types(data, carriage, op))
+	op = NULL;
+	if (data->arena[carriage->cur_pos] - 1 >= 0 && data->arena[carriage->cur_pos] - 1 <= 15)
+		op = &g_op[data->arena[carriage->cur_pos] - 1];
+	if (op)
 	{
-		printf("\tArg types are ok\n");
-		if (validate_args(data, carriage, op))
+		printf("------------------------------\n");
+		printf("\n%s at position %zu at cycle %d\n", g_op[carriage->op_id - 1].name, carriage->cur_pos, data->counter.total_cycles);
+		if (!op->read_types)
+			carriage->args[0] = op->args[0];
+		if (validate_args_types(data, carriage, op) && validate_args(data, carriage, op))
 		{
-			printf("\targs are also ok\n");
-			printf("%s\n", g_op[carriage->op_id - 1].name);
 			op->func(data, carriage);
-			printf("execution ended\n");
 		}
 		else
-			printf("\targs are not ok\n");
+			carriage->rel_pos = skip_args(carriage);
 	}
+	else
+		carriage->rel_pos = 1;
+	move_process(carriage);
 }

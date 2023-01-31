@@ -112,6 +112,5 @@ void	run_game_loop(t_data *const data)
 		if (data->counter.cycles_to_die <= 0)
 			perform_check(data, &data->counter);
 		data->counter.cycles_to_die--;
-		data->counter.total_cycles++;
 	}
 }

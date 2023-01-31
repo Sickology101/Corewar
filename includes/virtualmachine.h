@@ -49,8 +49,8 @@ typedef struct s_process
 	int					cycles_before_exec;
 	uint8_t				args[3];
 	size_t				cur_pos;
-	int					next_operation;
-	size_t				reg[REG_NUMBER];
+	size_t				rel_pos;
+	int32_t				reg[REG_NUMBER];
 	t_player			*player;
 	struct s_process	*next;
 }						t_process;
@@ -128,7 +128,6 @@ void	get_champion_comment(int fd, t_player *player);
 int		swap_endians(int buffer);
 int		make_dir_to_int(uint8_t *arena, int cur_pos, int dir_size);
 int		make_ind_to_int(uint8_t *arena, int cur_pos);
-void	set_next_op(t_process *carriage, int jump_to);
 
 void	put_reg_value_on_arena(uint8_t *arena, int value, int pos);
 int		calc_relative_position(int arg, t_process *carriage);
@@ -138,7 +137,7 @@ void	print_arena_term(t_data *const data);
 
 /*-------Get_arguments--------*/
 
-int		get_arg(t_data *const data, t_process *carriage, int *rel_pos, int arg_num);
+int		get_arg(t_data *const data, t_process *carriage, size_t *rel_pos, int arg_num);
 // int		get_arg(t_data *const data, t_process *carriage, int pos, int arg_code);
 int		calculate_args(int code, int args);
 int		set_ind(uint8_t *arena, int pos);
@@ -160,6 +159,7 @@ void	run_game_loop(t_data *const data);
 
 void	set_statement_codes(t_data *const data, t_process *carriage);
 void	perform_cycle(t_data *const data);
+void	move_process(t_process *carriage);
 
 /*-------Statements------*/
 

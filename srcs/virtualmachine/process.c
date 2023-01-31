@@ -55,11 +55,10 @@ void	init_process(t_data *const data, t_process *process, size_t pointer)
 	process->args[2] = 0;
 	process->carry = 0;
 	process->op_id = 0;
+	process->rel_pos = 0;
 	process->last_live = 0;
 	process->cycles_before_exec = 0;
 	process->cur_pos = pointer;
-	process->next_operation = -1;
-	process->reg[0] = 0;
 	process->player = NULL;
 	data->process_amount++;
 }

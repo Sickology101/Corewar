@@ -21,17 +21,16 @@
 void	set_live(t_data *const data, t_process *carriage)
 {
 	int			player_id;
-	int			rel_pos;
 	t_player	*player;
 
-	rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
-	player_id = get_arg(data, carriage, &rel_pos, 0);
+	carriage->rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
+	player_id = get_arg(data, carriage, &carriage->rel_pos, 0);
 	data->counter.lives_this_period++;
 	carriage->last_live = data->counter.total_cycles;
-	if (player_id <= -1 && player_id > -(data->player_amount))
+	if (player_id <= -1 && player_id >= -((int32_t)data->player_amount))
 	{
 		player = data->player;
-		while (player->id != player_id)
+		while (player->id != -player_id)
 			player = player->next;
 		// player->current_lives_num++;
 		data->last_alive = player_id;
