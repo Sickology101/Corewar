@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/28 05:22:55 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/31 09:28:10 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ typedef	struct s_line
 {
 	char	*str;
 	bool	type;
-	bool	instruction;
+	int		state_code;
+	int		req_arg_num;
+	int		req_arg_type[3];
 	char	*label;
 	char	*statement;
 	int		arg_num;
@@ -42,12 +44,19 @@ typedef	struct s_label
 	bool	statement;
 }			t_label;
 
+typedef	struct s_statements
+{
+	char	*name;
+	int		arg_num;
+	int		arg[3];
+}				t_statements;
 
 typedef struct	s_parser
 {
 	t_line	**line;
 	int				file_size;
 	int		fd;
+	t_statements	*s;
 }			t_parser;
 
 void	scan_file(t_parser *data);
@@ -56,6 +65,8 @@ void	get_name_comment(t_parser *data);
 void	exit_usage(int	flag);
 int	ignore_spaces(char *str, int index);
 void	get_instructions(t_parser *data);
+void	get_statement(t_parser *data, char *line, int index);
+void	init_statements(t_parser *data);
 
 // a struct to save the arguments in planning to use it as
 // a template to check against when reading, but also save 

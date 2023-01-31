@@ -1,16 +1,240 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_statements.c                                 :+:      :+:    :+:   */
+/*   get_statements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:30:08 by marius            #+#    #+#             */
-/*   Updated: 2023/01/28 03:52:07 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/31 10:24:03 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
+
+t_statements g_operations[17] = 
+{
+	{"live", 1, {T_DIR, 0, 0}},
+	{"ld", 2, {T_DIR + T_IND, T_REG, 0}},
+	{"st",2, {T_REG, T_REG + T_IND}},
+	{"add", 3, {T_REG, T_REG, T_REG}},
+	{"sub", 3, {T_REG, T_REG, T_REG}},
+	{"and", 3, {T_REG + T_DIR + T_IND, T_REG + T_DIR + T_IND, T_REG}},
+	{"or", 3, {T_REG + T_DIR + T_IND, T_REG + T_DIR + T_IND, T_REG}},
+	{"xor", 3, {T_REG + T_DIR + T_IND, T_REG + T_DIR + T_IND, T_REG}},
+	{"zjmp", 1, {T_DIR, 0, 0}},
+	{"ldi", 3, {T_REG + T_DIR + T_IND, T_REG + T_DIR, T_REG}},
+	{"sti", 3, {T_REG, T_REG + T_DIR + T_IND, T_REG + T_DIR}},
+	{"fork", 1, {T_DIR, 0, 0}},
+	{"lld", 2, {T_DIR + T_IND, T_REG, 0}},
+	{"lldi", 3, {T_REG + T_DIR + T_IND, T_REG + T_DIR, T_REG}},
+	{"lfork", 1, {T_DIR, 0, 0}},
+	{"aff", 1, {T_REG, 0, 0}},
+	{NULL, 0, {0, 0, 0}}
+};
+
+int	get_name_size(char *line, int index)
+{
+	while (line[index] != MTY_SPACE_1 && line[index] != MTY_SPACE_2 && line[index] != '\0')
+	{
+		index++;
+	}
+	if (line[index] == '\0')
+		exit_usage(4);
+	return (index);
+}
+
+void	get_name(t_parser *data, char *line, int *index)
+{
+	int	size;
+	int	i;
+
+	size = get_name_size(line, *index);
+	data->line[data->file_size]->statement = (char *)malloc(sizeof(char) * size);
+	data->line[data->file_size]->statement[size] = '\0';
+	i = 0;
+	while (*index < size)
+	{
+		data->line[data->file_size]->statement[i] = line[*index];
+		i++;
+		*index = *index + 1;
+	}
+}
+
+bool	check_valid_statement_name(char *str, t_line *line)
+{
+	int	index;
+
+	index = 0;
+	while (index < 16)
+	{
+		if (!ft_strcmp(str, g_operations[index].name))
+		{
+			line->state_code = index + 1;
+			line->req_arg_num = g_operations[index].arg_num;
+			line->req_arg_type[0] = g_operations[index].arg[0];
+			line->req_arg_type[1] =	g_operations[index].arg[1];
+			line->req_arg_type[2] = g_operations[index].arg[2];
+			return (true);
+		}
+		index++;
+	}
+	return (false);
+}
+
+char *get_arg(char *line, int *index)
+{
+	char *dest;
+	int	size;
+	int	i;
+
+	size = get_name_size(line, *index);
+	i = 0;
+	dest = (char *)malloc(sizeof(char) * size);
+	dest[size] = '\0';
+	while (i < size)
+	{
+		dest[i] = line[*index];
+		i++;
+		*index = *index + 1;
+	}
+	return (dest);
+}
+
+bool check_valid_arg_type(t_parser *data, int flag, char *arg, int index)
+{
+	int	arg_type;
+	
+	if (arg[0] == 'r')
+		data->line[data->file_size]->arg_type[index] = 1;
+	else if (arg[0] == '%')
+		data->line[data->file_size]->arg_type[index] = 2;
+	else
+		data->line[data->file_size]->arg_type[index] = 4;
+	arg_type = data->line[data->file_size]->arg_type[index];
+	if (arg_type == flag)
+		return (true);
+	if (flag == 3)
+		if (arg_type == 1 || arg_type == 2)
+			return (true);
+	if (flag == 5)
+		if (arg_type == 1 || arg_type == 4)
+			return (true);
+	if (flag == 6)
+		if (arg_type == 2 || arg_type == 4)
+			return (true);
+	if (flag == 7)
+		return (true);
+}
+
+int	get_number_index(char *str, int *index)
+{
+	int n;
+
+	n = 0;
+	while (str[*index] != MTY_SPACE_1 && str[*index] != MTY_SPACE_2 && str[*index] != '\0')
+	{
+		if (ft_isdigit(str[*index]))
+			n = n * 10 + (str[*index] - '0');
+		else
+			break;
+		*index = *index + 1;
+	}
+	return (n);
+}
+
+void	check_valid_reg(t_parser *data, char *arg, int flag)
+{
+	int	index;
+
+	index = 1;
+	if (arg[0] != 'r')
+		exit_usage(4);
+	data->line[data->file_size]->arg_num = get_number_index(arg, &index);
+	index = ignore_spaces(arg, index);
+	if (arg[index] != SEPARATOR_CHAR && arg[index] != COMMENT_CHAR && arg[index] != '\0')
+		exit_usage(4);
+	data->line[data->file_size]->arg[flag] = ft_strdup(arg);
+}
+
+void	check_valid_dir(t_parser *data, char *arg, int flag)
+{
+	int	index;
+	
+	index = 1;
+	if (arg[0] != '%')
+		exit_usage(4);
+	if (arg[1] == ':')
+		data->line[data->file_size]->arg[flag] = ft_strdup(arg);
+	else
+	{
+		data->line[data->file_size]->arg_num = get_number_index(arg, &index);
+		index = ignore_spaces(arg, index);
+		if (arg[index] != SEPARATOR_CHAR && arg[index] != COMMENT_CHAR && arg[index] != '\0')
+			exit_usage(4);
+		data->line[data->file_size]->arg[flag] = ft_strdup(arg);
+	}
+}
+
+void	check_valid_ind(t_parser *data, char *arg, int flag)
+{
+	int	index;
+
+	index = 0;
+	if (!ft_isdigit(arg[index]))
+		exit_usage(4);
+	data->line[data->file_size]->arg_num = get_number_index(arg, &index);
+	index = ignore_spaces(arg, index);
+	if (arg[index] != SEPARATOR_CHAR && arg[index] != COMMENT_CHAR && arg[index] != '\0')
+		exit_usage(4);
+	data->line[data->file_size]->arg[flag] = ft_strdup(arg);
+}
+
+void	handle_1_arg(t_parser *data, char *line, int index)
+{
+	char *arg;
+
+	arg = get_arg(line, &index);
+	data->line[data->file_size]->arg = (char **)malloc(sizeof(char *));
+	if (!check_valid_arg_type(data, data->line[data->file_size]->req_arg_type[0], arg, 0))
+		exit_usage(4);
+	if (data->line[data->file_size]->arg_type[0] == 1)
+		check_valid_reg(data, arg, 0);
+	else if (data->line[data->file_size]->arg_type[0] == 2)
+		check_valid_dir(data, arg, 0);
+	else
+		check_valid_ind(data, arg, 0);
+	index = ignore_spaces(line, index);
+	if (line[index] != '\0' || line[index] != COMMENT_CHAR)
+		exit_usage(4);
+}
+
+void	handle_2_arg(t_parser *data, char *line, int index)
+{
+	
+}
+
+void	handle_3_arg(t_parser *data, char *line, int index)
+{
+	
+}
+
+void	get_statement(t_parser *data, char *line, int index)
+{
+	get_name(data,line, &index);
+	if (!check_valid_statement_name(data->line[data->file_size]->statement, data->line[data->file_size]))
+		exit_usage(3);
+	index = ignore_spaces(line, index);
+	if (line[index] == '\0')
+		exit_usage(4);
+	if (data->line[data->file_size]->req_arg_num == 1)
+		handle_1_arg(data, line, index);
+	else if (data->line[data->file_size]->req_arg_num == 2)
+		handle_2_arg(data, line, index);
+	else
+		handle_3_arg(data,line, index);
+	ft_printf("%x %d %d %d %d\n", data->line[data->file_size]->state_code , data->line[data->file_size]->req_arg_num, data->line[data->file_size]->req_arg_type[0], data->line[data->file_size]->req_arg_type[1], data->line[data->file_size]->req_arg_type[2]);
+}
 
 /*char *get_syntax_name(char *str, int *index)
 {

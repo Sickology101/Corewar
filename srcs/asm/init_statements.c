@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:13:12 by marius            #+#    #+#             */
-/*   Updated: 2023/01/28 03:53:16 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/31 09:30:48 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 {
 	t_statements	s;
 
-	s.str = ft_strdup("live");
+	s.name = ft_strdup("live");
 	s.arg_num = 1;
-	s.arg = (int *)malloc(sizeof(int));
 	s.arg[0] = T_DIR; // 2
+	s.arg[1] = 0;
+	s.arg[2] = 0;
 	return (s);
 }
 
@@ -27,11 +28,11 @@ static t_statements	init_ld(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("ld");
+	s.name = ft_strdup("ld");
 	s.arg_num = 2;
-	s.arg = (int *)malloc(sizeof(int) * 2);
 	s.arg[0] = T_DIR + T_IND;
 	s.arg[1] = T_REG;
+	s.arg[2] = 0;
 	return (s);
 }
 
@@ -39,11 +40,11 @@ static t_statements	init_st(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("st");
+	s.name = ft_strdup("st");
 	s.arg_num = 2;
-	s.arg = (int *)malloc(sizeof(int) * 2);
 	s.arg[0] = T_REG;
 	s.arg[1] = T_REG + T_IND;
+	s.arg[2] = 0;
 	return (s);
 }
 
@@ -51,9 +52,8 @@ static t_statements	init_add(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("add");
+	s.name = ft_strdup("add");
 	s.arg_num = 3;
-	s.arg = (int *)malloc(sizeof(int) * 3);
 	s.arg[0] = T_REG;
 	s.arg[1] = T_REG;
 	s.arg[2] = T_REG;
@@ -64,9 +64,8 @@ static t_statements	init_sub(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("sub");
+	s.name = ft_strdup("sub");
 	s.arg_num = 3;
-	s.arg = (int *)malloc(sizeof(int) * 3);
 	s.arg[0] = T_REG;
 	s.arg[1] = T_REG;
 	s.arg[2] = T_REG;
@@ -77,9 +76,8 @@ static t_statements	init_and(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("and");
+	s.name = ft_strdup("and");
 	s.arg_num = 3;
-	s.arg = (int *)malloc(sizeof(int) * 3);
 	s.arg[0] = T_REG + T_IND + T_DIR;
 	s.arg[1] = T_REG + T_IND + T_DIR;
 	s.arg[2] = T_REG;
@@ -90,9 +88,8 @@ static t_statements	init_or(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("or");
+	s.name = ft_strdup("or");
 	s.arg_num = 3;
-	s.arg = (int *)malloc(sizeof(int) * 3);
 	s.arg[0] = T_REG + T_IND + T_DIR;
 	s.arg[1] = T_REG + T_IND + T_DIR;
 	s.arg[2] = T_REG;
@@ -103,9 +100,8 @@ static t_statements	init_xor(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("xor");
+	s.name = ft_strdup("xor");
 	s.arg_num = 3;
-	s.arg = (int *)malloc(sizeof(int) * 3);
 	s.arg[0] = T_REG + T_IND + T_DIR;
 	s.arg[1] = T_REG + T_IND + T_DIR;
 	s.arg[2] = T_REG;
@@ -116,10 +112,11 @@ static t_statements	init_zjmp(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("zjmp");
+	s.name = ft_strdup("zjmp");
 	s.arg_num = 1;
-	s.arg = (int *)malloc(sizeof(int) * 1);
 	s.arg[0] = T_DIR;
+	s.arg[1] = 0;
+	s.arg[2] = 0;
 	return (s);
 }
 
@@ -127,9 +124,8 @@ static t_statements	init_ldi(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("ldi");
+	s.name = ft_strdup("ldi");
 	s.arg_num = 3;
-	s.arg = (int *)malloc(sizeof(int) * 3);
 	s.arg[0] = T_REG + T_IND + T_DIR;
 	s.arg[1] = T_REG + T_DIR;
 	s.arg[2] = T_REG;
@@ -140,9 +136,8 @@ static t_statements	init_sti(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("sti");
+	s.name = ft_strdup("sti");
 	s.arg_num = 3;
-	s.arg = (int *)malloc(sizeof(int) * 3);
 	s.arg[0] = T_REG;
 	s.arg[1] = T_REG + T_DIR + T_IND;
 	s.arg[2] = T_REG + T_DIR;
@@ -153,10 +148,11 @@ static t_statements	init_fork(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("fork");
+	s.name = ft_strdup("fork");
 	s.arg_num = 1;
-	s.arg = (int *)malloc(sizeof(int) * 1);
 	s.arg[0] = T_DIR;
+	s.arg[1] = 0;
+	s.arg[2] = 0;
 	return (s);
 }
 
@@ -164,11 +160,11 @@ static t_statements	init_lld(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("lld");
+	s.name = ft_strdup("lld");
 	s.arg_num = 2;
-	s.arg = (int *)malloc(sizeof(int) * 2);
 	s.arg[0] = T_DIR + T_IND;
 	s.arg[1] = T_REG;
+	s.arg[2] = 0;
 	return (s);
 }
 
@@ -176,9 +172,8 @@ static t_statements	init_lldi(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("lldi");
+	s.name = ft_strdup("lldi");
 	s.arg_num = 3;
-	s.arg = (int *)malloc(sizeof(int) * 3);
 	s.arg[0] = T_REG + T_DIR + T_IND; // 1 + 2 + 4 = 7
 	s.arg[1] = T_REG + T_DIR; // 1 + 2 = 3
 	s.arg[2] = T_REG; // 1
@@ -189,10 +184,11 @@ static t_statements	init_lfork(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("lfork");
+	s.name = ft_strdup("lfork");
 	s.arg_num = 1;
-	s.arg = (int *)malloc(sizeof(int) * 1);
 	s.arg[0] = T_DIR;
+	s.arg[1] = 0;
+	s.arg[2] = 0;
 	return (s);
 }
 
@@ -200,10 +196,11 @@ static t_statements	init_aff(void)
 {
 	t_statements	s;
 
-	s.str = ft_strdup("aff");
+	s.name = ft_strdup("aff");
 	s.arg_num = 1;
-	s.arg = (int *)malloc(sizeof(int) * 1);
 	s.arg[0] = T_REG;
+	s.arg[1] = 0;
+	s.arg[2] = 0;
 	return (s);
 }
 
@@ -227,5 +224,4 @@ void	init_statements(t_parser *data)
 	data->s[13] = init_lldi();
 	data->s[14] = init_lfork();
 	data->s[15] = init_aff();
-}
-*/
+}*/
