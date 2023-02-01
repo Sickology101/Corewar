@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/02/01 19:57:39 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:13:40 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ void	scan_file(t_parser *data);
 bool	ignore_comment_empty(char *line);
 void	get_name_comment(t_parser *data);
 void	exit_usage(int	flag);
-int	ignore_spaces(char *str, int index);
+int		ignore_spaces(char *str, int index);
 void	get_instructions(t_parser *data);
 void	get_statement(t_parser *data, char *line, int index);
 void	init_statements(t_parser *data);
-
+void	write_to_file(t_parser *a, char **av)
 // a struct to save the arguments in planning to use it as
 // a template to check against when reading, but also save 
 // the statements in.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/02/01 11:50:49 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/01 20:14:01 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	main (int argc, char **argv)
 		ft_printf("%s %s %s %s %s\n",data->line[index]->label,data->line[index]->statement, data->line[index]->arg[0], data->line[index]->arg[1], data->line[index]->arg[2]);
 		index++;
 	}*/
+	write_to_file(data, argv);
 	exit_usage(6);
 	//hero = generate_champ(data);
 	//ft_printf("%s\n%s\n",hero->name, hero->comment);
