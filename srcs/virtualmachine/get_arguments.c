@@ -84,13 +84,13 @@ int	get_arg(t_data *const data, t_process *carriage, size_t *rel_pos, int arg_nu
 	else if (carriage->args[arg_num] == IND_CODE)
 	{
 		arg = set_ind(data->arena, real_pos);
-		*rel_pos += T_IND;
+		*rel_pos += IND_SIZE;
 	}
 	else
 	{
 		arg = calculate_args(REG_CODE, data->arena[real_pos]);
 		arg = carriage->reg[arg - 1];
-		*rel_pos += T_REG;
+		*rel_pos += 1;
 	}
 	return (arg);
 }

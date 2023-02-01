@@ -9,16 +9,23 @@
 PASS=0
 NOT_PASS=0
 i=0
-FILENAME="ex"
+FILENAME="Car"
 INCREMENT=1000
+run_games() {
+	# ./vbrazh/corewar -dump $1 resources_42/vm_champs/$FILENAME.cor > ourcorewar1.txt
+	# tail -n +3 ourcorewar1.txt > ourcorewar.txt
+	# rm ourcorewar1.txt
+	./corewar -dump $1 resources_42/vm_champs/$FILENAME.cor > ourcorewar_log.txt
+
+	./resources_42/vm_champs/corewar -d $1 resources_42/vm_champs/$FILENAME.cor > 42.txt
+	tail -n +3 42.txt > 42corewar.txt
+	rm 42.txt
+}
 
 while true; do
 	echo "testing with i = $i"
 	echo "NOT_PASS = $NOT_PASS \tPASS = $PASS"
-	./corewar -dump $i resources_42/vm_champs/$FILENAME.cor > /dev/null 2>&1
-	./resources_42/vm_champs/corewar -d $i resources_42/vm_champs/$FILENAME.cor > 42.txt
-	tail -n +3 42.txt > 42corewar.txt
-	rm 42.txt
+	run_games "$i"
 	if [[ $(diff ourcorewar.txt 42corewar.txt) != "" ]]
 	then
 		echo "$i Didn't pass\n"
@@ -39,17 +46,11 @@ while true; do
 		echo "CHECK THAT FIRST DIFF IS EMPTY, AND SECOND IS NOT"
 		echo "OTHERWISE THE SCRIPT GAVE FALSE RESULT\n"
 
-		./corewar -dump $PASS resources_42/vm_champs/$FILENAME.cor > ourcorewar_log.txt
-		./resources_42/vm_champs/corewar -d $PASS resources_42/vm_champs/$FILENAME.cor > 42.txt
-		tail -n +3 42.txt > 42corewar.txt
-		rm 42.txt
-		echo diff = $(diff ourcorewar.txt 42corewar.txt)
+		run_games "$PASS"
+		echo diff 1 = $(diff ourcorewar.txt 42corewar.txt)
 
-		./corewar -dump $NOT_PASS resources_42/vm_champs/$FILENAME.cor > ourcorewar_log.txt
-		./resources_42/vm_champs/corewar -d $NOT_PASS resources_42/vm_champs/$FILENAME.cor > 42.txt
-		tail -n +3 42.txt > 42corewar.txt
-		rm 42.txt
-		echo diff = $(diff ourcorewar.txt 42corewar.txt)
+		run_games "$NOT_PASS"
+		echo diff 2 = $(diff ourcorewar.txt 42corewar.txt)
 
 		echo "\nPASS = $PASS\tNOT_PASS = $NOT_PASS"
 		echo "diff occured at -dump = $NOT_PASS"

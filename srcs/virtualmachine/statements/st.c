@@ -31,8 +31,8 @@ void	set_st(t_data *const data, t_process *carr)
 	if (carr->args[1] == IND_CODE)
 	{
 		address = get_arg(data, carr, &carr->rel_pos, 1);
-		// address = protect_address(address % IDX_MOD);
-		put_reg_value_on_arena(data->arena, (int)reg_value, (carr->cur_pos + (address % IDX_MOD) % MEM_SIZE));
+		address = protect_address(address % IDX_MOD);
+		put_reg_value_on_arena(data->arena, (int)reg_value, ((carr->cur_pos + address) % MEM_SIZE));
 	}
 	else if (carr->args[1] == REG_CODE)
 	{

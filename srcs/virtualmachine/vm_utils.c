@@ -52,13 +52,22 @@ int	make_dir_to_int(uint8_t *arena, int cur_pos, int dir_size)
 
 int	make_ind_to_int(uint8_t *arena, int cur_pos)
 {
-	uint32_t	res;
+	int32_t	res;
+	int sign;
 
+	sign = arena[cur_pos] & 0x80;
 	res = 0;
-	res = arena[(cur_pos) % MEM_SIZE] << 24
-		| arena[(cur_pos + 1) % MEM_SIZE] << 16
-		| arena[(cur_pos + 2) % MEM_SIZE] << 8
-		| arena[(cur_pos + 3) % MEM_SIZE] << 0;
+	if (!sign)
+	{
+		res = arena[(cur_pos) % MEM_SIZE] << 8 | arena[(cur_pos + 1) % MEM_SIZE] << 0;
+	}
+	else
+	{
+		res = (arena[(cur_pos) % MEM_SIZE] ^ 0xFF) << 8
+		| (arena[(cur_pos + 1) % MEM_SIZE] ^ 0xFF) << 0;
+	}
+	if (sign)
+		res = ~(res);
 	return (res);
 }
 
@@ -67,10 +76,10 @@ void	put_reg_value_on_arena(uint8_t *arena, int value, int pos)
 	int		i;
 
 	i = 0;
-	arena[pos + i++] = (value & 0xFF000000) >> 24;
-	arena[pos + i++] = (value & 0x00FF0000) >> 16;
-	arena[pos + i++] = (value & 0x0000FF00) >> 8;
-	arena[pos + i++] = (value & 0x000000FF) >> 0;
+	arena[(pos + i++) % MEM_SIZE] = (value & 0xFF000000) >> 24;
+	arena[(pos + i++) % MEM_SIZE] = (value & 0x00FF0000) >> 16;
+	arena[(pos + i++) % MEM_SIZE] = (value & 0x0000FF00) >> 8;
+	arena[(pos + i++) % MEM_SIZE] = (value & 0x000000FF) >> 0;
 }
 
 int	calc_relative_position(int arg, t_process *carriage)
