@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/31 09:38:00 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/01 11:50:49 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ bool checkname(char *str)
 int	main (int argc, char **argv)
 {
 	t_parser 		*data;
-	int	index = 0;
+	//int	index = 2;
 	
 	if (argc != 2)
 		exit_usage(0);
@@ -67,10 +67,13 @@ int	main (int argc, char **argv)
 	data->fd = open(argv[1],O_RDONLY);
 	// add error if file inexistent;
 	scan_file(data);
-	while(data->line[index] != NULL)
+	
+	ft_printf("%s\n%s\n", data->name, data->comment);
+	/*while(data->line[index] != NULL)
 	{
-		ft_printf("%s\n",data->line[index++]->str);
-	}
+		ft_printf("%s %s %s %s %s\n",data->line[index]->label,data->line[index]->statement, data->line[index]->arg[0], data->line[index]->arg[1], data->line[index]->arg[2]);
+		index++;
+	}*/
 	exit_usage(6);
 	//hero = generate_champ(data);
 	//ft_printf("%s\n%s\n",hero->name, hero->comment);

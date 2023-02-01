@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/01/31 09:28:10 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/01 11:58:31 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef	struct s_line
 	char	**arg;
 	int		arg_type[3];
 	char	*arg_code[8];
+	int		size;
 }			t_line;
 
 typedef	struct s_label
@@ -56,6 +57,8 @@ typedef struct	s_parser
 	t_line	**line;
 	int				file_size;
 	int		fd;
+	char	*name;
+	char	*comment;
 	t_statements	*s;
 }			t_parser;
 
