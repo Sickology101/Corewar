@@ -6,13 +6,13 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:58:29 by parkharo          #+#    #+#             */
-/*   Updated: 2023/01/15 08:29:40 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:58:08 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "assembler.h"
 
-static void		write_name_comment(int fd, t_champion *a)
+static void		write_name_comment(int fd, t_parser *a)
 {
 	int		i;
 
@@ -20,13 +20,13 @@ static void		write_name_comment(int fd, t_champion *a)
 	write_bytes(fd, COREWAR_EXEC_MAGIC, 4);
 	while (a->name[++i])
 		write_bytes(fd, a->name[i], 1);
-	while (++i < 134)
+	while (++i < PROG_NAME_LENGTH + NULL_SEPARATOR)
 		write_bytes(fd, 0, 1);
 	write_bytes(fd, size_code(a), 4);
 	i = 0;
 	while (a->comment[++i])
 		write_bytes(fd, a->comment[i], 1);
-	while (++i < 2054)
+	while (++i < COMMENT_LENGTH + NULL_SEPARATOR)
 		write_bytes(fd, 0, 1);
 }
 
