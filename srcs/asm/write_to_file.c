@@ -6,22 +6,23 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:58:29 by parkharo          #+#    #+#             */
-/*   Updated: 2023/02/01 20:13:19 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:26:09 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "assembler.h"
 
-// static int	size_code(t_parser *a)
-// {
-// 	int ret;
-// 	int	i;
+static int	size_code(t_parser *a)
+{
+	int ret;
+	int	i;
 
-// 	ret = 0;
-// 	while (a->line[i])
-// 		ret += a->line[i++]->size;
-// 	return (ret);
-// }
+	ret = 0;
+	i = 2;
+	while (i <= a->file_size);
+		ret += a->line[i++]->size;
+	return (ret);
+}
 
 static void		write_name_comment(int fd, t_parser *a)
 {
@@ -33,8 +34,7 @@ static void		write_name_comment(int fd, t_parser *a)
 		write_bytes(fd, a->name[i], 1);
 	while (++i < PROG_NAME_LENGTH + NULL_SEPARATOR)
 		write_bytes(fd, 0, 1);
-	//write_bytes(fd, size_code(a), 4);
-	write_bytes(fd, a->file_size, 4);
+	write_bytes(fd, size_code(a), 4);
 	i = 0;
 	while (a->comment[++i])
 		write_bytes(fd, a->comment[i], 1);
