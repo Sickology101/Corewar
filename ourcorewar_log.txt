@@ -1,0 +1,387 @@
+	bytes read in get_champion_name: 128
+
+[0;32m CHAMPION NAME: Tching tching(Intercepteur), Bouh!Bouh!(bruits d'anti-jeu)
+
+[0m	bytes read in chehk_null_separator: 4
+
+CURRENT LOCATION: 136
+[0;32m executable SIZE: 281
+[0mCURRENT LOCATION: 140
+	bytes read in get_champion_comment: 2048
+
+[0;93m 		buffer[0](champion comment) does not exist...
+ [0m[0;32m CHAMPION COMMENT: (null)
+
+ [0m	bytes read in chehk_null_separator: 4
+
+	bytes read in get_exec_code: 281
+
+[0;32m executable CODE: 
+
+[0m 0 rounds until EOF
+--------------------------------------
+
+dump: 2510
+
+------------------------------
+
+fork at position 0 at cycle 800
+	carriage at: 0, reading bytes from: 1 tdir_size: 2
+
+		ARG: |106| CODE: |T_DIR|
+
+
+
+fork	current position: 0
+	dump : 2510
+
+------------------------------
+
+ld at position 106 at cycle 805
+	carriage at: 106, reading bytes from: 108 tdir_size: 4
+
+		ARG: |400| CODE: |T_DIR|
+
+	set_ld: value: 400 to the register: 3, which is reg[2]
+------------------------------
+
+ld at position 3 at cycle 805
+	carriage at: 3, reading bytes from: 5 tdir_size: 4
+
+		ARG: |-272| CODE: |T_DIR|
+
+	set_ld: value: -272 to the register: 3, which is reg[2]
+------------------------------
+
+live at position 113 at cycle 815
+	carriage at: 113, reading bytes from: 114 tdir_size: 4
+
+		ARG: |0| CODE: |T_DIR|
+
+
+	 you've reached set_live, arg: 0
+------------------------------
+
+live at position 10 at cycle 815
+	carriage at: 10, reading bytes from: 11 tdir_size: 4
+
+		ARG: |0| CODE: |T_DIR|
+
+
+	 you've reached set_live, arg: 0
+------------------------------
+
+fork at position 118 at cycle 1615
+	carriage at: 118, reading bytes from: 119 tdir_size: 2
+
+		ARG: |40| CODE: |T_DIR|
+
+
+
+fork	current position: 118
+	dump : 2510
+
+------------------------------
+
+fork at position 15 at cycle 1615
+	carriage at: 15, reading bytes from: 16 tdir_size: 2
+
+		ARG: |47| CODE: |T_DIR|
+
+
+
+fork	current position: 15
+	dump : 2510
+
+------------------------------
+
+ld at position 18 at cycle 1620
+	carriage at: 18, reading bytes from: 20 tdir_size: 4
+
+		ARG: |-272| CODE: |T_DIR|
+
+	set_ld: value: -272 to the register: 3, which is reg[2]
+------------------------------
+
+add at position 41 at cycle 1626
+	arg types wrong
+------------------------------
+
+add at position 50 at cycle 1628
+	arg types wrong
+------------------------------
+
+add at position 50 at cycle 1640
+	arg types wrong
+------------------------------
+
+add at position 58 at cycle 1641
+	arg types wrong
+------------------------------
+
+st at position 68 at cycle 1651
+	arg types wrong
+------------------------------
+
+add at position 58 at cycle 1653
+	arg types wrong
+------------------------------
+
+ld at position 78 at cycle 1659
+	arg types wrong
+------------------------------
+
+st at position 68 at cycle 1663
+	arg types wrong
+------------------------------
+
+add at position 85 at cycle 1669
+	arg types wrong
+------------------------------
+
+ld at position 78 at cycle 1671
+	arg types wrong
+------------------------------
+
+add at position 85 at cycle 1681
+	arg types wrong
+------------------------------
+
+add at position 94 at cycle 1683
+	arg types wrong
+------------------------------
+
+add at position 94 at cycle 1695
+	arg types wrong
+------------------------------
+
+add at position 102 at cycle 1696
+	arg types wrong
+------------------------------
+
+add at position 102 at cycle 1708
+	arg types wrong
+------------------------------
+
+live at position 110 at cycle 1709
+	carriage at: 110, reading bytes from: 111 tdir_size: 4
+
+		ARG: |-1878851328| CODE: |T_DIR|
+
+
+	 you've reached set_live, arg: -1878851328
+------------------------------
+
+live at position 110 at cycle 1721
+	carriage at: 110, reading bytes from: 111 tdir_size: 4
+
+		ARG: |-1878851328| CODE: |T_DIR|
+
+
+	 you've reached set_live, arg: -1878851328
+------------------------------
+
+fork at position 121 at cycle 2415
+	carriage at: 121, reading bytes from: 122 tdir_size: 2
+
+		ARG: |20| CODE: |T_DIR|
+
+
+
+fork	current position: 121
+	dump : 2510
+
+------------------------------
+
+ld at position 124 at cycle 2420
+	carriage at: 124, reading bytes from: 126 tdir_size: 4
+
+		ARG: |0| CODE: |T_DIR|
+
+	set_ld: value: 0 to the register: 2, which is reg[1]
+------------------------------
+
+fork at position 25 at cycle 2420
+	carriage at: 25, reading bytes from: 26 tdir_size: 2
+
+		ARG: |20| CODE: |T_DIR|
+
+
+
+fork	current position: 25
+	dump : 2510
+
+------------------------------
+
+st at position 24 at cycle 2424
+	arg types wrong
+------------------------------
+
+ld at position 131 at cycle 2425
+	carriage at: 131, reading bytes from: 133 tdir_size: 4
+
+		ARG: |0| CODE: |T_DIR|
+
+	set_ld: value: 0 to the register: 4, which is reg[3]
+------------------------------
+
+ld at position 28 at cycle 2425
+	carriage at: 28, reading bytes from: 30 tdir_size: 4
+
+		ARG: |0| CODE: |T_DIR|
+
+	set_ld: value: 0 to the register: 2, which is reg[1]
+------------------------------
+
+st at position 24 at cycle 2429
+	arg types wrong
+------------------------------
+
+ld at position 35 at cycle 2430
+	carriage at: 35, reading bytes from: 37 tdir_size: 4
+
+		ARG: |0| CODE: |T_DIR|
+
+	set_ld: value: 0 to the register: 4, which is reg[3]
+------------------------------
+
+ld at position 34 at cycle 2432
+	arg types wrong
+------------------------------
+
+ld at position 34 at cycle 2437
+	arg types wrong
+------------------------------
+
+add at position 41 at cycle 2442
+	arg types wrong
+------------------------------
+
+zjmp at position 138 at cycle 2445
+	carriage at: 138, reading bytes from: 139 tdir_size: 2
+
+		ARG: |69| CODE: |T_DIR|
+
+------------------------------
+
+add at position 41 at cycle 2447
+	arg types wrong
+------------------------------
+
+zjmp at position 42 at cycle 2450
+	carriage at: 42, reading bytes from: 43 tdir_size: 2
+
+		ARG: |139| CODE: |T_DIR|
+
+------------------------------
+
+add at position 50 at cycle 2456
+	arg types wrong
+------------------------------
+
+add at position 50 at cycle 2461
+	arg types wrong
+------------------------------
+
+add at position 58 at cycle 2469
+	arg types wrong
+------------------------------
+
+ldi at position 207 at cycle 2470
+	carriage at: 207, reading bytes from: 209 tdir_size: 2
+
+		ARG: |2| CODE: |T_REG|
+
+	carriage at: 207, reading bytes from: 210 tdir_size: 2
+
+		ARG: |18| CODE: |T_DIR|
+
+------------------------------
+
+add at position 58 at cycle 2474
+	arg types wrong
+------------------------------
+
+ld at position 213 at cycle 2475
+	carriage at: 213, reading bytes from: 215 tdir_size: 4
+
+		ARG: |0| CODE: |T_DIR|
+
+	set_ld: value: 0 to the register: 4, which is reg[3]
+------------------------------
+
+ldi at position 181 at cycle 2475
+	carriage at: 181, reading bytes from: 183 tdir_size: 2
+
+		ARG: |2| CODE: |T_REG|
+
+	carriage at: 181, reading bytes from: 184 tdir_size: 2
+
+		ARG: |18| CODE: |T_DIR|
+
+------------------------------
+
+st at position 68 at cycle 2479
+	arg types wrong
+------------------------------
+
+ld at position 187 at cycle 2480
+	carriage at: 187, reading bytes from: 189 tdir_size: 4
+
+		ARG: |0| CODE: |T_DIR|
+
+	set_ld: value: 0 to the register: 4, which is reg[3]
+------------------------------
+
+st at position 68 at cycle 2484
+	arg types wrong
+------------------------------
+
+live at position 220 at cycle 2485
+	carriage at: 220, reading bytes from: 221 tdir_size: 4
+
+		ARG: |1| CODE: |T_DIR|
+
+
+	 you've reached set_live, arg: 1
+------------------------------
+
+ld at position 78 at cycle 2487
+	arg types wrong
+------------------------------
+
+live at position 194 at cycle 2490
+	carriage at: 194, reading bytes from: 195 tdir_size: 4
+
+		ARG: |1| CODE: |T_DIR|
+
+
+	 you've reached set_live, arg: 1
+------------------------------
+
+ld at position 78 at cycle 2492
+	arg types wrong
+------------------------------
+
+add at position 85 at cycle 2497
+	arg types wrong
+------------------------------
+
+add at position 85 at cycle 2502
+	arg types wrong
+------------------------------
+
+sti at position 225 at cycle 2510
+	carriage at: 225, reading bytes from: 227 tdir_size: 2
+
+		ARG: |6| CODE: |T_REG|
+
+	carriage at: 225, reading bytes from: 228 tdir_size: 2
+
+		ARG: |2| CODE: |T_REG|
+
+	carriage at: 225, reading bytes from: 229 tdir_size: 2
+
+		ARG: |3| CODE: |T_REG|
+
+	Writing 11 to index 400
