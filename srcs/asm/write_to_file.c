@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_to_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:58:29 by parkharo          #+#    #+#             */
-/*   Updated: 2023/02/02 08:31:18 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/02 11:51:48 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,5 @@ static void		writer(t_parser *a, char *line)
 
 void			write_to_file(t_parser *a, char **av)
 {
-	int			i;
-	//t_champion	*start;
-
-	i = 0;
-	//start = a;
-	while (av[++i])
-	{
-		if (ft_strcmp(av[i], "-a"))
-		{
-			writer(a, av[i]);
-			//start = start->next;
-		}
-	}
+	writer(a, av[1]);
 }
