@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:30:08 by marius            #+#    #+#             */
-/*   Updated: 2023/02/02 10:58:41 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/02 12:13:28 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ void	check_valid_dir(t_parser *data, char *arg, int flag)
 	}
 }
 
-int	get_inst_size(int state_code, int arg_code)
+int	get_inst_size(t_parser *data, int state_code, int arg_code)
 {
 	if (arg_code == 1)
 		return (1);
@@ -210,9 +210,15 @@ int	get_inst_size(int state_code, int arg_code)
 	if (arg_code == 2)
 	{
 		if ((state_code > 8 && state_code < 13) || state_code == 14 || state_code == 15)
+		{
+			data->line[data->file_size]->dir_size = 2;
 			return (2);
+		}
 		else
+		{
+			data->line[data->file_size]->dir_size = 4;
 			return (4);
+		}
 	}
 	return (0);
 }
@@ -250,7 +256,7 @@ void	handle_1_arg(t_parser *data, char *line, int index)
 	index = ignore_spaces(line, index);
 	if (line[index] != '\0' && line[index] != COMMENT_CHAR)
 		exit_usage(4);
-	data->line[data->file_size]->size = get_inst_size(data->line[data->file_size]->state_code, data->line[data->file_size]->arg_type[0]);
+	data->line[data->file_size]->size = get_inst_size(data, data->line[data->file_size]->state_code, data->line[data->file_size]->arg_type[0]);
 }
 
 void	handle_2_arg(t_parser *data, char *line, int index)
@@ -272,7 +278,7 @@ void	handle_2_arg(t_parser *data, char *line, int index)
 	else
 		exit_usage(4);
 	index = ignore_spaces(line, index);
-	data->line[data->file_size]->size = get_inst_size(data->line[data->file_size]->state_code, data->line[data->file_size]->arg_type[0]);
+	data->line[data->file_size]->size = get_inst_size(data, data->line[data->file_size]->state_code, data->line[data->file_size]->arg_type[0]);
 	free(arg);
 	arg = get_arg(line, &index);
 	if (!check_valid_arg_type(data, data->line[data->file_size]->req_arg_type[1], arg, 1))
@@ -286,7 +292,7 @@ void	handle_2_arg(t_parser *data, char *line, int index)
 	index = ignore_spaces(line, index);
 	if (line[index] != '\0' && line[index] != COMMENT_CHAR)
 		exit_usage(4);
-	data->line[data->file_size]->size = data->line[data->file_size]->size + get_inst_size(data->line[data->file_size]->state_code, data->line[data->file_size]->arg_type[1]);
+	data->line[data->file_size]->size = data->line[data->file_size]->size + get_inst_size(data, data->line[data->file_size]->state_code, data->line[data->file_size]->arg_type[1]);
 }
 
 void	handle_3_arg(t_parser *data, char *line, int index)
@@ -308,7 +314,7 @@ void	handle_3_arg(t_parser *data, char *line, int index)
 	else
 		exit_usage(4);
 	index = ignore_spaces(line, index);
-	data->line[data->file_size]->size = get_inst_size(data->line[data->file_size]->state_code, data->line[data->file_size]->arg_type[0]);
+	data->line[data->file_size]->size = get_inst_size(data, data->line[data->file_size]->state_code, data->line[data->file_size]->arg_type[0]);
 	free(arg);
 	arg = get_arg(line, &index);
 	if (!check_valid_arg_type(data, data->line[data->file_size]->req_arg_type[1], arg, 1))
@@ -324,7 +330,7 @@ void	handle_3_arg(t_parser *data, char *line, int index)
 	else
 		exit_usage(4);
 	index = ignore_spaces(line, index);
-	data->line[data->file_size]->size = data->line[data->file_size]->size + get_inst_size(data->line[data->file_size]->state_code, data->line[data->file_size]->arg_type[1]);
+	data->line[data->file_size]->size = data->line[data->file_size]->size + get_inst_size(data, data->line[data->file_size]->state_code, data->line[data->file_size]->arg_type[1]);
 	free(arg);
 	arg = get_arg(line, &index);
 	if (!check_valid_arg_type(data, data->line[data->file_size]->req_arg_type[2], arg, 2))
@@ -338,7 +344,7 @@ void	handle_3_arg(t_parser *data, char *line, int index)
 	index = ignore_spaces(line, index);
 	if (line[index] != '\0' && line[index] != COMMENT_CHAR)
 		exit_usage(4);
-	data->line[data->file_size]->size = data->line[data->file_size]->size + get_inst_size(data->line[data->file_size]->state_code, data->line[data->file_size]->arg_type[2]);
+	data->line[data->file_size]->size = data->line[data->file_size]->size + get_inst_size(data, data->line[data->file_size]->state_code, data->line[data->file_size]->arg_type[2]);
 }
 
 void	get_statement(t_parser *data, char *line, int index)

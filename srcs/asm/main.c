@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/02/02 10:58:00 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/02 12:16:37 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	print_file(t_parser *data)
 				i++;
 			}
 		}
-		ft_printf("   size = %d\n",data->line[index]->size);
+		ft_printf("   size = %d",data->line[index]->size);
+		ft_printf("      dir_size =  %d\n",data->line[index]->dir_size);
 		index++;
 	}
 }
@@ -125,6 +126,7 @@ int	main (int argc, char **argv)
 	scan_file(data);
 	populate_t_dir(data);
 	print_file(data);
+	//ft_printf("dir size = %d\n", data->line[3]->dir_size);
 	/*while(data->line[index] != NULL)
 	{
 		ft_printf("%s %s %s %s %s\n",data->line[index]->label,data->line[index]->statement, data->line[index]->arg[0], data->line[index]->arg[1], data->line[index]->arg[2]);

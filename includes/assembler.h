@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/02/02 10:45:19 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/02 11:50:33 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@
 typedef	struct s_line
 {
 	char	*str;
-	int	type; // 0 for label, 1 for statement, 2 for label and statement
+	int		type; // 0 for label, 1 for statement, 2 for label and statement
 	int		state_code; //saves the code for the statement (1 - 16)
 	int		req_arg_num;
 	int		req_arg_type[3];
+	int		dir_size;
 	char	*label; // saves the label 
 	char	*statement; // saves the statement as char
 	int		arg_num[3]; // saves the value of the argument except for label
