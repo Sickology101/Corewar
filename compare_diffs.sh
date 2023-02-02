@@ -9,8 +9,8 @@
 PASS=0
 NOT_PASS=0
 i=0
-FILENAME="Car"
-INCREMENT=1000
+FILENAME="Octobre_Rouge_V42"
+INCREMENT=10000
 run_games() {
 	# ./vbrazh/corewar -dump $1 resources_42/vm_champs/$FILENAME.cor > ourcorewar1.txt
 	# tail -n +3 ourcorewar1.txt > ourcorewar.txt

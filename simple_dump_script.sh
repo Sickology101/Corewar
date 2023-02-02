@@ -1,4 +1,4 @@
-FILENAME="Gagnant"
+FILENAME="Backward"
 ARGS=$#
 if ((ARGS != 1))
 then
