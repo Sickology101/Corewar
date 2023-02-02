@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_to_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:58:29 by parkharo          #+#    #+#             */
-/*   Updated: 2023/02/01 20:26:09 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/02 08:31:18 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	size_code(t_parser *a)
 
 	ret = 0;
 	i = 2;
-	while (i <= a->file_size);
+	while (i <= a->file_size)
 		ret += a->line[i++]->size;
 	return (ret);
 }

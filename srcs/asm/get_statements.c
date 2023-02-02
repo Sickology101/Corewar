@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:30:08 by marius            #+#    #+#             */
-/*   Updated: 2023/02/01 12:09:13 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/02 10:58:41 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ void	check_valid_reg(t_parser *data, char *arg, int flag)
 		exit_usage(4);
 	if(!ft_isdigit(arg[1]))
 		exit_usage(4);
-	data->line[data->file_size]->arg_num = get_number_index(arg, &index);
+	data->line[data->file_size]->arg_num[flag] = get_number_index(arg, &index);
 	index = ignore_spaces(arg, index);
 	if (arg[index] != SEPARATOR_CHAR && arg[index] != COMMENT_CHAR && arg[index] != '\0')
 		exit_usage(4);
@@ -184,12 +184,16 @@ void	check_valid_dir(t_parser *data, char *arg, int flag)
 	if (arg[0] != '%')
 		exit_usage(4);
 	if (arg[1] == ':')
+	{
 		data->line[data->file_size]->arg[flag] = ft_strdup(arg);
+		data->line[data->file_size]->dir_label = true;
+		data->line[data->file_size]->dir_loc[flag] = 1;
+	}
 	else if (!ft_isdigit(arg[index]))
 		exit_usage(4);
 	else
 	{
-		data->line[data->file_size]->arg_num = get_number_index(arg, &index);
+		data->line[data->file_size]->arg_num[flag] = get_number_index(arg, &index);
 		index = ignore_spaces(arg, index);
 		if (arg[index] != SEPARATOR_CHAR && arg[index] != COMMENT_CHAR && arg[index] != '\0')
 			exit_usage(4);
@@ -222,7 +226,7 @@ void	check_valid_ind(t_parser *data, char *arg, int flag)
 		index++;
 	if (!ft_isdigit(arg[index]))
 		exit_usage(4);
-	data->line[data->file_size]->arg_num = get_number_index(arg, &index);
+	data->line[data->file_size]->arg_num[flag] = get_number_index(arg, &index);
 	index = ignore_spaces(arg, index);
 	if (arg[index] != SEPARATOR_CHAR && arg[index] != COMMENT_CHAR && arg[index] != '\0')
 		exit_usage(4);
@@ -343,6 +347,9 @@ void	get_statement(t_parser *data, char *line, int index)
 	if (!check_valid_statement_name(data->line[data->file_size]->statement, data))
 		exit_usage(3);
 	index = ignore_spaces(line, index);
+	data->line[data->file_size]->dir_loc[0] = 0;
+	data->line[data->file_size]->dir_loc[1] = 0;
+	data->line[data->file_size]->dir_loc[2] = 0;
 	if (line[index] == '\0')
 		exit_usage(4);
 	if (data->line[data->file_size]->req_arg_num == 1)
@@ -351,7 +358,15 @@ void	get_statement(t_parser *data, char *line, int index)
 		handle_2_arg(data, line, index);
 	else
 		handle_3_arg(data,line, index);
-	ft_printf("%d\n", data->line[data->file_size]->size);
+	if (data->line[data->file_size]->state_code == 1 || data->line[data->file_size]->state_code == 9 || data->line[data->file_size]->state_code == 12 || data->line[data->file_size]->state_code == 15)
+		data->line[data->file_size]->arg_code_req = false;
+	else
+	{
+		gen_arg_code(data);
+		data->line[data->file_size]->arg_code_req = true;
+		data->line[data->file_size]->size++;
+	}
+	data->line[data->file_size]->size++;
 	//ft_printf("%x %d %d %d %d\n", data->line[data->file_size]->state_code , data->line[data->file_size]->req_arg_num, data->line[data->file_size]->req_arg_type[0], data->line[data->file_size]->req_arg_type[1], data->line[data->file_size]->req_arg_type[2]);
 }
 

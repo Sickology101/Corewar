@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_bytes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:05:48 by parkharo          #+#    #+#             */
-/*   Updated: 2023/01/29 18:20:17 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/02 08:34:42 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	int32_to_bytecode(char *data,
 
 void	write_bytes(int fd, int input, int count_bytes)
 {
-	int				original_count;
+	//int				original_count;
 	char	arr[count_bytes];
 
 	int32_to_bytecode(arr, input, count_bytes);

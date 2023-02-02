@@ -6,11 +6,45 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:02:13 by parkharo          #+#    #+#             */
-/*   Updated: 2023/01/28 05:17:53 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/02 09:18:44 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
+
+void	gen_arg_code(t_parser *data)
+{
+	int	index1;
+	int	index2;
+
+	index1 = 0;
+	index2 = 0;
+	while (index1 < 8)
+	{
+		while (index2 < data->line[data->file_size]->req_arg_num)
+		{
+			if (data->line[data->file_size]->arg_type[index2] == 1)
+			{
+				data->line[data->file_size]->arg_code[index1] = 0;
+				data->line[data->file_size]->arg_code[index1 + 1] = 1;
+			}
+			else if (data->line[data->file_size]->arg_type[index2] == 2)
+			{
+				data->line[data->file_size]->arg_code[index1] = 1;
+				data->line[data->file_size]->arg_code[index1 + 1] = 0;
+			}
+			else
+			{
+				data->line[data->file_size]->arg_code[index1] = 1;
+				data->line[data->file_size]->arg_code[index1 + 1] = 1;
+			}
+			index1 += 2;
+			index2++;
+		}
+		data->line[data->file_size]->arg_code[index1] = 0;
+		index1++;
+	}
+}
 
 int	ignore_spaces(char *str, int index)
 {

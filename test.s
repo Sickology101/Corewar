@@ -1,5 +1,9 @@
-.name           "42"
-.comment       "Just a basic Winner Program"
+.name "Batman"
+.comment "This city needs me"
 
-entree:		live	%42		# entree
-	ld	%0,r5
+loop:
+        sti r1,%:live,%1
+live:
+        live %0
+        ld %0, r2
+        zjmp %:loop

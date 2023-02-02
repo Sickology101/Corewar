@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assembler.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/02/01 20:13:40 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/02 10:45:19 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,20 @@
 typedef	struct s_line
 {
 	char	*str;
-	bool	type;
-	int		state_code;
+	int	type; // 0 for label, 1 for statement, 2 for label and statement
+	int		state_code; //saves the code for the statement (1 - 16)
 	int		req_arg_num;
 	int		req_arg_type[3];
-	char	*label;
-	char	*statement;
-	int		arg_num;
-	char	**arg;
-	int		arg_type[3];
-	char	*arg_code[8];
-	int		size;
+	char	*label; // saves the label 
+	char	*statement; // saves the statement as char
+	int		arg_num[3]; // saves the value of the argument except for label
+	bool	dir_label; // true if there are T_DIR with labels
+	int		dir_loc[3]; // used to know which arg is T_DIR with label
+	char	**arg; // saves the arg
+	int		arg_type[3]; // saves the arg type
+	bool	arg_code_req; // true if arg_code is needed
+	int		arg_code[8]; // saves the arg code in binary
+	int		size; //saves the size of the statement
 }			t_line;
 
 typedef	struct s_label
@@ -71,7 +74,12 @@ int		ignore_spaces(char *str, int index);
 void	get_instructions(t_parser *data);
 void	get_statement(t_parser *data, char *line, int index);
 void	init_statements(t_parser *data);
-void	write_to_file(t_parser *a, char **av)
+void	write_to_file(t_parser *a, char **av);
+void	write_bytes(int fd, int input, int count_bytes);
+char	*join_free(char *line, char *line2, int flag);
+void	gen_arg_code(t_parser *data);
+void	populate_t_dir(t_parser *data);
+
 // a struct to save the arguments in planning to use it as
 // a template to check against when reading, but also save 
 // the statements in.

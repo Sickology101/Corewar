@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 05:22:04 by marius            #+#    #+#             */
-/*   Updated: 2023/02/01 11:03:08 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/02 10:07:48 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,22 @@ void	save_instruction(t_parser *data, char *line)
 	{
 		data->line[data->file_size]->label = get_label(line, &index);
 		index++;
+		data->line[data->file_size]->type = 0;
+		data->line[data->file_size]->size = 0;
 		index = ignore_spaces(line, index);
-		if (line[index] != '\0')
+		if (line[index] != '\0' && line[index] != COMMENT_CHAR)
+		{
 			get_statement(data, line, index);
+			data->line[data->file_size]->type = 2;
+		}
+			
 		data->file_size++;
 	}
 	else
 	{
 		index = ignore_spaces(line, index);
 		data->line[data->file_size]->label = NULL;
+		data->line[data->file_size]->type = 1;
 		get_statement(data, line, index);
 		data->file_size++;
 	}
