@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:58:29 by parkharo          #+#    #+#             */
-/*   Updated: 2023/02/02 11:51:48 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/02 12:24:30 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	size_code(t_parser *a)
 
 	ret = 0;
 	i = 2;
-	while (i <= a->file_size)
+	while (i < a->file_size)
 		ret += a->line[i++]->size;
 	return (ret);
 }
@@ -30,14 +30,14 @@ static void		write_name_comment(int fd, t_parser *a)
 
 	i = 0;
 	write_bytes(fd, COREWAR_EXEC_MAGIC, 4);
-	while (a->name[++i])
-		write_bytes(fd, a->name[i], 1);
+	while (a->name[i])
+		write_bytes(fd, a->name[i++], 1);
 	while (++i < PROG_NAME_LENGTH + NULL_SEPARATOR)
 		write_bytes(fd, 0, 1);
 	write_bytes(fd, size_code(a), 4);
 	i = 0;
-	while (a->comment[++i])
-		write_bytes(fd, a->comment[i], 1);
+	while (a->comment[i])
+		write_bytes(fd, a->comment[i++], 1);
 	while (++i < COMMENT_LENGTH + NULL_SEPARATOR)
 		write_bytes(fd, 0, 1);
 }
