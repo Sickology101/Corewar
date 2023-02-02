@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:30:08 by marius            #+#    #+#             */
-/*   Updated: 2023/02/02 12:13:28 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/02 13:43:49 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,8 +179,6 @@ void	check_valid_dir(t_parser *data, char *arg, int flag)
 	int	index;
 	
 	index = 1;
-	if (arg[1] == '-')
-		index = 2;
 	if (arg[0] != '%')
 		exit_usage(4);
 	if (arg[1] == ':')
@@ -189,7 +187,7 @@ void	check_valid_dir(t_parser *data, char *arg, int flag)
 		data->line[data->file_size]->dir_label = true;
 		data->line[data->file_size]->dir_loc[flag] = 1;
 	}
-	else if (!ft_isdigit(arg[index]))
+	else if (!ft_isdigit(arg[index]) && arg[index] != '-')
 		exit_usage(4);
 	else
 	{
@@ -228,9 +226,7 @@ void	check_valid_ind(t_parser *data, char *arg, int flag)
 	int	index;
 
 	index = 0;
-	if (arg[index] == '-')
-		index++;
-	if (!ft_isdigit(arg[index]))
+	if (!ft_isdigit(arg[index]) && arg[index] != '-')
 		exit_usage(4);
 	data->line[data->file_size]->arg_num[flag] = get_number_index(arg, &index);
 	index = ignore_spaces(arg, index);

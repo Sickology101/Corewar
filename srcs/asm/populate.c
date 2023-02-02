@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:23:44 by marius            #+#    #+#             */
-/*   Updated: 2023/02/02 12:07:53 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/02 13:12:17 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ int	search_down(t_parser *data, int index, char *label)
 	size = 0;
 	while (index < data->file_size)
 	{
-		size = size + data->line[index]->size;
 		if (data->line[index]->type == 0 || data->line[index]->type == 2)
 			if (!ft_strcmp(label, data->line[index]->label))
 				return (size);
+		size = size + data->line[index]->size;
 		index++;
 	}
 	return (0);

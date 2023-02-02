@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/02/02 11:50:33 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/02 12:48:21 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	write_bytes(int fd, int input, int count_bytes);
 char	*join_free(char *line, char *line2, int flag);
 void	gen_arg_code(t_parser *data);
 void	populate_t_dir(t_parser *data);
+int		binary_dec(int *array);
 
 // a struct to save the arguments in planning to use it as
 // a template to check against when reading, but also save 

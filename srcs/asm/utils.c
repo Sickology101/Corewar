@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:02:13 by parkharo          #+#    #+#             */
-/*   Updated: 2023/02/02 09:18:44 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/02 12:48:27 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,24 @@ bool ignore_comment_empty(char *line)
 		index++;
 	}
 	return (true);
+}
+
+int	binary_dec(int *array)
+{
+	int decimal_num;
+	int	index;
+	int	base;
+	
+	index = 7;
+	base = 1;
+	decimal_num = 0;
+	while (index >= 0)  
+    {  
+        decimal_num = decimal_num + array[index] * base; 
+        base = base * 2;
+		index--;
+    }
+	return (decimal_num);
 }
 
 /*t_data	*get_data(void)
