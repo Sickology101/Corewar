@@ -10,3 +10,50 @@ Parameters:
 REMEMBER AT ALL TIMES THAT IT WILL BE PRINTED !
 
 
+
+
+TESTING:
+_______________
+42635204(42,6 million) processes with one Car.cor as the only player.
+On visual mode on 42_corewar. Stopped at that point as it was really slow.
+_______________
+
+
+________________________________________________________________________________
+
+CYCLE 2510 diff:
+0x0240 : 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 0b 00 00 00 00 00 00 00 00 00 00 00 --- > 
+0x0240 : 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00
+
+
+sti (0b) apparently writes the value of r6(registry 6) to the address, 
+but it always writes 8 bytes!
+as far as I know, a registry only has 4 bytes..
+In this case, the registry has the value of the sti-statement inside of it,
+as well as the zjmp-statement after it. 
+They're all inside one label, and is exactly 8 bytes long.
+
+Could it be that the registry has stored the value of the label itself,
+rather than the 4 bytes that stand at the address of that label?(LOOK BELOW)
+
+
+Label in this case:
+	label13: sti   r6,r2,r3           		# 5,225,56
+		zjmp  %395 
+sti- and zjmp- statements in this case: 
+	sti   r6,r2,r3 = 0b 54 06 02 03
+	zjmp  %395 = 09 01 8b
+
+Here the registry get's it's value from ldi:
+	ldi   r2,%:label13,r6 = 0a 64 02 00 12 06
+(meaning 0x12 = 18 - so the address to read from is 18 bytes forward)
+
+________________________________________________________________________________

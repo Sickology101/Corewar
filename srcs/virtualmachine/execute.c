@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 17:53:52 by igaplich          #+#    #+#             */
-/*   Updated: 2023/01/27 19:33:20 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:42:28 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ size_t	skip_args(t_process *carriage)
 {
 	size_t		rel_pos;
 	t_statement	*op;
-	int 		i;
+	int			i;
 
 	op = &g_op[carriage->op_id - 1];
 	rel_pos = 1 + op->read_types;

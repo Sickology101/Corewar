@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:40:29 by igaplich          #+#    #+#             */
-/*   Updated: 2023/01/30 17:30:42 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/02 17:22:20 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ void	init_process(t_data *const data, t_process *process, size_t pointer)
 	data->process_amount++;
 }
 
+/*
+** DELETE put_process_on_arena IF NOT NEEDED!
+*/
 void	put_process_on_arena(t_data *const data,
 		t_process *copy, int start, int end)
 {
