@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/02/03 09:50:58 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/03 10:45:26 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,18 @@ char	*join_free(char *line, char *line2, int flag);
 void	gen_arg_code(t_parser *data);
 void	populate_t_dir(t_parser *data);
 int		binary_dec(int *array);
+int		get_name_size(char *line, int index);
+void	get_name(t_parser *data, char *line, int *index);
+bool	check_valid_statement_name(char *str, t_parser *data);
+char	*get_arg(char *line, int *index);
+bool	check_valid_arg_type(t_parser *data, int flag, char *arg, int index);
+int		get_number_index(char *str, int *index);
+void	check_valid_reg(t_parser *data, char *arg, int flag);
+void	check_valid_dir(t_parser *data, char *arg, int flag);
+int		get_inst_size(t_parser *data, int state_code, int arg_code);
+void	check_valid_ind(t_parser *data, char *arg, int flag);
+void	handle_3_arg_2(t_parser *data, char *line, int index);
+void	check_arg(t_parser *data, char *arg, int flag);
+void	handle_arg_code(t_parser *data);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: marius <marius@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-#    Updated: 2023/02/02 09:24:03 by marius           ###   ########.fr        #
+#    Updated: 2023/02/03 10:40:39 by marius           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ ASSEMBLER	=	assembler
 LIBFT		=	libft/libftprintf.a
 FLAGS		=	-Wall -Wextra -Werror -I includes -I libft/includes -I libft/libft
 
-SRC		=	main.c scanner.c get_name_comment.c utils.c get_instructions.c get_statements.c write_to_file.c write_bytes.c joinfree.c populate.c
+SRC		=	main.c scanner.c get_name_comment.c utils.c get_instructions.c get_statements.c write_to_file.c write_bytes.c joinfree.c populate.c get_statements2.c get_statements3.c get_statements4.c
 
 LIBFT_DIR	=	libft/
 SRC_DIR		=	srcs/asm/
