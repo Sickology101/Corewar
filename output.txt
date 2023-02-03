@@ -207,4 +207,3 @@ tird 1  [2]42   size = 5      dir_size =  4
 fin 1  [2]633   size = 5      dir_size =  4
 Writing output program to 42.cor
 File converted succesfuly
-
