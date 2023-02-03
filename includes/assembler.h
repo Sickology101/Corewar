@@ -6,22 +6,43 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/02/03 09:41:58 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/03 09:50:58 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASSEMBLER_H
 
 # define ASSEMBLER_H
-# include "../resources_42/op.h"
 # include "ft_printf.h"
 # include <fcntl.h>
 # include <stdbool.h>
 
 # define MTY_SPACE_1 ' '
 # define MTY_SPACE_2 '	'
-
+# define IND_SIZE 2
+# define REG_SIZE 4
+# define DIR_SIZE REG_SIZE
+# define COMMENT_CHAR '#'
+# define LABEL_CHAR ':'
+# define DIRECT_CHAR '%'
+# define SEPARATOR_CHAR ','
+# define LABEL_CHARS "abcdefghijklmnopqrstuvwxyz_0123456789"
 # define NULL_SEPARATOR 4
+# define T_REG 1
+# define T_DIR 2
+# define T_IND 4
+# define T_LAB 8
+# define PROG_NAME_LENGTH		(128)
+# define COMMENT_LENGTH			(2048)
+# define COREWAR_EXEC_MAGIC		0xea83f3
+
+typedef struct s_header
+{
+	unsigned int		magic;
+	char				prog_name[PROG_NAME_LENGTH + 1];
+	unsigned int		prog_size;
+	char				comment[COMMENT_LENGTH + 1];
+}					t_header;
 
 typedef struct s_line
 {
