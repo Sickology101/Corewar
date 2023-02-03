@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 05:22:04 by marius            #+#    #+#             */
-/*   Updated: 2023/02/02 12:10:13 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/03 10:04:56 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ bool	check_valid_label_char(char c)
 	return (false);
 }
 
-char *get_label(char *line, int *index)
+char	*get_label(char *line, int *index)
 {
-	int	size;
-	char *dest;
+	int		size;
+	char	*dest;
 
 	size = get_label_size(line, *index);
 	dest = (char *)malloc(sizeof(char) * size);
@@ -72,7 +72,6 @@ void	save_instruction(t_parser *data, char *line)
 			get_statement(data, line, index);
 			data->line[data->file_size]->type = 2;
 		}
-			
 		data->file_size++;
 	}
 	else
@@ -83,26 +82,26 @@ void	save_instruction(t_parser *data, char *line)
 		get_statement(data, line, index);
 		data->file_size++;
 	}
-		//data->line[data->file_size]->label = get_label(line, &index);
 }
 
 void	get_instructions(t_parser *data)
 {
-	char *line;
+	char	*line;
 	int		ret;
 
 	ret = get_next_line(data->fd, &line);
 	data->file_size = 2;
-	while(ret != 0)
+	while (ret != 0)
 	{
 		if (!ignore_comment_empty(line))
 		{
 			data->line[data->file_size] = (t_line *)malloc(sizeof(t_line));
-			data->line[data->file_size]->str = (char *)malloc(sizeof(char) * ft_strlen(line));
-			data->line[data->file_size]->str = ft_strcpy(data->line[data->file_size]->str, line);
+			data->line[data->file_size]->str
+				= (char *)malloc(sizeof(char) * ft_strlen(line));
+			data->line[data->file_size]->str
+				= ft_strcpy(data->line[data->file_size]->str, line);
 			save_instruction(data, line);
 		}
-			
 		ret = get_next_line(data->fd, &line);
 	}
 	if (data->file_size == 2)
