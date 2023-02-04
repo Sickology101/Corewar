@@ -33,7 +33,7 @@ void	set_ld(t_data *const data, t_process *carriage)
 
 	carriage->rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
 	value = get_arg(data, carriage, &carriage->rel_pos, 0);
-	reg_id = data->arena[carriage->cur_pos + carriage->rel_pos] - 1;
+	reg_id = data->arena[(carriage->cur_pos + (carriage->rel_pos & IDX_MOD)) % MEM_SIZE] - 1;
 	carriage->rel_pos += T_REG;
 	load_value_to_reg(carriage, value, reg_id);
 	printf("\tset_ld: value: %i to the register: %i, which is reg[%i]\n", value, reg_id + 1, reg_id);

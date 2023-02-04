@@ -86,6 +86,7 @@ void	print_arena_term(t_data *const data)
 	}
 	ft_printf("\n");
 }
+
 /*
 You can install Hex Editor and open .cor file there
 And use this function to print player code

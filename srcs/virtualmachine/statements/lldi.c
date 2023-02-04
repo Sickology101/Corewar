@@ -21,7 +21,7 @@ void	set_lldi(t_data *const data, t_process *carr)
 	addr = get_arg(data, carr, &carr->rel_pos, 0);
 	addr += get_arg(data, carr, &carr->rel_pos, 1);
 	addr = protect_address(addr);
-	reg_id = data->arena[carr->cur_pos + carr->rel_pos] - 1;
+	reg_id = data->arena[(carr->cur_pos + carr->rel_pos) % MEM_SIZE] - 1;
 	carr->rel_pos += T_REG;
-	carr->reg[reg_id] = data->arena[carr->cur_pos + addr];
+	carr->reg[reg_id] = data->arena[(carr->cur_pos + addr) % MEM_SIZE];
 }

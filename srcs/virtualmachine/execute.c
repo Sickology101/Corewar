@@ -18,13 +18,13 @@ int	validate_args_types(t_data *const data,
 	uint8_t	byte;
 	int		i;
 
-	if (g_op[carriage->op_id - 1].read_types)
+	if (op->read_types)
 	{
 		byte = data->arena[carriage->cur_pos + 1 % MEM_SIZE];
 		i = 0;
 		while (i < op->args_num)
 		{
-			carriage->args[i] = (byte & (0xc0 >> i * 2)) >> (6 - i * 2);
+			carriage->args[i] = g_arg_code[((int8_t)((byte & (0xC0 >> (i * 2))) >> (6 - i * 2))) - 1];
 			if (!(carriage->args[i] & op->args[i])) // TODO: CHECK THAT IT ACTUALLY WORKS
 			{
 				printf("\targ types wrong\n");
@@ -50,7 +50,7 @@ int	validate_args(t_data *const data, t_process *carriage, t_statement *op)
 	{
 		if (carriage->args[i] == REG_CODE)
 		{
-			byte = data->arena[carriage->cur_pos + rel_index];
+			byte = data->arena[(carriage->cur_pos + rel_index) % MEM_SIZE];
 			if (byte < 1 || byte > 16)
 			{
 				printf("\targs are not ok");

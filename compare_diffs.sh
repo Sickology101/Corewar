@@ -9,15 +9,15 @@
 PASS=0
 NOT_PASS=0
 i=0
-FILENAME="Octobre_Rouge_V42"
-INCREMENT=10000
+FILENAME="jumper"
+INCREMENT=5
 run_games() {
 	# ./vbrazh/corewar -dump $1 resources_42/vm_champs/$FILENAME.cor > ourcorewar1.txt
 	# tail -n +3 ourcorewar1.txt > ourcorewar.txt
 	# rm ourcorewar1.txt
-	./corewar -dump $1 resources_42/vm_champs/$FILENAME.cor > ourcorewar_log.txt
+	./corewar -dump $1 resources_42/valid_files/byte_code/$FILENAME.cor > ourcorewar_log.txt
 
-	./resources_42/vm_champs/corewar -d $1 resources_42/vm_champs/$FILENAME.cor > 42.txt
+	./resources_42/vm_champs/corewar -d $1 resources_42/valid_files/byte_code/$FILENAME.cor > 42.txt
 	tail -n +3 42.txt > 42corewar.txt
 	rm 42.txt
 }
@@ -29,6 +29,10 @@ while true; do
 	if [[ $(diff ourcorewar.txt 42corewar.txt) != "" ]]
 	then
 		echo "$i Didn't pass\n"
+		if ((i == 0))
+		then
+			break
+		fi
 		((NOT_PASS = i))
 		((i= PASS + (NOT_PASS - PASS) / 2))
 	else

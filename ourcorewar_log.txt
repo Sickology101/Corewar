@@ -1,228 +1,28 @@
 	bytes read in get_champion_name: 128
 
-[0;32m CHAMPION NAME: Octobre Rouge V4.2
+[0;32m CHAMPION NAME: Jumper !
 
 [0m	bytes read in chehk_null_separator: 4
 
 CURRENT LOCATION: 136
-[0;32m executable SIZE: 609
+[0;32m executable SIZE: 320
 [0mCURRENT LOCATION: 140
 	bytes read in get_champion_comment: 2048
 
-[0;32m CHAMPION COMMENT: And the winner is ...
+[0;32m CHAMPION COMMENT: en fait C forker !
 
  [0m	bytes read in chehk_null_separator: 4
 
-	bytes read in get_exec_code: 609
+	bytes read in get_exec_code: 320
 
 [0;32m executable CODE: p
 
 [0m 0 rounds until EOF
 --------------------------------------
 
-dump: 2645
+dump: 5
 
 ------------------------------
 
 st at position 0 at cycle 5
-	carriage at: 0, reading bytes from: 2 tdir_size: 4
-
-		ARG: |1| CODE: |T_REG|
-
-	carriage at: 0, reading bytes from: 3 tdir_size: 4
-
-		ARG: |19| CODE: |T_IND|
-
-------------------------------
-
-ld at position 5 at cycle 10
-	carriage at: 5, reading bytes from: 7 tdir_size: 4
-
-		ARG: |0| CODE: |T_DIR|
-
-	set_ld: value: 0 to the register: 15, which is reg[14]
-------------------------------
-
-fork at position 12 at cycle 810
-	carriage at: 12, reading bytes from: 13 tdir_size: 2
-
-		ARG: |6| CODE: |T_DIR|
-
-
-
-fork	current position: 12
-	dump : 2645
-
-------------------------------
-
-zjmp at position 15 at cycle 830
-	carriage at: 15, reading bytes from: 16 tdir_size: 2
-
-		ARG: |396| CODE: |T_DIR|
-
-------------------------------
-
-live at position 411 at cycle 840
-	carriage at: 411, reading bytes from: 412 tdir_size: 4
-
-		ARG: |42| CODE: |T_DIR|
-
-
-	 you've reached set_live, arg: 42
-PROCESS DELETED! nb of processes now: 1
-------------------------------
-
-fork at position 416 at cycle 1640
-	carriage at: 416, reading bytes from: 417 tdir_size: 2
-
-		ARG: |43| CODE: |T_DIR|
-
-
-
-fork	current position: 416
-	dump : 2645
-
-------------------------------
-
-live at position 419 at cycle 1650
-	carriage at: 419, reading bytes from: 420 tdir_size: 4
-
-		ARG: |42| CODE: |T_DIR|
-
-
-	 you've reached set_live, arg: 42
-------------------------------
-
-fork at position 424 at cycle 2450
-	carriage at: 424, reading bytes from: 425 tdir_size: 2
-
-		ARG: |82| CODE: |T_DIR|
-
-
-
-fork	current position: 424
-	dump : 2645
-
-------------------------------
-
-live at position 427 at cycle 2460
-	carriage at: 427, reading bytes from: 428 tdir_size: 4
-
-		ARG: |42| CODE: |T_DIR|
-
-
-	 you've reached set_live, arg: 42
-------------------------------
-
-zjmp at position 82 at cycle 2470
-	carriage at: 82, reading bytes from: 83 tdir_size: 2
-
-		ARG: |-5| CODE: |T_DIR|
-
-------------------------------
-
-live at position 77 at cycle 2480
-	carriage at: 77, reading bytes from: 78 tdir_size: 4
-
-		ARG: |42| CODE: |T_DIR|
-
-
-	 you've reached set_live, arg: 42
-------------------------------
-
-zjmp at position 82 at cycle 2500
-	carriage at: 82, reading bytes from: 83 tdir_size: 2
-
-		ARG: |-5| CODE: |T_DIR|
-
-------------------------------
-
-live at position 77 at cycle 2510
-	carriage at: 77, reading bytes from: 78 tdir_size: 4
-
-		ARG: |42| CODE: |T_DIR|
-
-
-	 you've reached set_live, arg: 42
-------------------------------
-
-zjmp at position 82 at cycle 2530
-	carriage at: 82, reading bytes from: 83 tdir_size: 2
-
-		ARG: |-5| CODE: |T_DIR|
-
-------------------------------
-
-live at position 77 at cycle 2540
-	carriage at: 77, reading bytes from: 78 tdir_size: 4
-
-		ARG: |42| CODE: |T_DIR|
-
-
-	 you've reached set_live, arg: 42
-------------------------------
-
-zjmp at position 82 at cycle 2560
-	carriage at: 82, reading bytes from: 83 tdir_size: 2
-
-		ARG: |-5| CODE: |T_DIR|
-
-------------------------------
-
-live at position 77 at cycle 2570
-	carriage at: 77, reading bytes from: 78 tdir_size: 4
-
-		ARG: |42| CODE: |T_DIR|
-
-
-	 you've reached set_live, arg: 42
-------------------------------
-
-zjmp at position 82 at cycle 2590
-	carriage at: 82, reading bytes from: 83 tdir_size: 2
-
-		ARG: |-5| CODE: |T_DIR|
-
-------------------------------
-
-live at position 77 at cycle 2600
-	carriage at: 77, reading bytes from: 78 tdir_size: 4
-
-		ARG: |42| CODE: |T_DIR|
-
-
-	 you've reached set_live, arg: 42
-------------------------------
-
-zjmp at position 82 at cycle 2620
-	carriage at: 82, reading bytes from: 83 tdir_size: 2
-
-		ARG: |-5| CODE: |T_DIR|
-
-------------------------------
-
-live at position 77 at cycle 2630
-	carriage at: 77, reading bytes from: 78 tdir_size: 4
-
-		ARG: |42| CODE: |T_DIR|
-
-
-	 you've reached set_live, arg: 42
-------------------------------
-
-lfork at position 48 at cycle 2645
-	carriage at: 48, reading bytes from: 49 tdir_size: 2
-
-		ARG: |256| CODE: |T_DIR|
-
-
-
-	lfork current position: 48
-	dump : 2645
-
-new: 0f
-new: 01
-new: 00
-	set_lfork: Making a LONG fork at arena[304]
-
-cycle: 2645
+	arg types wrong
