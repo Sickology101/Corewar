@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   write_bytes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:05:48 by parkharo          #+#    #+#             */
-/*   Updated: 2023/02/02 08:34:42 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/04 13:51:58 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "assembler.h"
-
-// void	write_bytes(int fd, int input, int count_bytes)
-// {
-// 	int				original_count;
-// 	unsigned char	arr[count_bytes];
-
-// 	original_count = count_bytes;
-// 	while (count_bytes--)
-// 	{
-// 		arr[count_bytes] = (unsigned char)input;
-// 		input >>= 8;
-// 	}
-// 	while (++count_bytes < original_count)
-// 		write(fd, &arr[count_bytes], 1);
-// }
+#include "assembler.h"
 
 void	int32_to_bytecode(char *data,
 							int32_t value,
@@ -44,17 +29,13 @@ void	int32_to_bytecode(char *data,
 
 void	write_bytes(int fd, int input, int count_bytes)
 {
-	//int				original_count;
-	char	arr[count_bytes];
+	char	*arr;
+	int		i;
 
+	i = 0;
+	arr = ft_strnew(count_bytes);
 	int32_to_bytecode(arr, input, count_bytes);
-	// original_count = count_bytes;
-	// while (count_bytes--)
-	// {
-	// 	arr[count_bytes] = (unsigned char)input;
-	// 	input >>= 8;
-	// }
-	int i = 0;
-	while (i < count_bytes) //< original_count)
+	while (i < count_bytes)
 		write(fd, &arr[i++], 1);
+	free(arr);
 }

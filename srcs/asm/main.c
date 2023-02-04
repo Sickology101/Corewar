@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/02/02 12:26:23 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/04 13:56:36 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	print_file(t_parser *data)
 {
-	int index;
+	int	index;
 	int	i;
-	
-	ft_printf("%s\n%s\n",data->name, data->comment);
+
+	ft_printf("%s\n%s\n", data->name, data->comment);
 	index = 2;
 	while (index < data->file_size)
 	{
@@ -25,51 +25,54 @@ void	print_file(t_parser *data)
 			ft_printf("%s", data->line[index]->label);
 		else if (data->line[index]->type == 1)
 		{
-			ft_printf("%d ",data->line[index]->state_code);
+			ft_printf("%d ", data->line[index]->state_code);
 			if (data->line[index]->arg_code_req == true)
 			{
 				i = 0;
 				while (i < 8)
 				{
-					ft_printf("%d",data->line[index]->arg_code[i]);
+					ft_printf("%d", data->line[index]->arg_code[i]);
 					i++;
 				}
 			}
 			i = 0;
 			while (i < data->line[index]->req_arg_num)
 			{
-				ft_printf(" [%d]%d",data->line[index]->arg_type[i], data->line[index]->arg_num[i]);
+				ft_printf(" [%d]%d", data->line[index]->arg_type[i], data->line[index]->arg_num[i]);
 				i++;
 			}
 		}
 		else
 		{
 			ft_printf("%s ", data->line[index]->label);
-			ft_printf("%d ",data->line[index]->state_code);
+			ft_printf("%d ", data->line[index]->state_code);
 			if (data->line[index]->arg_code_req == true)
 			{
 				i = 0;
 				while (i < 8)
 				{
-					ft_printf("%d",data->line[index]->arg_code[i]);
+					ft_printf("%d", data->line[index]->arg_code[i]);
 					i++;
 				}
 			}
 			i = 0;
 			while (i < data->line[index]->req_arg_num)
 			{
-				ft_printf(" [%d]%d",data->line[index]->arg_type[i], data->line[index]->arg_num[i]);
+				ft_printf(" [%d]%d", data->line[index]->arg_type[i], data->line[index]->arg_num[i]);
 				i++;
 			}
 		}
-		ft_printf("   size = %d",data->line[index]->size);
-		ft_printf("      dir_size =  %d\n",data->line[index]->dir_size);
+		ft_printf("   size = %d", data->line[index]->size);
+		ft_printf("      dir_size =  %d\n", data->line[index]->dir_size);
 		index++;
 	}
 }
 
-//a simple function that exits the program in case of bad call (wrong filename, no file)
-void	exit_usage(int	flag)
+/*
+a simple function that exits the program in case of 
+bad call (wrong filename, no file) 
+*/
+void	exit_usage(int flag)
 {
 	if (flag == 1)
 		ft_printf("Invalid text in assembly code\n");
@@ -90,11 +93,13 @@ void	exit_usage(int	flag)
 	exit(1);
 }
 
-
-//a function to check the file name and exit the program in case it does not end with .s
-bool checkname(char *str)
+/*
+a function to check the file name and exit the program in case 
+it does not end with .s 
+*/
+bool	checkname(char *str)
 {
-	int index;
+	int	index;
 
 	index = ft_strlen(str);
 	index--;
@@ -108,34 +113,25 @@ bool checkname(char *str)
 	return (false);
 }
 
-// The assembler is meant to read through the .s file representing a champion
-// and take the code written in assembly language and turn it in bytecode
-// that the Virtual Machine can read. 
-int	main (int argc, char **argv)
+/* The assembler is meant to read through the .s file representing a champion
+ and take the code written in assembly language and turn it in bytecode
+ that the Virtual Machine can read. 
+	TODO  add error if file inexistent; 
+*/
+int	main(int argc, char **argv)
 {
-	t_parser 		*data;
-//	int	index = 0;
-	
+	t_parser	*data;
+
 	if (argc != 2)
 		exit_usage(0);
 	if (!checkname(argv[1]))
 		exit_usage(0);
 	data = (t_parser *)malloc(sizeof(t_parser));
-	data->fd = open(argv[1],O_RDONLY);
-	// add error if file inexistent;
+	data->fd = open(argv[1], O_RDONLY);
 	scan_file(data);
 	populate_t_dir(data);
 	print_file(data);
-	//ft_printf("dir size = %d\n", data->line[3]->dir_size);
-	/*while(data->line[index] != NULL)
-	{
-		ft_printf("%s %s %s %s %s\n",data->line[index]->label,data->line[index]->statement, data->line[index]->arg[0], data->line[index]->arg[1], data->line[index]->arg[2]);
-		index++;
-	}*/
 	write_to_file(data, argv);
 	exit_usage(6);
-	//hero = generate_champ(data);
-	//ft_printf("%s\n%s\n",hero->name, hero->comment);
-	//write_bytecode(hero, argv);
 	return (0);
 }

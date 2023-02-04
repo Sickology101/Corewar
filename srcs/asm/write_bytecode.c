@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_bytecode.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:40:53 by parkharo          #+#    #+#             */
-/*   Updated: 2023/01/14 14:48:37 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/04 13:46:31 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	write_bytecode(t_parser *data, char **av)
 {
-	int		i;
+	int			i;
 	t_parser	*start;
 
 	i = 0;
