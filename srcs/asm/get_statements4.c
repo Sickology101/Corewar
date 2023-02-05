@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_statements4.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 10:40:18 by marius            #+#    #+#             */
-/*   Updated: 2023/02/03 10:45:39 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/05 16:08:32 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	check_arg(t_parser *data, char *arg, int flag)
 
 void	handle_3_arg_2(t_parser *data, char *line, int index)
 {
-	char *arg;
+	char	*arg;
 
 	index = ignore_spaces(line, index);
 	data->line[data->file_size]->size = data->line[data->file_size]->size
