@@ -5,7 +5,7 @@ def assembly_versions(filename):
 	path_to_file = sample_files + '/' + filename
 	output_filename = filename.replace('.s', '.cor')
 	
-	os.system('./resources_42/asm ' + path_to_file)
+	os.system('./resources_42/vm_champs/asm ' + path_to_file)
 	# os.system('hexdump -v ./valid_files/' + output_filename + ' >> hex1.txt')
 	
 	# os.system('../assembler ' + path_to_file)
@@ -20,7 +20,7 @@ def assembly_versions(filename):
 	# os.system('rm hex1.txt')
 	# os.system('rm hex2.txt')
 
-sample_files = "resources_42/valid_files/"
+sample_files = "resources_42/valid_files/asm_code"
 asm_42_dir = "42asm"
 our_asm_dir = "ourAsm"
 
