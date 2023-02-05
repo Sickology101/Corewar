@@ -17,11 +17,13 @@ void	set_or(t_data *const data, t_process *carriage)
 	int arg1;
 	int	arg2;
 	int	arg3;
+	int	idx;
 
+	idx = IDX_MOD;
 	carriage->rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
-	arg1 = get_arg(data, carriage, &carriage->rel_pos, 0);
-	arg2 = get_arg(data, carriage, &carriage->rel_pos, 1);
-	arg3 = get_arg(data, carriage, &carriage->rel_pos, 2);
+	arg1 = get_arg(data, carriage, 0, idx);
+	arg2 = get_arg(data, carriage, 1, idx);
+	arg3 = get_arg(data, carriage, 2, idx);
 	if (carriage->args[0] == REG_CODE)
 		arg1 = carriage->reg[arg1];
 	if (carriage->args[1] == REG_CODE)

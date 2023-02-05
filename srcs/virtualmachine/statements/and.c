@@ -17,12 +17,14 @@ void	set_and(t_data *const data, t_process *carr)
 	int	arg1;
 	int	arg2;
 	int	reg_index;
+	int	idx;
 
+	idx = IDX_MOD;
 	carr->rel_pos = 1 + g_op[carr->op_id - 1].read_types;
-	arg1 = get_arg(data, carr, &carr->rel_pos, 0);
-	arg2 = get_arg(data, carr, &carr->rel_pos, 1);
+	arg1 = get_arg(data, carr, 0, idx);
+	arg2 = get_arg(data, carr, 1, idx);
 	reg_index = data->arena[carr->cur_pos + carr->rel_pos] - 1;
 	carr->rel_pos += T_REG;
 	carr->reg[reg_index] = (arg1 & arg2);
-	set_carry(carr, reg_index);
+	load_value_to_reg(carr, arg1 & arg2, reg_index);
 }

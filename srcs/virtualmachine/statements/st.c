@@ -24,17 +24,19 @@ void	set_st(t_data *const data, t_process *carr)
 {
 	int		address;
 	int32_t	reg_value;
+	int		idx;
 
 	// print_arena_term(data);
+	idx = IDX_MOD;
 	carr->rel_pos = 1 + g_op[carr->op_id - 1].read_types;
-	reg_value = get_arg(data, carr, &carr->rel_pos, 0);
-	if (carr->args[1] == IND_CODE)
+	reg_value = get_arg(data, carr, 0, idx);
+	if (carr->args[1] == T_IND)
 	{
-		address = get_arg(data, carr, &carr->rel_pos, 1);
-		address = protect_address(address % IDX_MOD);
-		put_reg_value_on_arena(data->arena, (int)reg_value, ((carr->cur_pos + address) % MEM_SIZE));
+		address = read_bytes(data->arena, carr->cur_pos + carr->rel_pos, IND_SIZE);
+		carr->rel_pos += IND_SIZE;
+		put_reg_value_on_arena(data->arena, (int)reg_value, carr->cur_pos + (address % idx));
 	}
-	else if (carr->args[1] == REG_CODE)
+	else if (carr->args[1] == T_REG)
 	{
 		address = data->arena[carr->cur_pos + carr->rel_pos] - 1;
 		carr->reg[address] = reg_value;

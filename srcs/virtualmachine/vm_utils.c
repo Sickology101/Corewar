@@ -38,7 +38,7 @@ void	put_reg_value_on_arena(uint8_t *arena, int value, int pos)
 	arena[(pos + i++) % MEM_SIZE] = (value & 0xFF000000) >> 24;
 	arena[(pos + i++) % MEM_SIZE] = (value & 0x00FF0000) >> 16;
 	arena[(pos + i++) % MEM_SIZE] = (value & 0x0000FF00) >> 8;
-	arena[(pos + i++) % MEM_SIZE] = (value & 0x000000FF) >> 0;
+	arena[(pos + i++) % MEM_SIZE] = (value & 0x000000FF);
 }
 
 int	calc_relative_position(int arg, t_process *carriage)
@@ -51,18 +51,10 @@ int	calc_relative_position(int arg, t_process *carriage)
 		return (1);
 }
 
-void	set_carry(t_process *carriage, int arg)
+void	set_carry(t_process *carriage, int value)
 {
-	if (!carriage->reg[arg])
+	if (!value)
 		carriage->carry = 1;
 	else
 		carriage->carry = 0;
-}
-
-int protect_address(int address)
-{
-	address = address % MEM_SIZE;
-	if (address < 0)
-		address += MEM_SIZE;
-	return (address);
 }

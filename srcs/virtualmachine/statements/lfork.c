@@ -21,16 +21,13 @@ void	set_lfork(t_data *const data, t_process *carriage)
 {
 	int			arg;
 	t_process	*copy;
+	int			idx;
 
+	idx = 0;
 	carriage->rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
-	arg = get_arg(data, carriage, &carriage->rel_pos, 0);
-	printf("\n\n\tlfork current position: %zu\n", carriage->cur_pos % MEM_SIZE);
-	printf("\tdump : %i\n\n", data->dump_cycles);
+	arg = get_arg(data, carriage, 0, idx);
 	copy_process(data, carriage, (carriage->cur_pos + arg) % MEM_SIZE);
 	copy = data->process_tail;
 	put_process_on_arena(data, copy, carriage->cur_pos % MEM_SIZE,
 		(carriage->cur_pos + 2) % MEM_SIZE);
-	printf("\tset_lfork: Making a LONG fork at arena[%zu]\n",
-		carriage->cur_pos + arg % MEM_SIZE);
-	printf("\ncycle: %i\n", data->counter.total_cycles);
 }

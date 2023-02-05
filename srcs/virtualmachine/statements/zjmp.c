@@ -19,12 +19,14 @@
 void	set_zjmp(t_data *const data, t_process *carriage)
 {
 	int	address;
+	int	idx;
 
+	idx = IDX_MOD;
 	carriage->rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
-	address = get_arg(data, carriage, &carriage->rel_pos, 0);
+	address = get_arg(data, carriage, 0, idx);
 	if (carriage->carry)
 	{
-		carriage->cur_pos = protect_address(carriage->cur_pos + (address % IDX_MOD));
+		carriage->cur_pos = (carriage->cur_pos + address) % MEM_SIZE;
 		carriage->rel_pos = 0;
 	}
 }

@@ -16,16 +16,23 @@ int	validate_args_types(t_data *const data,
 		t_process *carriage, t_statement *op)
 {
 	uint8_t	byte;
+	int		type_id;
 	int		i;
 
 	if (op->read_types)
 	{
-		byte = data->arena[carriage->cur_pos + 1 % MEM_SIZE];
+		byte = data->arena[(carriage->cur_pos + 1) % MEM_SIZE];
 		i = 0;
 		while (i < op->args_num)
 		{
-			carriage->args[i] = g_arg_code[((int8_t)((byte & (0xC0 >> (i * 2))) >> (6 - i * 2))) - 1];
-			if (!(carriage->args[i] & op->args[i])) // TODO: CHECK THAT IT ACTUALLY WORKS
+			type_id = ((byte & (0xC0 >> (i * 2))) >> (6 - i * 2));
+			carriage->args[i] = g_arg_code[type_id - 1];
+			i++;
+		}
+		i = 0;
+		while (i < op->args_num)
+		{
+			if (!(carriage->args[i] & op->args[i]))
 			{
 				printf("\targ types wrong\n");
 				return (0);
@@ -48,19 +55,19 @@ int	validate_args(t_data *const data, t_process *carriage, t_statement *op)
 		rel_index += 1;
 	while (i < op->args_num)
 	{
-		if (carriage->args[i] == REG_CODE)
+		if (carriage->args[i] == T_REG)
 		{
 			byte = data->arena[(carriage->cur_pos + rel_index) % MEM_SIZE];
 			if (byte < 1 || byte > 16)
 			{
-				printf("\targs are not ok");
+				printf("\targs are not ok\n");
 				return (0);
 			}
 			rel_index++;
 		}
-		else if (carriage->args[i] == DIR_CODE)
+		else if (carriage->args[i] == T_DIR)
 			rel_index += op->tdir_size;
-		else if (carriage->args[i] == IND_CODE)
+		else if (carriage->args[i] == T_IND)
 			rel_index += IND_SIZE;
 		i++;
 	}
@@ -78,12 +85,12 @@ size_t	skip_args(t_process *carriage)
 	i = 0;
 	while (i < op->args_num)
 	{
-		if (op->args[i] == REG_CODE)
+		if (carriage->args[i] == T_REG)
 			rel_pos += T_REG;
-		else if (op->args[i] == DIR_CODE)
+		else if (carriage->args[i] == T_DIR)
 			rel_pos += op->tdir_size;
-		else if (op->args[i] == IND_CODE)
-			rel_pos += T_IND;
+		else if (carriage->args[i] == T_IND)
+			rel_pos += IND_SIZE;
 		i++;
 	}
 	return (rel_pos);

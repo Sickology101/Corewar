@@ -126,8 +126,9 @@ void	get_champion_comment(int fd, t_player *player);
 /*-------Vm_Utils-------*/
 
 int		swap_endians(int buffer);
-int32_t	read_4_bytes(uint8_t *arena, int cur_pos, int sign);
-int16_t	read_2_bytes(uint8_t *arena, int cur_pos, int sign);
+int32_t	read_bytes(uint8_t *arena, int cur_pos, int size);
+int32_t	read_4_bytes(uint8_t *arena, int cur_pos);
+int16_t	read_2_bytes(uint8_t *arena, int cur_pos);
 
 void	put_reg_value_on_arena(uint8_t *arena, int value, int pos);
 int		calc_relative_position(int arg, t_process *carriage);
@@ -137,11 +138,8 @@ void	print_arena_term(t_data *const data);
 
 /*-------Get_arguments--------*/
 
-int		get_arg(t_data *const data, t_process *carriage, size_t *rel_pos, int arg_num);
-// int		get_arg(t_data *const data, t_process *carriage, int pos, int arg_code);
+int		get_arg(t_data *const data, t_process *carr, int arg_num, int idx);
 int		calculate_args(int code, int args);
-int		set_ind(uint8_t *arena, int pos);
-int		set_dir(uint8_t *arena, int pos, int dir_size);
 
 /*-------Process--------*/
 
@@ -197,7 +195,7 @@ static t_statement	g_op[16] = {
 	.id = 1,
 	.cycles_num = 10,
 	.args_num = 1,
-	.args = {DIR_CODE},
+	.args = {T_DIR},
 	.read_types = 0,
 	.tdir_size = 4,
 	.carry_mod = 0,
@@ -208,7 +206,7 @@ static t_statement	g_op[16] = {
 	.id = 2,
 	.cycles_num = 5,
 	.args_num = 2,
-	.args = {DIR_CODE | IND_CODE, REG_CODE},
+	.args = {T_DIR | T_IND, T_REG},
 	.read_types = 1,
 	.tdir_size = 4,
 	.carry_mod = 1,
@@ -220,7 +218,7 @@ static t_statement	g_op[16] = {
 	.id = 3,
 	.cycles_num = 5,
 	.args_num = 2,
-	.args = {REG_CODE, IND_CODE | REG_CODE},
+	.args = {T_REG, T_IND | T_REG},
 	.read_types = 1,
 	.tdir_size = 4,
 	.carry_mod = 0,
@@ -231,7 +229,7 @@ static t_statement	g_op[16] = {
 	.id = 4,
 	.cycles_num = 10,
 	.args_num = 3,
-	.args = {REG_CODE, REG_CODE, REG_CODE},
+	.args = {T_REG, T_REG, T_REG},
 	.read_types = 1,
 	.tdir_size = 4,
 	.carry_mod = 1,
@@ -242,7 +240,7 @@ static t_statement	g_op[16] = {
 	.id = 5,
 	.cycles_num = 10,
 	.args_num = 3,
-	.args = {REG_CODE, REG_CODE, REG_CODE},
+	.args = {T_REG, T_REG, T_REG},
 	.read_types = 1,
 	.tdir_size = 4,
 	.carry_mod = 1,
@@ -253,7 +251,7 @@ static t_statement	g_op[16] = {
 	.id = 6,
 	.cycles_num = 6,
 	.args_num = 3,
-	.args = {REG_CODE | DIR_CODE | IND_CODE, REG_CODE | IND_CODE | DIR_CODE, REG_CODE},
+	.args = {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG},
 	.read_types = 1,
 	.tdir_size = 4,
 	.carry_mod = 1,
@@ -264,7 +262,7 @@ static t_statement	g_op[16] = {
 	.id = 7,
 	.cycles_num = 6,
 	.args_num = 3,
-	.args = {REG_CODE | IND_CODE | DIR_CODE, REG_CODE | IND_CODE | DIR_CODE, REG_CODE},
+	.args = {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
 	.read_types = 1,
 	.tdir_size = 4,
 	.carry_mod = 1,
@@ -275,7 +273,7 @@ static t_statement	g_op[16] = {
 	.id = 8,
 	.cycles_num = 6,
 	.args_num = 3,
-	.args = {REG_CODE | IND_CODE | DIR_CODE, REG_CODE | IND_CODE | DIR_CODE, REG_CODE},
+	.args = {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
 	.read_types = 1,
 	.tdir_size = 4,
 	.carry_mod = 1,
@@ -286,7 +284,7 @@ static t_statement	g_op[16] = {
 	.id = 9,
 	.cycles_num = 20,
 	.args_num = 1,
-	.args = {DIR_CODE},
+	.args = {T_DIR},
 	.read_types = 0,
 	.tdir_size = 2,
 	.carry_mod = 0,
@@ -297,7 +295,7 @@ static t_statement	g_op[16] = {
 	.id = 10,
 	.cycles_num = 25,
 	.args_num = 3,
-	.args = {REG_CODE | DIR_CODE | IND_CODE, DIR_CODE | REG_CODE, REG_CODE},
+	.args = {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
 	.read_types = 1,
 	.tdir_size = 2,
 	.carry_mod = 0,
@@ -308,7 +306,7 @@ static t_statement	g_op[16] = {
 	.id = 11,
 	.cycles_num = 25,
 	.args_num = 3,
-	.args = {REG_CODE, REG_CODE | DIR_CODE | IND_CODE, DIR_CODE | REG_CODE},
+	.args = {T_REG, T_REG | T_DIR | T_IND, T_REG | T_DIR},
 	.read_types = 1,
 	.tdir_size = 2,
 	.carry_mod = 0,
@@ -319,7 +317,7 @@ static t_statement	g_op[16] = {
 	.id = 12,
 	.cycles_num = 800,
 	.args_num = 1,
-	.args = {DIR_CODE},
+	.args = {T_DIR},
 	.read_types = 0,
 	.tdir_size = 2,
 	.carry_mod = 0,
@@ -330,7 +328,7 @@ static t_statement	g_op[16] = {
 	.id = 13,
 	.cycles_num = 10,
 	.args_num = 2,
-	.args = {DIR_CODE | IND_CODE, REG_CODE},
+	.args = {T_DIR | T_IND, T_REG},
 	.read_types = 1,
 	.tdir_size = 4,
 	.carry_mod = 1,
@@ -341,7 +339,7 @@ static t_statement	g_op[16] = {
 	.id = 14,
 	.cycles_num = 50,
 	.args_num = 3,
-	.args = {REG_CODE | DIR_CODE | IND_CODE, DIR_CODE | REG_CODE, REG_CODE},
+	.args = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
 	.read_types = 1,
 	.tdir_size = 2,
 	.carry_mod = 1,
@@ -352,7 +350,7 @@ static t_statement	g_op[16] = {
 	.id = 15,
 	.cycles_num = 1000,
 	.args_num = 1,
-	.args = {DIR_CODE},
+	.args = {T_DIR},
 	.read_types = 0,
 	.tdir_size = 2,
 	.carry_mod = 0,
@@ -363,7 +361,7 @@ static t_statement	g_op[16] = {
 	.id = 16,
 	.cycles_num = 2,
 	.args_num = 1,
-	.args = {REG_CODE},
+	.args = {T_REG},
 	.read_types = 1,
 	.tdir_size = 4,
 	.carry_mod = 0,
