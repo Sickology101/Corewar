@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:23:44 by marius            #+#    #+#             */
-/*   Updated: 2023/02/05 16:29:06 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:30:48 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*get_label_from_arg(char *str)
 	return (dest);
 }
 
-void	inner_calculate_dir(t_parser *data, int index, bool found)
+void	inner_calculate_dir(t_parser *data, int index, int i, bool found)
 {
 	char	*label;
 
@@ -97,7 +97,7 @@ void	calculate_dir(t_parser *data, int index)
 	found = false;
 	while (i < 3)
 	{
-		inner_calculate_dir(data, index, found);
+		inner_calculate_dir(data, index, i, found);
 		i++;
 	}	
 }
