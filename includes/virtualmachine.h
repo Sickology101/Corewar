@@ -130,7 +130,8 @@ int32_t	read_bytes(uint8_t *arena, int cur_pos, int size);
 int32_t	read_4_bytes(uint8_t *arena, int cur_pos);
 int16_t	read_2_bytes(uint8_t *arena, int cur_pos);
 
-void	put_reg_value_on_arena(uint8_t *arena, int value, int pos);
+// void	put_reg_value_on_arena(uint8_t *arena, int value, int pos);
+void	put_reg_value_on_arena(uint8_t *arena, int value, int pos, int size);
 int		calc_relative_position(int arg, t_process *carriage);
 void	set_carry(t_process *carriage, int arg);
 int 	protect_address(int address);

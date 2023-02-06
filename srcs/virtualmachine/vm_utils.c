@@ -30,15 +30,18 @@ int	swap_endians(int buffer)
 	return (leftmost | left_middle | right_middle | rightmost);
 }
 
-void	put_reg_value_on_arena(uint8_t *arena, int value, int pos)
+void	put_reg_value_on_arena(uint8_t *arena, int value, int pos, int size)
 {
 	int		i;
 
 	i = 0;
 	if (pos < 0)
 		pos += MEM_SIZE;
-	arena[(pos + i++) % MEM_SIZE] = (value & 0xFF000000) >> 24;
-	arena[(pos + i++) % MEM_SIZE] = (value & 0x00FF0000) >> 16;
+	if (size == 4)
+	{
+		arena[(pos + i++) % MEM_SIZE] = (value & 0xFF000000) >> 24;
+		arena[(pos + i++) % MEM_SIZE] = (value & 0x00FF0000) >> 16;
+	}
 	arena[(pos + i++) % MEM_SIZE] = (value & 0x0000FF00) >> 8;
 	arena[(pos + i++) % MEM_SIZE] = (value & 0x000000FF);
 }

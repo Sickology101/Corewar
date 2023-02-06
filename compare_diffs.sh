@@ -9,17 +9,19 @@
 PASS=0
 NOT_PASS=0
 i=0
-FILENAME="sencha"
+FILENAME="slider2"
 INCREMENT=5000
 run_games() {
 	# ./vbrazh/corewar -dump $1 resources_42/vm_champs/$FILENAME.cor > ourcorewar1.txt
 	# tail -n +3 ourcorewar1.txt > ourcorewar.txt
 	# rm ourcorewar1.txt
 	./corewar -dump $1 resources_42/valid_files/byte_code/$FILENAME.cor > ourcorewar_log.txt
+	# sleep 0.05
 
 	./resources_42/vm_champs/corewar -d $1 resources_42/valid_files/byte_code/$FILENAME.cor > 42.txt
 	tail -n +3 42.txt > 42corewar.txt
 	rm 42.txt
+	# sleep 0.05
 }
 
 while true; do

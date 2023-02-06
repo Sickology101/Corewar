@@ -34,7 +34,7 @@ void	set_st(t_data *const data, t_process *carr)
 	{
 		address = read_bytes(data->arena, carr->cur_pos + carr->rel_pos, IND_SIZE);
 		carr->rel_pos += IND_SIZE;
-		put_reg_value_on_arena(data->arena, (int)reg_value, carr->cur_pos + (address % idx));
+		put_reg_value_on_arena(data->arena, (int)reg_value, carr->cur_pos + (address % idx), DIR_SIZE);
 	}
 	else if (carr->args[1] == T_REG)
 	{
@@ -42,5 +42,6 @@ void	set_st(t_data *const data, t_process *carr)
 		carr->reg[address] = reg_value;
 		carr->rel_pos += T_REG;
 	}
+	printf("carr id = %zu\n", carr->unique_id);
 	// print_arena_term(data);
 }

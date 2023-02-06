@@ -94,7 +94,7 @@ t_process	*copy_process(t_data *const data, t_process *carriage, int address)
 	copy->next = NULL;
 	copy->carry = carriage->carry;
 	copy->last_live = carriage->last_live;
-	i = 0;
+	i = -1;
 	while (++i < REG_NUMBER)
 		copy->reg[i] = carriage->reg[i];
 	return (copy);

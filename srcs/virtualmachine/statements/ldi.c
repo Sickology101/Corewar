@@ -24,5 +24,5 @@ void	set_ldi(t_data *const data, t_process *carr)
 	addr += get_arg(data, carr, 1, idx);
 	reg_id = data->arena[carr->cur_pos + carr->rel_pos] - 1;
 	carr->rel_pos += T_REG;
-	carr->reg[reg_id] = data->arena[((carr->cur_pos + addr) % IDX_MOD) % MEM_SIZE];
+	carr->reg[reg_id] = read_4_bytes(data->arena, carr->cur_pos + (addr % IDX_MOD));
 }

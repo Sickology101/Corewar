@@ -1,4 +1,4 @@
-FILENAME="pai_mu_tan"
+FILENAME="slider2"
 ARGS=$#
 if ((ARGS != 1))
 then

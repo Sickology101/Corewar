@@ -92,6 +92,7 @@ int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
 	else
 	{
 		arg = data->arena[real_pos];
+		printf("reg_id = %d\n", arg - 1);
 		arg = carr->reg[arg - 1];
 		carr->rel_pos += 1;
 	}
