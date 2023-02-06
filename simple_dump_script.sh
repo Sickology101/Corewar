@@ -1,4 +1,4 @@
-FILENAME="jumper"
+FILENAME="pai_mu_tan"
 ARGS=$#
 if ((ARGS != 1))
 then

@@ -89,7 +89,7 @@ t_process	*copy_process(t_data *const data, t_process *carriage, int address)
 	copy = (t_process *)malloc(sizeof(t_process));
 	if (!copy)
 		exit_error_message("Process allocation failed!");
-	init_process(data, copy, address);
+	init_process(data, copy, (carriage->cur_pos + address) % MEM_SIZE);
 	copy->unique_id = data->process_amount;
 	copy->next = NULL;
 	copy->carry = carriage->carry;

@@ -9,8 +9,8 @@
 PASS=0
 NOT_PASS=0
 i=0
-FILENAME="op_zjmp"
-INCREMENT=1000
+FILENAME="sencha"
+INCREMENT=5000
 run_games() {
 	# ./vbrazh/corewar -dump $1 resources_42/vm_champs/$FILENAME.cor > ourcorewar1.txt
 	# tail -n +3 ourcorewar1.txt > ourcorewar.txt

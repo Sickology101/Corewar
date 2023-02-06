@@ -25,9 +25,8 @@ void	set_fork(t_data *const data, t_process *carriage)
 	idx = IDX_MOD;
 	carriage->rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
 	address = get_arg(data, carriage, 0, idx);
-	printf("\n\nfork\tcurrent position: %zu\n", carriage->cur_pos);
-	printf("\tdump : %i\n\n", data->dump_cycles);
 	copy = copy_process(data, carriage, address);
-	copy->next = data->process_head;
+	if (data->process_head)
+		copy->next = data->process_head;
 	data->process_head = copy;
 }

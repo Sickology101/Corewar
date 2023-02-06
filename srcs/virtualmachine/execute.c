@@ -26,6 +26,13 @@ int	validate_args_types(t_data *const data,
 		while (i < op->args_num)
 		{
 			type_id = ((byte & (0xC0 >> (i * 2))) >> (6 - i * 2));
+			printf("TYPEID = %d\n", type_id);
+			if (type_id == 0)
+			{
+				carriage->args[i] = 0;
+				i++;
+				continue ;
+			}
 			carriage->args[i] = g_arg_code[type_id - 1];
 			i++;
 		}
@@ -69,6 +76,8 @@ int	validate_args(t_data *const data, t_process *carriage, t_statement *op)
 			rel_index += op->tdir_size;
 		else if (carriage->args[i] == T_IND)
 			rel_index += IND_SIZE;
+		else if (carriage->args[i] == 0)
+			return(0);
 		i++;
 	}
 	return (1);
@@ -101,8 +110,8 @@ void	execute_statement(t_data *const data, t_process *carriage)
 	t_statement	*op;
 
 	op = NULL;
-	if (data->arena[carriage->cur_pos] - 1 >= 0 && data->arena[carriage->cur_pos] - 1 <= 15)
-		op = &g_op[data->arena[carriage->cur_pos] - 1];
+	if (data->arena[carriage->cur_pos % MEM_SIZE] - 1 >= 0 && data->arena[carriage->cur_pos % MEM_SIZE] - 1 <= 15)
+		op = &g_op[data->arena[carriage->cur_pos % MEM_SIZE] - 1];
 	if (op)
 	{
 		printf("------------------------------\n");
