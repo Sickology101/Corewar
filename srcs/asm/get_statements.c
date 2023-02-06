@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:30:08 by marius            #+#    #+#             */
-/*   Updated: 2023/02/03 10:46:58 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/06 11:41:40 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ void	get_statement(t_parser *data, char *line, int index)
 	if (!check_valid_statement_name(data->line[data->file_size]->statement,
 			data))
 		exit_usage(3);
+	data->line[data->file_size]->arg_num
+		= (long long *)malloc(sizeof(long long)
+			* data->line[data->file_size]->req_arg_num);
 	index = ignore_spaces(line, index);
 	data->line[data->file_size]->dir_loc[0] = 0;
 	data->line[data->file_size]->dir_loc[1] = 0;

@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/02/06 10:13:52 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/06 11:02:12 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_line
 	int		dir_size;
 	char	*label;
 	char	*statement;
-	int		arg_num[3];
+	long long		*arg_num;
 	bool	dir_label;
 	int		dir_loc[3];
 	char	**arg;
@@ -107,7 +107,7 @@ void	get_name(t_parser *data, char *line, int *index);
 bool	check_valid_statement_name(char *str, t_parser *data);
 char	*get_arg(char *line, int *index);
 bool	check_valid_arg_type(t_parser *data, int flag, char *arg, int index);
-int		get_number_index(char *str, int *index);
+long long		get_number_index(char *str, int *index);
 void	check_valid_reg(t_parser *data, char *arg, int flag);
 void	check_valid_dir(t_parser *data, char *arg, int flag);
 int		get_inst_size(t_parser *data, int state_code, int arg_code);

@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/02/06 10:08:35 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/06 11:37:16 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	print_file(t_parser *data)
 			i = 0;
 			while (i < data->line[index]->req_arg_num)
 			{
-				ft_printf(" [%d]%d", data->line[index]->arg_type[i], data->line[index]->arg_num[i]);
+				ft_printf(" [%d]%lld", data->line[index]->arg_type[i], data->line[index]->arg_num[i]);
 				i++;
 			}
 		}

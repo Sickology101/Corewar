@@ -6,16 +6,16 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 10:21:59 by marius            #+#    #+#             */
-/*   Updated: 2023/02/06 10:01:40 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/06 11:40:03 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-int	get_number_index(char *str, int *index)
+long long	get_number_index(char *str, int *index)
 {
-	int	n;
-	int	sign;
+	long long	n;
+	int			sign;
 
 	n = 0;
 	if (str[*index] == '-')
