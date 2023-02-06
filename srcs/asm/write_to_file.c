@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:58:29 by parkharo          #+#    #+#             */
-/*   Updated: 2023/02/03 10:00:51 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/06 09:36:14 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,25 @@ void	writing_command(int fd, t_parser *a)
 	index = 2;
 	while (index < a->file_size)
 	{
-		write_bytes(fd, a->line[index]->state_code, 1);
-		if (a->line[index]->arg_code_req == true)
-			write_bytes(fd, binary_dec(a->line[index]->arg_code), 1);
-		i = 0;
-		while (i < a->line[index]->req_arg_num)
+		if (a->line[index]->size != 0)
 		{
-			if (a->line[index]->arg_type[i] == 1)
-				write_bytes(fd, a->line[index]->arg_num[i], 1);
-			else if (a->line[index]->arg_type[i] == 4)
-				write_bytes(fd, a->line[index]->arg_num[i], 2);
-			else
+			write_bytes(fd, a->line[index]->state_code, 1);
+			if (a->line[index]->arg_code_req == true)
+				write_bytes(fd, binary_dec(a->line[index]->arg_code), 1);
+			i = 0;
+			while (i < a->line[index]->req_arg_num)
 			{
-				write_bytes(fd, a->line[index]->arg_num[i],
-					a->line[index]->dir_size);
-			}
+				if (a->line[index]->arg_type[i] == 1)
+					write_bytes(fd, a->line[index]->arg_num[i], 1);
+				else if (a->line[index]->arg_type[i] == 4)
+					write_bytes(fd, a->line[index]->arg_num[i], 2);
+				else
+				{
+					write_bytes(fd, a->line[index]->arg_num[i],
+						a->line[index]->dir_size);
+				}
 			i++;
+			}
 		}
 		index++;
 	}
