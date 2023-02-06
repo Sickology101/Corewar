@@ -3,47 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   populate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:23:44 by marius            #+#    #+#             */
-/*   Updated: 2023/02/05 16:30:48 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:11:48 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
-
-int	search_up(t_parser *data, int index, char *label)
-{
-	int	size;
-
-	size = 0;
-	index--;
-	while (index > 1)
-	{
-		size = size - data->line[index]->size;
-		if (data->line[index]->type == 0 || data->line[index]->type == 2)
-			if (!ft_strcmp(label, data->line[index]->label))
-				return (size);
-		index--;
-	}
-	return (0);
-}
-
-int	search_down(t_parser *data, int index, char *label)
-{
-	int	size;
-
-	size = 0;
-	while (index < data->file_size)
-	{
-		if (data->line[index]->type == 0 || data->line[index]->type == 2)
-			if (!ft_strcmp(label, data->line[index]->label))
-				return (size);
-		size = size + data->line[index]->size;
-		index++;
-	}
-	return (0);
-}
 
 char	*get_label_from_arg(char *str)
 {

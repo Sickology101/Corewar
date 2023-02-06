@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/02/06 10:01:32 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/06 10:13:52 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,8 @@ void	check_valid_ind(t_parser *data, char *arg, int flag);
 void	handle_3_arg_2(t_parser *data, char *line, int index);
 void	check_arg(t_parser *data, char *arg, int flag);
 void	handle_arg_code(t_parser *data);
+int		search_down(t_parser *data, int index, char *label);
+int		search_up(t_parser *data, int index, char *label);
+void	writing_command(int fd, t_parser *a);
 
 #endif
