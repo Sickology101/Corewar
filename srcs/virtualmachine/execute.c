@@ -113,6 +113,10 @@ void	execute_statement(t_data *const data, t_process *carriage)
 		op = &g_op[data->arena[carriage->cur_pos % MEM_SIZE] - 1];
 	if (op)
 	{
+		if (carriage->unique_id == 4)
+		{
+			printf("ID4 %s %d %d\n", op->name, data->counter.cycles_total, carriage->carry);
+		}
 		printf("------------------------------\n");
 		printf("\n%s at position %zu at cycle %d\n", g_op[carriage->op_id - 1].name, carriage->cur_pos, data->counter.cycles_total);
 		if (!op->read_types)

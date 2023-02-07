@@ -26,7 +26,7 @@ void	set_zjmp(t_data *const data, t_process *carriage)
 	address = get_arg(data, carriage, 0, idx);
 	if (carriage->carry)
 	{
-		carriage->cur_pos = (carriage->cur_pos + address) % MEM_SIZE;
+		carriage->cur_pos = (carriage->cur_pos + (address % idx) % MEM_SIZE);
 		carriage->rel_pos = 0;
 	}
 }

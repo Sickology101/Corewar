@@ -62,24 +62,6 @@ void	init_process(t_data *const data, t_process *process, size_t pointer)
 	data->process_amount++;
 }
 
-/*
-** DELETE put_process_on_arena IF NOT NEEDED!
-*/
-void	put_process_on_arena(t_data *const data,
-		t_process *copy, int start, int end)
-{
-	int	i;
-
-	i = 0;
-	while (start <= end)
-	{
-		data->arena[copy->cur_pos + i] = data->arena[start];
-		printf("new: %0.2x\n", data->arena[copy->cur_pos + i]);
-		start++;
-		i++;
-	}
-}
-
 t_process	*copy_process(t_data *const data, t_process *carriage, int address)
 {
 	int			i;

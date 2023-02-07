@@ -24,6 +24,6 @@ void	set_or(t_data *const data, t_process *carriage)
 	arg1 = get_arg(data, carriage, 0, idx);
 	arg2 = get_arg(data, carriage, 1, idx);
 	arg3 = get_arg(data, carriage, 2, idx);
-	carriage->reg[arg3] = (arg1 | arg2);
+	load_value_to_reg(carriage, arg1 | arg2, arg3);
 	set_carry(carriage, arg3);
 }

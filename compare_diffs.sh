@@ -107,7 +107,7 @@ while true; do
 		echo diff 2 = $(diff ourcorewar.txt 42corewar.txt)
 
 		echo "\nPASS = $PASS\tNOT_PASS = $NOT_PASS"
-		echo "diff occured at -dump = $NOT_PASS"
+		echo "diff occured at -dump = $NOT_PASS\n"
 		break
 	fi
 done

@@ -25,6 +25,5 @@ void	set_and(t_data *const data, t_process *carr)
 	arg2 = get_arg(data, carr, 1, idx);
 	reg_index = data->arena[carr->cur_pos + carr->rel_pos] - 1;
 	carr->rel_pos += T_REG;
-	carr->reg[reg_index] = (arg1 & arg2);
 	load_value_to_reg(carr, arg1 & arg2, reg_index);
 }
