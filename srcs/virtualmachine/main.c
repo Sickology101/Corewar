@@ -31,6 +31,6 @@ int	main(const int ac, const char **av)
 	// print_introduction(&data);
 	init_arena(&data);
 	run_game_loop(&data);
-	printf("game took %d loops\n", data.counter.total_cycles);
+	printf("game took %d loops\n", data.counter.cycles_total);
 	return (0);
 }

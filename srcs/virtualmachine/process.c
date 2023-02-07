@@ -28,7 +28,6 @@ void	create_initial_process_list(t_data *const data)
 		data->process_head = (t_process *)malloc(sizeof(t_process));
 		if (!data->process_head)
 			exit_error_message("Process head allocation failed!");
-		data->process_tail = data->process_head;
 		data->process_head->next = NULL;
 		data->process_head->unique_id = data->player_amount;
 	}

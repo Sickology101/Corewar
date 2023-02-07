@@ -14,12 +14,11 @@
 
 void	init_counter(t_counter *counter)
 {
-	counter->total_cycles = 0;
+	counter->cycles_total = 0;
 	counter->cycles_to_die = CYCLE_TO_DIE;
-	counter->nb_of_checks_done = 0;
-	counter->checks_without_reducing = 0;
+	counter->cycles_after_check = 0;
+	counter->checks_total = 0;
 	counter->lives_this_period = 0;
-	counter->initial_cycles = CYCLE_TO_DIE;
 }
 
 /*
@@ -36,8 +35,6 @@ void	delete_process(t_data *const data, t_process *process)
 		while (prev->next != process)
 			prev = prev->next;
 		prev->next = process->next;
-		if (prev->next == NULL)
-			data->process_tail = prev;
 	}
 	else
 		data->process_head = process->next;
@@ -57,8 +54,7 @@ void	check_processes(t_data *const data)
 	{
 		after_temp = temp_process->next;
 		if (temp_process->cycles_before_exec <= 0
-			|| temp_process->last_live < data->counter.total_cycles
-			- data->counter.initial_cycles)
+			|| data->counter.cycles_to_die <= data->counter.cycles_total - temp_process->last_live)
 		{
 			delete_process(data, temp_process);
 		}
@@ -77,20 +73,26 @@ void	check_processes(t_data *const data)
 */
 void	perform_check(t_data *const data, t_counter *counter)
 {
-	counter->checks_without_reducing++;
-	counter->nb_of_checks_done++;
+	int			i;
+	t_player	*player;
+
+	i = 0;
+	counter->checks_total++;
 	check_processes(data);
 	if (counter->lives_this_period >= NBR_LIVE
-		|| counter->checks_without_reducing == MAX_CHECKS)
+		|| counter->checks_total == MAX_CHECKS)
 	{
-		counter->checks_without_reducing = 0;
-		counter->initial_cycles -= CYCLE_DELTA;
+		counter->cycles_to_die -= CYCLE_DELTA;
+		counter->checks_total = 0;
 	}
-	if (counter->initial_cycles >= 0)
-		counter->cycles_to_die = counter->initial_cycles;
-	else
-		counter->cycles_to_die = 1;
+	player = data->player;
+	while (player)	
+	{
+		player->lives_amount = 0;
+		player = player->next;
+	}
 	counter->lives_this_period = 0;
+	counter->cycles_after_check = 0;
 }
 
 /*
@@ -103,14 +105,13 @@ void	run_game_loop(t_data *const data)
 	init_counter(&data->counter);
 	while (data->process_amount)
 	{
-		if (data->counter.total_cycles == data->dump_cycles)
+		if (data->counter.cycles_total == data->dump_cycles)
 		{
 			print_arena(data);
 			exit(0);
 		}
 		perform_cycle(data);
-		if (data->counter.cycles_to_die <= 0)
+		if (data->counter.cycles_to_die <= 0 || data->counter.cycles_to_die == data->counter.cycles_after_check)
 			perform_check(data, &data->counter);
-		data->counter.cycles_to_die--;
 	}
 }

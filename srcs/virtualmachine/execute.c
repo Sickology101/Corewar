@@ -26,7 +26,6 @@ int	validate_args_types(t_data *const data,
 		while (i < op->args_num)
 		{
 			type_id = ((byte & (0xC0 >> (i * 2))) >> (6 - i * 2));
-			printf("TYPEID = %d\n", type_id);
 			if (type_id == 0)
 			{
 				carriage->args[i] = 0;
@@ -115,7 +114,7 @@ void	execute_statement(t_data *const data, t_process *carriage)
 	if (op)
 	{
 		printf("------------------------------\n");
-		printf("\n%s at position %zu at cycle %d\n", g_op[carriage->op_id - 1].name, carriage->cur_pos, data->counter.total_cycles);
+		printf("\n%s at position %zu at cycle %d\n", g_op[carriage->op_id - 1].name, carriage->cur_pos, data->counter.cycles_total);
 		if (!op->read_types)
 			carriage->args[0] = op->args[0];
 		if (validate_args_types(data, carriage, op) && validate_args(data, carriage, op))

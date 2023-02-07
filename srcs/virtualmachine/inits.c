@@ -20,7 +20,6 @@ void	init_data(t_data *data)
 	data->player_amount = 0;
 	data->process_amount = 0;
 	data->process_head = NULL;
-	data->process_tail = NULL;
 }
 
 void	init_player(const char *path, t_player **player, int flag_id)
@@ -29,6 +28,8 @@ void	init_player(const char *path, t_player **player, int flag_id)
 		(*player)->id = flag_id;
 	else
 		(*player)->id = 0;
+	(*player)->last_live = 0;
+	(*player)->lives_amount = 0;
 	(*player)->path = path;
 	(*player)->name = NULL;
 	(*player)->comment = NULL;

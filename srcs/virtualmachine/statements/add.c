@@ -30,5 +30,5 @@ void	set_add(t_data *const data, t_process *carr)
 	reg_id = data->arena[carr->cur_pos + carr->rel_pos] - 1;
 	carr->rel_pos += T_REG;
 	load_value_to_reg(carr, arg1 + arg2, reg_id);
-	printf("arena now [%.2x] and next [%.2x]", data->arena[carr->cur_pos], data->arena[(carr->cur_pos + carr->rel_pos) % MEM_SIZE]);
+	printf("arena now [%.2x] and next [%.2x]\n", data->arena[carr->cur_pos], data->arena[(carr->cur_pos + carr->rel_pos) % MEM_SIZE]);
 }

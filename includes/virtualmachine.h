@@ -21,6 +21,8 @@
 typedef struct s_player
 {
 	int					id;
+	int					last_live;
+	int					lives_amount;
 	const char			*path;
 	const char			*name;
 	const char			*comment;
@@ -32,12 +34,11 @@ typedef struct s_player
 
 typedef struct s_counter
 {
-	int				total_cycles;
+	int				cycles_total;
 	int				cycles_to_die;
-	int				nb_of_checks_done;
-	int				checks_without_reducing;
+	int				cycles_after_check;
+	int				checks_total;
 	int				lives_this_period;
-	int				initial_cycles;
 }				t_counter;
 
 typedef struct s_process
@@ -65,7 +66,6 @@ typedef struct s_data
 	uint8_t				arena[MEM_SIZE];
 	size_t				process_amount;
 	struct s_process	*process_head;
-	struct s_process	*process_tail;
 }						t_data;
 
 typedef struct s_statement
@@ -151,7 +151,6 @@ void	put_process_on_arena(t_data *const data,
 			t_process *copy, int start, int end);
 
 /*-------Game_loop------*/
-
 void	run_game_loop(t_data *const data);
 
 /*-------Set_statements------*/

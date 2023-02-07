@@ -26,8 +26,9 @@ void	set_lfork(t_data *const data, t_process *carriage)
 	idx = 0;
 	carriage->rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
 	arg = get_arg(data, carriage, 0, idx);
-	copy_process(data, carriage, (carriage->cur_pos + arg) % MEM_SIZE);
-	copy = data->process_tail;
+	copy = copy_process(data, carriage, (carriage->cur_pos + arg) % MEM_SIZE);
+	copy->next = data->process_head;
+	data->process_head = copy->next;
 	put_process_on_arena(data, copy, carriage->cur_pos % MEM_SIZE,
 		(carriage->cur_pos + 2) % MEM_SIZE);
 }
