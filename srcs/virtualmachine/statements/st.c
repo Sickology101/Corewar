@@ -23,13 +23,17 @@
 void	set_st(t_data *const data, t_process *carr)
 {
 	int		address;
+	int		reg_id;
 	int32_t	reg_value;
+
 	int		idx;
 
 	// print_arena_term(data);
 	idx = IDX_MOD;
 	carr->rel_pos = 1 + g_op[carr->op_id - 1].read_types;
-	reg_value = get_arg(data, carr, 0, idx);
+	reg_id = data->arena[(carr->cur_pos + carr->rel_pos) % MEM_SIZE] - 1;
+	carr->rel_pos += T_REG;
+	reg_value = carr->reg[reg_id];
 	if (carr->args[1] == T_IND)
 	{
 		address = read_bytes(data->arena, carr->cur_pos + carr->rel_pos, IND_SIZE);

@@ -14,16 +14,17 @@
 
 void	set_ldi(t_data *const data, t_process *carr)
 {	
-	int	addr;
+	int	addr1;
+	int	addr2;
 	int	reg_id;
 	int idx;
 
-	idx = 0;
+	idx = IDX_MOD;
 	carr->rel_pos = 1 + g_op[carr->op_id - 1].read_types;
-	addr = get_arg(data, carr, 0, idx);
-	addr += get_arg(data, carr, 1, idx);
+	addr1 = get_arg(data, carr, 0, idx);
+	addr2 = get_arg(data, carr, 1, idx);
 	reg_id = data->arena[carr->cur_pos + carr->rel_pos] - 1;
 	carr->rel_pos += T_REG;
-	carr->reg[reg_id] = read_4_bytes(data->arena, carr->cur_pos + (addr % IDX_MOD));
+	carr->reg[reg_id] = read_4_bytes(data->arena, carr->cur_pos + ((addr1 + addr2) % IDX_MOD));
 	printf("ldi: reg[%i]: %i\n", reg_id + 1, carr->reg[reg_id]);
 }
