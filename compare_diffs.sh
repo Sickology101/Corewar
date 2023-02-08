@@ -15,16 +15,14 @@ OUR_WAR="./corewar"
 SCHOOL_WAR="./resources_42/vm_champs/corewar"
 INCREMENT=5000
 run_games() {
-	# ./vbrazh/corewar -dump $1 resources_42/vm_champs/$FILENAME.cor > ourcorewar1.txt
-	# tail -n +3 ourcorewar1.txt > ourcorewar.txt
+	# ./vbrazh/corewar -dump $1 $FILE > ourcorewar1.txt
+	# tail -n +11 ourcorewar1.txt > ourcorewar2.txt
 	# rm ourcorewar1.txt
 	$OUR_WAR -dump $1 $FILE > ourcorewar_log.txt
-	# sleep 0.05
 
 	$SCHOOL_WAR -d $1 $FILE > 42.txt
 	tail -n +3 42.txt > 42corewar.txt
 	rm 42.txt
-	# sleep 0.05
 }
 
 choose_file() {

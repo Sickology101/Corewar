@@ -26,7 +26,7 @@ int	validate_args_types(t_data *const data,
 		while (i < op->args_num)
 		{
 			type_id = ((byte & (0xC0 >> (i * 2))) >> (6 - i * 2));
-			if (type_id == 0)
+			if (type_id == 0) // MIGHT NOT NEED THIS ANYMORE
 			{
 				carriage->args[i] = 0;
 				i++;

@@ -1,0 +1,136 @@
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55 pass
+56 ----
+57 ----
+58 ----
+59 pass
+60 pass
+61 pass
+62 too big
+63 too big
+64 pass
+65 pass
+66 too big
+67 too big
+68 pass
+69 too big
+70 pass
+71 pass
+72 pass
+73 pass
+74 pass
+75 ----
+76 pass -n 33
+77 pass
+78 pass
+79 pass
+80 pass
+81 pass
+82 pass
+83 too big
+84 pass
+85 ----
+86 ????
+87 pass
+88 too big
+89 too big
+90 pass
+91 pass
+92 pass -n 6
+93 pass
+94 pass
+95 ???
+96 pass -n 10
+97 pass -n 10
+98 pass
+99 pass
+100 pass
+101 pass
+102 pass
+103 pass
+104 pass
+105 pass
+106 pass
+107 pass
+108 pass
+109 pass
+110 pass
+111 pass
+112 pass
+113 pass
+114 pass
+115 pass
+116 pass
+117 pass
+118 we don't accept these names
+119 pass
+120 pass
+121 too long
+122 pass
+123 pass
+124 pass
+125 pass
+126 pass
+127 pass
+128 pass
+129 pass
+130 pass -n +83
+131 pass
+132 too big
+133 pass
+134 too big
+135 pass

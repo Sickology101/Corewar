@@ -17,7 +17,7 @@ int32_t	read_4_bytes(uint8_t *arena, int read_pos)
 	int32_t	res;
 	int		sign;
 
-	sign = arena[read_pos] & 0x80;
+	sign = arena[read_pos % MEM_SIZE] & 0x80;
 	res = 0;
 	if (!sign)
 		res = arena[read_pos % MEM_SIZE] << 24
@@ -39,7 +39,7 @@ int16_t	read_2_bytes(uint8_t *arena, int cur_pos)
 	int32_t	res;
 	int		sign;
 
-	sign = arena[cur_pos] & 0x80;
+	sign = arena[cur_pos % MEM_SIZE] & 0x80;
 	res = 0;
 	if (!sign)
 		res = arena[cur_pos % MEM_SIZE] << 8
