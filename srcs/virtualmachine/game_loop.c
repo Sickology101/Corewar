@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:21:17 by igaplich          #+#    #+#             */
-/*   Updated: 2023/01/30 17:40:31 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/08 20:30:06 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void	check_processes(t_data *const data)
 	while (temp_process != NULL)
 	{
 		after_temp = temp_process->next;
-		if (temp_process->cycles_before_exec <= 0
-			|| data->counter.cycles_to_die <= data->counter.cycles_total - temp_process->last_live)
+		if (data->counter.cycles_to_die <= data->counter.cycles_total - temp_process->last_live)
 		{
 			delete_process(data, temp_process);
 		}
