@@ -1,4 +1,4 @@
-FILENAME="slider2"
+FILENAME="Machine-gun"
 ARGS=$#
 if ((ARGS != 1))
 then

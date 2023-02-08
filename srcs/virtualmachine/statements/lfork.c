@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:08 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/30 17:25:29 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/08 19:19:27 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	set_lfork(t_data *const data, t_process *carriage)
 	t_process	*copy;
 	int			idx;
 
-	idx = 0;
+	idx = IDX_MOD;
 	carriage->rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
 	arg = get_arg(data, carriage, 0, idx);
-	copy = copy_process(data, carriage, (carriage->cur_pos + arg) % MEM_SIZE);
+	copy = copy_process(data, carriage, arg);
 	copy->next = data->process_head;
 	data->process_head = copy;
 }

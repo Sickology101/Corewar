@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 17:53:52 by igaplich          #+#    #+#             */
-/*   Updated: 2023/02/08 15:40:25 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/08 19:05:24 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,15 +109,18 @@ void	execute_statement(t_data *const data, t_process *carriage)
 	t_statement	*op;
 
 	op = NULL;
-	if (data->arena[carriage->cur_pos % MEM_SIZE] - 1 >= 0 && data->arena[carriage->cur_pos % MEM_SIZE] - 1 <= 15)
-		op = &g_op[data->arena[carriage->cur_pos % MEM_SIZE] - 1];
+//	if (data->arena[carriage->cur_pos % MEM_SIZE] - 1 >= 0 && data->arena[carriage->cur_pos % MEM_SIZE] - 1 <= 15)
+//		op = &g_op[data->arena[carriage->cur_pos % MEM_SIZE] - 1];
+	if (carriage->op_id - 1 >= 0 && carriage->op_id - 1 < 16)
+		op = &g_op[carriage->op_id - 1];
 	if (op)
 	{
+		printf("\n\n-----------------------carriage_id: %zu-----------------------\n", carriage->unique_id);
 		if (carriage->unique_id == 4)
 		{
 			printf("ID4 %s %d %d\n", op->name, data->counter.cycles_total, carriage->carry);
 		}
-		printf("------------------------------\n");
+		//printf("------------------------------\n");
 		printf("\n%s at position %zu at cycle %d\n", g_op[carriage->op_id - 1].name, carriage->cur_pos, data->counter.cycles_total);
 		if (!op->read_types)
 			carriage->args[0] = op->args[0];
