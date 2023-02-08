@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 17:53:52 by igaplich          #+#    #+#             */
-/*   Updated: 2023/02/08 19:05:24 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/08 21:44:51 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	validate_args(t_data *const data, t_process *carriage, t_statement *op)
 		else if (carriage->args[i] == T_IND)
 			rel_index += IND_SIZE;
 		else if (carriage->args[i] == 0)
-			return(0);
+			return (0);
 		i++;
 	}
 	return (1);
@@ -120,7 +120,6 @@ void	execute_statement(t_data *const data, t_process *carriage)
 		{
 			printf("ID4 %s %d %d\n", op->name, data->counter.cycles_total, carriage->carry);
 		}
-		//printf("------------------------------\n");
 		printf("\n%s at position %zu at cycle %d\n", g_op[carriage->op_id - 1].name, carriage->cur_pos, data->counter.cycles_total);
 		if (!op->read_types)
 			carriage->args[0] = op->args[0];

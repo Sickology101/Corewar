@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 18:58:02 by mtissari          #+#    #+#             */
-/*   Updated: 2023/02/08 19:30:08 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/08 21:44:22 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int16_t	read_2_bytes(uint8_t *arena, int cur_pos)
 		res = arena[cur_pos % MEM_SIZE] << 8
 			| arena [(cur_pos + 1) % MEM_SIZE];
 	else
-		res = (arena[cur_pos   % MEM_SIZE] ^ 0xFF) << 8
+		res = (arena[cur_pos % MEM_SIZE] ^ 0xFF) << 8
 			| (arena[(cur_pos + 1) % MEM_SIZE] ^ 0xFF);
 	if (sign)
 		res = ~(res);
@@ -54,7 +54,7 @@ int16_t	read_2_bytes(uint8_t *arena, int cur_pos)
 
 int32_t	read_bytes(uint8_t *arena, int read_pos, int size)
 {
-	int32_t res;
+	int32_t	res;
 
 	res = 0;
 	if (size == 2)
@@ -73,7 +73,6 @@ int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
 
 	real_pos = (carr->cur_pos + carr->rel_pos) % MEM_SIZE;
 	op = &g_op[carr->op_id - 1];
-	//printf("\tcarriage at: %zu, reading bytes from: %i tdir_size: %d\n\n", carr->cur_pos, real_pos, g_op[carr->op_id - 1].tdir_size);
 	if (carr->args[arg_num] == T_DIR)
 	{
 		arg = read_bytes(data->arena, real_pos, op->tdir_size);
