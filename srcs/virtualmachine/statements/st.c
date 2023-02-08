@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:11 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/27 17:07:23 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:33:13 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	set_st(t_data *const data, t_process *carr)
 		carr->reg[address] = reg_value;
 		carr->rel_pos += T_REG;
 	}
-	printf("carr id = %zu\n", carr->unique_id);
+	//printf("carr id = %zu\n", carr->unique_id);
 	// print_arena_term(data);
 }

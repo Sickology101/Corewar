@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:11 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/30 17:24:21 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:03:07 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	set_sti(t_data *const data, t_process *carriage)
 	arg += get_arg(data, carriage, 2, idx);
 	arg = arg % IDX_MOD;
 	put_reg_value_on_arena(data->arena, (int)reg_value, carriage->cur_pos + arg, DIR_SIZE);
-	printf("\tWriting %i to index %i carr id = %zu\n", (int)reg_value, arg, carriage->unique_id);
+	printf("\tWriting %i to index %lu\n", (int)reg_value, carriage->cur_pos + arg);
 	// print_arena_term(data);
 }

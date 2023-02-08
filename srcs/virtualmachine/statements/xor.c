@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:11 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/25 20:10:42 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:43:09 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	set_xor(t_data *const data, t_process *carr)
 	reg_index = data->arena[carr->cur_pos + carr->rel_pos] - 1;
 	carr->rel_pos += T_REG;
 	carr->reg[reg_index] = (arg1 ^ arg2);
-	set_carry(carr, reg_index);
+	set_carry(carr, carr->reg[reg_index]);
 }

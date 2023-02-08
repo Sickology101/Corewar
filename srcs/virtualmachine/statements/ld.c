@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:11 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/30 16:55:32 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:33:00 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	load_value_to_reg(t_process *carriage, int value, int reg_num)
 	else
 		carriage->carry = 0;
 	carriage->reg[reg_num] = value;
-	printf("loaded %d to reg_id %d of ", value, reg_num);
+	printf("loaded %d to reg_id %d of ", value, reg_num + 1);
 }
 
 /*
@@ -39,5 +39,5 @@ void	set_ld(t_data *const data, t_process *carriage)
 	reg_id = data->arena[(carriage->cur_pos + carriage->rel_pos) % MEM_SIZE] - 1;
 	carriage->rel_pos += T_REG;
 	load_value_to_reg(carriage, value, reg_id);
-	printf("of carriage id %zu\n", carriage->unique_id);
+	//printf("of carriage id %zu\n", carriage->unique_id);
 }

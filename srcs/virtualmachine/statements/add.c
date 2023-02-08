@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:05:56 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/30 17:40:53 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:49:25 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	set_add(t_data *const data, t_process *carr)
 	reg_id = data->arena[carr->cur_pos + carr->rel_pos] - 1;
 	carr->rel_pos += T_REG;
 	load_value_to_reg(carr, arg1 + arg2, reg_id);
-	printf("arena now [%.2x] and next [%.2x]\n", data->arena[carr->cur_pos], data->arena[(carr->cur_pos + carr->rel_pos) % MEM_SIZE]);
+	set_carry(carr, carr->reg[reg_id]);
+	//printf("arena now [%.2x] and next [%.2x]\n", data->arena[carr->cur_pos], data->arena[(carr->cur_pos + carr->rel_pos) % MEM_SIZE]);
 }

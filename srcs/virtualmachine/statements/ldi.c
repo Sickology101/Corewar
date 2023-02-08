@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:06 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/30 17:41:09 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:17:00 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ void	set_ldi(t_data *const data, t_process *carr)
 	reg_id = data->arena[carr->cur_pos + carr->rel_pos] - 1;
 	carr->rel_pos += T_REG;
 	carr->reg[reg_id] = read_4_bytes(data->arena, carr->cur_pos + (addr % IDX_MOD));
+	printf("ldi: reg[%i]: %i\n", reg_id + 1, carr->reg[reg_id]);
 }

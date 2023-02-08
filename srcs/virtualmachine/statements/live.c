@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:11 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/26 20:19:36 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:29:44 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	set_live(t_data *const data, t_process *carriage)
 		player->last_live = data->counter.cycles_total;
 		player->lives_amount++;
 	}
-	printf("\n\t you've reached set_live, arg: %i\n", player_id);
+//	printf("\n\t you've reached set_live, arg: %i\n", player_id);
 }
 
 /*	TEMPORARY COMMENT(from cookbook):

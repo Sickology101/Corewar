@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:01 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/27 19:41:26 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:48:45 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void	set_and(t_data *const data, t_process *carr)
 	reg_index = data->arena[carr->cur_pos + carr->rel_pos] - 1;
 	carr->rel_pos += T_REG;
 	load_value_to_reg(carr, arg1 & arg2, reg_index);
+	set_carry(carr, carr->reg[reg_index]);
 }

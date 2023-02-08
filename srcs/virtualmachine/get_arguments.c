@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 18:58:02 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/27 19:48:29 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/08 14:58:10 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
 
 	real_pos = (carr->cur_pos + carr->rel_pos) % MEM_SIZE;
 	op = &g_op[carr->op_id - 1];
-	printf("\tcarriage at: %zu, reading bytes from: %i tdir_size: %d\n\n", carr->cur_pos, real_pos, g_op[carr->op_id - 1].tdir_size);
+	//printf("\tcarriage at: %zu, reading bytes from: %i tdir_size: %d\n\n", carr->cur_pos, real_pos, g_op[carr->op_id - 1].tdir_size);
 	if (carr->args[arg_num] == T_DIR)
 	{
 		arg = read_bytes(data->arena, real_pos, op->tdir_size);
@@ -89,10 +89,10 @@ int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
 			arg = read_bytes(data->arena, (carr->cur_pos + (arg % idx)) % MEM_SIZE, DIR_SIZE);
 		carr->rel_pos += 2;
 	}
-	else
+	else if (carr->args[arg_num] == T_REG)
 	{
 		arg = data->arena[real_pos];
-		printf("reg_id = %d\n", arg - 1);
+		printf("reg = %d\n", arg);
 		arg = carr->reg[arg - 1];
 		carr->rel_pos += 1;
 	}
