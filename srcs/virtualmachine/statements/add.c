@@ -17,22 +17,18 @@
 */
 void	set_add(t_data *const data, t_process *carr)
 {
-	int	reg_id1;
-	int	reg_id2;
-	int	reg_id3;
-	int	value;
+	int	arg1;
+	int	arg2;
+	int	reg_id;
 	int	idx;
 
 	idx = 0;
 	print_arena(data);
 	carr->rel_pos = 1 + g_op[carr->op_id - 1].read_types;
-	reg_id1 = data->arena[carr->cur_pos + carr->rel_pos] - 1;
+	arg1 = get_arg(data, carr, 0, idx);
+	arg2 = get_arg(data, carr, 1, idx);
+	reg_id = data->arena[carr->cur_pos + carr->rel_pos] - 1;
 	carr->rel_pos += T_REG;
-	reg_id2 = data->arena[carr->cur_pos + carr->rel_pos] - 1;
-	carr->rel_pos += T_REG;
-	value = carr->reg[reg_id1] + carr->reg[reg_id2];
-	reg_id3 = data->arena[carr->cur_pos + carr->rel_pos] - 1;
-	carr->rel_pos += T_REG;
-	load_value_to_reg(carr, value, reg_id3);
+	load_value_to_reg(carr, arg1 + arg2, reg_id);
 	//printf("arena now [%.2x] and next [%.2x]\n", data->arena[carr->cur_pos], data->arena[(carr->cur_pos + carr->rel_pos) % MEM_SIZE]);
 }
