@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:35 by marius            #+#    #+#             */
-/*   Updated: 2023/02/09 17:15:37 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:13:29 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	print_winner(t_data *const data)
 	ft_putchar('"');
 	ft_printf("%s", winner->name);
 	ft_putchar('"');
-	ft_printf(", has won !");
+	ft_printf(", has won !\n");
 }
 
 int	main(const int ac, const char **av)
@@ -56,6 +56,7 @@ int	main(const int ac, const char **av)
 	init_arena(&data);
 	run_game_loop(&data);
 	print_winner(&data);
-	printf("\n\033[0;93m \t Game took %d loops\n\n\033[0m", data.counter.cycles_total);//temporary
+	printf("\n\033[0;93m \t Game took %d loops\n\n\033[0m",
+		data.counter.cycles_total);//temporary
 	return (0);
 }

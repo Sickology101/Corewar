@@ -1,4 +1,4 @@
-0 too large code**
+0 change error message? (has too large code)
 1 pass
 2 pass
 3 pass
@@ -7,40 +7,40 @@
 6 pass
 7 pass
 8 pass
-9 ???
+9 comment check
 10 pass
 11 pass
 12 pass
-13 ???
-14 ???
+13 comment check
+14 comment check
 15 pass
-16 ???
-17 ???
+16 comment check
+17 comment check
 18 pass
 19 pass
-20 ???
+20 comment check
 21 pass
-22 ???
-23 ???
+22 comment check
+23 wrong file name (dot'.' in name) >> works on the 42corewar.
 24 pass
 25 pass
 26 pass
 27 pass
-28 ???
+28 comment check
 29 pass
 30 pass
 31 pass
 32 pass
 33 pass
 34 pass
-35 too large code**
-36 
-37 
-38 
-39 
-40 
-41 
-42 
+35 change error message? (has too large code)
+36 no space left on device (bee_gees.cor)
+37 did not get to the end (big_feet.cor)
+38 pass
+39 pass
+40 pass
+41 pass
+42 pass
 43 pass
 44 pass
 45 pass
@@ -54,9 +54,9 @@
 53 pass
 54 pass
 55 pass
-56 ----
-57 ----
-58 ----
+56 ???
+57 pass
+58 pass
 59 pass
 60 pass
 61 pass
@@ -84,7 +84,7 @@
 83 too big
 84 pass
 85 ----
-86 ????
+86 pass
 87 pass
 88 too big
 89 too big
@@ -93,7 +93,7 @@
 92 pass -n 6
 93 pass
 94 pass
-95 ???
+95 pass
 96 pass -n 10
 97 pass -n 10
 98 pass

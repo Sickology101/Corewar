@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:41:35 by macbook           #+#    #+#             */
-/*   Updated: 2023/01/17 15:51:07 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:00:16 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	print_introduction(t_data *const data)
 void	print_arena(t_data *const data)
 {
 	int	i;
-	int fd;
+	int	fd;
 
 	i = 0;
 

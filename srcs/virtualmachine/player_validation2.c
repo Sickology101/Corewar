@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_code_validation.c                           :+:      :+:    :+:   */
+/*   player_validation2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:34:11 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/27 16:26:24 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:18:19 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	get_exec_code(int fd, t_player *player)
 	printf("\033[0;32m executable CODE: %s\n\n\033[0m", buffer);
 	if (rtn < 1)
 	{
-		/* NEED TO DISCUSS IF THIS IS AN ERROR! */
-		exit_error_message("No executable code detected");
+		player->exec_code = (uint8_t *)malloc(sizeof(uint8_t) * 1);
+		ft_memcpy(player->exec_code, buffer, player->exec_size);
 	}
-	if (buffer[0])
+	else if (buffer[0])
 	{
 		player->exec_code = (uint8_t *)malloc(sizeof(uint8_t) * rtn);
 		ft_memcpy(player->exec_code, buffer, player->exec_size);
@@ -61,21 +61,19 @@ void	check_null_separator(int fd)
 void	get_champion_comment(int fd, t_player *player)
 {
 	int		rtn;
-	char	buffer[COMMENT_LENGTH];
+	char	buffer[COMMENT_LENGTH + 1];
 
 	rtn = lseek(fd, 0, SEEK_CUR);
 	printf("CURRENT LOCATION: %i\n", rtn);
+	buffer[COMMENT_LENGTH] = '\0';
 	rtn = read(fd, buffer, COMMENT_LENGTH);
 	printf("\tbytes read in get_champion_comment: %i\n\n", rtn);
 	if (rtn < COMMENT_LENGTH)
-	{
 		exit_error_message("invalid champion comment");
-	}
 	if (buffer[0])
 		player->comment = ft_strdup(buffer);
 	else
-		printf("\033[0;93m \t\tbuffer[0]" // An error or not?
-			"(champion comment) does not exist...\n \033[0m");
+		player->comment = ft_strdup("");
 	printf("\033[0;32m CHAMPION "
 		"COMMENT: %s\n\n \033[0m", player->comment);
 	check_null_separator(fd);

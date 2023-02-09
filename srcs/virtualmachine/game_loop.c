@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:21:17 by igaplich          #+#    #+#             */
-/*   Updated: 2023/02/08 20:30:06 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:11:19 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	check_processes(t_data *const data)
 	while (temp_process != NULL)
 	{
 		after_temp = temp_process->next;
-		if (data->counter.cycles_to_die <= data->counter.cycles_total - temp_process->last_live)
+		if (data->counter.cycles_to_die <= data->counter.cycles_total
+			- temp_process->last_live)
 		{
 			delete_process(data, temp_process);
 		}
@@ -85,7 +86,7 @@ void	perform_check(t_data *const data, t_counter *counter)
 		counter->checks_total = 0;
 	}
 	player = data->player;
-	while (player)	
+	while (player)
 	{
 		player->lives_amount = 0;
 		player = player->next;
@@ -110,7 +111,8 @@ void	run_game_loop(t_data *const data)
 			exit(0);
 		}
 		perform_cycle(data);
-		if (data->counter.cycles_to_die <= 0 || data->counter.cycles_to_die == data->counter.cycles_after_check)
+		if (data->counter.cycles_to_die <= 0
+			|| data->counter.cycles_to_die == data->counter.cycles_after_check)
 			perform_check(data, &data->counter);
 	}
 }

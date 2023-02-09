@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:30:33 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/27 18:58:31 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:05:45 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	calc_relative_position(int arg, t_process *carriage)
 		return (2);
 	else if (arg == REG_CODE)
 		return (1);
+	return (0);
 }
 
 void	set_carry(t_process *carriage, int value)

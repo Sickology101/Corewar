@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation.c                                       :+:      :+:    :+:   */
+/*   player_validation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:40:34 by mtissari          #+#    #+#             */
-/*   Updated: 2023/01/26 17:33:37 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:16:49 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	get_exec_size(int fd, t_player *player)
 	buffer = swap_endians(buffer);
 	if (buffer > CHAMP_MAX_SIZE)
 		exit_error_message("invalid exec_size");
-	else if (buffer == 0)
-	{
+	//else if (buffer == 0)
+	//{
 		/* THIS IS IN VALIDATION PART IN COOKBOOK - VIRTUAL MACHINE */
-		player->exec_size = CHAMP_MAX_SIZE;
-	}
+//		player->exec_size = CHAMP_MAX_SIZE;
+//	}
 	else
 		player->exec_size = buffer;
 	printf("\033[0;32m executable SIZE: %zu\n\033[0m", player->exec_size);
@@ -54,10 +54,10 @@ void	get_champion_name(int fd, t_player *player)
 	if (rtn < PROG_NAME_LENGTH)
 		exit_error_message("Error reading - Champion file to short!");
 	printf("\tbytes read in get_champion_name: %i\n\n", rtn);
-	printf("\033[0;32m CHAMPION NAME: %s\n\n\033[0m", buffer);
-	if (!buffer[0] || ft_strlen(buffer) > PROG_NAME_LENGTH)
+	printf("\033[0;32m CHAMPION NAME: %s\033[0m\n\n", buffer);
+	if ((buffer[0] && ft_strlen(buffer) > PROG_NAME_LENGTH))
 	{
-		exit_error_message("invalid champion name");
+		exit_error_message("\033[0;93m invalid champion name");
 	}
 	player->name = ft_strdup(buffer);
 	check_null_separator(fd);
@@ -84,7 +84,7 @@ int	validate_player(t_data *const data)
 {
 	int			fd;
 	int			rtn;
-	int			delete;
+	int			file_checker;
 	t_player	*player;
 
 	player = data->player;
@@ -98,13 +98,9 @@ int	validate_player(t_data *const data)
 		get_exec_size(fd, player);
 		get_champion_comment(fd, player);
 		get_exec_code(fd, player);
-		rtn = 1;
-		while (rtn >= 1)
-		{
-			rtn = read(fd, &delete, 1); //if this is > 0, file is too long?
-			printf(" %i rounds until EOF\n", rtn); // so is it an error then?
-		}
-		printf("--------------------------------------");
+		rtn = read(fd, &file_checker, 1);
+		if (rtn < 1)
+			exit_error_message("invalid file"); // means asm doesn't work!?
 		close (fd);
 		player = player->next;
 	}

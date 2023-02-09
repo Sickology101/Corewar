@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 18:58:02 by mtissari          #+#    #+#             */
-/*   Updated: 2023/02/09 16:14:38 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:12:41 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int32_t	read_4_bytes(uint8_t *arena, int read_pos)
 	res = 0;
 	if (!sign)
 		res = arena[read_pos % MEM_SIZE] << 24
-			| arena [(read_pos + 1) % MEM_SIZE] << 16
-			| arena [(read_pos + 2) % MEM_SIZE] << 8
-			| arena [(read_pos + 3) % MEM_SIZE];
+			| arena[(read_pos + 1) % MEM_SIZE] << 16
+			| arena[(read_pos + 2) % MEM_SIZE] << 8
+			| arena[(read_pos + 3) % MEM_SIZE];
 	else
 		res = (arena[read_pos % MEM_SIZE] ^ 0xFF) << 24
 			| (arena[(read_pos + 1) % MEM_SIZE] ^ 0xFF) << 16
@@ -43,7 +43,7 @@ int16_t	read_2_bytes(uint8_t *arena, int cur_pos)
 	res = 0;
 	if (!sign)
 		res = arena[cur_pos % MEM_SIZE] << 8
-			| arena [(cur_pos + 1) % MEM_SIZE];
+			| arena[(cur_pos + 1) % MEM_SIZE];
 	else
 		res = (arena[cur_pos % MEM_SIZE] ^ 0xFF) << 8
 			| (arena[(cur_pos + 1) % MEM_SIZE] ^ 0xFF);
@@ -81,18 +81,15 @@ int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
 	else if (carr->args[arg_num] == T_IND)
 	{
 		arg = read_2_bytes(data->arena, real_pos);
-		printf("\t\t\t ind: %i\t\t", arg);
-		if (idx == 0)
-		{
-			arg = read_bytes(data->arena, (carr->cur_pos + arg) % MEM_SIZE, DIR_SIZE);
-			printf("\tmiddle::: %i\t\t", arg);
-		}
+		if (idx == 0)	//is this statement needed?
+			arg = read_bytes(data->arena,
+					(carr->cur_pos + arg) % MEM_SIZE, DIR_SIZE);
 		else
-			arg = read_bytes(data->arena, (carr->cur_pos + (arg % idx)) % MEM_SIZE, DIR_SIZE);
-		printf("\t\t\t ind2: %i\t\t", arg);
+			arg = read_bytes(data->arena,
+					(carr->cur_pos + (arg % idx)) % MEM_SIZE, DIR_SIZE);
 		carr->rel_pos += 2;
 	}
-	else if (carr->args[arg_num] == T_REG)
+	else
 	{
 		arg = data->arena[real_pos];
 		printf("reg = %d\n", arg);
