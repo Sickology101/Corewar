@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 18:58:02 by mtissari          #+#    #+#             */
-/*   Updated: 2023/02/08 21:44:22 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:14:38 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,15 @@ int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
 	else if (carr->args[arg_num] == T_IND)
 	{
 		arg = read_2_bytes(data->arena, real_pos);
+		printf("\t\t\t ind: %i\t\t", arg);
 		if (idx == 0)
+		{
 			arg = read_bytes(data->arena, (carr->cur_pos + arg) % MEM_SIZE, DIR_SIZE);
+			printf("\tmiddle::: %i\t\t", arg);
+		}
 		else
 			arg = read_bytes(data->arena, (carr->cur_pos + (arg % idx)) % MEM_SIZE, DIR_SIZE);
+		printf("\t\t\t ind2: %i\t\t", arg);
 		carr->rel_pos += 2;
 	}
 	else if (carr->args[arg_num] == T_REG)
