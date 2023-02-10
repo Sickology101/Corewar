@@ -61,6 +61,7 @@ choose_file() {
 ARGS=$#
 if ((ARGS == 1)); then
 	FILE="${FILE_DIR[$1]}"
+	file_id=$1
 else
 	echo "\tPress [ to choose previous file"
 	echo "\tPress ] to choose next file"

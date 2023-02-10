@@ -7,26 +7,26 @@
 6 pass
 7 pass
 8 pass
-9 comment check
+9 pass -n +9
 10 pass
 11 pass
 12 pass
-13 comment check
-14 comment check
+13 pass -n +4
+14 pass -n +16
 15 pass
-16 comment check
-17 comment check
+16 pass -n +16
+17 pass -n 9
 18 pass
 19 pass
-20 comment check
+20 pass -n +5
 21 pass
-22 comment check
-23 wrong file name (dot'.' in name) >> works on the 42corewar.
+22 pass -n +16
+23 pass
 24 pass
 25 pass
 26 pass
 27 pass
-28 comment check
+28 pass -n +7
 29 pass
 30 pass
 31 pass
@@ -54,7 +54,7 @@
 53 pass
 54 pass
 55 pass
-56 ???
+56 pass -n +11
 57 pass
 58 pass
 59 pass
@@ -73,7 +73,7 @@
 72 pass
 73 pass
 74 pass
-75 ----
+75 File has too large code
 76 pass -n 33
 77 pass
 78 pass
@@ -83,7 +83,7 @@
 82 pass
 83 too big
 84 pass
-85 ----
+85 File has too large code
 86 pass
 87 pass
 88 too big
@@ -116,7 +116,7 @@
 115 pass
 116 pass
 117 pass
-118 we don't accept these names
+118 pass
 119 pass
 120 pass
 121 too long

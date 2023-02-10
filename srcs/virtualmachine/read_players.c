@@ -14,24 +14,13 @@
 
 void	validate_file_extension(const int i, const char **av)
 {
-	const char	*dot;
+	size_t		len;
 
 	if (av[i])
 	{
-		dot = ft_strchr(av[i], '.');
-		if (!dot)
+		len = ft_strlen(av[i]);
+		if (len < 4 || ft_strcmp(&av[i][len - 4], ".cor"))
 			exit_error_message("Wrong player file extension!");
-		else if (dot == av[i] && *(dot - 1) && *(dot - 1) == '/')
-			exit_error_message("Empty player filename!");
-		else if (dot == av[i] && *(dot + 1) && *(dot + 1) == '/')
-			exit_error_message("Enter player filename without "
-				"starting from ./");
-		else
-		{
-			if (ft_strcmp(dot, ".cor"))
-				exit_error_message("Wrong player file extension "
-					"or dots in the path!");
-		}
 	}
 }
 

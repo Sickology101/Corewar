@@ -64,6 +64,16 @@ int32_t	read_bytes(uint8_t *arena, int read_pos, int size)
 	return (res);
 }
 
+void	move_rel_pos(int arg_type, t_process *carr, t_statement *op)
+{
+	if (arg_type == T_DIR)
+		carr->rel_pos += op->tdir_size;
+	else if (arg_type == T_IND)
+		carr->rel_pos += 2;
+	else
+		carr->rel_pos += 1;
+}
+
 int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
 {
 	t_statement	*op;
@@ -73,10 +83,7 @@ int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
 	real_pos = (carr->cur_pos + carr->rel_pos) % MEM_SIZE;
 	op = &g_op[carr->op_id - 1];
 	if (carr->args[arg_num] == T_DIR)
-	{
 		arg = read_bytes(data->arena, real_pos, op->tdir_size);
-		carr->rel_pos += op->tdir_size;
-	}
 	else if (carr->args[arg_num] == T_IND)
 	{
 		arg = read_2_bytes(data->arena, real_pos);
@@ -86,14 +93,9 @@ int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
 		else
 			arg = read_bytes(data->arena,
 					(carr->cur_pos + (arg % idx)) % MEM_SIZE, DIR_SIZE);
-		carr->rel_pos += 2;
 	}
 	else
-	{
-		arg = data->arena[real_pos];
-		//printf("reg = %d\n", arg);
-		arg = carr->reg[arg - 1];
-		carr->rel_pos += 1;
-	}
+		arg = carr->reg[data->arena[real_pos] - 1];
+	move_rel_pos(carr->args[arg_num], carr, op);
 	return (arg);
 }
