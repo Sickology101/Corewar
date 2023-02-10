@@ -30,7 +30,11 @@ void	get_exec_size(int fd, t_player *player)
 		exit_error_message("Error reading - Champion file to short!");
 	buffer = swap_endians(buffer);
 	if (buffer > CHAMP_MAX_SIZE)
-		exit_error_message("invalid exec_size");
+	{
+		ft_printf("Error: File %s has too large a code (%d bytes > %d bytes)\n",
+				player->path, buffer, CHAMP_MAX_SIZE);
+		exit(0);
+	}
 	else
 		player->exec_size = buffer;
 }
