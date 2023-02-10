@@ -87,12 +87,10 @@ void	init_arena(t_data *const data)
 	player = data->player;
 	while (i < data->player_amount)
 	{
-		// print_player_code(player);
 		place_players_on_arena(player, data, pointer);
 		init_process_on_arena(data, player, pointer);
 		i++;
 		pointer += MEM_SIZE / data->player_amount;
 		player = player->next;
 	}
-	// print_arena(data);
 }

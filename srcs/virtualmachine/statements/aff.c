@@ -15,7 +15,7 @@
 void	set_aff(t_data *const data, t_process *carriage)
 {
 	int32_t	value;
-	int idx;
+	int		idx;
 
 	idx = 0;
 	carriage->rel_pos = 1 + g_op[carriage->op_id - 1].read_types;

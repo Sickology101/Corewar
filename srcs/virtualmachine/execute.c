@@ -38,11 +38,8 @@ int	validate_args_types(t_data *const data,
 		i = 0;
 		while (i < op->args_num)
 		{
-			if (!(carriage->args[i] & op->args[i]))
-			{
-				printf("\targ types wrong\n");
+			if (!(carriage->args[i] & op->args[i])) // means args types not ok
 				return (0);
-			}
 			i++;
 		}
 	}
@@ -64,19 +61,14 @@ int	validate_args(t_data *const data, t_process *carriage, t_statement *op)
 		if (carriage->args[i] == T_REG)
 		{
 			byte = data->arena[(carriage->cur_pos + rel_index) % MEM_SIZE];
-			if (byte < 1 || byte > 16)
-			{
-				printf("\targs are not ok\n");
+			if (byte < 1 || byte > 16 || carriage->args[i] == 0)
 				return (0);
-			}
 			rel_index++;
 		}
 		else if (carriage->args[i] == T_DIR)
 			rel_index += op->tdir_size;
 		else if (carriage->args[i] == T_IND)
 			rel_index += IND_SIZE;
-		else if (carriage->args[i] == 0)
-			return (0);
 		i++;
 	}
 	return (1);
@@ -109,21 +101,16 @@ void	execute_statement(t_data *const data, t_process *carriage)
 	t_statement	*op;
 
 	op = NULL;
-//	if (data->arena[carriage->cur_pos % MEM_SIZE] - 1 >= 0 && data->arena[carriage->cur_pos % MEM_SIZE] - 1 <= 15)
-//		op = &g_op[data->arena[carriage->cur_pos % MEM_SIZE] - 1];
 	if (carriage->op_id - 1 >= 0 && carriage->op_id - 1 < 16)
 		op = &g_op[carriage->op_id - 1];
 	if (op)
 	{
-		printf("\n\n-----------------------carriage_id: %zu-----------------------\n", carriage->unique_id);
-		if (carriage->unique_id == 4)
-		{
-			printf("ID4 %s %d %d\n", op->name, data->counter.cycles_total, carriage->carry);
-		}
-		printf("\n%s at position %zu at cycle %d\n", g_op[carriage->op_id - 1].name, carriage->cur_pos, data->counter.cycles_total);
+	//	printf("\n\n-----------------------carriage_id: %zu-----------------------\n", carriage->unique_id);
+	//	printf("\n%s at position %zu at cycle %d\n", g_op[carriage->op_id - 1].name, carriage->cur_pos, data->counter.cycles_total);
 		if (!op->read_types)
 			carriage->args[0] = op->args[0];
-		if (validate_args_types(data, carriage, op) && validate_args(data, carriage, op))
+		if (validate_args_types(data, carriage, op)
+			&& validate_args(data, carriage, op))
 		{
 			op->func(data, carriage);
 		}

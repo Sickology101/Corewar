@@ -64,7 +64,6 @@ int32_t	read_bytes(uint8_t *arena, int read_pos, int size)
 	return (res);
 }
 
-
 int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
 {
 	t_statement	*op;
@@ -81,7 +80,7 @@ int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
 	else if (carr->args[arg_num] == T_IND)
 	{
 		arg = read_2_bytes(data->arena, real_pos);
-		if (idx == 0)	//is this statement needed?
+		if (idx == 0) //is this statement needed?
 			arg = read_bytes(data->arena,
 					(carr->cur_pos + arg) % MEM_SIZE, DIR_SIZE);
 		else
@@ -92,7 +91,7 @@ int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
 	else
 	{
 		arg = data->arena[real_pos];
-		printf("reg = %d\n", arg);
+		//printf("reg = %d\n", arg);
 		arg = carr->reg[arg - 1];
 		carr->rel_pos += 1;
 	}

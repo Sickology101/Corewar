@@ -15,8 +15,11 @@
 void	set_statement_codes(t_data *const data, t_process *carriage)
 {
 	carriage->op_id = data->arena[carriage->cur_pos];
-	if (data->arena[carriage->cur_pos] >= 1 && data->arena[carriage->cur_pos] <= 16)
+	if (data->arena[carriage->cur_pos] >= 1
+		&& data->arena[carriage->cur_pos] <= 16)
+	{
 		carriage->cycles_before_exec = g_op[carriage->op_id - 1].cycles_num;
+	}
 }
 
 void	move_process(t_process *carriage)

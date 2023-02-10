@@ -16,7 +16,7 @@
 ** set_live is the most important statement in the game,
 ** because it tells if the champion is alive.
 ** The function identifies the live-statement to the process,
-** and the champion that is mentioned in the argument.
+** and to the champion that is mentioned in the argument.
 */
 void	set_live(t_data *const data, t_process *carriage)
 {
@@ -38,22 +38,5 @@ void	set_live(t_data *const data, t_process *carriage)
 		player->last_live = data->counter.cycles_total;
 		player->lives_amount++;
 	}
-	printf("\t you've reached set_live, arg: %i\n", player_id);
+	//printf("\t you've reached set_live, arg: %i\n", player_id);
 }
-
-/*	TEMPORARY COMMENT(from cookbook):
-The live statement has two functions:
-
-	It counts that carriage, which performs the live statement, is alive.
-		> done on line 23.
-
-	If the number specified as an argument to the statement live 
-	matches the number of the player, 
-	then it will consider that the player is alive. 
-	For example, if the argument value is -2, 
-	then the player with the number 2 is alive.
-		> done on line 24-25
-			> Must be a negative number! (2 doesn't count, '-2' does!)
-			> Need to change either data->last_alive to (int),
-				OR we find the address to the player here.
-*/

@@ -48,7 +48,6 @@ void	print_arena(t_data *const data)
 	int	fd;
 
 	i = 0;
-
 	fd = open("ourcorewar.txt", O_WRONLY | O_CREAT | O_TRUNC, 0600);
 	while (i < MEM_SIZE)
 	{

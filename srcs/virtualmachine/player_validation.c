@@ -25,21 +25,14 @@ void	get_exec_size(int fd, t_player *player)
 	rtn = lseek(fd, 0, SEEK_CUR);
 	if (rtn != 136)
 		exit_error_message("Error: Wrong byte location");
-	printf("CURRENT LOCATION: %i\n", rtn);
 	rtn = read(fd, &buffer, 4);
 	if (rtn < 4)
 		exit_error_message("Error reading - Champion file to short!");
 	buffer = swap_endians(buffer);
 	if (buffer > CHAMP_MAX_SIZE)
 		exit_error_message("invalid exec_size");
-	//else if (buffer == 0)
-	//{
-		/* THIS IS IN VALIDATION PART IN COOKBOOK - VIRTUAL MACHINE */
-//		player->exec_size = CHAMP_MAX_SIZE;
-//	}
 	else
 		player->exec_size = buffer;
-	printf("\033[0;32m executable SIZE: %zu\n\033[0m", player->exec_size);
 }
 
 /*
@@ -53,8 +46,6 @@ void	get_champion_name(int fd, t_player *player)
 	rtn = read(fd, buffer, PROG_NAME_LENGTH);
 	if (rtn < PROG_NAME_LENGTH)
 		exit_error_message("Error reading - Champion file to short!");
-	printf("\tbytes read in get_champion_name: %i\n\n", rtn);
-	printf("\033[0;32m CHAMPION NAME: %s\033[0m\n\n", buffer);
 	if ((buffer[0] && ft_strlen(buffer) > PROG_NAME_LENGTH))
 	{
 		exit_error_message("\033[0;93m invalid champion name");
@@ -99,22 +90,10 @@ int	validate_player(t_data *const data)
 		get_champion_comment(fd, player);
 		get_exec_code(fd, player);
 		rtn = read(fd, &file_checker, 1);
-		if (rtn < 1)
-			exit_error_message("invalid file"); // means asm doesn't work!?
+		if (rtn > 0)
+			exit_error_message("invalid file");
 		close (fd);
 		player = player->next;
 	}
 	return (0);
 }
-
-/*   _______________________________________________________
-	| an empty string can also be used as a champion name:  |
-	|														|
-	| .name ""												|
-	| But the complete absence of a string is an error:		|
-	|														|
-	| .name													|
-	|_______________________________________________________|
-		^ This has not been dealt with yet!!
-		Let's see if it needs to be validated here
-*/

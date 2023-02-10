@@ -81,107 +81,105 @@ typedef struct s_statement
 	void		(*func)(t_data *const, t_process *);
 }				t_statement;
 
-void	exit_error_message(char *message);
+void		exit_error_message(char *message);
 
 /*-------Prints-------*/
 
-void	print_introduction(t_data *const data);
-void	print_player_code(t_player *player);
-void	print_champion_path_and_id(t_data *const data);
-void	print_arena(t_data *const data);
+void		print_introduction(t_data *const data);
+void		print_player_code(t_player *player);
+void		print_champion_path_and_id(t_data *const data);
+void		print_arena(t_data *const data);
 
 /*-------Inits--------*/
 
-void	init_data(t_data *data);
-void	init_player(const char *path, t_player **player, int flag_id);
-void	init_arena(t_data *const data);
+void		init_data(t_data *data);
+void		init_player(const char *path, t_player **player, int flag_id);
+void		init_arena(t_data *const data);
 
 /*-------Player_ids---*/
 
-void	check_amount_of_players(t_data *const data);
-void	set_players_ids(t_data *const data);
-void	sort_players_list(t_data *const data);
+void		check_amount_of_players(t_data *const data);
+void		set_players_ids(t_data *const data);
+void		sort_players_list(t_data *const data);
 
 /*-------Read_players---*/
 
-void	validate_user_input(const int ac, const char **av, t_data *const data);
+void		validate_user_input(const int ac, const char **av,
+				t_data *const data);
 
 /*-------Flags----------*/
 
-void	check_n_flag_unique_ids(t_data *const data);
-int		validate_and_receive_n_flag(int *i, const char **av, int ac);
-void	validate_and_receive_dump_flag_arg(int *i, const char **av, int ac,
-			t_data *const data);
+void		check_n_flag_unique_ids(t_data *const data);
+int			validate_and_receive_n_flag(int *i, const char **av, int ac);
+void		validate_and_receive_dump_flag_arg(int *i, const char **av, int ac,
+				t_data *const data);
 
 /*-------Validation-----*/
 
-int		validate_player(t_data *const data);
+int			validate_player(t_data *const data);
 
 /*-------Player_code_validation*/
 
-void	get_exec_code(int fd, t_player *player);
-void	check_null_separator(int fd);
-void	get_champion_comment(int fd, t_player *player);
+void		get_exec_code(int fd, t_player *player);
+void		check_null_separator(int fd);
+void		get_champion_comment(int fd, t_player *player);
 
 /*-------Vm_Utils-------*/
 
-int		swap_endians(int buffer);
-int32_t	read_bytes(uint8_t *arena, int cur_pos, int size);
-int32_t	read_4_bytes(uint8_t *arena, int cur_pos);
-int16_t	read_2_bytes(uint8_t *arena, int cur_pos);
+int			swap_endians(int buffer);
+int32_t		read_bytes(uint8_t *arena, int cur_pos, int size);
+int32_t		read_4_bytes(uint8_t *arena, int cur_pos);
+int16_t		read_2_bytes(uint8_t *arena, int cur_pos);
 
 // void	put_reg_value_on_arena(uint8_t *arena, int value, int pos);
-void	put_reg_value_on_arena(uint8_t *arena, int value, int pos, int size);
-int		calc_relative_position(int arg, t_process *carriage);
-void	set_carry(t_process *carriage, int arg);
-int 	protect_address(int address);
-void	print_arena_term(t_data *const data);
+void		put_reg_value_on_arena(uint8_t *arena, int value,
+				int pos, int size);
+int			calc_relative_position(int arg, t_process *carriage);
+void		set_carry(t_process *carriage, int arg);
+void		print_arena_term(t_data *const data);
 
 /*-------Get_arguments--------*/
 
-int		get_arg(t_data *const data, t_process *carr, int arg_num, int idx);
-int		calculate_args(int code, int args);
+int			get_arg(t_data *const data, t_process *carr, int arg_num, int idx);
 
 /*-------Process--------*/
 
-void	free_process(t_process *process);
-void	create_initial_process_list(t_data *const data);
+void		free_process(t_process *process);
+void		create_initial_process_list(t_data *const data);
 t_process	*copy_process(t_data *const data, t_process *carriage, int pos);
-void	put_process_on_arena(t_data *const data,
-			t_process *copy, int start, int end);
 
 /*-------Game_loop------*/
-void	run_game_loop(t_data *const data);
+void		run_game_loop(t_data *const data);
 
 /*-------Set_statements------*/
 
-void	set_statement_codes(t_data *const data, t_process *carriage);
-void	perform_cycle(t_data *const data);
-void	move_process(t_process *carriage);
+void		set_statement_codes(t_data *const data, t_process *carriage);
+void		perform_cycle(t_data *const data);
+void		move_process(t_process *carriage);
 
 /*-------Statements------*/
 
-void	set_add(t_data *const data, t_process *carriage);
-void	set_aff(t_data *const data, t_process *carriage);
-void	set_and(t_data *const data, t_process *carriage);
-void	set_fork(t_data *const data, t_process *carriage);
-void	set_ldi(t_data *const data, t_process *carriage);
-void	set_lfork(t_data *const data, t_process *carriage);
-void	set_live(t_data *const data, t_process *carriage);
-void	set_lld(t_data *const data, t_process *carriage);
-void	set_lldi(t_data *const data, t_process *carriage);
-void	set_ld(t_data *const data, t_process *carriage);
-void	set_or(t_data *const data, t_process *carriage);
-void	set_st(t_data *const data, t_process *carriage);
-void	set_sti(t_data *const data, t_process *carriage);
-void	set_sub(t_data *const data, t_process *carriage);
-void	set_xor(t_data *const data, t_process *carriage);
-void	set_zjmp(t_data *const data, t_process *carriage);
+void		set_add(t_data *const data, t_process *carriage);
+void		set_aff(t_data *const data, t_process *carriage);
+void		set_and(t_data *const data, t_process *carriage);
+void		set_fork(t_data *const data, t_process *carriage);
+void		set_ldi(t_data *const data, t_process *carriage);
+void		set_lfork(t_data *const data, t_process *carriage);
+void		set_live(t_data *const data, t_process *carriage);
+void		set_lld(t_data *const data, t_process *carriage);
+void		set_lldi(t_data *const data, t_process *carriage);
+void		set_ld(t_data *const data, t_process *carriage);
+void		set_or(t_data *const data, t_process *carriage);
+void		set_st(t_data *const data, t_process *carriage);
+void		set_sti(t_data *const data, t_process *carriage);
+void		set_sub(t_data *const data, t_process *carriage);
+void		set_xor(t_data *const data, t_process *carriage);
+void		set_zjmp(t_data *const data, t_process *carriage);
 
 /*-------Execute--------*/
 
-void	execute_statement(t_data *const data, t_process *carriage);
-void	load_value_to_reg(t_process *carriage, int value, int reg_num);
+void		execute_statement(t_data *const data, t_process *carriage);
+void		load_value_to_reg(t_process *carriage, int value, int reg_num);
 
 static uint8_t			g_arg_code[3] = {
 	T_REG,
@@ -189,7 +187,7 @@ static uint8_t			g_arg_code[3] = {
 	T_IND
 };
 
-static t_statement	g_op[16] = {
+static t_statement		g_op[16] = {
 {
 	.name = "live",
 	.id = 1,
@@ -212,7 +210,6 @@ static t_statement	g_op[16] = {
 	.carry_mod = 1,
 	.func = &set_ld
 },
-
 {
 	.name = "st",
 	.id = 3,

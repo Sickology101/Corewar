@@ -14,7 +14,7 @@
 
 void	set_or(t_data *const data, t_process *carriage)
 {
-	int arg1;
+	int	arg1;
 	int	arg2;
 	int	reg_id;
 	int	idx;
@@ -23,8 +23,8 @@ void	set_or(t_data *const data, t_process *carriage)
 	carriage->rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
 	arg1 = get_arg(data, carriage, 0, idx);
 	arg2 = get_arg(data, carriage, 1, idx);
-	reg_id = data->arena[(carriage->cur_pos + carriage->rel_pos) % MEM_SIZE] - 1;
+	reg_id = data->arena[(carriage->cur_pos + carriage->rel_pos)
+		% MEM_SIZE] - 1;
 	carriage->rel_pos += T_REG;
 	load_value_to_reg(carriage, arg1 | arg2, reg_id);
-//	set_carry(carriage, arg3);
 }

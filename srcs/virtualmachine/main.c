@@ -30,11 +30,11 @@ void	print_winner(t_data *const data)
 	}
 	else
 	{
-		printf("\033[0;93m\n NO LIVES WERE SHOUTED!\033[0m\n\n");//temporary
+//		printf("\033[0;93m\n NO LIVES WERE SHOUTED!\033[0m\n\n");
 		while (winner->next)
 			winner = winner->next;
 	}
-	printf("\n\033[0;32m \t WINNER IS: %s\033[0m\n", winner->name);//temporary
+//	printf("\n\033[0;32m \t WINNER IS: %s\033[0m\n", winner->name);
 	ft_printf("Contestant %i, ", winner->id);
 	ft_putchar('"');
 	ft_printf("%s", winner->name);
@@ -56,7 +56,7 @@ int	main(const int ac, const char **av)
 	init_arena(&data);
 	run_game_loop(&data);
 	print_winner(&data);
-	printf("\n\033[0;93m \t Game took %d loops\n\n\033[0m",
-		data.counter.cycles_total);//temporary
+//	printf("\n\033[0;93m \t Game took %d loops\n\n\033[0m",
+//		data.counter.cycles_total);
 	return (0);
 }

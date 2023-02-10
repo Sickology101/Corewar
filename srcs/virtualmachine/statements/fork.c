@@ -26,7 +26,8 @@ void	set_fork(t_data *const data, t_process *carriage)
 	carriage->rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
 	address = get_arg(data, carriage, 0, idx);
 	copy = copy_process(data, carriage, address % idx);
-	printf("\t\t\t|-|=-|+| copied process location: %zu |-|=-|+| carriage_id: %zu, from carriage: %zu\n", copy->cur_pos, copy->unique_id, carriage->unique_id);
+//	printf("copied process location: %zu carriage_id:%zu, from carriage: %zu\n",
+		//copy->cur_pos, copy->unique_id, carriage->unique_id);
 	copy->next = data->process_head;
 	data->process_head = copy;
 }
