@@ -24,11 +24,11 @@ void	set_zjmp(t_data *const data, t_process *carriage)
 	idx = IDX_MOD;
 	carriage->rel_pos = 1 + g_op[carriage->op_id - 1].read_types;
 	address = get_arg(data, carriage, 0, idx);
-	printf("\ncarry: %i \n", carriage->carry);
+//	printf("\ncarry: %i \n", carriage->carry);
 	if (carriage->carry)
 	{
 		carriage->cur_pos = (carriage->cur_pos + (address % idx) % MEM_SIZE);
 		carriage->rel_pos = 0;
-		printf("\tzjmp: jumped to :%zu \t\n", carriage->cur_pos);
+//		printf("\tzjmp: jumped to :%zu \t\n", carriage->cur_pos);
 	}
 }
