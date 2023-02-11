@@ -36,6 +36,8 @@ void	check_amount_of_players(t_data *const data)
 
 	counter = 1;
 	tmp = data->player;
+	if (!tmp)
+		exit_error_message("Not enough players");
 	while (tmp)
 	{
 		if (counter > MAX_PLAYERS)

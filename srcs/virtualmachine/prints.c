@@ -12,21 +12,6 @@
 
 #include "../../includes/virtualmachine.h"
 
-void	print_champion_path_and_id(t_data *const data)
-{
-	t_player	*tmp;
-
-	printf("----------\n");
-	printf("\nLIST OF CHAMPS WITH THEIR ID'S\n");
-	tmp = data->player;
-	while (tmp)
-	{
-		printf("%s ", tmp->path);
-		printf("id = %d\n", tmp->id);
-		tmp = tmp->next;
-	}
-}
-
 void	print_introduction(t_data *const data)
 {
 	t_player	*tmp;
