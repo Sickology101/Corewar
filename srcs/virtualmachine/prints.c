@@ -16,13 +16,26 @@ void	print_introduction(t_data *const data)
 {
 	t_player	*tmp;
 
-	tmp = data->player;
-	ft_printf("\n\n");
+	tmp = NULL;
+	if (data->player)
+		tmp = data->player;
+	else 
+		ft_printf("Not enough players!");
 	ft_printf("Introducing contestants...\n");
 	while (tmp)
 	{
-		printf("* Player %d, weighing %zu bytes, \"%s\" (\"%s\") !\n",
-			tmp->id, tmp->exec_size, tmp->name, tmp->comment);
+		ft_printf("* Player %d, weighing %d bytes, ", tmp->id, tmp->exec_size);
+		ft_putchar('"');
+		if (tmp->name == NULL)
+			tmp->name = ft_strdup("");
+		ft_printf("%s", tmp->name);
+		ft_putchar('"');
+		ft_putchar(' ');
+		ft_putchar('(');
+		ft_putchar('"');
+		ft_printf("%s", tmp->comment);
+		ft_putchar('"');
+		ft_printf(") !\n");
 		tmp = tmp->next;
 	}
 }
@@ -30,24 +43,22 @@ void	print_introduction(t_data *const data)
 void	print_arena(t_data *const data)
 {
 	int	i;
-	int	fd;
 
 	i = 0;
-	fd = open("ourcorewar.txt", O_WRONLY | O_CREAT | O_TRUNC, 0600);
 	while (i < MEM_SIZE)
 	{
 		if (i % 64 == 0)
 		{
 			if (i != 0)
-				dprintf(fd, "\n");
+				ft_printf("\n");
 			if (i == 0)
-				dprintf(fd, "0x");
-			dprintf(fd, "%#.4x : ", i);
+				ft_printf("0x");
+			ft_printf("%#.4x : ", i);
 		}
-		dprintf(fd, "%.2x ", data->arena[i]);
+		ft_printf("%.2x ", data->arena[i]);
 		i++;
 	}
-	dprintf(fd, "\n");
+	ft_printf("\n");
 }
 
 void	print_arena_term(t_data *const data)

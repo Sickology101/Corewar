@@ -35,7 +35,7 @@ void	print_winner(t_data *const data)
 			winner = winner->next;
 	}
 //	printf("\n\033[0;32m \t WINNER IS: %s\033[0m\n", winner->name);
-	ft_printf("Contestant %i, \"%s\", has won !\n", winner->id, winner->name);
+	ft_printf(" Contestant %i, \"%s\", has won !\n", winner->id, winner->name);
 }
 
 int	main(const int ac, const char **av)

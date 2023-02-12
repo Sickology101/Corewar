@@ -1,65 +1,85 @@
 PASS=0
 NOT_PASS=0
 i=0
-FILE_ID=-1
+FILE_ID=0
 FILE_NUM=0
 FILE_DIR=( resources_42/valid_files/byte_code/*)
 OUR_WAR="./corewar"
 SCHOOL_WAR="./resources_42/vm_champs/corewar"
 INCREMENT=5000
+RED='\033[31m'
 GREEN='\033[32m'
+YELLOW='\033[33m'
 NOCOLOR='\033[0m'
 run_games() {
-	# ./vbrazh/corewar -dump $1 $FILE > ourcorewar1.txt
-	# tail -n +11 ourcorewar1.txt > ourcorewar2.txt
-	# rm ourcorewar1.txt
-	echo "Commands, used to run:"
-	echo "$OUR_WAR -dump $1 ${FILE[@]} > ourcorewar_log.txt"
-	$OUR_WAR -dump $1 ${FILE[@]} > ourcorewar_log.txt
-
-	echo "$SCHOOL_WAR -d $1 ${FILE[@]} > 42.txt"
-	$SCHOOL_WAR -d $1 ${FILE[@]} > 42.txt
-	tail -n +4 42.txt > 42corewar.txt
-	rm 42.txt
+	$OUR_WAR -dump $1 ${FILE[@]} | tail -n 64 > ourcorewar.txt
+	$SCHOOL_WAR -d $1 ${FILE[@]} | tail -n 64 > 42corewar.txt
 }
 
-print_chosen() {
+print_chosen_files() {
 	x=0
-	echo "${GREEN} Currently chosen files: ${NOCOLOR}"
-	while ((x < ARGS_AMOUNT))
-	do
-		echo "${FILE[$x]}, id = ${FILE_ID_ARR[$x]} "
-		((x += 1))
-	done
-	echo "\n"
-}
-
-
-choose_file() {
-
-	if ((FILE_NUM > 3))
-	then
-		echo "Max amount of players has been chosen"
-		sleep "1"
-		return
+	if (($1 != 1)); then
+		echo "${GREEN}Currently chosen files: ${NOCOLOR}"
+	else
+		echo "Files, used in this run:"
 	fi
 
-	FILE[$FILE_NUM]=${FILE_DIR[FILE_ID]}
-	echo "Choose player $FILE_NUM"
-	echo "file_id = $FILE_ID"
-	echo "${FILE[FILE_NUM]}"
+	if ((ARGS_AMOUNT == 0)); then
+		echo "None"
+		((x += 1))
+	fi
+	while ((x < ARGS_AMOUNT))
+	do
+		if (($1 != 1)); then
+			echo "${FILE[$x]}, id = ${FILE_ID_ARR[$x]} "
+		else
+			echo "\t${FILE[$x]}, id = ${FILE_ID_ARR[$x]} "
+		fi
+		((x += 1))
+	done
+
+	while ((x < 4)); do
+		echo ""
+		((x += 1))
+	done
+	echo ""
+}
+
+overwrite() {
+	echo "\033[11A";
+}
+
+choose_file() {
+	if ((FILE_ID < 0)); then
+		((FILE_ID = (${#FILE_DIR[@]} - 1)))
+	fi
+
+	if ((FILE_ID > (${#FILE_DIR[@]} - 1))); then
+		((FILE_ID = 0))
+	fi
+
+	print_chosen_files 0
+	echo "\r\033[KChoose player $FILE_NUM"
+	echo "\r\033[Kfile_id = $FILE_ID"
+	if (($FILE_ID >= 0)); then
+		echo "\r\033[K${FILE_DIR[FILE_ID]}"
+	else
+		echo "\r\033[KFile_id has to be >= 0"
+	fi
 
 	read -n1 -s -r -p $'\n' key
 
 	case "$key" in
 	$'[' )
 		((FILE_ID -= 1))
-		FILE_ID_ARR[$FILE_NUM]=$FILE_ID
+		FILE_ID_ARR[FILE_NUM]=$FILE_ID
+		overwrite ""
 		choose_file ""
 		;;
 	$']' )
 		((FILE_ID += 1))
-		FILE_ID_ARR[$FILE_NUM]=$FILE_ID
+		FILE_ID_ARR[FILE_NUM]=$FILE_ID
+		overwrite ""
 		choose_file ""
 		;;
 	$'\e' )
@@ -67,43 +87,52 @@ choose_file() {
 		exit 1
 		;;
 	$yes )
-		if ((FILE_ID < 0))
+		FILE[FILE_NUM]=${FILE_DIR[FILE_ID]}
+		((FILE_ID = 0))
+		((FILE_NUM += 1))
+		((ARGS_AMOUNT += 1))
+		if ((FILE_NUM > 3))
 		then
-			echo "file_id can't be negative"
-		else
-			((FILE_ID = -1))
-			((FILE_NUM += 1))
-			((ARGS_AMOUNT += 1))
+			echo "Max amount of players has been chosen"
+			sleep "1"
+			return
 		fi
-		print_chosen""
-		choose_file""
+		overwrite ""
+		choose_file ""
 		;;
 	$'r' )
 		if ((FILE_NUM < 1))
 		then
 			echo "Choose at least one player"
 			((FILE_ID = -1))
-			choose_file""
+			choose_file ""
 		else
 			return
 		fi
 		;;
 	* )
-		((FILE_ID = -1))
+		overwrite ""
 		choose_file ""
 		;;
 	esac
 }
 
+print_commands() {
+	echo "Commands, used to run:"
+
+	echo "\t$OUR_WAR -dump $1 ${FILE[@]} | tail -n 64 > ourcorewar.txt"
+	echo "\t$SCHOOL_WAR -d $1 ${FILE[@]} | tail -n 64 > 42corewar.txt"
+}
+
 ARGS_AMOUNT=$#
 if ((ARGS_AMOUNT >= 1)); then
 	for j in "$@"; do
-		echo "$j"
 		FILE[$FILE_NUM]=${FILE_DIR[j]}
 		FILE_ID_ARR[$FILE_NUM]=$j
 		((FILE_NUM += 1))
 	done
 else
+	echo "Controls:"
 	echo "\tPress [ to choose previous file"
 	echo "\tPress ] to choose next file"
 	echo "\tESC to exit"
@@ -113,22 +142,23 @@ else
 	choose_file ""
 fi
 
-print_chosen""
+strstr() {
+  [ "${1#*$2*}" = "$1" ] && return 1
+  return 0
+}
+
+
+print_chosen_files 0
 while true; do
-	echo "testing with i = $i"
-	echo "NOT_PASS = $NOT_PASS \tPASS = $PASS"
+	echo "Testing with -dump $i"
 	run_games "$i"
 	if [[ $(diff ourcorewar.txt 42corewar.txt) != "" ]]
 	then
-		echo "$i Didn't pass\n"
-		if ((i == 0))
-		then
-			break
-		fi
+		echo "${RED}diff with -dump $i isn't empty${NOCOLOR}\n"
 		((NOT_PASS = i))
 		((i= PASS + (NOT_PASS - PASS) / 2))
 	else
-		echo "$i passed\n"
+		echo "${GREEN}diff with -dump $i empty${NOCOLOR}\n"
 		((PASS = i))
 		if  ((NOT_PASS != 0))
 		then
@@ -137,22 +167,23 @@ while true; do
 			((i=i+INCREMENT))
 		fi
 	fi
-	if (((NOT_PASS - PASS) == 1));
+	if (((NOT_PASS - PASS) == 1)) || ((i == 0))
 	then
-		echo "CHECK THAT FIRST DIFF IS EMPTY, AND SECOND IS NOT"
-		echo "OTHERWISE THE SCRIPT GAVE FALSE RESULT\n"
+		if ((i != 0)); then
+			echo "${YELLOW}CHECK THAT FIRST DIFF IS EMPTY, AND SECOND IS NOT"
+			echo "OTHERWISE THE SCRIPT GAVE FALSE RESULT${NOCOLOR}\n"
 
-		run_games "$PASS"
-		echo diff 1 = $(diff ourcorewar.txt 42corewar.txt)
+			run_games "$PASS"
+			echo diff 1 = $(diff ourcorewar.txt 42corewar.txt)
 
-		run_games "$NOT_PASS"
-		echo diff 2 = $(diff ourcorewar.txt 42corewar.txt)
-
-		echo "\nPASS = $PASS\tNOT_PASS = $NOT_PASS"
-		echo "diff occured at -dump = $NOT_PASS\n"
+			run_games "$NOT_PASS"
+			echo diff 2 = $(diff ourcorewar.txt 42corewar.txt)
+		fi
+		echo "${RED}diff occured at -dump $NOT_PASS${NOCOLOR}\n"
 		break
 	fi
 done
 
-echo "Files used:"
-print_chosen ""
+echo "Gerenal info:\n"
+print_commands $i
+print_chosen_files 1
