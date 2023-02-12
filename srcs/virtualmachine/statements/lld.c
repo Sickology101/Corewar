@@ -25,6 +25,4 @@ void	set_lld(t_data *const data, t_process *carriage)
 		% MEM_SIZE] - 1;
 	carriage->rel_pos += T_REG;
 	load_value_to_reg(carriage, value, reg_id);
-	//printf("set_lld: value: %i to the register: %i, which is reg[%i]\n",
-		//value, reg_id + 1, reg_id);
 }

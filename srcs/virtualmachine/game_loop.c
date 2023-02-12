@@ -41,7 +41,6 @@ void	delete_process(t_data *const data, t_process *process)
 	free_process(process);
 	prev = NULL;
 	data->process_amount--;
-//	printf("PROCESS DELETED! nb of processes now: %zu\n", data->process_amount);
 }
 
 void	check_processes(t_data *const data)
@@ -101,7 +100,6 @@ void	perform_check(t_data *const data, t_counter *counter)
 */
 void	run_game_loop(t_data *const data)
 {
-//	printf("\n\ndump: %i\n\n", data->dump_cycles);
 	init_counter(&data->counter);
 	while (data->process_amount)
 	{

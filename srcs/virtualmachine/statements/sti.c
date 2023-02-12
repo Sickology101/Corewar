@@ -26,7 +26,4 @@ void	set_sti(t_data *const data, t_process *carriage)
 	arg = arg % IDX_MOD;
 	put_reg_value_on_arena(data->arena, (int)reg_value,
 		carriage->cur_pos + arg, DIR_SIZE);
-	//printf("\tWriting %i to index %lu, carriage_id: %zu\n",(int)reg_value,
-		//(carriage->cur_pos + arg) % MEM_SIZE, carriage->unique_id);
-	// print_arena_term(data);
 }

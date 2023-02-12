@@ -38,5 +38,4 @@ void	set_live(t_data *const data, t_process *carriage)
 		player->last_live = data->counter.cycles_total;
 		player->lives_amount++;
 	}
-	//printf("\t you've reached set_live, arg: %i\n", player_id);
 }

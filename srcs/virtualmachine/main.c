@@ -15,6 +15,9 @@
 void	exit_error_message(char *message)
 {
 	ft_putendl(message);
+	ft_putstr("Usage:\tcorewar [-dump <num>] [-n <num>] <champion.cor> <...>\n");
+	ft_putstr("\t\t-dump\t<num>\t\t : Dump memory after <num> cycles and exit\n");
+	ft_putstr("\t\t-n\t<num>\t\t : Set <num> tp the next player\n");
 	exit(0);
 }
 
@@ -30,11 +33,9 @@ void	print_winner(t_data *const data)
 	}
 	else
 	{
-//		printf("\033[0;93m\n NO LIVES WERE SHOUTED!\033[0m\n\n");
 		while (winner->next)
 			winner = winner->next;
 	}
-//	printf("\n\033[0;32m \t WINNER IS: %s\033[0m\n", winner->name);
 	ft_printf(" Contestant %i, \"%s\", has won !\n", winner->id, winner->name);
 }
 
@@ -51,7 +52,5 @@ int	main(const int ac, const char **av)
 	init_arena(&data);
 	run_game_loop(&data);
 	print_winner(&data);
-//	printf("\n\033[0;93m \t Game took %d loops\n\n\033[0m",
-//		data.counter.cycles_total);
 	return (0);
 }

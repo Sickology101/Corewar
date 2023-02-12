@@ -27,5 +27,4 @@ void	set_ldi(t_data *const data, t_process *carr)
 	carr->rel_pos += T_REG;
 	carr->reg[reg_id] = read_4_bytes(data->arena,
 			carr->cur_pos + ((addr1 + addr2) % IDX_MOD));
-//	printf("ldi: reg[%i]: %i\n", reg_id + 1, carr->reg[reg_id]);
 }

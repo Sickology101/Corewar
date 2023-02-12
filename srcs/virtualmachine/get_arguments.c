@@ -87,7 +87,7 @@ int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
 	else if (carr->args[arg_num] == T_IND)
 	{
 		arg = read_2_bytes(data->arena, real_pos);
-		if (idx == 0) //is this statement needed?
+		if (idx == 0)
 			arg = read_bytes(data->arena,
 					(carr->cur_pos + arg) % MEM_SIZE, DIR_SIZE);
 		else

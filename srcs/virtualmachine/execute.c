@@ -12,6 +12,20 @@
 
 #include "../../includes/virtualmachine.h"
 
+int	compare_arg_types(t_process *carriage, t_statement *op)
+{
+	int	i;
+
+	i = 0;
+	while (i < op->args_num)
+	{
+		if (!(carriage->args[i] & op->args[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	validate_args_types(t_data *const data,
 		t_process *carriage, t_statement *op)
 {
@@ -26,7 +40,7 @@ int	validate_args_types(t_data *const data,
 		while (i < op->args_num)
 		{
 			type_id = ((byte & (0xC0 >> (i * 2))) >> (6 - i * 2));
-			if (type_id == 0) // MIGHT NOT NEED THIS ANYMORE
+			if (type_id == 0)
 			{
 				carriage->args[i] = 0;
 				i++;
@@ -35,15 +49,8 @@ int	validate_args_types(t_data *const data,
 			carriage->args[i] = g_arg_code[type_id - 1];
 			i++;
 		}
-		i = 0;
-		while (i < op->args_num)
-		{
-			if (!(carriage->args[i] & op->args[i])) // means args types not ok
-				return (0);
-			i++;
-		}
 	}
-	return (1);
+	return (compare_arg_types(carriage, op));
 }
 
 int	validate_args(t_data *const data, t_process *carriage, t_statement *op)
@@ -105,8 +112,6 @@ void	execute_statement(t_data *const data, t_process *carriage)
 		op = &g_op[carriage->op_id - 1];
 	if (op)
 	{
-	//	printf("\n\n-----------------------carriage_id: %zu-----------------------\n", carriage->unique_id);
-	//	printf("\n%s at position %zu at cycle %d\n", g_op[carriage->op_id - 1].name, carriage->cur_pos, data->counter.cycles_total);
 		if (!op->read_types)
 			carriage->args[0] = op->args[0];
 		if (validate_args_types(data, carriage, op)

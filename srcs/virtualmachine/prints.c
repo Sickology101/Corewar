@@ -19,7 +19,7 @@ void	print_introduction(t_data *const data)
 	tmp = NULL;
 	if (data->player)
 		tmp = data->player;
-	else 
+	else
 		ft_printf("Not enough players!");
 	ft_printf("Introducing contestants...\n");
 	while (tmp)

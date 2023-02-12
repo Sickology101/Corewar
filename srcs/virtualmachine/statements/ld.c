@@ -19,7 +19,6 @@ void	load_value_to_reg(t_process *carriage, int value, int reg_num)
 	else
 		carriage->carry = 0;
 	carriage->reg[reg_num] = value;
-//	printf("loaded %d to reg_id %d of ", value, reg_num + 1);
 }
 
 /*
@@ -40,5 +39,4 @@ void	set_ld(t_data *const data, t_process *carriage)
 		% MEM_SIZE] - 1;
 	carriage->rel_pos += T_REG;
 	load_value_to_reg(carriage, value, reg_id);
-	//printf("of carriage id %zu\n", carriage->unique_id);
 }

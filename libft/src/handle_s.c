@@ -66,7 +66,7 @@ void	handle_s(t_print *tab)
 	char	*s;
 
 	s = va_arg(tab->args, char *);
-	if (!s || *s == '\0')
+	if (!s)
 	{
 		add_str_to_buff("(null)", tab);
 		return ;

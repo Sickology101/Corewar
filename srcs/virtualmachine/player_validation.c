@@ -32,7 +32,7 @@ void	get_exec_size(int fd, t_player *player)
 	if (buffer > CHAMP_MAX_SIZE)
 	{
 		ft_printf("Error: File %s has too large a code (%d bytes > %d bytes)\n",
-				player->path, buffer, CHAMP_MAX_SIZE);
+			player->path, buffer, CHAMP_MAX_SIZE);
 		exit(0);
 	}
 	else
