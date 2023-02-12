@@ -3,70 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/02/06 11:37:16 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/11 12:52:26 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-void	print_file(t_parser *data)
-{
-	int	index;
-	int	i;
+// void	print_file(t_parser *data)
+// {
+// 	int	index;
+// 	int	i;
 
-	ft_printf("%s\n%s\n", data->name, data->comment);
-	index = 2;
-	while (index < data->file_size)
-	{
-		if (data->line[index]->type == 0)
-			ft_printf("%s", data->line[index]->label);
-		else if (data->line[index]->type == 1)
-		{
-			ft_printf("%d ", data->line[index]->state_code);
-			if (data->line[index]->arg_code_req == true)
-			{
-				i = 0;
-				while (i < 8)
-				{
-					ft_printf("%d", data->line[index]->arg_code[i]);
-					i++;
-				}
-			}
-			i = 0;
-			while (i < data->line[index]->req_arg_num)
-			{
-				ft_printf(" [%d]%d", data->line[index]->arg_type[i], data->line[index]->arg_num[i]);
-				i++;
-			}
-		}
-		else
-		{
-			ft_printf("%s ", data->line[index]->label);
-			ft_printf("%d ", data->line[index]->state_code);
-			if (data->line[index]->arg_code_req == true)
-			{
-				i = 0;
-				while (i < 8)
-				{
-					ft_printf("%d", data->line[index]->arg_code[i]);
-					i++;
-				}
-			}
-			i = 0;
-			while (i < data->line[index]->req_arg_num)
-			{
-				ft_printf(" [%d]%lld", data->line[index]->arg_type[i], data->line[index]->arg_num[i]);
-				i++;
-			}
-		}
-		ft_printf("   size = %d", data->line[index]->size);
-		ft_printf("      dir_size =  %d\n", data->line[index]->dir_size);
-		index++;
-	}
-}
+// 	ft_printf("%s\n%s\n", data->name, data->comment);
+// 	index = 2;
+// 	while (index < data->file_size)
+// 	{
+// 		if (data->line[index]->type == 0)
+// 			ft_printf("%s", data->line[index]->label);
+// 		else if (data->line[index]->type == 1)
+// 		{
+// 			ft_printf("%d ", data->line[index]->state_code);
+// 			if (data->line[index]->arg_code_req == true)
+// 			{
+// 				i = 0;
+// 				while (i < 8)
+// 				{
+// 					ft_printf("%d", data->line[index]->arg_code[i]);
+// 					i++;
+// 				}
+// 			}
+// 			i = 0;
+// 			while (i < data->line[index]->req_arg_num)
+// 			{
+// 				ft_printf(" [%d]%d", data->line[index]->arg_type[i], data->line[index]->arg_num[i]);
+// 				i++;
+// 			}
+// 		}
+// 		else
+// 		{
+// 			ft_printf("%s ", data->line[index]->label);
+// 			ft_printf("%d ", data->line[index]->state_code);
+// 			if (data->line[index]->arg_code_req == true)
+// 			{
+// 				i = 0;
+// 				while (i < 8)
+// 				{
+// 					ft_printf("%d", data->line[index]->arg_code[i]);
+// 					i++;
+// 				}
+// 			}
+// 			i = 0;
+// 			while (i < data->line[index]->req_arg_num)
+// 			{
+// 				ft_printf(" [%d]%lld", data->line[index]->arg_type[i], data->line[index]->arg_num[i]);
+// 				i++;
+// 			}
+// 		}
+// 		ft_printf("   size = %d", data->line[index]->size);
+// 		ft_printf("      dir_size =  %d\n", data->line[index]->dir_size);
+// 		index++;
+// 	}
+// }
 
 /*
 a simple function that exits the program in case of 
@@ -130,7 +130,6 @@ int	main(int argc, char **argv)
 	data->fd = open(argv[1], O_RDONLY);
 	scan_file(data);
 	populate_t_dir(data);
-	print_file(data);
 	write_to_file(data, argv);
 	exit_usage(6);
 	return (0);

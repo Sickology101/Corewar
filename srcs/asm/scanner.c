@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/02/06 11:39:17 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/12 13:44:35 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*store_name_comment(t_parser *data, int flag)
 
 	index = 0;
 	size = calculate_size(data->line[flag]->str);
-	dest = (char *)malloc(sizeof(char) * size + 1);
+	dest = ft_strnew(size);
 	while (data->line[flag]->str[index] != '"')
 	{
 		index++;
@@ -54,7 +54,6 @@ char	*store_name_comment(t_parser *data, int flag)
 		i++;
 		index++;
 	}
-	dest[i] = '\0';
 	return (dest);
 }
 

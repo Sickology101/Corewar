@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_statements2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 10:13:22 by marius            #+#    #+#             */
-/*   Updated: 2023/02/06 11:40:20 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/12 13:45:49 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,7 @@ char	*get_arg(char *line, int *index)
 	if (line[*index + size - 1] == SEPARATOR_CHAR)
 		size--;
 	i = 0;
-	dest = (char *)malloc(sizeof(char) * size);
-	dest[size] = '\0';
+	dest = ft_strnew(size);
 	while (i < size)
 	{
 		dest[i] = line[*index];

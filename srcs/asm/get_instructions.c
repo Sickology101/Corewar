@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_instructions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 05:22:04 by marius            #+#    #+#             */
-/*   Updated: 2023/02/03 10:04:56 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/12 13:46:26 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ char	*get_label(char *line, int *index)
 	char	*dest;
 
 	size = get_label_size(line, *index);
-	dest = (char *)malloc(sizeof(char) * size);
-	dest[size] = '\0';
+	dest = ft_strnew(size);
 	while (*index < size)
 	{
 		if (!check_valid_label_char(line[*index]))
