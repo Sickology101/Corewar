@@ -64,3 +64,13 @@ void	set_carry(t_process *carriage, int value)
 	else
 		carriage->carry = 0;
 }
+
+void	move_rel_pos(int arg_type, t_process *carr, t_statement *op)
+{
+	if (arg_type == T_DIR)
+		carr->rel_pos += op->tdir_size;
+	else if (arg_type == T_IND)
+		carr->rel_pos += 2;
+	else
+		carr->rel_pos += 1;
+}

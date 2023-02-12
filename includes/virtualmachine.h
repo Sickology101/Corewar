@@ -86,8 +86,6 @@ void		exit_error_message(char *message);
 /*-------Prints-------*/
 
 void		print_introduction(t_data *const data);
-void		print_player_code(t_player *player);
-void		print_champion_path_and_id(t_data *const data);
 void		print_arena(t_data *const data);
 
 /*-------Inits--------*/
@@ -129,14 +127,12 @@ void		get_champion_comment(int fd, t_player *player);
 int			swap_endians(int buffer);
 int32_t		read_bytes(uint8_t *arena, int cur_pos, int size);
 int32_t		read_4_bytes(uint8_t *arena, int cur_pos);
-int16_t		read_2_bytes(uint8_t *arena, int cur_pos);
+void		move_rel_pos(int arg_type, t_process *carr, t_statement *op);
 
 // void	put_reg_value_on_arena(uint8_t *arena, int value, int pos);
 void		put_reg_value_on_arena(uint8_t *arena, int value,
 				int pos, int size);
-int			calc_relative_position(int arg, t_process *carriage);
 void		set_carry(t_process *carriage, int arg);
-void		print_arena_term(t_data *const data);
 
 /*-------Get_arguments--------*/
 
@@ -149,11 +145,11 @@ void		create_initial_process_list(t_data *const data);
 t_process	*copy_process(t_data *const data, t_process *carriage, int pos);
 
 /*-------Game_loop------*/
+
 void		run_game_loop(t_data *const data);
 
 /*-------Set_statements------*/
 
-void		set_statement_codes(t_data *const data, t_process *carriage);
 void		perform_cycle(t_data *const data);
 void		move_process(t_process *carriage);
 

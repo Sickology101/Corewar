@@ -64,14 +64,24 @@ int32_t	read_bytes(uint8_t *arena, int read_pos, int size)
 	return (res);
 }
 
-void	move_rel_pos(int arg_type, t_process *carr, t_statement *op)
+int	read_ind(t_data *const data, int real_pos, t_process *carr, int idx)
 {
-	if (arg_type == T_DIR)
-		carr->rel_pos += op->tdir_size;
-	else if (arg_type == T_IND)
-		carr->rel_pos += 2;
+	int			size;
+	int			arg;
+	t_statement	*op;
+
+	op = &g_op[carr->op_id - 1];
+	size = DIR_SIZE;
+	if (op->id == 13)
+		size = 2;
+	arg = read_2_bytes(data->arena, real_pos);
+	if (idx == 0)
+		arg = read_bytes(data->arena,
+				(carr->cur_pos + arg) % MEM_SIZE, size);
 	else
-		carr->rel_pos += 1;
+		arg = read_bytes(data->arena,
+				(carr->cur_pos + (arg % idx)) % MEM_SIZE, size);
+	return (arg);
 }
 
 int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
@@ -85,15 +95,7 @@ int	get_arg(t_data *const data, t_process *carr, int arg_num, int idx)
 	if (carr->args[arg_num] == T_DIR)
 		arg = read_bytes(data->arena, real_pos, op->tdir_size);
 	else if (carr->args[arg_num] == T_IND)
-	{
-		arg = read_2_bytes(data->arena, real_pos);
-		if (idx == 0)
-			arg = read_bytes(data->arena,
-					(carr->cur_pos + arg) % MEM_SIZE, DIR_SIZE);
-		else
-			arg = read_bytes(data->arena,
-					(carr->cur_pos + (arg % idx)) % MEM_SIZE, DIR_SIZE);
-	}
+		arg = read_ind(data, real_pos, carr, idx);
 	else
 		arg = carr->reg[data->arena[real_pos] - 1];
 	move_rel_pos(carr->args[arg_num], carr, op);
