@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_statements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:30:08 by marius            #+#    #+#             */
-/*   Updated: 2023/02/06 11:41:40 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/12 15:49:58 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	handle_3_arg(t_parser *data, char *line, int index)
 			data->line[data->file_size]->arg_type[0]);
 	free(arg);
 	arg = get_arg(line, &index);
+	
 	check_arg(data, arg, 1);
 	if (line[index] == SEPARATOR_CHAR)
 		index++;
@@ -101,6 +102,7 @@ void	get_statement(t_parser *data, char *line, int index)
 	data->line[data->file_size]->dir_loc[2] = 0;
 	if (line[index] == '\0')
 		exit_usage(4);
+	ft_printf(" \n\n data->line[data->file_size]->req_arg_num == %i \n\n", data->line[data->file_size]->req_arg_num);
 	if (data->line[data->file_size]->req_arg_num == 1)
 		handle_1_arg(data, line, index);
 	else if (data->line[data->file_size]->req_arg_num == 2)

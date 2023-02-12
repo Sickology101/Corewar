@@ -6,7 +6,7 @@
 #    By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 08:10:42 by marius            #+#    #+#              #
-#    Updated: 2023/02/12 13:49:13 by parkharo         ###   ########.fr        #
+#    Updated: 2023/02/12 15:06:33 by parkharo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJ			=	$(addprefix $(OBJ_D), $(SRCS:%.c=%.o))
 INCLUDE		=	-I includes/ -I $(LIB)
 
 CC			=	clang
-CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror# -g # -fsanitize=address
 
 all: $(NAME)
 

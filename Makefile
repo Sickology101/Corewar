@@ -6,14 +6,14 @@
 #    By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-#    Updated: 2023/02/12 13:48:54 by parkharo         ###   ########.fr        #
+#    Updated: 2023/02/12 15:06:29 by parkharo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 COREWAR		=	corewar
 ASSEMBLER	=	assembler
 LIBFT		=	libft/libftprintf.a
-FLAGS		=	-Wall -Wextra -Werror -I includes -I libft/includes -I libft/libft -g -fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror -I includes -I libft/includes -I libft/libft #-g -fsanitize=address
 
 SRC		=	main.c scanner.c get_name_comment.c utils.c get_instructions.c get_statements.c write_to_file.c write_bytes.c joinfree.c populate.c get_statements2.c get_statements3.c get_statements4.c populate_help.c write_utils.c
 

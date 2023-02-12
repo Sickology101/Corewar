@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/02/12 13:44:35 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/12 15:00:50 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ char	*store_name_comment(t_parser *data, int flag)
 
 	index = 0;
 	size = calculate_size(data->line[flag]->str);
-	dest = ft_strnew(size);
+	dest = (char *)malloc(sizeof(char) * size + 1);
+	dest[size - 1] = '\0';
 	while (data->line[flag]->str[index] != '"')
 	{
 		index++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_statements3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 10:21:59 by marius            #+#    #+#             */
-/*   Updated: 2023/02/06 11:40:03 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/12 15:55:19 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	check_valid_reg(t_parser *data, char *arg, int flag)
 	int	index;
 
 	index = 1;
+	ft_printf("\n\nWe are here !!!\n\n");
 	if (arg[0] != 'r')
 		exit_usage(4);
 	if (!ft_isdigit(arg[1]))
@@ -109,6 +110,7 @@ void	check_valid_ind(t_parser *data, char *arg, int flag)
 	int	index;
 
 	index = 0;
+	ft_printf("\n\narg is '%s'\n\n", arg);
 	if (!ft_isdigit(arg[index]) && arg[index] != '-')
 		exit_usage(4);
 	data->line[data->file_size]->arg_num[flag] = get_number_index(arg, &index);

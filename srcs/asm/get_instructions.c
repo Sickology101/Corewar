@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 05:22:04 by marius            #+#    #+#             */
-/*   Updated: 2023/02/12 13:46:26 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/12 15:42:55 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,15 @@ char	*get_label(char *line, int *index)
 void	save_instruction(t_parser *data, char *line)
 {
 	int	index;
+	int index2;
 
 	index = 0;
-	if (line[index] != MTY_SPACE_1 && line[index] != MTY_SPACE_2)
+	index2 = 0;
+	while (line[index2] != MTY_SPACE_1 && line[index2] != MTY_SPACE_2 && line[index2] != '\0')
+	{
+		index2++;
+	}
+	if (line[index2 - 1] == ':')
 	{
 		data->line[data->file_size]->label = get_label(line, &index);
 		index++;
