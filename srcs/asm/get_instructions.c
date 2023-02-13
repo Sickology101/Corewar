@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 05:22:04 by marius            #+#    #+#             */
-/*   Updated: 2023/02/12 15:42:55 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 11:39:22 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,19 @@
 
 int	get_label_size(char *line, int index)
 {
+	int		size;
+
+	size = 0;
+	ft_printf("\n\nLINE IN GET LABEL SIZE IS '%s'", line);
+	index = ignore_spaces(line, index);
 	while (line[index] != '\0' && line[index] != LABEL_CHAR)
 	{
+		size++;
 		index++;
 	}
 	if (line[index] == '\0')
 		exit_usage(1);
-	return (index);
+	return (size);
 }
 
 bool	check_valid_label_char(char c)
@@ -41,14 +47,18 @@ char	*get_label(char *line, int *index)
 {
 	int		size;
 	char	*dest;
+	int		i;
 
+	i = 0;
 	size = get_label_size(line, *index);
 	dest = ft_strnew(size);
-	while (*index < size)
+	*index = ignore_spaces(line, *index);
+	while (i < size)
 	{
+		ft_printf ("\n\n INDEX IS '%i'", *index);
 		if (!check_valid_label_char(line[*index]))
 			exit_usage(2);
-		dest[*index] = line[*index];
+		dest[i++] = line[*index];
 		*index = *index + 1;
 	}
 	return (dest);
@@ -61,6 +71,7 @@ void	save_instruction(t_parser *data, char *line)
 
 	index = 0;
 	index2 = 0;
+	index2 = ignore_spaces(line, index2);
 	while (line[index2] != MTY_SPACE_1 && line[index2] != MTY_SPACE_2 && line[index2] != '\0')
 	{
 		index2++;
