@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 14:19:10 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:55:40 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,32 @@ bool	checkname(char *str)
 void	our_free(t_parser *data)
 {
 	int index;
+	int	i;
 
 	index = 0;
 	while (index < data->file_size)
 	{
-		free(data->line[index]->str);
+		i = 0;
+		if (data->line[index]->label != NULL)
+			free(data->line[index]->label);
+		if (data->line[index]->arg_num != NULL)
+			free(data->line[index]->arg_num);
+		ft_printf("\n\n INDEX IS '%i'", index);
+		if (data->line[index]->statement != NULL)
+			free(data->line[index]->statement);
+		if (index > 1)
+		{
+			while (i < data->line[index]->req_arg_num)
+				free(data->line[index]->arg[i++]);
+		}
+		if (data->line[index]->str != NULL)
+			free(data->line[index]->str);
+		if (data->line[index] != NULL)
+			free(data->line[index]);
 		index++;
 	}
+	if (data->line != NULL)
+		free(data->line);
 	free(data);
 }
 
@@ -144,7 +163,7 @@ int	main(int argc, char **argv)
 	scan_file(data);
 	populate_t_dir(data);
 	write_to_file(data, argv);
-	our_free(data);
+	//our_free(data);
 	exit_usage(6);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strupdate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:19:15 by marius            #+#    #+#             */
-/*   Updated: 2023/01/28 04:56:05 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/13 15:21:30 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ char	*ft_strupdate(char *s1, const char *s2)
 	temp = ft_strjoin(s1, s2);
 	if (!temp)
 		return (NULL);
-	ft_strdel(&s1);
+	free(s1);
 	return (temp);
 }

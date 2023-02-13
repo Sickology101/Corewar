@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 05:22:04 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 14:17:39 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:46:57 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,11 @@ void	get_instructions(t_parser *data)
 		if (!ignore_comment_empty(line))
 		{
 			data->line[data->file_size] = (t_line *)malloc(sizeof(t_line));
-			data->line[data->file_size]->str
-				= (char *)malloc(sizeof(char) * (ft_strlen(line) + 1));
-			data->line[data->file_size]->str
-				= ft_strcpy(data->line[data->file_size]->str, line);
+			data->line[data->file_size]->str = ft_strnew((ft_strlen(line)));
+			ft_strcpy(data->line[data->file_size]->str, line);
 			save_instruction(data, line);
 		}
+		free(line);
 		ret = get_next_line(data->fd, &line);
 	}
 	if (data->file_size == 2)

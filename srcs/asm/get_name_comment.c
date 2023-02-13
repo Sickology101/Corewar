@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:28:58 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 14:01:48 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:44:57 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	save_name_comment(t_parser *data, char *line, int flag)
 	else
 	{
 		data->line[flag]->str = ft_strupdate(data->line[flag]->str, "\n");
+		free(line);
 		ret = get_next_line(data->fd, &line);
 		if (ret == 0)
 			exit_usage(4);
@@ -80,32 +81,44 @@ void	process_name_comment(t_parser *data, char *line, int i)
 	save_name_comment(data, line, i);
 }
 
-char *ft_strtrimstart(char *line)
+int	 ft_strnccmp(char *line)
 {
 	while (*line == MTY_SPACE_1 || *line == MTY_SPACE_2)
 	{
 		++line;
 	}
-	return line;
+	if (ft_strncmp(line, ".name", 5) == 0)
+	{
+		return (1);
+	}
+	if (ft_strncmp(line, ".comment", 8) == 0)
+	{
+		return (2);
+	}
+	return (0);
 }
+
 
 void	get_name_comment(t_parser *data)
 {
 	int		ret;
 	char	*line;
+	int		i;
 
 	ret = get_next_line(data->fd, &line);
 	if (ret == 0)
 		exit_usage(4);
 	while (ignore_comment_empty(line))
 	{
+		free(line);
 		ret = get_next_line(data->fd, &line);
 		if (ret == 0)
 			exit_usage(4);
 	}
-	if (!ft_strncmp(ft_strtrimstart(line), ".name", 5))
+	i = ft_strnccmp(line);
+	if (i == 1)
 		process_name_comment(data, line, 0);
-	else if (!ft_strncmp(ft_strtrimstart(line), ".comment", 8))
+	else if (i == 2)
 		process_name_comment(data, line, 1);
 	else
 		exit_usage(5);

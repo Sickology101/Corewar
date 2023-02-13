@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:30:08 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 14:18:11 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:52:58 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	handle_1_arg(t_parser *data, char *line, int index)
 	data->line[data->file_size]->size
 		= get_inst_size(data, data->line[data->file_size]->state_code,
 			data->line[data->file_size]->arg_type[0]);
+	free(arg);
 }
 
 void	handle_2_arg(t_parser *data, char *line, int index)
@@ -60,6 +61,7 @@ void	handle_2_arg(t_parser *data, char *line, int index)
 	data->line[data->file_size]->size = data->line[data->file_size]->size
 		+ get_inst_size(data, data->line[data->file_size]->state_code,
 			data->line[data->file_size]->arg_type[1]);
+	free(arg);
 }
 
 void	handle_3_arg(t_parser *data, char *line, int index)
@@ -86,6 +88,7 @@ void	handle_3_arg(t_parser *data, char *line, int index)
 		index++;
 	else
 		exit_usage(4);
+	free(arg);
 	handle_3_arg_2(data, line, index);
 }
 
