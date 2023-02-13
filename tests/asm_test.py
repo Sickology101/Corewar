@@ -20,8 +20,6 @@ def assembly_versions(filename):
 	os.system('rm hex2.txt')
 
 sample_files = "./valid_files"
-asm_42_dir = "42asm"
-our_asm_dir = "ourAsm"
 
 for filename in os.listdir(sample_files):
 	assembly_versions(filename)

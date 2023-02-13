@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:30:08 by marius            #+#    #+#             */
-/*   Updated: 2023/02/12 15:49:58 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 10:31:54 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	handle_2_arg(t_parser *data, char *line, int index)
 	arg = get_arg(line, &index);
 	data->line[data->file_size]->arg = (char **)malloc(sizeof(char *) * 2);
 	check_arg(data, arg, 0);
+	index = ignore_spaces(line, index);
 	if (line[index] == SEPARATOR_CHAR)
 		index++;
 	else
@@ -68,6 +69,7 @@ void	handle_3_arg(t_parser *data, char *line, int index)
 	arg = get_arg(line, &index);
 	data->line[data->file_size]->arg = (char **)malloc(sizeof(char *) * 3);
 	check_arg(data, arg, 0);
+	index = ignore_spaces(line, index);
 	if (line[index] == SEPARATOR_CHAR)
 		index++;
 	else
@@ -78,8 +80,8 @@ void	handle_3_arg(t_parser *data, char *line, int index)
 			data->line[data->file_size]->arg_type[0]);
 	free(arg);
 	arg = get_arg(line, &index);
-	
 	check_arg(data, arg, 1);
+	index = ignore_spaces(line, index);
 	if (line[index] == SEPARATOR_CHAR)
 		index++;
 	else
@@ -89,6 +91,7 @@ void	handle_3_arg(t_parser *data, char *line, int index)
 
 void	get_statement(t_parser *data, char *line, int index)
 {
+	ft_printf(" \n\n data->line[data->file_size]->str equals to '%s' \n\n", data->line[data->file_size]->str);
 	get_name(data, line, &index);
 	if (!check_valid_statement_name(data->line[data->file_size]->statement,
 			data))
@@ -102,7 +105,6 @@ void	get_statement(t_parser *data, char *line, int index)
 	data->line[data->file_size]->dir_loc[2] = 0;
 	if (line[index] == '\0')
 		exit_usage(4);
-	ft_printf(" \n\n data->line[data->file_size]->req_arg_num == %i \n\n", data->line[data->file_size]->req_arg_num);
 	if (data->line[data->file_size]->req_arg_num == 1)
 		handle_1_arg(data, line, index);
 	else if (data->line[data->file_size]->req_arg_num == 2)

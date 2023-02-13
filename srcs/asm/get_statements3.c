@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 10:21:59 by marius            #+#    #+#             */
-/*   Updated: 2023/02/12 15:55:19 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 10:10:08 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,20 @@ void	check_valid_ind(t_parser *data, char *arg, int flag)
 
 	index = 0;
 	ft_printf("\n\narg is '%s'\n\n", arg);
-	if (!ft_isdigit(arg[index]) && arg[index] != '-')
-		exit_usage(4);
-	data->line[data->file_size]->arg_num[flag] = get_number_index(arg, &index);
-	index = ignore_spaces(arg, index);
-	if (arg[index] != SEPARATOR_CHAR && arg[index]
-		!= COMMENT_CHAR && arg[index] != '\0')
-		exit_usage(4);
-	data->line[data->file_size]->arg[flag] = ft_strdup(arg);
+	if (arg[0] == ':')
+	{
+		data->line[data->file_size]->arg[flag] = ft_strdup(arg);
+		data->line[data->file_size]->dir_label = true;
+		data->line[data->file_size]->dir_loc[flag] = 1;
+	} else 
+	{
+		if (!ft_isdigit(arg[index]) && arg[index] != '-')
+			exit_usage(4);
+		data->line[data->file_size]->arg_num[flag] = get_number_index(arg, &index);
+		index = ignore_spaces(arg, index);
+		if (arg[index] != SEPARATOR_CHAR && arg[index]
+			!= COMMENT_CHAR && arg[index] != '\0')
+			exit_usage(4);
+		data->line[data->file_size]->arg[flag] = ft_strdup(arg);
+	}
 }

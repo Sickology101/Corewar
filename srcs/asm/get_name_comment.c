@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:28:58 by marius            #+#    #+#             */
-/*   Updated: 2023/02/12 15:07:44 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 10:43:51 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,15 @@ void	process_name_comment(t_parser *data, char *line, int i)
 	save_name_comment(data, line, i);
 }
 
+char *ft_strtrimstart(char *line)
+{
+	while (*line == MTY_SPACE_1 || *line == MTY_SPACE_2)
+	{
+		++line;
+	}
+	return line;
+}
+
 void	get_name_comment(t_parser *data)
 {
 	int		ret;
@@ -94,9 +103,9 @@ void	get_name_comment(t_parser *data)
 		if (ret == 0)
 			exit_usage(4);
 	}
-	if (!ft_strncmp(line, ".name", 5))
+	if (!ft_strncmp(ft_strtrimstart(line), ".name", 5))
 		process_name_comment(data, line, 0);
-	else if (!ft_strncmp(line, ".comment", 8))
+	else if (!ft_strncmp(ft_strtrimstart(line), ".comment", 8))
 		process_name_comment(data, line, 1);
 	else
 		exit_usage(5);
