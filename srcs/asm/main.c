@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/02/11 12:52:26 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:06:26 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,21 @@ bool	checkname(char *str)
 	return (false);
 }
 
+void	our_free(t_parser *data)
+{
+	int index;
+
+	index = 0;
+	free(data->name);
+	free(data->comment);
+	while (index < data->file_size)
+	{
+		free(data->line[index]->str);
+		index++;
+	}
+	free(data);
+}
+
 /* The assembler is meant to read through the .s file representing a champion
  and take the code written in assembly language and turn it in bytecode
  that the Virtual Machine can read. 
@@ -131,6 +146,7 @@ int	main(int argc, char **argv)
 	scan_file(data);
 	populate_t_dir(data);
 	write_to_file(data, argv);
+	our_free(data);
 	exit_usage(6);
 	return (0);
 }

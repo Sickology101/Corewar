@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:23:44 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 10:59:59 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 11:50:17 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ char	*get_label_from_arg(char *str)
 	int		index;
 	int		i;
 
-	dest = (char *)malloc(sizeof(char) * ft_strlen(str) - 1);
 	ft_printf("\n\n STR IN GET LABEL IS '%s' \n\n", str);
 	if (str[0] == '%')
 		index = 2;
 	else
 		index = 1;
+	dest = (char *)malloc(sizeof(char) * (ft_strlen(str) - (index - 1)));
 	i = 0;
 	while (str[index] != '\0')
 	{

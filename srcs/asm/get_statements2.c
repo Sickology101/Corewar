@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 10:13:22 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 10:27:26 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 11:48:37 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	get_name(t_parser *data, char *line, int *index)
 	size = get_name_size(line, *index);
 	ft_printf("\n\n NAME SIZE IS %i \n\n", size);
 	data->line[data->file_size]->statement
-		= (char *)malloc(sizeof(char) * size);
+		= (char *)malloc(sizeof(char) * (size + 1));
 	data->line[data->file_size]->statement[size] = '\0';
 	i = 0;
 	while (i < size)
@@ -103,7 +103,7 @@ char	*get_arg(char *line, int *index)
 	if (line[*index + size - 1] == SEPARATOR_CHAR)
 		size--;
 	i = 0;
-	dest = (char *)malloc(sizeof(char) * size);
+	dest = (char *)malloc(sizeof(char) * (size + 1));
 	dest[size] = '\0';
 	while (i < size)
 	{

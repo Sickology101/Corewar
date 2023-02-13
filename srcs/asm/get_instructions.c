@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 05:22:04 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 11:39:22 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 11:47:02 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	get_instructions(t_parser *data)
 		{
 			data->line[data->file_size] = (t_line *)malloc(sizeof(t_line));
 			data->line[data->file_size]->str
-				= (char *)malloc(sizeof(char) * ft_strlen(line));
+				= (char *)malloc(sizeof(char) * (ft_strlen(line) + 1));
 			data->line[data->file_size]->str
 				= ft_strcpy(data->line[data->file_size]->str, line);
 			save_instruction(data, line);
