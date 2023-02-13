@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:40:29 by igaplich          #+#    #+#             */
-/*   Updated: 2023/02/02 17:22:20 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:58:06 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	init_process(t_data *const data, t_process *process, size_t pointer)
 	process->cur_pos = pointer;
 	process->player = NULL;
 	data->process_amount++;
+	data->total_processes++;
 }
 
 t_process	*copy_process(t_data *const data, t_process *carriage, int address)
@@ -71,7 +72,7 @@ t_process	*copy_process(t_data *const data, t_process *carriage, int address)
 	if (!copy)
 		exit_error_message("Process allocation failed!");
 	init_process(data, copy, (carriage->cur_pos + address) % MEM_SIZE);
-	copy->unique_id = data->process_amount;
+	copy->unique_id = data->total_processes;
 	copy->next = NULL;
 	copy->carry = carriage->carry;
 	copy->last_live = carriage->last_live;

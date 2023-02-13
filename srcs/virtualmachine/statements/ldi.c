@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:06 by mtissari          #+#    #+#             */
-/*   Updated: 2023/02/08 15:17:00 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:59:16 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ void	set_ldi(t_data *const data, t_process *carr)
 	int	addr1;
 	int	addr2;
 	int	reg_id;
-	int	idx;
+	int	address;
 
-	idx = IDX_MOD;
 	carr->rel_pos = 1 + g_op[carr->op_id - 1].read_types;
-	addr1 = get_arg(data, carr, 0, idx);
-	addr2 = get_arg(data, carr, 1, idx);
+	addr1 = get_arg(data, carr, 0, IDX_MOD);
+	addr2 = get_arg(data, carr, 1, IDX_MOD);
 	reg_id = data->arena[carr->cur_pos + carr->rel_pos] - 1;
 	carr->rel_pos += T_REG;
-	carr->reg[reg_id] = read_4_bytes(data->arena,
-			carr->cur_pos + ((addr1 + addr2) % IDX_MOD));
+	address = carr->cur_pos + ((addr1 + addr2) % IDX_MOD);
+	if (address < 0)
+		address = MEM_SIZE + address;
+	carr->reg[reg_id] = read_4_bytes(data->arena, address);
 }

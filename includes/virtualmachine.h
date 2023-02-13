@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:57 by marius            #+#    #+#             */
-/*   Updated: 2023/01/30 17:30:54 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:09:57 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_data
 	int					player_amount;
 	uint8_t				arena[MEM_SIZE];
 	size_t				process_amount;
+	size_t				total_processes;
 	struct s_process	*process_head;
 }						t_data;
 

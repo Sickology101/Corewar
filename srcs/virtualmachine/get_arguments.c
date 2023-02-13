@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 18:58:02 by mtissari          #+#    #+#             */
-/*   Updated: 2023/02/09 19:12:41 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:58:15 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ int32_t	read_4_bytes(uint8_t *arena, int read_pos)
 	sign = arena[read_pos % MEM_SIZE] & 0x80;
 	res = 0;
 	if (!sign)
+	{
 		res = arena[read_pos % MEM_SIZE] << 24
 			| arena[(read_pos + 1) % MEM_SIZE] << 16
 			| arena[(read_pos + 2) % MEM_SIZE] << 8
 			| arena[(read_pos + 3) % MEM_SIZE];
+	}
 	else
 		res = (arena[read_pos % MEM_SIZE] ^ 0xFF) << 24
 			| (arena[(read_pos + 1) % MEM_SIZE] ^ 0xFF) << 16

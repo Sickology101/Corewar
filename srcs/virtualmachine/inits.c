@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:37:31 by macbook           #+#    #+#             */
-/*   Updated: 2023/01/26 17:28:37 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:12:21 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_data(t_data *data)
 	data->dump_cycles = -1;
 	data->player_amount = 0;
 	data->process_amount = 0;
+	data->total_processes = 0;
 	data->process_head = NULL;
 }
 
@@ -71,6 +72,7 @@ void	init_process_on_arena(t_data *const data, t_player *player,
 	data->process_head->reg[0] = -(player->id);
 	data->process_head->player = player;
 	data->process_amount++;
+	data->total_processes++;
 }
 
 void	init_arena(t_data *const data)
