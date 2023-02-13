@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:05:48 by parkharo          #+#    #+#             */
-/*   Updated: 2023/02/04 13:51:58 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:31:56 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,26 @@ void	int32_to_bytecode(char *data,
 	}
 }
 
+void write_null(int count_bytes, int fd)
+{
+	int	var;
+
+	var = 0;
+	while (count_bytes--)
+		write(fd, &var, 1);
+}
+
 void	write_bytes(int fd, int input, int count_bytes)
 {
 	char	*arr;
 	int		i;
 
 	i = 0;
+	if (input == 0)
+	{
+		write_null(count_bytes, fd);
+		return ;
+	}
 	arr = ft_strnew(count_bytes);
 	int32_to_bytecode(arr, input, count_bytes);
 	while (i < count_bytes)

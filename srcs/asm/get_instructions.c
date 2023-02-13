@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 05:22:04 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 11:47:02 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:17:39 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	get_label_size(char *line, int index)
 	int		size;
 
 	size = 0;
-	ft_printf("\n\nLINE IN GET LABEL SIZE IS '%s'", line);
 	index = ignore_spaces(line, index);
 	while (line[index] != '\0' && line[index] != LABEL_CHAR)
 	{
@@ -55,7 +54,6 @@ char	*get_label(char *line, int *index)
 	*index = ignore_spaces(line, *index);
 	while (i < size)
 	{
-		ft_printf ("\n\n INDEX IS '%i'", *index);
 		if (!check_valid_label_char(line[*index]))
 			exit_usage(2);
 		dest[i++] = line[*index];

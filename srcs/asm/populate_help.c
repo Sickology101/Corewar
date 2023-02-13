@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:10:24 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 11:08:00 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:18:42 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,9 @@ int	search_up(t_parser *data, int index, char *label, bool *found)
 	index--;
 	while (index > 1)
 	{
-		ft_printf("\n\n data->line[index]->type EQUALS TO '%i' \n\n", data->line[index]->type);
 		size = size - data->line[index]->size;
 		if (data->line[index]->type == 0 || data->line[index]->type == 2)
 		{
-			ft_printf("\n\n\n WE ARE HERE !)!)(!)!(!(!(!\n\n");
-			ft_printf("Size is %i", size);
 			if (!ft_strcmp(label, data->line[index]->label))
 			{
 				*found = true;

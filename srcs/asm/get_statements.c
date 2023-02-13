@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:30:08 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 10:31:54 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:18:11 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	handle_3_arg(t_parser *data, char *line, int index)
 
 void	get_statement(t_parser *data, char *line, int index)
 {
-	ft_printf(" \n\n data->line[data->file_size]->str equals to '%s' \n\n", data->line[data->file_size]->str);
 	get_name(data, line, &index);
 	if (!check_valid_statement_name(data->line[data->file_size]->statement,
 			data))

@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 11:53:32 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:12:59 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,37 +32,47 @@ int	calculate_size(char *line)
 	return (size - 1);
 }
 
-char	*store_name_comment(t_parser *data, int flag)
+void	store_name_comment(t_parser *data, int flag)
 {
 	int		index;
 	int		size;
-	char	*dest;
 	int		i;
 
 	index = 0;
 	size = calculate_size(data->line[flag]->str);
-	dest = (char *)malloc(sizeof(char) * size + 1);
-	dest[size - 1] = '\0';
 	while (data->line[flag]->str[index] != '"')
 	{
 		index++;
 	}
 	index++;
 	i = 0;
-	while (i < size)
+	if (flag == 0)
 	{
-		dest[i] = data->line[flag]->str[index];
-		i++;
-		index++;
+		while (i < size)
+		{
+			data->name[i] = data->line[flag]->str[index];
+			i++;
+			index++;
+		}
+		data->name[i] = '\0';
 	}
-	return (dest);
+	else 
+	{
+		while (i < size)
+		{
+			data->comment[i] = data->line[flag]->str[index];
+			i++;
+			index++;
+		}
+		data->comment[i] = '\0';
+	}
 }
 
 void	scan_file(t_parser *data)
 {
 	data->line = (t_line **)malloc(sizeof(t_line *) * 1064);
 	get_name_comment(data);
-	data->name = store_name_comment(data, 0);
-	data->comment = store_name_comment(data, 1);
+	store_name_comment(data, 0);
+	store_name_comment(data, 1);
 	get_instructions(data);
 }

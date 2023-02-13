@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:28:58 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 12:12:58 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:01:48 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ char *ft_strtrimstart(char *line)
 	{
 		++line;
 	}
-
 	return line;
 }
 

@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 12:06:26 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:19:10 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,6 @@ void	our_free(t_parser *data)
 	int index;
 
 	index = 0;
-	free(data->name);
-	free(data->comment);
 	while (index < data->file_size)
 	{
 		free(data->line[index]->str);

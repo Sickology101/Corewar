@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 11:01:17 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:09:44 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ typedef struct s_parser
 	t_line			**line;
 	int				file_size;
 	int				fd;
-	char			*name;
-	char			*comment;
+	char			name[PROG_NAME_LENGTH];
+	char			comment[COMMENT_LENGTH];
 	t_statements	*s;
 }			t_parser;
 

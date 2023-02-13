@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 10:21:59 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 10:10:08 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:18:16 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	check_valid_reg(t_parser *data, char *arg, int flag)
 	int	index;
 
 	index = 1;
-	ft_printf("\n\nWe are here !!!\n\n");
 	if (arg[0] != 'r')
 		exit_usage(4);
 	if (!ft_isdigit(arg[1]))
@@ -110,7 +109,6 @@ void	check_valid_ind(t_parser *data, char *arg, int flag)
 	int	index;
 
 	index = 0;
-	ft_printf("\n\narg is '%s'\n\n", arg);
 	if (arg[0] == ':')
 	{
 		data->line[data->file_size]->arg[flag] = ft_strdup(arg);
