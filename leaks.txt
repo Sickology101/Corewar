@@ -1,116 +1,29 @@
-Writing output program to ./valid_files/bigzork.cor
+Writing output program to ./valid_files/Explosive_Kitty.cor
 File converted succesfuly
-Process:         assembler [44328]
+Process:         assembler [56255]
 Path:            /Volumes/VOLUME/*/assembler
-Load Address:    0x10824d000
+Load Address:    0x1035f9000
 Identifier:      assembler
 Version:         ???
 Code Type:       X86-64
-Parent Process:  leaks [44327]
+Parent Process:  leaks [56254]
 
-Date/Time:       2023-02-13 15:46:45.786 +0200
-Launch Time:     2023-02-13 15:46:45.643 +0200
+Date/Time:       2023-02-13 16:09:30.059 +0200
+Launch Time:     2023-02-13 16:09:29.910 +0200
 OS Version:      Mac OS X 10.14.6 (18G9323)
 Report Version:  7
 Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
 Analysis Tool Version:  Xcode 11.3.1 (11C505)
 
-Physical footprint:         384K
-Physical footprint (peak):  384K
+Physical footprint:         368K
+Physical footprint (peak):  368K
 ----
 
 leaks Report Version: 4.0
-Process 44328: 253 nodes malloced for 16 KB
-Process 44328: 89 leaks for 1440 total leaked bytes.
+Process 56255: 1022 nodes malloced for 59 KB
+Process 56255: 2 leaks for 80 total leaked bytes.
 
-    89 (1.41K) << TOTAL >>
-      1 (32 bytes) ROOT LEAK: 0x7faafb402b60 [32]  length: 28  ".comment "I know i cant win""
-      1 (16 bytes) ROOT LEAK: 0x7faafb402ac0 [16]  length: 15  ".name "bigzork""
-      1 (16 bytes) ROOT LEAK: 0x7faafb403190 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb4033c0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb4035f0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb403820 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb403a50 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb403c80 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb403eb0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb4040e0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb404310 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb404540 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb404770 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb4049a0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb404bd0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb404e00 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb405030 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb405260 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb405490 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb4056c0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb4058f0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb405b20 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb405d50 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb405f80 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb4061b0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb4063e0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb406610 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb406840 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb406a70 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb406ca0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb406ed0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb407100 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb407330 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb407560 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb407790 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb4079c0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb407bf0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb407e20 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb408050 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb408280 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb4084b0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb4086e0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb408910 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb408b40 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb408d70 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb409190 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb4093b0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb4095d0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb4097f0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb409a10 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb409c30 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb409e50 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40a070 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40a290 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40a4b0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40a6d0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40a8f0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40ab10 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40ad30 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40af50 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40b170 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40b390 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40b5b0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40b7d0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40b9f0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40bc10 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40be30 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40c050 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40c270 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40c490 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40c6b0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40c8d0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40caf0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40cd10 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40cf30 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40d150 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40d370 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40d590 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40d7b0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40d9d0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40dbf0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40de10 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40e030 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40e250 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40e470 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40e690 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40e8b0 [16]
-      1 (16 bytes) ROOT LEAK: 0x7faafb40eac0 [16]  length: 4  "loop"
-      1 (16 bytes) ROOT LEAK: 0x7faafb40ead0 [16]
+    2 (80 bytes) << TOTAL >>
+      1 (48 bytes) ROOT LEAK: 0x7fdf96402b70 [48]  length: 38  "Tapis dans l'ombre je veille. - Minou""
+      1 (32 bytes) ROOT LEAK: 0x7fdf96400640 [32]  length: 23  ".name "Explosive Kitty""
 

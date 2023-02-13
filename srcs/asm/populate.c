@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:23:44 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 14:18:59 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:09:21 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ void	inner_calculate_dir(t_parser *data, int index, int i, bool found)
 			if (!found)
 				exit_usage(7);
 		}
+		free(label);
 	}
+	
 }
 
 void	calculate_dir(t_parser *data, int index)
