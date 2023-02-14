@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_statements4.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mangheli <mangheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 10:40:18 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 14:53:47 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/14 14:35:19 by mangheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	handle_3_arg_2(t_parser *data, char *line, int index)
 	char	*arg;
 
 	index = ignore_spaces(line, index);
+	if (line[index] == COMMENT_CHAR || line[index] == '\0')
+		exit_usage(4);
 	data->line[data->file_size]->size = data->line[data->file_size]->size
 		+ get_inst_size(data, data->line[data->file_size]->state_code,
 			data->line[data->file_size]->arg_type[1]);
