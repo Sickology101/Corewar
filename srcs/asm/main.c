@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mangheli <mangheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/02/14 09:29:41 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/14 14:05:20 by mangheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,20 +118,23 @@ void	our_free(t_parser *data)
 	int index;
 	int	i;
 
-	index = 0;
+	index = 2;
 	while (index < data->file_size)
 	{
 		i = 0;
 		if (data->line[index]->label != NULL)
 			free(data->line[index]->label);
-		if (data->line[index]->arg_num != NULL)
-			free(data->line[index]->arg_num);
-		if (data->line[index]->statement != NULL)
-			free(data->line[index]->statement);
-		if (index > 1 && data->line[index]->type != 0)
+		if (data->line[index]->type != 0)
 		{
-			while (i < data->line[index]->req_arg_num)
-				free(data->line[index]->arg[i++]);
+			if (data->line[index]->arg_num != NULL)
+				free(data->line[index]->arg_num);
+			if (data->line[index]->statement != NULL)
+				free(data->line[index]->statement);
+			if (index > 1)
+			{
+				while (i < data->line[index]->req_arg_num)
+					free(data->line[index]->arg[i++]);
+			}
 		}
 		if (data->line[index]->str != NULL)
 			free(data->line[index]->str);
@@ -139,6 +142,8 @@ void	our_free(t_parser *data)
 			free(data->line[index]);
 		index++;
 	}
+	free(data->line[0]->str);
+	free(data->line[1]->str);
 	if (data->line != NULL)
 		free(data->line);
 	free(data);
@@ -162,7 +167,7 @@ int	main(int argc, char **argv)
 	scan_file(data);
 	populate_t_dir(data);
 	write_to_file(data, argv);
-	our_free(data);
+	//our_free(data);
 	exit_usage(6);
 	return (0);
 }

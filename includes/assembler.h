@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assembler.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mangheli <mangheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/02/14 08:43:50 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/14 14:02:19 by mangheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,22 @@ typedef struct s_header
 
 typedef struct s_line
 {
-	char	*str;
-	int		type;
-	int		state_code;
-	int		req_arg_num;
-	int		req_arg_type[3];
-	int		dir_size;
-	char	*label;
-	char	*statement;
-	long long		*arg_num;
-	bool	dir_label;
-	int		dir_loc[3];
-	char	**arg;
-	int		arg_type[3];
-	bool	arg_code_req;
-	int		arg_code[8];
-	int		size;
+	char		*str;
+	int			type;
+	int			state_code;
+	int			req_arg_num;
+	int			req_arg_type[3];
+	int			dir_size;
+	char		*label;
+	char		*statement;
+	long long	*arg_num;
+	bool		dir_label;
+	int			dir_loc[3];
+	char		**arg;
+	int			arg_type[3];
+	bool		arg_code_req;
+	int			arg_code[8];
+	int			size;
 }			t_line;
 
 typedef struct s_label
@@ -89,35 +89,36 @@ typedef struct s_parser
 	t_statements	*s;
 }			t_parser;
 
-void	scan_file(t_parser *data);
-bool	ignore_comment_empty(char *line);
-void	get_name_comment(t_parser *data);
-void	exit_usage(int flag);
-int		ignore_spaces(char *str, int index);
-void	get_instructions(t_parser *data);
-void	get_statement(t_parser *data, char *line, int index);
-void	init_statements(t_parser *data);
-void	write_to_file(t_parser *a, char **av);
-void	write_bytes(int fd, int input, int count_bytes);
-char	*join_free(char *line, char *line2, int flag);
-void	gen_arg_code(t_parser *data);
-void	populate_t_dir(t_parser *data);
-int		binary_dec(int *array);
-int		get_name_size(char *line, int index);
-void	get_name(t_parser *data, char *line, int *index);
-bool	check_valid_statement_name(char *str, t_parser *data);
-char	*get_arg(char *line, int *index);
-bool	check_valid_arg_type(t_parser *data, int flag, char *arg, int index);
-long long		get_number_index(char *str, int *index);
-void	check_valid_reg(t_parser *data, char *arg, int flag);
-void	check_valid_dir(t_parser *data, char *arg, int flag);
-int		get_inst_size(t_parser *data, int state_code, int arg_code);
-void	check_valid_ind(t_parser *data, char *arg, int flag);
-void	handle_3_arg_2(t_parser *data, char *line, int index);
-void	check_arg(t_parser *data, char *arg, int flag);
-void	handle_arg_code(t_parser *data);
-int		search_down(t_parser *data, int index, char *label, bool *found);
-int		search_up(t_parser *data, int index, char *label, bool *found);
-void	writing_command(int fd, t_parser *a);
+void		scan_file(t_parser *data);
+bool		ignore_comment_empty(char *line);
+void		get_name_comment(t_parser *data);
+void		exit_usage(int flag);
+int			ignore_spaces(char *str, int index);
+void		get_instructions(t_parser *data);
+void		get_statement(t_parser *data, char *line, int index);
+void		init_statements(t_parser *data);
+void		write_to_file(t_parser *a, char **av);
+void		write_bytes(int fd, int input, int count_bytes);
+char		*join_free(char *line, char *line2, int flag);
+void		gen_arg_code(t_parser *data);
+void		populate_t_dir(t_parser *data);
+int			binary_dec(int *array);
+int			get_name_size(char *line, int index);
+void		get_name(t_parser *data, char *line, int *index);
+bool		check_valid_statement_name(char *str, t_parser *data);
+char		*get_arg(char *line, int *index);
+bool		check_valid_arg_type(t_parser *data, int flag, char *arg, int i);
+long long	get_number_index(char *str, int *index);
+void		check_valid_reg(t_parser *data, char *arg, int flag);
+void		check_valid_dir(t_parser *data, char *arg, int flag);
+int			get_inst_size(t_parser *data, int state_code, int arg_code);
+void		check_valid_ind(t_parser *data, char *arg, int flag);
+void		handle_3_arg_2(t_parser *data, char *line, int index);
+void		check_arg(t_parser *data, char *arg, int flag);
+void		handle_arg_code(t_parser *data);
+int			search_down(t_parser *data, int index, char *label, bool *found);
+int			search_up(t_parser *data, int index, char *label, bool *found);
+void		writing_command(int fd, t_parser *a);
+int			ignore_chars(char *line, int index);
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marius <marius@student.42.fr>              +#+  +:+       +#+         #
+#    By: mangheli <mangheli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-#    Updated: 2023/02/14 09:32:02 by marius           ###   ########.fr        #
+#    Updated: 2023/02/14 14:02:32 by mangheli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ ASSEMBLER	=	assembler
 LIBFT		=	libft/libftprintf.a
 FLAGS		=	-Wall -Wextra -Werror -I includes -I libft/includes -I libft/libft #-g -fsanitize=address
 
-SRC		=	main.c scanner.c get_name_comment.c utils.c get_instructions.c get_statements.c write_to_file.c write_bytes.c joinfree.c populate.c get_statements2.c get_statements3.c get_statements4.c populate_help.c write_utils.c
+SRC		=	main.c scanner.c get_name_comment.c utils.c get_instructions.c get_statements.c write_to_file.c write_bytes.c joinfree.c populate.c get_statements2.c get_statements3.c get_statements4.c populate_help.c write_utils.c utils2.c
 
 LIBFT_DIR	=	libft/
 SRC_DIR		=	srcs/asm/

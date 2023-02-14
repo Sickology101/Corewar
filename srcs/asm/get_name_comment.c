@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_name_comment.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mangheli <mangheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:28:58 by marius            #+#    #+#             */
-/*   Updated: 2023/02/14 08:46:23 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/14 14:26:44 by mangheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,11 @@ void	save_name_comment(t_parser *data, char *line, int flag)
 	else if (check_quotes(data->line[flag]->str) == 2)
 	{
 		if (check_valid_syntax(data->line[flag]->str))
+		{
+			free(line);
 			return ;
+		}
+			
 		else
 			exit_usage(1);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_instructions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mangheli <mangheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 05:22:04 by marius            #+#    #+#             */
-/*   Updated: 2023/02/14 09:25:33 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/14 14:02:47 by mangheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,12 @@ char	*get_label(char *line, int *index)
 void	save_instruction(t_parser *data, char *line)
 {
 	int	index;
-	int index2;
+	int	index2;
 
 	index = 0;
 	index2 = 0;
 	index2 = ignore_spaces(line, index2);
-	while (line[index2] != MTY_SPACE_1 && line[index2] != MTY_SPACE_2 && line[index2] != '\0')
-	{
-		index2++;
-	}
+	index2 = ignore_chars(line, index2);
 	if (line[index2 - 1] == ':')
 	{
 		data->line[data->file_size]->label = get_label(line, &index);

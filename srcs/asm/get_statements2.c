@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_statements2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mangheli <mangheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 10:13:22 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 14:17:56 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/14 13:57:34 by mangheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,17 +110,17 @@ char	*get_arg(char *line, int *index)
 	return (dest);
 }
 
-bool	check_valid_arg_type(t_parser *data, int flag, char *arg, int index)
+bool	check_valid_arg_type(t_parser *data, int flag, char *arg, int i)
 {
 	int	arg_type;
 
 	if (arg[0] == 'r')
-		data->line[data->file_size]->arg_type[index] = 1;
+		data->line[data->file_size]->arg_type[i] = 1;
 	else if (arg[0] == '%')
-		data->line[data->file_size]->arg_type[index] = 2;
+		data->line[data->file_size]->arg_type[i] = 2;
 	else
-		data->line[data->file_size]->arg_type[index] = 4;
-	arg_type = data->line[data->file_size]->arg_type[index];
+		data->line[data->file_size]->arg_type[i] = 4;
+	arg_type = data->line[data->file_size]->arg_type[i];
 	if (arg_type == flag)
 		return (true);
 	if (flag == 3)
