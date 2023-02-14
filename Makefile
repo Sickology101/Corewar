@@ -6,7 +6,7 @@
 #    By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-#    Updated: 2023/01/27 19:00:23 by mtissari         ###   ########.fr        #
+#    Updated: 2023/02/14 17:48:45 by mtissari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CGREEN=\033[0;32m
 
 CC = gcc
 VM_NAME = corewar
-FLAGS = -Wall -Wextra -g -fsanitize=address#-Werror
+FLAGS = -Wall -Wextra -g -fsanitize=address -Werror
 
 VM_SRC_DIR = ./srcs/virtualmachine/
 VM_STAT_DIR = $(VM_SRC_DIR)statements/

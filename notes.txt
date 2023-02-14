@@ -102,6 +102,7 @@ _______________________________
 |	gedeon.cor (65)
 |	helltrain.cor (66)
 |	kappa.cor (15)
+|	Gagnant.cor (11)
 |_______________________________
 
 
@@ -118,3 +119,28 @@ ff fd ff fd 0b 64 0f 00 00 0e 00 00 00 06 00 00 00 05 00 ff ff fd ff fd 0b 64 0f
 
 diff occured at -dump 7460 
 
+
+
+Files, used in this run:
+        resources_42/valid_files/byte_code/helltrain.cor, id = 66 
+        resources_42/valid_files/byte_code/darksasuke.cor, id = 49 
+        resources_42/valid_files/byte_code/jinx.cor, id = 67 
+        resources_42/valid_files/byte_code/lou_forktologue.cor, id = 82 
+
+0x01c0 : 
+00 00 30 0b 54 05 10 09 00 00 00 00 30 0b 54 0b 54 05 04 00 00 00 00 00 30 0b 54 
+05 04 00 00 00 00 00 30 0b 54 05 04 00 00 00 00 00 30 0b 54 05 04 00 00 00 00 00 
+30 0b 54 05 04 00 00 00 00 00 --- > 
+0x01c0 : 
+00 00 30 0b 54 05 00 00 00 00 00 00 30 0b 54 0b 54 05 04 00 00 00 00 00 30 0b 54 
+05 04 00 00 00 00 00 30 0b 54 05 04 00 00 00 00 00 30 0b 54 05 04 00 00 00 00 00 
+30 0b 54 05 04 00 00 00 00 00
+diff occured at -dump 9587
+
+
+0b 54 05 04 06
+so from reg 5 to place reg4+reg6
+
+reg: 269025279
+reg: 510
+reg: 51

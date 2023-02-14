@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:11 by mtissari          #+#    #+#             */
-/*   Updated: 2023/02/13 19:58:38 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:15:47 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	set_zjmp(t_data *const data, t_process *carriage)
 	address = get_arg(data, carriage, 0, idx);
 	if (carriage->carry)
 	{
-		carriage->cur_pos = (carriage->cur_pos + (address % idx) % MEM_SIZE);
+		carriage->cur_pos = (carriage->cur_pos + (address % idx)) % MEM_SIZE;
 		carriage->rel_pos = 0;
 	}
 }

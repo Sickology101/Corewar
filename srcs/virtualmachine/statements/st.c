@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:11 by mtissari          #+#    #+#             */
-/*   Updated: 2023/02/08 13:33:13 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:15:07 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	set_st(t_data *const data, t_process *carr)
 	}
 	else if (carr->args[1] == T_REG)
 	{
-		address = data->arena[carr->cur_pos + carr->rel_pos] - 1;
+		address = data->arena[(carr->cur_pos + carr->rel_pos) % MEM_SIZE] - 1;
 		carr->reg[address] = reg_value;
 		carr->rel_pos += T_REG;
 	}
