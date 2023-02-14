@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assembler.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 14:09:44 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/14 08:43:50 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_parser
 	int				fd;
 	char			name[PROG_NAME_LENGTH];
 	char			comment[COMMENT_LENGTH];
+	int				found[2];
 	t_statements	*s;
 }			t_parser;
 

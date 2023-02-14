@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_name_comment.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:28:58 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 15:44:57 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/14 08:46:23 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,21 +78,32 @@ void	process_name_comment(t_parser *data, char *line, int i)
 {
 	data->line[i] = (t_line *)malloc(sizeof(t_line));
 	data->line[i]->str = ft_strnew(0);
+	data->found[i] = 1;
 	save_name_comment(data, line, i);
 }
 
 int	 ft_strnccmp(char *line)
 {
+	int	index;
+	
 	while (*line == MTY_SPACE_1 || *line == MTY_SPACE_2)
 	{
 		++line;
 	}
 	if (ft_strncmp(line, ".name", 5) == 0)
 	{
+		index = 5;
+		index = ignore_spaces(line, index);
+		if (line[index] != '"')
+			exit_usage(1);
 		return (1);
 	}
 	if (ft_strncmp(line, ".comment", 8) == 0)
 	{
+		index = 8;
+		index = ignore_spaces(line, index);
+		if (line[index] != '"')
+			exit_usage(1);
 		return (2);
 	}
 	return (0);
@@ -116,9 +127,9 @@ void	get_name_comment(t_parser *data)
 			exit_usage(4);
 	}
 	i = ft_strnccmp(line);
-	if (i == 1)
+	if (i == 1 && data->found[0] == 0)
 		process_name_comment(data, line, 0);
-	else if (i == 2)
+	else if (i == 2 && data->found[1] == 0)
 		process_name_comment(data, line, 1);
 	else
 		exit_usage(5);

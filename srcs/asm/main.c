@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 15:55:40 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/14 09:29:41 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,9 @@ void	our_free(t_parser *data)
 			free(data->line[index]->label);
 		if (data->line[index]->arg_num != NULL)
 			free(data->line[index]->arg_num);
-		ft_printf("\n\n INDEX IS '%i'", index);
 		if (data->line[index]->statement != NULL)
 			free(data->line[index]->statement);
-		if (index > 1)
+		if (index > 1 && data->line[index]->type != 0)
 		{
 			while (i < data->line[index]->req_arg_num)
 				free(data->line[index]->arg[i++]);
@@ -163,7 +162,7 @@ int	main(int argc, char **argv)
 	scan_file(data);
 	populate_t_dir(data);
 	write_to_file(data, argv);
-	//our_free(data);
+	our_free(data);
 	exit_usage(6);
 	return (0);
 }

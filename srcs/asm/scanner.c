@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 14:12:59 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/14 08:42:51 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,9 @@ void	scan_file(t_parser *data)
 	get_name_comment(data);
 	store_name_comment(data, 0);
 	store_name_comment(data, 1);
+	if (ft_strlen(data->name) > PROG_NAME_LENGTH)
+		exit_usage(1);
+	if (ft_strlen(data->comment) > COMMENT_LENGTH)
+		exit_usage(1);
 	get_instructions(data);
 }
