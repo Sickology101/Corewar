@@ -1,8 +1,8 @@
-FILE_DIR=( test_files/valid_files/byte_code/*)
+FILE_DIR=( test_files_vm_team/compiled/*)
 FT_OUTPUT="corewar42.txt"
 OUR_OUTPUT="corewar.txt"
 OUR_WAR="./corewar"
-SCHOOL_WAR="./resources_42/vm_champs/corewar"
+SCHOOL_WAR="./corewar42"
 
 PASS=0
 TEST_OK=0
