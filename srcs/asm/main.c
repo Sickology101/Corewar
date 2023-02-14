@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/02/14 16:35:39 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:57:19 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,23 @@ void	exit_usage(int flag)
 bool	check_newline(char *filename)
 {
 	int		fd;
-	char	cache[1];
-	int		ret;
+	char	cache[10];
+	char	*tail;
 	
 	fd = open(filename, O_RDONLY); 
-	ret = read(fd, cache, 1);
-	while (ret)
-		ret = read(fd, cache, 1);
-	return (cache[0] == '\n');
+	lseek(fd, -10, SEEK_END);
+	read(fd, cache, 10);
+	tail = ft_strrchr(cache, 10);
+	size_t taill = ft_strlen(tail) - 1;
+	//ft_printf("Tail is '%i' bytes long\n", taill);
+	
+	while (taill)
+	{
+		//printf("ft_isascii returns '%i', char is '%i'\n", ft_isprint(tail[i]), tail[i]);
+		if (ft_isprint(tail[taill--]))
+			return (false);
+	}
+	return (true);
 }
 
 /*
