@@ -36,7 +36,7 @@ void	print_winner(t_data *const data)
 		while (winner->next)
 			winner = winner->next;
 	}
-	ft_printf(" Contestant %i, \"%s\", has won !\n", winner->id, winner->name);
+	ft_printf("Contestant %i, \"%s\", has won !\n", winner->id, winner->name);
 }
 
 int	main(const int ac, const char **av)
