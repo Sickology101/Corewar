@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:34:11 by mtissari          #+#    #+#             */
-/*   Updated: 2023/02/09 19:18:19 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:13:53 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,15 @@ void	get_exec_code(int fd, t_player *player)
 	if (rtn < 1)
 	{
 		player->exec_code = (uint8_t *)malloc(sizeof(uint8_t) * 1);
+		if (!player->exec_code)
+			exit_error_message("player->exec_code allocation failed!");
 		ft_memcpy(player->exec_code, buffer, player->exec_size);
 	}
 	else if (buffer[0])
 	{
 		player->exec_code = (uint8_t *)malloc(sizeof(uint8_t) * rtn);
+		if (!player->exec_code)
+			exit_error_message("player->exec_code allocation failed!");
 		ft_memcpy(player->exec_code, buffer, player->exec_size);
 	}
 }
