@@ -6,20 +6,23 @@
 #    By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 10:11:17 by marius            #+#    #+#              #
-#    Updated: 2023/02/14 17:48:45 by mtissari         ###   ########.fr        #
+#    Updated: 2023/02/14 18:31:29 by mtissari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CEND=\033[0m
-CGREEN=\033[0;32m
+CEND			= \033[0m
+CGREEN			= \033[0;32m
+CYELLOW			= \033[0;33m
+CPURPLEB		= \033[1;95m
 
-CC = gcc
-VM_NAME = corewar
-FLAGS = -Wall -Wextra -g -fsanitize=address -Werror
+CC				= gcc
+VM_NAME			= corewar
+FLAGS			= -Wall -Wextra -g -fsanitize=address -Werror
 
-VM_SRC_DIR = ./srcs/virtualmachine/
-VM_STAT_DIR = $(VM_SRC_DIR)statements/
-VM_SRC_FILES = main.c \
+VM_SRC_DIR		= ./srcs/virtualmachine/
+VM_STAT_DIR		= $(VM_SRC_DIR)statements/
+
+VM_SRC_FILES	= main.c \
 				read_players.c \
 				player_ids.c \
 				inits.c \
@@ -34,7 +37,7 @@ VM_SRC_FILES = main.c \
 				execute.c \
 				get_arguments.c
 
-VM_STATEMENTS = add.c \
+VM_STATEMENTS	= add.c \
 				aff.c \
 				and.c \
 				fork.c \
@@ -50,27 +53,27 @@ VM_STATEMENTS = add.c \
 				sub.c \
 				xor.c \
 				zjmp.c
-				
-VM_SRC = $(addprefix $(VM_SRC_DIR), $(VM_SRC_FILES))
-VM_SRC_STAT = $(addprefix $(VM_STAT_DIR), $(VM_STATEMENTS))
 
-VM_OBJ_DIR = ./vm_obj/
-VM_OBJ_FILES = $(VM_SRC_FILES:.c=.o) $(VM_STATEMENTS:.c=.o)
-VM_OBJ = $(addprefix $(VM_OBJ_DIR), $(VM_OBJ_FILES))
+VM_SRC			= $(addprefix $(VM_SRC_DIR), $(VM_SRC_FILES))
+VM_SRC_STAT		= $(addprefix $(VM_STAT_DIR), $(VM_STATEMENTS))
 
-VM_INC_DIR = ./includes/
-VM_INC_FILES = virtualmachine.h
-VM_INC = $(addprefix $(VM_INC_DIR), $(VM_INC_FILES))
+VM_OBJ_DIR		= ./vm_obj/
+VM_OBJ_FILES	= $(VM_SRC_FILES:.c=.o) $(VM_STATEMENTS:.c=.o)
+VM_OBJ			= $(addprefix $(VM_OBJ_DIR), $(VM_OBJ_FILES))
 
-LIBFT_DIR = libft/
-LIBFT_LIB = libftprintf.a
-LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
+VM_INC_DIR		= ./includes/
+VM_INC_FILES	= virtualmachine.h
+VM_INC			= $(addprefix $(VM_INC_DIR), $(VM_INC_FILES))
+
+LIBFT_DIR		= libft/
+LIBFT_LIB		= libftprintf.a
+LIBFT			= $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
 all : $(VM_NAME)
 
 $(VM_NAME): $(VM_OBJ) $(VM_INC)
 	@make -C $(LIBFT_DIR)
-	@echo "$(CYELLOW)Compiling $(VM_NAME)$(CEND)"
+	@echo "$(CYELLOW)Compiling the executable: $(CPURPLEB)$(VM_NAME)$(CEND)"
 	@$(CC) -o $(VM_NAME) $(FLAGS) $(VM_OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBFT)
 	@echo "$(CGREEN)OK$(CEND)"
 
@@ -84,13 +87,13 @@ $(VM_OBJ_DIR)%.o: $(VM_STAT_DIR)%.c
 
 clean :
 	@make -C $(LIBFT_DIR) clean
-	@echo "$(CYELLOW)Removing $(VM_NAME) object folder$(CEND)"
+	@echo "$(CYELLOW)Removing $(CPURPLEB)$(VM_NAME)$(CYELLOW) object folder$(CEND)"
 	@rm -rf $(VM_OBJ_DIR)
 	@echo "$(CGREEN)OK$(CEND)"
 
 fclean : clean
 	@make -C $(LIBFT_DIR) fclean
-	@echo "$(CYELLOW)Removing $(VM_NAME)$(CEND)"
+	@echo "$(CYELLOW)Removing $(CPURPLEB)$(VM_NAME)$(CEND)"
 	@rm -rf $(VM_NAME)
 	@echo "$(CGREEN)OK$(CEND)"
 
