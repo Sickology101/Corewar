@@ -6,7 +6,7 @@
 /*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:40:29 by igaplich          #+#    #+#             */
-/*   Updated: 2023/02/13 19:58:06 by mtissari         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:49:48 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void	create_initial_process_list(t_data *const data)
 		if (!data->process_head)
 			exit_error_message("Process head allocation failed!");
 		data->process_head->next = NULL;
-		data->process_head->unique_id = data->player_amount;
+		data->process_head->unique_id = 1;
 	}
 	else
 	{
 		new_process = (t_process *)malloc(sizeof(t_process));
 		if (!new_process)
 			exit_error_message("Process head allocation failed!");
-		new_process->unique_id = data->process_head->unique_id - 1;
+		new_process->unique_id = data->process_head->unique_id + 1;
 		new_process->next = data->process_head;
 		data->process_head = new_process;
 	}
