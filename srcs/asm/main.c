@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mangheli <mangheli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/02/14 14:05:20 by mangheli         ###   ########.fr       */
+/*   Updated: 2023/02/14 16:35:39 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,24 @@ void	exit_usage(int flag)
 		ft_printf("File converted succesfuly\n");
 	else if (flag == 7)
 		ft_printf("Label not found\n");
+	else if (flag == 8)
+		ft_printf("No newline at the end\n");
 	else
 		ft_printf("Usage : ./assembler [filename.s]\n");
 	exit(1);
+}
+
+bool	check_newline(char *filename)
+{
+	int		fd;
+	char	cache[1];
+	int		ret;
+	
+	fd = open(filename, O_RDONLY); 
+	ret = read(fd, cache, 1);
+	while (ret)
+		ret = read(fd, cache, 1);
+	return (cache[0] == '\n');
 }
 
 /*
@@ -162,6 +177,8 @@ int	main(int argc, char **argv)
 		exit_usage(0);
 	if (!checkname(argv[1]))
 		exit_usage(0);
+	if (!check_newline(argv[1]))
+		exit_usage(8);
 	data = (t_parser *)malloc(sizeof(t_parser));
 	data->fd = open(argv[1], O_RDONLY);
 	scan_file(data);
