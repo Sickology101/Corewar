@@ -1,4 +1,4 @@
-FILE_DIR=( resources_42/valid_files/byte_code/*)
+FILE_DIR=( test_files/valid_files/byte_code/*)
 FT_OUTPUT="corewar42.txt"
 OUR_OUTPUT="corewar.txt"
 OUR_WAR="./corewar"
