@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/02/14 08:42:51 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/14 09:46:59 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,21 @@ int	calculate_size(char *line)
 	return (size - 1);
 }
 
+void	check_size(int size, int flag)
+{
+	if (flag == 0)
+	{
+		if (size > PROG_NAME_LENGTH)
+			exit_usage(1);
+	}
+	else
+	{
+		
+		if (size > COMMENT_LENGTH)
+			exit_usage(1);
+	}
+}
+
 void	store_name_comment(t_parser *data, int flag)
 {
 	int		index;
@@ -40,6 +55,7 @@ void	store_name_comment(t_parser *data, int flag)
 
 	index = 0;
 	size = calculate_size(data->line[flag]->str);
+	check_size(size, flag);
 	while (data->line[flag]->str[index] != '"')
 	{
 		index++;
@@ -74,9 +90,5 @@ void	scan_file(t_parser *data)
 	get_name_comment(data);
 	store_name_comment(data, 0);
 	store_name_comment(data, 1);
-	if (ft_strlen(data->name) > PROG_NAME_LENGTH)
-		exit_usage(1);
-	if (ft_strlen(data->comment) > COMMENT_LENGTH)
-		exit_usage(1);
 	get_instructions(data);
 }
