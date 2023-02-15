@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assembler.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mangheli <mangheli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:24:54 by marius            #+#    #+#             */
-/*   Updated: 2023/02/14 14:02:19 by mangheli         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:31:17 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,6 @@ int			search_down(t_parser *data, int index, char *label, bool *found);
 int			search_up(t_parser *data, int index, char *label, bool *found);
 void		writing_command(int fd, t_parser *a);
 int			ignore_chars(char *line, int index);
+int			ft_strnccmp(char *line);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_name_comment.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mangheli <mangheli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:28:58 by marius            #+#    #+#             */
-/*   Updated: 2023/02/14 14:26:44 by mangheli         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:30:59 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,14 @@ void	save_name_comment(t_parser *data, char *line, int flag)
 			free(line);
 			return ;
 		}
-			
-		else
-			exit_usage(1);
+		exit_usage(1);
 	}
-	else
-	{
-		data->line[flag]->str = ft_strupdate(data->line[flag]->str, "\n");
-		free(line);
-		ret = get_next_line(data->fd, &line);
-		if (ret == 0)
-			exit_usage(4);
-		save_name_comment(data, line, flag);
-	}
+	data->line[flag]->str = ft_strupdate(data->line[flag]->str, "\n");
+	free(line);
+	ret = get_next_line(data->fd, &line);
+	if (ret == 0)
+		exit_usage(4);
+	save_name_comment(data, line, flag);
 }
 
 void	process_name_comment(t_parser *data, char *line, int i)
@@ -85,34 +80,6 @@ void	process_name_comment(t_parser *data, char *line, int i)
 	data->found[i] = 1;
 	save_name_comment(data, line, i);
 }
-
-int	 ft_strnccmp(char *line)
-{
-	int	index;
-	
-	while (*line == MTY_SPACE_1 || *line == MTY_SPACE_2)
-	{
-		++line;
-	}
-	if (ft_strncmp(line, ".name", 5) == 0)
-	{
-		index = 5;
-		index = ignore_spaces(line, index);
-		if (line[index] != '"')
-			exit_usage(1);
-		return (1);
-	}
-	if (ft_strncmp(line, ".comment", 8) == 0)
-	{
-		index = 8;
-		index = ignore_spaces(line, index);
-		if (line[index] != '"')
-			exit_usage(1);
-		return (2);
-	}
-	return (0);
-}
-
 
 void	get_name_comment(t_parser *data)
 {

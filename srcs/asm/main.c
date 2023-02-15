@@ -6,72 +6,12 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:23:15 by marius            #+#    #+#             */
-/*   Updated: 2023/02/14 19:52:54 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:32:25 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-// void	print_file(t_parser *data)
-// {
-// 	int	index;
-// 	int	i;
-
-// 	ft_printf("%s\n%s\n", data->name, data->comment);
-// 	index = 2;
-// 	while (index < data->file_size)
-// 	{
-// 		if (data->line[index]->type == 0)
-// 			ft_printf("%s", data->line[index]->label);
-// 		else if (data->line[index]->type == 1)
-// 		{
-// 			ft_printf("%d ", data->line[index]->state_code);
-// 			if (data->line[index]->arg_code_req == true)
-// 			{
-// 				i = 0;
-// 				while (i < 8)
-// 				{
-// 					ft_printf("%d", data->line[index]->arg_code[i]);
-// 					i++;
-// 				}
-// 			}
-// 			i = 0;
-// 			while (i < data->line[index]->req_arg_num)
-// 			{
-// 				ft_printf(" [%d]%d", data->line[index]->arg_type[i], data->line[index]->arg_num[i]);
-// 				i++;
-// 			}
-// 		}
-// 		else
-// 		{
-// 			ft_printf("%s ", data->line[index]->label);
-// 			ft_printf("%d ", data->line[index]->state_code);
-// 			if (data->line[index]->arg_code_req == true)
-// 			{
-// 				i = 0;
-// 				while (i < 8)
-// 				{
-// 					ft_printf("%d", data->line[index]->arg_code[i]);
-// 					i++;
-// 				}
-// 			}
-// 			i = 0;
-// 			while (i < data->line[index]->req_arg_num)
-// 			{
-// 				ft_printf(" [%d]%lld", data->line[index]->arg_type[i], data->line[index]->arg_num[i]);
-// 				i++;
-// 			}
-// 		}
-// 		ft_printf("   size = %d", data->line[index]->size);
-// 		ft_printf("      dir_size =  %d\n", data->line[index]->dir_size);
-// 		index++;
-// 	}
-// }
-
-/*
-a simple function that exits the program in case of 
-bad call (wrong filename, no file) 
-*/
 void	exit_usage(int flag)
 {
 	if (flag == 1)
@@ -100,8 +40,8 @@ bool	check_newline(char *filename)
 	int		fd;
 	char	cache[6];
 	char	*tail;
-	
-	fd = open(filename, O_RDONLY); 
+
+	fd = open(filename, O_RDONLY);
 	lseek(fd, -5, SEEK_END);
 	read(fd, cache, 5);
 	cache[5] = '\0';
@@ -134,42 +74,6 @@ bool	checkname(char *str)
 	return (false);
 }
 
-void	our_free(t_parser *data)
-{
-	int index;
-	int	i;
-
-	index = 2;
-	while (index < data->file_size)
-	{
-		i = 0;
-		if (data->line[index]->label != NULL)
-			free(data->line[index]->label);
-		if (data->line[index]->type != 0)
-		{
-			if (data->line[index]->arg_num != NULL)
-				free(data->line[index]->arg_num);
-			if (data->line[index]->statement != NULL)
-				free(data->line[index]->statement);
-			if (index > 1)
-			{
-				while (i < data->line[index]->req_arg_num)
-					free(data->line[index]->arg[i++]);
-			}
-		}
-		if (data->line[index]->str != NULL)
-			free(data->line[index]->str);
-		if (data->line[index] != NULL)
-			free(data->line[index]);
-		index++;
-	}
-	free(data->line[0]->str);
-	free(data->line[1]->str);
-	if (data->line != NULL)
-		free(data->line);
-	free(data);
-}
-
 /* The assembler is meant to read through the .s file representing a champion
  and take the code written in assembly language and turn it in bytecode
  that the Virtual Machine can read. 
@@ -190,7 +94,6 @@ int	main(int argc, char **argv)
 	scan_file(data);
 	populate_t_dir(data);
 	write_to_file(data, argv);
-	//our_free(data);
 	exit_usage(6);
 	return (0);
 }

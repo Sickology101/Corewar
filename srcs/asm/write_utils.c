@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:13:28 by marius            #+#    #+#             */
-/*   Updated: 2023/02/06 10:15:06 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/15 21:31:02 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,31 @@ void	writing_command(int fd, t_parser *a)
 		}
 		index++;
 	}
+}
+
+int	ft_strnccmp(char *line)
+{
+	int	index;
+
+	while (*line == MTY_SPACE_1 || *line == MTY_SPACE_2)
+	{
+		++line;
+	}
+	if (ft_strncmp(line, ".name", 5) == 0)
+	{
+		index = 5;
+		index = ignore_spaces(line, index);
+		if (line[index] != '"')
+			exit_usage(1);
+		return (1);
+	}
+	if (ft_strncmp(line, ".comment", 8) == 0)
+	{
+		index = 8;
+		index = ignore_spaces(line, index);
+		if (line[index] != '"')
+			exit_usage(1);
+		return (2);
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:05:48 by parkharo          #+#    #+#             */
-/*   Updated: 2023/02/13 12:31:56 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:32:43 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	int32_to_bytecode(char *data,
 	}
 }
 
-void write_null(int count_bytes, int fd)
+void	write_null(int count_bytes, int fd)
 {
 	int	var;
 
