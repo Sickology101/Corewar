@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "assembler.h"
+#include "../../includes/assembler.h"
 
 void	set_some_arg_shit(t_parser *data, int index1, int index2)
 {

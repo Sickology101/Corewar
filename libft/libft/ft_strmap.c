@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mangheli <mangheli@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:51:34 by mangheli          #+#    #+#             */
-/*   Updated: 2021/11/09 10:51:35 by mangheli         ###   ########.fr       */
+/*   Updated: 2023/02/12 13:43:30 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strmap(const char *s, char (*f)(char))
 	char	*dest;
 
 	size = ft_strlen((char *)s);
-	dest = (char *)malloc(sizeof(char) * size + 1);
+	dest = (char *)malloc(sizeof(char) * (size + 1));
 	if (!dest)
 		return (NULL);
 	index = 0;

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "assembler.h"
+#include "../../includes/assembler.h"
 
 t_statements	g_operations[17]
 	= {{"live", 1, {T_DIR, 0, 0}},

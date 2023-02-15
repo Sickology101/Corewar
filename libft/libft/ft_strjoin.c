@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mangheli <mangheli@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 19:20:00 by mangheli          #+#    #+#             */
-/*   Updated: 2021/11/08 19:20:01 by mangheli         ###   ########.fr       */
+/*   Updated: 2023/02/12 13:43:30 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	size;
 
 	size = ft_strlen(s1) + ft_strlen(s2);
-	dest = (char *)malloc(sizeof(char) * size + 1);
+	dest = (char *)malloc(sizeof(char) * (size + 1));
 	if (!dest)
 		return (NULL);
 	joinstrings(s1, s2, dest);
