@@ -10,12 +10,12 @@ def assembly_versions(filename):
 	output_filename = filename.replace('.s', '.cor')
 	path_to_output = sample_files + '/' + output_filename
 	
-	os.system('../asm ' + path_to_file)
+	os.system('./asm ' + path_to_file)
 	if os.path.exists(path_to_output):
 		errors42.append(path_to_file)
 		os.system('rm ' + path_to_output)
 	
-	os.system('../assembler ' + path_to_file)
+	os.system('../asm ' + path_to_file)
 	if os.path.exists(path_to_output):
 		errorsOurs.append(path_to_file)
 		os.system('rm ' + path_to_output)
