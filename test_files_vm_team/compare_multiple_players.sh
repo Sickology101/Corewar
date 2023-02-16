@@ -1,4 +1,4 @@
-FILE_DIR=( test_files_vm_team/compiled/*)
+FILE_DIR=( asm_tests/compiled/*)
 FT_OUTPUT="corewar42.txt"
 OUR_OUTPUT="corewar.txt"
 OUR_WAR="./corewar"

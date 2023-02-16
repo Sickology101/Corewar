@@ -18,7 +18,7 @@ CPURPLEB		= \033[1;95m
 CC				= gcc
 VM_NAME			= corewar
 ASM_NAME		= asm
-FLAGS			= -Wall -Wextra -Werror
+FLAGS		= -Wall -Wextra -Werror
 
 
 VM_SRC_DIR		= ./srcs/virtualmachine/
@@ -100,24 +100,18 @@ LIBFT			= $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
 all : $(VM_NAME) $(ASM_NAME)
 
-$(VM_NAME): $(LIBFT) $(VM_OBJ_DIR) $(VM_OBJ) $(VM_INC) 
-	@echo "$(CYELLOW)Compiling VM: $(CPURPLEB)$(VM_NAME)$(CEND)"
-	$(CC) -o $(VM_NAME) $(FLAGS) $(VM_OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBFT)
-	@echo "$(CGREEN)OK$(CEND)"
-
-$(LIBFT):
-	@echo "$(CYELLOW)Creating $(CPURPLEB)$(LIBFT_LIB)$(CEND)"
+$(VM_NAME): $(VM_OBJ) $(VM_INC)
 	@make -C $(LIBFT_DIR)
+	@echo "$(CYELLOW)Compiling the executable: $(CPURPLEB)$(VM_NAME)$(CEND)"
+	@$(CC) -o $(VM_NAME) $(FLAGS) -g -fsanitize=address $(VM_OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBFT)
 	@echo "$(CGREEN)OK$(CEND)"
 
 $(VM_OBJ_DIR)%.o: $(VM_SRC_DIR)%.c
+	@mkdir -p $(VM_OBJ_DIR)
 	@$(CC) $(FLAGS) -c $< -o $@
 
-$(VM_OBJ_DIR):
-	@mkdir -p $(VM_OBJ_DIR)
-	@echo "$(CPURPLEB)$(VM_OBJ_DIR)$(CGREEN) folder has been created$(CEND)"
-
 $(VM_OBJ_DIR)%.o: $(VM_STAT_DIR)%.c
+	@mkdir -p $(VM_OBJ_DIR)
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(ASM_NAME): $(LIBFT) $(ASM_OBJ_DIR) $(ASM_OBJ) $(ASM_INC) 
