@@ -44,9 +44,6 @@
 
 # define IDX_MOD			512
 
-
-
-
 typedef struct s_player
 {
 	int					id;
