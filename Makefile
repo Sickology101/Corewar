@@ -109,6 +109,7 @@ $(VM_NAME): $(LIBFT) $(VM_OBJ_DIR) $(VM_OBJ) $(VM_INC)
 $(LIBFT):
 	@echo "$(CYELLOW)Creating $(CPURPLEB)$(LIBFT_LIB)$(CEND)"
 	@make -C $(LIBFT_DIR)
+	@echo "$(CGREEN)OK$(CEND)"
 
 $(VM_OBJ_DIR)%.o: $(VM_SRC_DIR)%.c
 	@mkdir -p $(VM_OBJ_DIR)
@@ -123,7 +124,6 @@ $(VM_OBJ_DIR)%.o: $(VM_STAT_DIR)%.c
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(ASM_NAME): $(LIBFT) $(ASM_OBJ_DIR) $(ASM_OBJ) $(ASM_INC) 
-	@make -C $(LIBFT_DIR)
 	@echo "$(CYELLOW)Compiling Asm: $(CPURPLEB)$(ASM_NAME)$(CEND)"
 	@$(CC) -o $(ASM_NAME) $(FLAGS) $(ASM_OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBFT)
 	@echo "$(CGREEN)OK$(CEND)"
@@ -146,10 +146,10 @@ clean :
 
 fclean : clean
 	@make -C $(LIBFT_DIR) fclean
-	@echo "$(CYELLOW)Removing $(CPURPLEB)$(VM_NAME) $(ASM_NAME)$(CEND)"
+	@echo "$(CYELLOW)Removing $(CPURPLEB)$(VM_NAME)$(CEND)"
 	@rm -rf $(VM_NAME)
 	@echo "$(CGREEN)OK$(CEND)"
-	@echo "$(CYELLOW)Removing $(CPURPLEB)$(ASM_NAME) $(ASM_NAME)$(CEND)"
+	@echo "$(CYELLOW)Removing $(CPURPLEB)$(ASM_NAME)$(CEND)"
 	@rm -rf $(ASM_NAME)
 	@echo "$(CGREEN)OK$(CEND)"
 
