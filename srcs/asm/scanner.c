@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   scanner.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mangheli <mangheli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:50:23 by marius            #+#    #+#             */
-/*   Updated: 2023/02/14 14:08:02 by mangheli         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:37:47 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "assembler.h"
+#include "../../includes/assembler.h"
 
 int	calculate_size(char *line)
 {
@@ -41,7 +41,6 @@ void	check_size(int size, int flag)
 	}
 	else
 	{
-		
 		if (size > COMMENT_LENGTH)
 			exit_usage(1);
 	}
@@ -57,36 +56,34 @@ void	store_name_comment(t_parser *data, int flag)
 	size = calculate_size(data->line[flag]->str);
 	check_size(size, flag);
 	while (data->line[flag]->str[index] != '"')
-	{
 		index++;
-	}
 	index++;
 	i = 0;
 	if (flag == 0)
 	{
 		while (i < size)
-		{
-			data->name[i] = data->line[flag]->str[index];
-			i++;
-			index++;
-		}
+			data->name[i++] = data->line[flag]->str[index++];
 		data->name[i] = '\0';
 	}
-	else 
+	else
 	{
 		while (i < size)
-		{
-			data->comment[i] = data->line[flag]->str[index];
-			i++;
-			index++;
-		}
+			data->comment[i++] = data->line[flag]->str[index++];
 		data->comment[i] = '\0';
 	}
 }
 
 void	scan_file(t_parser *data)
 {
+	int	i;
+
+	i = 0;
 	data->line = (t_line **)malloc(sizeof(t_line *) * 1064);
+	while (i < 1064)
+	{
+		data->line[i] = NULL;
+		i++;
+	}
 	get_name_comment(data);
 	store_name_comment(data, 0);
 	store_name_comment(data, 1);

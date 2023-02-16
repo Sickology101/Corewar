@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_instructions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mangheli <mangheli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 05:22:04 by marius            #+#    #+#             */
-/*   Updated: 2023/02/14 14:02:47 by mangheli         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:35:06 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "assembler.h"
+#include "../../includes/assembler.h"
 
 int	get_label_size(char *line, int index)
 {
@@ -62,13 +62,8 @@ char	*get_label(char *line, int *index)
 	return (dest);
 }
 
-void	save_instruction(t_parser *data, char *line)
+void	save_instruction(t_parser *data, char *line, int index, int index2)
 {
-	int	index;
-	int	index2;
-
-	index = 0;
-	index2 = 0;
 	index2 = ignore_spaces(line, index2);
 	index2 = ignore_chars(line, index2);
 	if (line[index2 - 1] == ':')
@@ -109,7 +104,7 @@ void	get_instructions(t_parser *data)
 			data->line[data->file_size] = (t_line *)malloc(sizeof(t_line));
 			data->line[data->file_size]->str = ft_strnew((ft_strlen(line)));
 			ft_strcpy(data->line[data->file_size]->str, line);
-			save_instruction(data, line);
+			save_instruction(data, line, 0, 0);
 		}
 		free(line);
 		ret = get_next_line(data->fd, &line);

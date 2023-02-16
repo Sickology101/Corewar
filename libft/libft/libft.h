@@ -6,7 +6,7 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 10:37:25 by mangheli          #+#    #+#             */
-/*   Updated: 2022/12/10 17:24:03 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:24:11 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define MAX_FD 8192
 # define BUFF_SIZE 4096
+# define MAX_INT 0xFFFFFFFF
 
 typedef struct s_list
 {

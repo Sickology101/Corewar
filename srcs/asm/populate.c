@@ -6,11 +6,11 @@
 /*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:23:44 by marius            #+#    #+#             */
-/*   Updated: 2023/02/13 16:09:21 by parkharo         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:33:40 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "assembler.h"
+#include "../../includes/assembler.h"
 
 char	*get_label_from_arg(char *str)
 {
@@ -34,33 +34,32 @@ char	*get_label_from_arg(char *str)
 	return (dest);
 }
 
-void	inner_calculate_dir(t_parser *data, int index, int i, bool found)
+void	inner_calculate_dir(t_parser *d, int in, int i, bool found)
 {
 	char	*label;
 
 	found = false;
-	if (data->line[index]->dir_loc[i] == 1)
+	if (d->line[in]->dir_loc[i] == 1)
 	{
-		label = get_label_from_arg(data->line[index]->arg[i]);
-		if (data->line[index]->type == 0 || data->line[index]->type == 2)
+		label = get_label_from_arg(d->line[in]->arg[i]);
+		if (d->line[in]->type == 0 || d->line[in]->type == 2)
 		{
-			if (!ft_strcmp(label, data->line[index]->label))
+			if (!ft_strcmp(label, d->line[in]->label))
 			{
-				data->line[index]->arg_num[i] = 0;
+				d->line[in]->arg_num[i] = 0;
 				found = true;
 			}
 		}
 		if (found == false)
 		{
-			data->line[index]->arg_num[i] = search_up(data, index, label, &found);
+			d->line[in]->arg_num[i] = search_up(d, in, label, &found);
 			if (!found)
-				data->line[index]->arg_num[i] = search_down(data, index, label, &found);
+				d->line[in]->arg_num[i] = search_down(d, in, label, &found);
 			if (!found)
 				exit_usage(7);
 		}
 		free(label);
 	}
-	
 }
 
 void	calculate_dir(t_parser *data, int index)

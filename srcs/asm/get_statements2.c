@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_statements2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mangheli <mangheli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 10:13:22 by marius            #+#    #+#             */
-/*   Updated: 2023/02/14 13:57:34 by mangheli         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:39:39 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "assembler.h"
+#include "../../includes/assembler.h"
 
-t_statements	g_operations[17]
+static const t_statements	g_operations[17]
 	= {{"live", 1, {T_DIR, 0, 0}},
 {"ld", 2, {T_DIR + T_IND, T_REG, 0}},
 {"st", 2, {T_REG, T_REG + T_IND}},

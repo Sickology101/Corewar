@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_statements4.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mangheli <mangheli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 10:40:18 by marius            #+#    #+#             */
-/*   Updated: 2023/02/14 14:35:19 by mangheli         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:31:29 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "assembler.h"
+#include "../../includes/assembler.h"
 
 void	check_arg(t_parser *data, char *arg, int flag)
 {
-	//ft_printf("\n\nWe are here !!!\n\n");
 	if (!check_valid_arg_type(data,
 			data->line[data->file_size]->req_arg_type[flag], arg, flag))
 		exit_usage(4);
