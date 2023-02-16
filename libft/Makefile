@@ -25,7 +25,7 @@ OBJ			=	$(addprefix $(OBJ_D), $(SRCS:%.c=%.o))
 INCLUDE		=	-I includes/ -I $(LIB)
 
 CC			=	clang
-CFLAGS		=	-Wall -Wextra -Werror# -g # -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror
 
 all: $(NAME)
 

@@ -18,7 +18,7 @@ CPURPLEB		= \033[1;95m
 CC				= gcc
 VM_NAME			= corewar
 ASM_NAME		= asm
-FLAGS			= -Wall -Wextra -g -fsanitize=address -Werror
+FLAGS			= -Wall -Wextra -Werror
 
 
 VM_SRC_DIR		= ./srcs/virtualmachine/
@@ -62,7 +62,6 @@ ASM_SRC_FILES	= get_instructions.c \
 				get_statements2.c \
 				get_statements3.c \
 				get_statements4.c \
-				globals.c \
 				joinfree.c \
 				main.c \
 				populate_help.c \
@@ -103,7 +102,7 @@ all : $(VM_NAME) $(ASM_NAME)
 
 $(VM_NAME): $(LIBFT) $(VM_OBJ_DIR) $(VM_OBJ) $(VM_INC) 
 	@echo "$(CYELLOW)Compiling VM: $(CPURPLEB)$(VM_NAME)$(CEND)"
-	@$(CC) -o $(VM_NAME) $(FLAGS) $(VM_OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBFT)
+	$(CC) -o $(VM_NAME) $(FLAGS) $(VM_OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBFT)
 	@echo "$(CGREEN)OK$(CEND)"
 
 $(LIBFT):
@@ -112,7 +111,6 @@ $(LIBFT):
 	@echo "$(CGREEN)OK$(CEND)"
 
 $(VM_OBJ_DIR)%.o: $(VM_SRC_DIR)%.c
-	@mkdir -p $(VM_OBJ_DIR)
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(VM_OBJ_DIR):
@@ -120,12 +118,11 @@ $(VM_OBJ_DIR):
 	@echo "$(CPURPLEB)$(VM_OBJ_DIR)$(CGREEN) folder has been created$(CEND)"
 
 $(VM_OBJ_DIR)%.o: $(VM_STAT_DIR)%.c
-	@mkdir -p $(VM_OBJ_DIR)
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(ASM_NAME): $(LIBFT) $(ASM_OBJ_DIR) $(ASM_OBJ) $(ASM_INC) 
 	@echo "$(CYELLOW)Compiling Asm: $(CPURPLEB)$(ASM_NAME)$(CEND)"
-	@$(CC) -o $(ASM_NAME) $(FLAGS) $(ASM_OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBFT)
+	$(CC) -o $(ASM_NAME) $(FLAGS) $(ASM_OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBFT)
 	@echo "$(CGREEN)OK$(CEND)"
 	
 $(ASM_OBJ_DIR)%.o: $(ASM_SRC_DIR)%.c
