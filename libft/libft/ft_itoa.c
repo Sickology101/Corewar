@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mangheli <mangheli@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 09:52:58 by mangheli          #+#    #+#             */
-/*   Updated: 2021/11/09 09:52:59 by mangheli         ###   ########.fr       */
+/*   Updated: 2023/02/12 13:43:35 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ft_itoa(int n)
 	long	temp;
 
 	size = checksize(n);
-	dest = (char *)malloc(sizeof(char) * size + 1);
+	dest = (char *)malloc(sizeof(char) * (size + 1));
 	if (!dest)
 		return (NULL);
 	if (n == 0)

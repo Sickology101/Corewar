@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:57:59 by marius            #+#    #+#             */
-/*   Updated: 2022/04/05 13:48:58 by marius           ###   ########.fr       */
+/*   Updated: 2023/02/12 13:43:30 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_utoa(unsigned int n)
 	unsigned int	temp;
 
 	size = checksize(n);
-	dest = (char *)malloc(sizeof(char) * size + 1);
+	dest = (char *)malloc(sizeof(char) * (size + 1));
 	if (!dest)
 		return (NULL);
 	if (n == 0)

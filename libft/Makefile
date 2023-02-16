@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marius <marius@student.42.fr>              +#+  +:+       +#+         #
+#    By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 08:10:42 by marius            #+#    #+#              #
-#    Updated: 2022/04/05 16:07:17 by marius           ###   ########.fr        #
+#    Updated: 2023/02/12 15:06:33 by parkharo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJ			=	$(addprefix $(OBJ_D), $(SRCS:%.c=%.o))
 INCLUDE		=	-I includes/ -I $(LIB)
 
 CC			=	clang
-CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror
 
 all: $(NAME)
 

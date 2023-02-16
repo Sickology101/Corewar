@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbook <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:37:31 by macbook           #+#    #+#             */
-/*   Updated: 2023/01/12 20:37:34 by macbook          ###   ########.fr       */
+/*   Updated: 2023/02/13 17:12:21 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 void	init_data(t_data *data)
 {
 	data->player = NULL;
-	data->last_alive = NULL;
+	data->last_alive = 0;
+	data->dump_cycles = -1;
 	data->player_amount = 0;
-	data->cycles_from_begin = 0;
-	data->amount_of_live = 0;
-	data->cycles_to_die = CYCLE_TO_DIE;
 	data->process_amount = 0;
+	data->total_processes = 0;
 	data->process_head = NULL;
-	data->process_tail = NULL;
 }
 
 void	init_player(const char *path, t_player **player, int flag_id)
@@ -31,7 +29,8 @@ void	init_player(const char *path, t_player **player, int flag_id)
 		(*player)->id = flag_id;
 	else
 		(*player)->id = 0;
-	(*player)->fd = 0;
+	(*player)->last_live = 0;
+	(*player)->lives_amount = 0;
 	(*player)->path = path;
 	(*player)->name = NULL;
 	(*player)->comment = NULL;
@@ -55,16 +54,25 @@ void	place_players_on_arena(t_player *player, t_data *const data,
 void	init_process_on_arena(t_data *const data, t_player *player,
 					size_t pointer)
 {
+	int	i;
+
 	create_initial_process_list(data);
+	data->process_head->args[0] = 0;
+	data->process_head->args[1] = 0;
+	data->process_head->args[2] = 0;
 	data->process_head->carry = 0;
-	data->process_head->operation_code = 0;
+	data->process_head->op_id = 0;
+	data->process_head->rel_pos = 0;
 	data->process_head->last_live = 0;
 	data->process_head->cycles_before_exec = 0;
 	data->process_head->cur_pos = pointer;
-	data->process_head->next_operation = 0;
+	i = -1;
+	while (++i < REG_NUMBER)
+		data->process_head->reg[i] = 0;
 	data->process_head->reg[0] = -(player->id);
 	data->process_head->player = player;
 	data->process_amount++;
+	data->total_processes++;
 }
 
 void	init_arena(t_data *const data)
@@ -81,12 +89,10 @@ void	init_arena(t_data *const data)
 	player = data->player;
 	while (i < data->player_amount)
 	{
-		print_player_code(player);
 		place_players_on_arena(player, data, pointer);
 		init_process_on_arena(data, player, pointer);
 		i++;
 		pointer += MEM_SIZE / data->player_amount;
 		player = player->next;
 	}
-	print_arena(data);
 }

@@ -12,38 +12,14 @@
 
 #include "../../includes/virtualmachine.h"
 
-int	validate_and_receive_n_flag_arg(int *i, const char **av, int ac)
-{
-	if (*av[*i] == '-')
-	{
-		if (!ft_strcmp(av[*i], "-n"))
-		{
-			if ((*i + 2) >= ac)
-				exit_error_message("Too few arguments after -n flag!");
-			*i = *i + 1;
-			if (av[*i][0] < '1' || av[*i][0] > '4' || av[*i][1])
-				exit_error_message("Wrong argument after -n flag!");
-			*i = *i + 1;
-			return (av[*i - 1][0] - '0');
-		}
-		else
-			exit_error_message("Unsupported flag!");
-	}
-	return (0);
-}
-
 void	validate_file_extension(const int i, const char **av)
 {
-	const char	*dot;
+	size_t		len;
 
-	dot = ft_strchr(av[i], '.');
-	if (!dot)
-		exit_error_message("Wrong player file extension!");
-	else if (dot == av[i])
-		exit_error_message("Empty player name!");
-	else
+	if (av[i])
 	{
-		if (ft_strcmp(dot, ".cor"))
+		len = ft_strlen(av[i]);
+		if (len < 4 || ft_strcmp(&av[i][len - 4], ".cor"))
 			exit_error_message("Wrong player file extension!");
 	}
 }
@@ -66,26 +42,6 @@ void	create_player(t_data *const data)
 	data->player_amount++;
 }
 
-void	check_n_flag_unique_ids(t_data *const data)
-{
-	char		ids[4];
-	t_player	*tmp;
-	int			i;
-
-	i = -1;
-	while (++i < data->player_amount)
-		ids[i] = 0;
-	tmp = data->player;
-	while (tmp)
-	{
-		if (tmp->id != 0 && ids[tmp->id - 1] == 0)
-			ids[tmp->id - 1] = 1;
-		else if (tmp->id != 0 && ids[tmp->id - 1] != 0)
-			exit_error_message("-n number is used multiple times!");
-		tmp = tmp->next;
-	}
-}
-
 void	validate_user_input(const int ac, const char **av, t_data *const data)
 {
 	int	i;
@@ -95,7 +51,15 @@ void	validate_user_input(const int ac, const char **av, t_data *const data)
 	flag_id = 0;
 	while (i < ac)
 	{
-		flag_id = validate_and_receive_n_flag_arg(&i, av, ac);
+		if (!ft_strcmp(av[i], "-dump"))
+		{
+			validate_and_receive_dump_flag_arg(&i, av, ac, data);
+			if (!av[i])
+				break ;
+			else
+				continue ;
+		}
+		flag_id = validate_and_receive_n_flag(&i, av, ac);
 		validate_file_extension(i, av);
 		create_player(data);
 		init_player(av[i], &data->player, flag_id);

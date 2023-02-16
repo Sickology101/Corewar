@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mangheli <mangheli@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: parkharo <parkharo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 10:46:39 by mangheli          #+#    #+#             */
-/*   Updated: 2021/11/11 10:46:40 by mangheli         ###   ########.fr       */
+/*   Updated: 2023/02/12 13:43:30 by parkharo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static	char	**extrafunction(char **dest, char const *s, char c)
 		if (s[index] != c)
 		{
 			size = stringlenght(s, c, index);
-			dest[index1] = (char *)malloc(sizeof(char) * size + 1);
+			dest[index1] = (char *)malloc(sizeof(char) * (size + 1));
 			if (!dest[index1])
 				return (NULL);
 			index = assignstring(s, dest[index1], c, index);

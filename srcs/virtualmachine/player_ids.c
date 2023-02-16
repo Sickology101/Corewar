@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   n_flag.c                                           :+:      :+:    :+:   */
+/*   player_ids.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igaplich <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mtissari <mtissari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 19:32:14 by igaplich          #+#    #+#             */
-/*   Updated: 2023/01/11 19:32:17 by igaplich         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:10:23 by mtissari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,21 @@ void	find_free_id(t_data *const data, int *missing_id)
 void	check_amount_of_players(t_data *const data)
 {
 	t_player	*tmp;
+	int			counter;
 
+	counter = 1;
 	tmp = data->player;
+	if (!tmp)
+		exit_error_message("Not enough players");
 	while (tmp)
 	{
+		if (counter > MAX_PLAYERS)
+			exit_error_message("Too many players - maximum amount is 4!");
 		if (tmp->id > data->player_amount)
 			exit_error_message("-n player number is higher "
 				"than amount of players!");
 		tmp = tmp->next;
+		counter++;
 	}
 }
 
