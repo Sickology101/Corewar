@@ -39,8 +39,10 @@ There can be 1 - 4 players, the extension has to be _.cor_, and supported flags 
   
 Then we read the files one by one, perform various validations and save the data into _s_player_ -struct.  
 The validation includes checkin the _Magic Header_, _champion name_, _champion comment_, the _size of the executable code_, and the _executable code_ itself. There are _Null separators_ in between, and the sizes of _Magic Header_, _name_ and _comment_ are prefixed.  
-
-
+  
+| <img style="float:right" width="400" alt="honkyJoe cor" src="https://user-images.githubusercontent.com/90178358/219679483-5511009a-6850-4fe5-a1d2-645d6ccf3ad0.jpeg#right"> |
+|:--:|
+|<em>first part of the .cor -file</em>|
 </p>
 </details>
   
