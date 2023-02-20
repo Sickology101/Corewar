@@ -100,7 +100,7 @@ Without any hand-eye coordination, Joe often slaps people by accident.
 But because Joe is such a nice fellow, he let's the other champions beat his a**, 
 hence Honky-Joe is not the greatest of fighters.  
   
-He is the honkiest.
+But he is the honkiest.
   
   
   
