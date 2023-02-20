@@ -7,7 +7,7 @@ The project consists of three parts:
 - [Assembler](#Assembler)  
   * Takes the champion's raw information and commands,  
   and transforms it to asssembly language for the Virtual Machine to understand it.  
-- The Champion  
+- [Champion](#Champion)  
   * an AI player in the corewar-game, has a name, comment and commands.  
   
 The whole project had to be done according to Hive's Norminette; a set of rules that restrict and improve the way we code.  
