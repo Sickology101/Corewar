@@ -3,14 +3,14 @@ The final project of the Algorithm-branch at Hive Helsinki.
 
 The project consists of three parts:  
 - [Virtual Machine](#Virtual-Machine)   
-  * The Game itself, a platform for the champions to battle.  
+  * The Game itself, a platform for the champions to battle. 
 - [Assembler](#Assembler)  
-  * Takes the champion's raw information and commands,  
-  and transforms it to asssembly language for the Virtual Machine to understand it.  
+  * Takes the champion .s file written (mostly) in assembler language  
+  and interprets it as a bytecode for the Virtual Machine to understand.  
 - [Champion](#Champion)  
-  * an AI player in the corewar-game, has a name, comment and commands.  
+  * a player in the corewar-game, has a name, comment and ASM commands.  
   
-The whole project had to be done according to Hive's Norminette; a set of rules that restrict and improve the way we code.  
+The whole project had to be done according to School 42's [Norminette](https://github.com/gdamion/Norminette/blob/master/norme.en.pdf); a set of rules aimed to improve the way we code by imposing certain style restrictions.  
 
 We allocated [Pavel](https://github.com/pavel-arkharov) and [Marius](https://github.com/Sickology101) to work on the Assembler, and [Ian](https://github.com/IanGaplichnik) and [Miro](https://github.com/MiroTissari) to work on the Virtual Machine.  
   
@@ -45,7 +45,11 @@ To be released soon.
 <details><summary>a section</summary>
 <p>
 
-To be released soon.
+Executing 
+ ```
+ ./asm exampleFilename.s
+ ```
+ will output the exampleFilename.cor file in the same folder as original. 
 
 </p>
 </details>
@@ -79,7 +83,7 @@ To be released soon
 
 </p>
 </details>
-  
+ 
   
 
 
@@ -102,7 +106,8 @@ hence Honky-Joe is not the greatest of fighters.
   
 But he is the honkiest.
   
-  
+## License 
+This project is licensed under the MIT License. See the LICENSE file for more information.
   
   
   
